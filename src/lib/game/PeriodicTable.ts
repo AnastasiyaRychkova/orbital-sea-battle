@@ -1,12 +1,12 @@
 import {
-	ElemConfig,
-} from '../../../common/general.js';
+	default as ElemConfig,
+} from './ChemicalElement/ElemConfig';
 
 import type {
 	ChemicalElement,
-} from '../../../common/general.js';
+} from './ChemicalElement/ChemicalElement';
 
-
+// TODO: Добавить квантовые числа
 
 /** 
  * Периодическая таблица химических элементов

@@ -1,4 +1,5 @@
 import ElemConfig from './ElemConfig.js';
+// import { MainQN, OrbitalQN, MagneticQN } from "./QuantumNumbers";
 
 /** Химический элемент */
 type ChemicalElement = {
@@ -13,6 +14,13 @@ type ChemicalElement = {
 
 	/** Электронная конфигурация */
 	config: ElemConfig;
+
+
+/* 	mainQN: MainQN;
+
+	orbitalQN: OrbitalQN;
+
+	magneticQN: MagneticQN; */
 };
 
 export type {
