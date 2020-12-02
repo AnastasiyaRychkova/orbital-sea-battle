@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2? family = Montserrat: wght @ 600 & display = swap'); /*шрифт*/
+
+body {
+  max-width: 1400px;
+  background: #071029; /* Для старых браузеров */
+  background: linear-gradient(to bottom, #071029, #112056);  /*градиент фона*/
+  font-family: 'Montserrat', sans-serif;
+  color:#24F2FF;
+  display: flex;
+  flex-direction:column; 
+  margin:20px auto;   
+}
+
+.empty{
+    height:15em;
+    width:100%;
+}
+
+/*название игры*/
+.game-name{
+    font-size: 80px;
+    position:relative;
+    margin: 0px auto;
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.game-name_orbital{
+    position:absolute;
+    max-width:4.2em; 
+    margin-left: -5.5em;
+    padding: 0.2em 0.5em;
+    border: 4px solid #24F2FF;
+    
+    
+}
+.game-name_battleship{
+    position: absolute;
+    margin-left: 6em;
+    margin-top: 1em;
+    max-width: 6em;
+    padding: 0.2em 0.5em;
+    background-color: #24F2FF;
+    color:#071029;
+    z-index:1;
+}
+
+a{
+    text-decoration: none;
+    color:#24F2FF;
+}
+
+.wrapper_menu{
+    display: flex;
+    flex-direction:row;  
+    justify-content:flex-end; 
+   
+}
+.wrapper_menu ul{
+   font-size: 30px;
+   padding: 0;
+   margin:0 20px;
+   display: flex;   
+   flex-direction: column;
+   list-style: none; /*убрать точки*/
+}
+
+
+.politic a{
+    position: absolute;
+    right:10em;
+    margin:-30px;
+}
