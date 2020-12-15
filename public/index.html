@@ -12,40 +12,36 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link href="CSS/index.css" rel="stylesheet" type="text/css">
-    <title>React App</title>
+    <title>ORBITAL BATTLESHIP</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <body>
-      <noscript>You need to enable JavaScript to run this app.</noscript>  
-      
-           <!--Здесь название игры-->
-          <div class="game-name">
-              <div class="game-name_orbital">
-                  ORBITAL
-              </div>
-              <div class="game-name_battleship">
-                  BATTLESHIP
-              </div>
-          </div>
+
+          <!--Здесь название игры-->
+        <h1 class="game-name">
+            <span class="game-name_orbital">
+                ORBITAL
+            </span>
+            <span class="game-name_battleship">
+                BATTLESHIP
+            </span>
+        </h1>
        
         <!--Здесь меню игры-->
-         <div class="empty"></div>
-         <nav class="wrapper_menu">
+         <nav class="menu">
            <ul>
-             <li><a href="#"><img src="img/index/to_play.svg"></a></li>
-             <li><a href="#"><img src="img/index/training.svg"></a></li>
-             <li><a href="#"><img src ="img/index/about_us.svg"></a></li>
-             <li><a href="#"><img src="img/index/rules.svg"></a></li>
-             <li><a href="#"><img src="img/index/theory.svg"></a></li>
+             <li><a class="a-remove-default" href="#">ИГРАТЬ</a></li>
+             <li><a class="a-remove-default" href="#">ТРЕНИРОВКА</a></li>
+             <li><a class="a-remove-default" href="#">О НАС</a></li>
+             <li><a class="a-remove-default" href="#">ПРАВИЛА</a></li>
+             <li><a class="a-remove-default" href="#">ТЕОРИЯ</a></li>
            </ul>
          </nav>
-      
-        <img src="img/index/bottom_line.svg" style="mix-blend-mode: overlay;">
-        <div class="politic"><a href="#">Политика конфиденциальности</a>
-      </div>
-    </body>
-
+         <footer class="politic">
+          <img src="img/index/bottom_line.svg" alt="зигзагообразная линия" >
+          <a class="politic_a a-remove-default"  href="#">Политика конфиденциальности</a>
+        </footer>
   </body>
+
 </html>

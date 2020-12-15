@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap'); /*шрифт*/
+html{
+    height: 100%;
+}
+
+body {
+    --main-text-color: #24F2FF;
+    --main-bg-color: #071029;
+    max-width: 1400px;
+    height: 100%;
+    background:var(--main-bg-color); /* Для старых браузеров */
+    background: linear-gradient(to bottom,var(--main-bg-color), #112056);  /*градиент фона*/
+    font-family: 'Montserrat', sans-serif;
+    color:var(--main-text-color);
+    display: flex;
+    flex-direction:column;
+    justify-content:space-between;
+    margin:0 auto;
+    
+}
+.switch{
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+   
+}
+.switch ul{
+    padding: 0;
+    margin:20px;
+    list-style-type: none;
+    display: flex;
+    
+}
+
+.switch li{
+    width: 200px;
+    height: 10px;
+    border:1px solid var(--main-text-color);
+    margin: auto 30px;
+
+}
+.switch li:first-child{
+    background-color: var(--main-text-color);
+}
+
+.button{
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    
+}
+.button_save{
+    
+    width: 180px;
+    height: 40px;
+    margin:20px;
+    background-color: #C4C4C4;
+}
