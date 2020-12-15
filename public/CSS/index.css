@@ -1,74 +1,114 @@
-@import url('https://fonts.googleapis.com/css2? family = Montserrat: wght @ 600 & display = swap'); /*шрифт*/
-
-body {
-  max-width: 1400px;
-  background: #071029; /* Для старых браузеров */
-  background: linear-gradient(to bottom, #071029, #112056);  /*градиент фона*/
-  font-family: 'Montserrat', sans-serif;
-  color:#24F2FF;
-  display: flex;
-  flex-direction:column; 
-  margin:20px auto;   
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap'); /*шрифт*/
+html{
+    height: 100%;
 }
 
-.empty{
-    height:15em;
-    width:100%;
+body {
+    --main-text-color: #24F2FF;
+    --main-bg-color: #071029;  
+    max-width: 1400px;
+    height: 100%;
+    background:var(--main-bg-color); /* Для фона под кругом */
+   
+    background-attachment: fixed;
+    background-image: url(../img/index/fon_t.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;  
+    font-family: 'Montserrat', sans-serif;
+    color:var(--main-text-color);
+    display: flex;
+    flex-direction:column; 
+    justify-content:space-between;
+    margin:0 auto;
 }
 
 /*название игры*/
 .game-name{
-    font-size: 80px;
+    font-size: 64px;
     position:relative;
     margin: 0px auto;
+    height: 2.5em;
     width:100%;
     display: flex;
     justify-content: center;
 }
 
 .game-name_orbital{
+    display: block;
     position:absolute;
-    max-width:4.2em; 
-    margin-left: -5.5em;
-    padding: 0.2em 0.5em;
-    border: 4px solid #24F2FF;
+    max-width:4.5em; 
+    margin-left: -6em;
+    padding: 0.15em 0.5em;
+    border: 4px solid var(--main-text-color);
     
     
 }
 .game-name_battleship{
+    display: block;
     position: absolute;
     margin-left: 6em;
     margin-top: 1em;
-    max-width: 6em;
-    padding: 0.2em 0.5em;
-    background-color: #24F2FF;
-    color:#071029;
+    max-width: 6.5em;
+    padding: 0.15em 0.45em;
+    background-color: var(--main-text-color);
+    color:var(--main-bg-color);
     z-index:1;
 }
 
-a{
+.a-remove-default{
     text-decoration: none;
-    color:#24F2FF;
+    color:var(--main-text-color);
 }
 
-.wrapper_menu{
+.menu{
     display: flex;
-    flex-direction:row;  
-    justify-content:flex-end; 
+    flex-direction:row;
+    justify-content:flex-end;
    
 }
-.wrapper_menu ul{
-   font-size: 30px;
-   padding: 0;
-   margin:0 20px;
-   display: flex;   
-   flex-direction: column;
-   list-style: none; /*убрать точки*/
+.menu ul{
+    font-size: 28px;
+    padding: 0;
+    margin:0 20px;
+    display: flex;
+    flex-direction: column;
+    list-style: none; /*убрать точки*/
 }
 
+.menu ul li{
+   background-image: url('../img/index/frame_for_menu.svg');
+   background-repeat:No-repeat;
+   
+   width:12em;
+   background-size: contain; /*изображение подстраивается под размер контейнера*/
+   text-align:center;
+   line-height: 2.5em;
+}
 
-.politic a{
+.politic{
+    position: relative;
+    height: 5em;
+}
+.politic img{
     position: absolute;
-    right:10em;
-    margin:-30px;
+    bottom:20%;
+    right:2%;
+    mix-blend-mode: overlay;
+
+}
+
+.politic_a{
+    position: absolute;
+    right:13%;
+    bottom:50%;
+}
+
+@media screen and (max-width:1024px) {
+    .menu ul {
+        font-size: 20px;
+    }
+    .game-name{
+        font-size: 50px;
+    }
 }
