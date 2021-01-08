@@ -3,7 +3,7 @@ import IntInRange from '../../util/IntInRange';
 /**
  * **Ячейка диаграммы (=spin)**
  * 
- * Хранит индекс яцеки: [0;117]
+ * Хранит индекс ячейки: [0;117]
  */
 export class DiagramCell extends IntInRange
 {
