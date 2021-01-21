@@ -1,114 +1,179 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap'); /*шрифт*/
 html{
-    height: 100%;
+	--main-text-color: #51CF15;
+	--main-bg-color: #00200A;
+	--main-darktext-color: #299601;
+	height: 100%;
+	background-image: -webkit-linear-gradient(bottom,#003C19,#00200A);
+	background: no-repeat -o-linear-gradient(top,var(--main-bg-color), #003C19);
+	background: no-repeat linear-gradient(to bottom,var(--main-bg-color), #003C19);/*градиент фона*/
 }
 
+/*строки, в которых используются цвета без переменных-для safari*/
+/*линии на фоне*/
 body {
-    --main-text-color: #24F2FF;
-    --main-bg-color: #071029;  
-    max-width: 1400px;
-    height: 100%;
-    background:var(--main-bg-color); /* Для фона под кругом */
-   
-    background-attachment: fixed;
-    background-image: url(../img/index/fon_t.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;  
-    font-family: 'Montserrat', sans-serif;
-    color:var(--main-text-color);
-    display: flex;
-    flex-direction:column; 
-    justify-content:space-between;
-    margin:0 auto;
+	background: repeat url(../img/index/bg-lines.png); 
+	height: 100%;
+	width:100%;
+	margin:0;
+}
+
+/*клетки на фоне*/
+.background-cell{
+	background:repeat url(../img/index/bg-cell2.png);
+	height: 100%;
+	width:100%;
+	margin:0;
+}
+.background-circle{
+	background: url(../img/index/fon_t.svg) no-repeat fixed  center center;
+	background-size: cover;
+	height: 100%;
+	width:100%;
+	margin:0;
+}
+/*круг на фоне*/
+.content{
+	height: 100%;
+	width:100%;
+	max-width: 1200px;
+	padding:0 32px;
+	font-family: 'Montserrat', sans-serif;
+	color:#51CF15;
+	color:var(--main-text-color);
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+		-webkit-box-orient:vertical;
+		-webkit-box-direction:normal;
+		-ms-flex-direction:column;
+	flex-direction:column; 
+		-ms-flex-pack:distribute;
+	justify-content:space-around;
+	margin:0 auto;
+		-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 /*название игры*/
 .game-name{
-    font-size: 64px;
-    position:relative;
-    margin: 0px auto;
-    height: 2.5em;
-    width:100%;
-    display: flex;
-    justify-content: center;
+	margin: 40px auto 10vh;
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+	font-size: 46px;
+	letter-spacing:0.2em;
 }
 
 .game-name_orbital{
-    display: block;
-    position:absolute;
-    max-width:4.5em; 
-    margin-left: -6em;
-    padding: 0.15em 0.5em;
-    border: 4px solid var(--main-text-color);
-    
-    
+	max-width: 6em;
+	padding: 0.15em 0.5em;
+	border: 3px solid  #51CF15;
+	border: 3px solid var(--main-text-color);	
 }
+
 .game-name_battleship{
-    display: block;
-    position: absolute;
-    margin-left: 6em;
-    margin-top: 1em;
-    max-width: 6.5em;
-    padding: 0.15em 0.45em;
-    background-color: var(--main-text-color);
-    color:var(--main-bg-color);
-    z-index:1;
+	padding: 0.2em 0.45em;
+	background-color: #51CF15;
+	background-color: var(--main-text-color);
+	color:#00200A;
+	color: var(--main-bg-color);
+		-webkit-transform: translate( -1.4em, 1.4em );
+		-ms-transform: translate( -1.4em, 1.4em );
+	transform: translate( -1.4em, 1.4em );
 }
 
-.a-remove-default{
-    text-decoration: none;
-    color:var(--main-text-color);
-}
-
+/*главное меню */
 .menu{
-    display: flex;
-    flex-direction:row;
-    justify-content:flex-end;
-   
-}
-.menu ul{
-    font-size: 28px;
-    padding: 0;
-    margin:0 20px;
-    display: flex;
-    flex-direction: column;
-    list-style: none; /*убрать точки*/
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+	flex-direction:row; 
+		-webkit-box-pack:end;
+		-ms-flex-pack:end;
+	justify-content:flex-end;
 }
 
-.menu ul li{
-   background-image: url('../img/index/frame_for_menu.svg');
-   background-repeat:No-repeat;
-   
-   width:12em;
-   background-size: contain; /*изображение подстраивается под размер контейнера*/
-   text-align:center;
-   line-height: 2.5em;
+.menu-column{
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+	flex-direction: column;
+	font-size: 28px;
+	padding: 0;
 }
 
+/*кнопки главного меню и их состояния*/
+.menu-column-choose{
+	font-size: 18px;
+	letter-spacing:0.2em;
+	width: 14em;
+	border:3px solid #299601;
+	border: 3px solid var(--main-darktext-color);
+	text-align:center;
+	padding: 0.5em;
+	margin: 0.4em 0;
+	background-color:transparent;
+	color:#51CF15;
+	color:var(--main-text-color);
+	outline:none;
+}
+
+.menu-column-choose:hover{
+	background-color:#51CF15;
+	border-color:#51CF15;
+	color:#00200A;
+	background-color:var(--main-text-color);
+	border-color:var(--main-text-color);
+	color:var(--main-bg-color);
+}
+.menu-column-choose:disabled{
+	opacity: 0.4;
+	background-color:transparent;
+	color:#51CF15;
+	color:var(--main-text-color);
+	border-color:#003C19;
+	border-color:var(--main-darktext-color);
+}
+
+/*подвал*/
 .politic{
-    position: relative;
-    height: 5em;
+	position: relative;
+	height: 5em;
 }
 .politic img{
-    position: absolute;
-    bottom:20%;
-    right:2%;
-    mix-blend-mode: overlay;
-
+	position: absolute;
+	bottom:20%;
+	right:0;
+	mix-blend-mode: overlay;
 }
 
-.politic_a{
-    position: absolute;
-    right:13%;
-    bottom:50%;
+.politic-button{
+	position: absolute;
+	right:17%;
+	bottom:40%;
+	font-size: 16px;
+	background-color:transparent;
+	border:none;
+	outline:none;
+	color:#299601;
+	color:var(--main-darktext-color);
 }
 
-@media screen and (max-width:1024px) {
-    .menu ul {
-        font-size: 20px;
-    }
-    .game-name{
-        font-size: 50px;
-    }
+.politic-button:hover{
+	color:#51CF15;
+	color:var(--main-text-color);
+}
+
+@media screen and (max-width:1300px) {
+	.game-name{
+		font-size: 38px;
+	}
+	.menu-column-choose{
+		font-size: 16px;
+	}
 }
