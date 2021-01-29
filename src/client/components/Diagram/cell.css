@@ -1,0 +1,28 @@
+.cell {
+	fill: #245a0b;
+}
+
+.cell-space:hover > .cell {
+	fill: #38a505;
+}
+
+.cell_on {
+	fill: #c1ffa5;
+}
+
+.cell-space:hover > .cell_on {
+	fill: #83ee51;
+}
+
+.cell_hit {
+	fill: #ffa8a5;
+}
+
+.cell_hit.cell_selected {
+	fill: #ee5151;
+}
+
+.container {
+	fill: white;
+	opacity: 0;
+}
