@@ -7,9 +7,11 @@ html{
 	background-image: -webkit-linear-gradient(bottom,#003C19,#00200A);
 	background: no-repeat -o-linear-gradient(top,var(--main-bg-color), #003C19);
 	background: no-repeat linear-gradient(to bottom,var(--main-bg-color), #003C19);/*градиент фона*/
+	min-width:680px;
+	overflow-x: auto;
+	min-height:620px;
 }
 
-/*строки, в которых используются цвета без переменных-для safari*/
 /*линии на фоне*/
 body {
 	background: repeat url(../img/index/bg-lines.png); 
@@ -25,6 +27,8 @@ body {
 	width:100%;
 	margin:0;
 }
+
+/*круг на фоне*/
 .background-circle{
 	background: url(../img/index/fon_t.svg) no-repeat fixed  center center;
 	background-size: cover;
@@ -32,14 +36,13 @@ body {
 	width:100%;
 	margin:0;
 }
-/*круг на фоне*/
+
 .content{
 	height: 100%;
 	width:100%;
-	max-width: 1200px;
+	max-width: 800px;
 	padding:0 32px;
 	font-family: 'Montserrat', sans-serif;
-	color:#51CF15;
 	color:var(--main-text-color);
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -58,7 +61,7 @@ body {
 
 /*название игры*/
 .game-name{
-	margin: 40px auto 10vh;
+	margin: 5vh auto 10vh;
 		display: -webkit-box;
 		display: -ms-flexbox;
 	display: flex;
@@ -69,15 +72,12 @@ body {
 .game-name_orbital{
 	max-width: 6em;
 	padding: 0.15em 0.5em;
-	border: 3px solid  #51CF15;
 	border: 3px solid var(--main-text-color);	
 }
 
 .game-name_battleship{
 	padding: 0.2em 0.45em;
-	background-color: #51CF15;
 	background-color: var(--main-text-color);
-	color:#00200A;
 	color: var(--main-bg-color);
 		-webkit-transform: translate( -1.4em, 1.4em );
 		-ms-transform: translate( -1.4em, 1.4em );
@@ -112,21 +112,16 @@ body {
 	font-size: 18px;
 	letter-spacing:0.2em;
 	width: 14em;
-	border:3px solid #299601;
 	border: 3px solid var(--main-darktext-color);
 	text-align:center;
 	padding: 0.5em;
 	margin: 0.4em 0;
 	background-color:transparent;
-	color:#51CF15;
 	color:var(--main-text-color);
 	outline:none;
 }
 
 .menu-column-choose:hover{
-	background-color:#51CF15;
-	border-color:#51CF15;
-	color:#00200A;
 	background-color:var(--main-text-color);
 	border-color:var(--main-text-color);
 	color:var(--main-bg-color);
@@ -134,9 +129,7 @@ body {
 .menu-column-choose:disabled{
 	opacity: 0.4;
 	background-color:transparent;
-	color:#51CF15;
 	color:var(--main-text-color);
-	border-color:#003C19;
 	border-color:var(--main-darktext-color);
 }
 
@@ -148,28 +141,30 @@ body {
 .politic img{
 	position: absolute;
 	bottom:20%;
-	right:0;
+	right:-10%;
 	mix-blend-mode: overlay;
 }
 
 .politic-button{
+	font-family: 'Montserrat', sans-serif;
 	position: absolute;
-	right:17%;
+	right:13%;
 	bottom:40%;
 	font-size: 16px;
 	background-color:transparent;
 	border:none;
 	outline:none;
-	color:#299601;
 	color:var(--main-darktext-color);
 }
 
 .politic-button:hover{
-	color:#51CF15;
 	color:var(--main-text-color);
 }
 
 @media screen and (max-width:1300px) {
+	html{
+		min-height:530px;
+	}
 	.game-name{
 		font-size: 38px;
 	}
