@@ -1,0 +1,40 @@
+h2 {
+	font-size:24px;
+	margin:0;
+	font-weight: 500;
+}
+
+/*при открытии*/
+.details[open] .button{
+	background: url(../../img/theory/arrow_up.png) no-repeat 0.5em 0.7em;
+	color:var(--main-text-color);
+}
+
+/*уберем стандартные маркеры*/
+details summary::-webkit-details-marker {
+	display: none;
+}
+
+/*аналогично Для Firefox*/
+summary {display: block;}
+
+/*кнопки открывающихся блоков*/
+.button {
+	border:3px solid var(--main-text-color);
+	padding:0.3em 0.5em 0.3em 2.5em;
+	margin-top:1em;
+	box-sizing: border-box;
+	width:24em;
+	cursor:pointer;
+	outline:none;
+	background: url(../../img/theory/arrow_down.png) no-repeat 0.5em 0.7em;
+	background-color:var(--main-text-color);
+	color:var(--main-bg-color);
+}
+
+@media screen and (max-width:1300px) {
+	h2 {
+		font-size: 20px;
+	}
+}
+

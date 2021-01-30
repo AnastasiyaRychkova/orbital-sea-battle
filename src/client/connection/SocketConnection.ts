@@ -1,4 +1,4 @@
-import { io } from "../../lib/third-party/socket.io";
+/*import { io } from "../../lib/third-party/socket.io";*/
 import prop from './properties';
 import { InputMessage, OutputMessage } from "./types";
 

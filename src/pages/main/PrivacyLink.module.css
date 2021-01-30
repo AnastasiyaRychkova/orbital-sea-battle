@@ -1,0 +1,29 @@
+/*подвал*/
+.privacy {
+	position: relative;
+	height: 5em;
+}
+
+.privacy img {
+	position: absolute;
+	bottom: 20%;
+	right: -10%;
+	mix-blend-mode: overlay;
+}
+
+.button {
+	font-family: 'Montserrat', sans-serif;
+	position: absolute;
+	right: 13%;
+	bottom: 40%;
+	font-size: 16px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	color:var(--main-darktext-color);
+}
+
+.button:hover {
+	color: var(--main-text-color);
+}

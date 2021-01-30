@@ -1,0 +1,41 @@
+/*кнопки главного меню и их состояния*/
+.choose {
+	cursor: pointer;
+	font-size: 18px;
+	letter-spacing: 0.2em;
+	width: 14em;
+	border: 3px solid var(--main-darktext-color);
+	text-align: center;
+	padding: 0.5em;
+	margin: 0.4em 0;
+	background-color: transparent;
+	color: var(--main-text-color);
+	outline: none;
+}
+
+.choose:hover {
+	background-color: var(--main-text-color);
+	border-color: var(--main-text-color);
+	color: var(--main-bg-color);
+}
+
+.disabled {
+	cursor: default;
+	opacity: 0.4;
+	font-size: 18px;
+	letter-spacing: 0.2em;
+	width: 14em;
+	border: 3px solid var(--main-darktext-color);
+	text-align: center;
+	padding: 0.5em;
+	margin: 0.4em 0;
+	background-color: transparent;
+	color: var(--main-text-color);
+	outline: none;
+}
+
+@media screen and (max-width:1300px) {
+	.choose, .disabled {
+		font-size: 16px;
+	}
+}
