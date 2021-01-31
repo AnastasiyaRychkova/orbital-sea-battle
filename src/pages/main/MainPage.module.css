@@ -1,0 +1,60 @@
+html {
+	--main-text-color: #51CF15;
+	--main-bg-color: #00200A;
+	--main-darktext-color: #299601;
+	/*height: 100%;*/
+	background-image: -webkit-linear-gradient(bottom,#003C19,#00200A);
+	background: no-repeat -o-linear-gradient(top,var(--main-bg-color), #003C19);
+	background: no-repeat linear-gradient(to bottom,var(--main-bg-color), #003C19); /*градиент фона*/
+	min-width: 680px;
+	overflow-x: auto;
+	min-height: 620px;
+}
+
+/*линии на фоне*/
+body {
+	background: repeat url(../../img/main/bg-lines.png);
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+/*круг на фоне*/
+.circle {
+	background: url(../../img/main/fon_t.svg) no-repeat fixed center center;
+	background-size: cover;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	/*min-height: 100vh;*/
+}
+
+.content {
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	max-width: 800px;
+	padding: 0 32px;
+	font-family: 'Montserrat', sans-serif;
+	color: var(--main-text-color);
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+	flex-direction: column; 
+		-ms-flex-pack: distribute;
+	justify-content: space-around;
+	margin: 0 auto;
+		-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+@media screen and (max-width:1300px) {
+	html {
+		min-height:530px;
+	}
+}

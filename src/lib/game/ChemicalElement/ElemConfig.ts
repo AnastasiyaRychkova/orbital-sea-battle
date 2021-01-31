@@ -118,11 +118,6 @@ class ElemConfig
 		return spinIndex % ElemConfig.CHUNK_SIZE;
 	}
 
-	private _chunkBySpinIndex( spinIndex: number ): number
-	{
-		return this.#config[ ElemConfig._chunkIndexBySpinIndex( spinIndex ) ];
-	}
-
 	private static _chunkIndexBySpinIndex( spinIndex: number ): number
 	{
 		return ( spinIndex / ElemConfig.CHUNK_SIZE ) | 0;

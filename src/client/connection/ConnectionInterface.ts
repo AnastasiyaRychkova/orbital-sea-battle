@@ -5,7 +5,7 @@ import type {
 	ShotType,ShotResult,
 	OfferResponse,
 	ElemCheckResult,
-} from "./types";
+} from "../../lib/game/types";
 
 
 

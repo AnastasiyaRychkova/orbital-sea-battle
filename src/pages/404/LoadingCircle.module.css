@@ -1,0 +1,10 @@
+/*круг загрузки*/
+.loading {
+	transform-origin: center center;
+	animation: circle 5s 1 ease;
+}
+
+@keyframes circle {
+	0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}

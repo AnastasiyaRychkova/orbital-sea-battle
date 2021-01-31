@@ -4,12 +4,19 @@ import type { CellProps } from './types';
 import './cell.css';
 
 function UpCell( props: CellProps ) {
-	const fn = () => {
-		props.clickFn && props.clickFn( props.schema.index );
-	};
-
+	const {index, diagram} = props;
+	const fn = diagram.cellClickFunction
+		? () => {
+			diagram.cellClickFunction!( index )
+		}
+		: undefined;
 	return (
-		<use href="#cell" className={makeCellClass(props.schema)} x={props.x} y={props.y} key={props.schema.index} onClick={fn} />
+		<use href="#cell"
+			className={makeCellClass( index, diagram )}
+			x={props.x}
+			y={props.y}
+			onClick={fn}
+		/>
 	);
 }
 

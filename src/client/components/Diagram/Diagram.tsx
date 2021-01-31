@@ -1,17 +1,18 @@
 import React from 'react';
-import { observer } from "mobx-react";
-import CounterStore from "./Counter";
+import CellSymbol from './CellSymbol';
+import DiagramField from './DiagramField';
+import './diagram.css';
 
-const Diagram = observer(props => {
-		const { count, increase, decrease } = CounterStore
-
-		return (
-			<div>
-				<h1>{count}</h1>
-				<button onClick={increase}>increment</button>
-				<button onClick={decrease}>decrement</button>
-			</div>
-		)
-})
+function Diagram( props: any )
+{
+	return(
+		<svg id="diagram" viewBox="-2 -2 1520 602" fill="none" preserveAspectRatio="xMidYMid meet">
+			<defs>
+				<CellSymbol />
+			</defs>
+			<DiagramField diagram={props.diagram} />
+		</svg>
+	)
+}
 
 export default Diagram;

@@ -1,15 +1,23 @@
 import React from 'react';
-import { makeCellClass } from './properties';
+import { CONTAINER_HEIGHT, CONTAINER_WIDTH, makeCellClass } from './properties';
 import type { CellProps } from './types';
 import './cell.css';
 
 function DownCell( props: CellProps ) {
-	const fn = () => {
-		props.clickFn && props.clickFn( props.schema.index );
-	};
-
+	const {index, diagram} = props;
+	const fn = diagram.cellClickFunction
+		? () => {
+			diagram.cellClickFunction!( index )
+		}
+		: undefined;
 	return (
-		<use href="#cell" className={makeCellClass(props.schema)} x={props.x} y={props.y} key={props.schema.index} transform="rotate( 180 10 20 )" onClick={fn} />
+		<use href="#cell"
+			className={makeCellClass( index, diagram )}
+			x={props.x}
+			y={props.y}
+			onClick={fn}
+			transform={"rotate( 180 "+(props.x + (CONTAINER_WIDTH)/4)+" "+(props.y + (CONTAINER_HEIGHT)/2)+")"}
+		/>
 	);
 }
 

@@ -1,0 +1,31 @@
+/*название игры*/
+.name {
+	margin: 5vh auto 10vh;
+		display: -webkit-box;
+		display: -ms-flexbox;
+	display: flex;
+	font-weight: 500;
+	font-size: 46px;
+	letter-spacing: 0.2em;
+}
+
+.name_orbital {
+	max-width: 6em;
+	padding: 0.15em 0.5em;
+	border: 3px solid var(--main-text-color);	
+}
+
+.name_battleship{
+	padding: 0.2em 0.45em;
+	background-color: var(--main-text-color);
+	color: var(--main-bg-color);
+		-webkit-transform: translate( -1.4em, 1.4em );
+		-ms-transform: translate( -1.4em, 1.4em );
+	transform: translate( -1.4em, 1.4em );
+}
+
+@media screen and (max-width:1300px) {
+	.name {
+		font-size: 38px;
+	}
+}

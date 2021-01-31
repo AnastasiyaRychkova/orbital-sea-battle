@@ -7,16 +7,12 @@ import type {
 } from './ChemicalElement/ChemicalElement';
 
 // TODO: Добавить квантовые числа
-
-/** 
- * Периодическая таблица химических элементов
- */
-type PeriodicTable = Array<ChemicalElement>;
+type PeriodicTableStructure = Array<ChemicalElement>;
 
 /**
  * Таблица Менделеева
  */
-const periodicTable: PeriodicTable = [
+const periodicTable: PeriodicTableStructure = [
 	{
 		number: 1,
 		name: 	'hydrogen',
@@ -728,11 +724,29 @@ const periodicTable: PeriodicTable = [
 ];
 
 
+type PeriodicTableType = {
+	getByNumber( number: number ): ChemicalElement
+}
 
+/** 
+ * Периодическая таблица химических элементов
+ */
 
-export default periodicTable;
+class PeriodicTable
+{
+	#table = periodicTable;
+
+	getByNumber( number: number ): ChemicalElement
+	{
+		return this.#table[ number - 1 ];
+	}
+}
+
+const periodicTableInstance = new PeriodicTable();
+
+export default periodicTableInstance;
 
 export type {
 	ChemicalElement,
-	PeriodicTable,
+	PeriodicTableType,
 };

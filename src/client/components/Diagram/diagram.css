@@ -1,0 +1,28 @@
+.cell_off {
+	stroke: #245a0b;
+}
+
+.cell_off:hover {
+	stroke: #38a505;
+}
+
+.cell_on {
+	stroke: #c1ffa5;
+}
+
+.cell_on:hover {
+	stroke: #83ee51;
+}
+
+.cell_hit {
+	stroke: #ffa8a5;
+}
+
+/* .cell_hit.cell_selected {
+	fill: #ee5151;
+} */
+
+.cell-space {
+	fill: white;
+	opacity: 0;
+}

@@ -1,3 +1,5 @@
+import type DiagramStateType from '../../../lib/game/Diagram/DiagramInterface'
+
 // ---- CELL ------
 
 export enum CellState
@@ -8,72 +10,41 @@ export enum CellState
 	miss,
 };
 
-export type CellSchema = {
-	index: number,
-	state: CellState,
-	isLast: boolean,
-	isSelected: boolean,
-};
-
 export type CellProps = {
-	schema: CellSchema,
+	diagram: DiagramStateType,
 	x: number,
 	y: number,
+	index: number,
 };
 
 
 // ---- CONTAINER ------
 
-export type ContainerSchema = {
-	upCell: CellSchema,
-	downCell: CellSchema,
-	isSelected: boolean,
-};
-
 export type ContainerProps = {
-	schema: ContainerSchema,
+	diagram: DiagramStateType,
 	x: number,
 	y: number,
-	cellClickFn?: ( index: number ) => void,
-	children: any,
+	upCell: number,
+	downCell: number,
 };
 
 
 // ---- SHIP NAME ------
 
-export type ShipNameSchema = {
-	firstCellIndex: number,
-	length: number,
-	name: string,
-};
-
 export type ShipNameProps = {
-	schema: ShipNameSchema,
+	diagram: DiagramStateType,
 	x: number,
 	y: number,
-	clickFn?: ( firstCellIndex: number, length: number ) => void,
+	name: string,
 };
 
 
 // ---- SHIP ------
 
-export type ShipSchema = {
-	name: string,
-	cells: Array<CellSchema>,
-	length: number,
-	isSelected: boolean,
-	cellClickFn?: ( index: number ) => void,
-	nameClickFn?: ( firstCellIndex: number, length: number ) => void,
-};
-
 export type ShipProps = {
-	schema: ShipSchema,
-	x: number,
-	y: number,
-	children: any,
+	diagram: DiagramStateType,
+	column: number,
+	row: number,
+	vertLine: number,
+	name: string,
 };
-
-
-export type DiagramStoreType = {
-
-}

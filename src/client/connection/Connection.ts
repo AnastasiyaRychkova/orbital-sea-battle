@@ -7,9 +7,8 @@ import type {
 	ShotResult,
 	OfferResponse,
 	ElemCheckResult,
-} from "./types";
+} from "../../lib/game/types";
 import ConnectionInterface from "./ConnectionInterface";
-import { ReadinessCode } from "../../lib/game/Readiness";
 
 class ConnectionImplementation implements ConnectionInterface
 {

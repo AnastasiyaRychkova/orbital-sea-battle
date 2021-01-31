@@ -2,18 +2,24 @@ import React from 'react';
 import { ShipNameProps } from './types';
 
 function ShipName( props: ShipNameProps ) {
-	let className = 'ship-name';
-	// let clickFn: () => void | undefined;
-	const clickFn = () => console.log('click');
-	if( props.clickFn )
-	{
-		className += '_ship-name-disabled';
-		/* clickFn = () => {
-			props.clickFn( props.schema.firstCellIndex, props.schema.length );
-		} */
-	}
+	const { diagram, name } = props;
+	const fn = diagram.shipNameClickFunction
+		? () => {
+			diagram.shipNameClickFunction!( name );
+		}
+		: undefined;
+
+	const className = 'ship-name' + (diagram.shipNameClickFunction ? '' : ' ship-name-disabled');
+
 	return (
-		<text className="" x={props.x} y={props.y} onClick={clickFn} >{props.schema.name}</text>
+		<text
+			className={className}
+			x={props.x}
+			y={props.y}
+			onClick={fn}
+		>
+			{props.name}
+		</text>
 	);
 }
 

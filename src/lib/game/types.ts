@@ -1,5 +1,5 @@
-import type { ChemicalElement as ChemicalElementEntity } from "../../lib/game/ChemicalElement/ChemicalElement";
-import type { ReadinessStatusType, ReadinessCodeType } from "../../lib/game/Readiness";
+import type { ChemicalElement as ChemicalElementEntity } from "./ChemicalElement/ChemicalElement";
+import type { ReadinessStatusType, ReadinessCodeType } from "./Readiness";
 
 export type ElemCheckResult = boolean;
 
