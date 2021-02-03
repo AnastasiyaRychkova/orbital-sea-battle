@@ -13,7 +13,7 @@ function MainMenu()
 				<MenuButtonDisabled path="/about" text="About"/>
 				<MenuButtonDisabled path="/rules" text="Rules"/>
 				<MenuButton path="/theory" text="Theory"/>
-				<MenuButtonDisabled path="/diagram" text="Diagram"/>
+				<MenuButton path="/diagram" text="Diagram"/>
 			</div>
 		</nav>
 	);

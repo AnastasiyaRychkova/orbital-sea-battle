@@ -9,7 +9,7 @@ import TheoryPage from './pages/theory/TheoryPage';
 import MainPage from './pages/main/MainPage';
 import Page404 from './pages/404/Page404';
 import Stub from './pages/404/Stub';
-// import DiagramInfoPage from './pages/diagram_info/DiagramInfoPage';
+import DiagramInfoPage from './pages/diagram_info/DiagramInfoPage';
 
 function App() {
 	return (
@@ -19,12 +19,12 @@ function App() {
 				<Route path="/theory" component={TheoryPage} />
 				<Route path="/training" component={Stub} />
 				<Route path="/privacy" component={Stub} />
-				
+				<Route path="/diagram" component={DiagramInfoPage} />
 				<Route component={Page404} />
 			</Switch>
 		</Router>
 	);
 }
-// <Route path="/diagram" component={DiagramInfoPage} />
+// 
 
 export default App;

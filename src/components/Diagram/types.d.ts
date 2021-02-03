@@ -1,4 +1,4 @@
-import type DiagramStateType from '../../../lib/game/Diagram/DiagramInterface'
+import type DiagramStateType from '../../lib/game/Diagram/DiagramInterface'
 
 // ---- CELL ------
 

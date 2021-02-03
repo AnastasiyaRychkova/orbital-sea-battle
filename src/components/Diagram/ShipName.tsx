@@ -1,7 +1,8 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import { ShipNameProps } from './types';
 
-function ShipName( props: ShipNameProps ) {
+const ShipName = observer(( props: ShipNameProps ) => {
 	const { diagram, name } = props;
 	const fn = diagram.shipNameClickFunction
 		? () => {
@@ -21,6 +22,6 @@ function ShipName( props: ShipNameProps ) {
 			{props.name}
 		</text>
 	);
-}
+});
 
 export default ShipName;

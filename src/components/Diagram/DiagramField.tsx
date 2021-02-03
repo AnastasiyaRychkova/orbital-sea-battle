@@ -1,9 +1,13 @@
 import React from 'react';
-
+import { observer } from 'mobx-react';
 import Ship from './Ship';
+import type DiagramStateType from '../../lib/game/Diagram/DiagramInterface'
 
+type DiagramProps = {
+	diagram: DiagramStateType,
+}
 
-function DiagramField( props:any ) {
+const DiagramField = observer((props: DiagramProps) => {
 	return (
 		<g>
 			<Ship
@@ -103,6 +107,6 @@ function DiagramField( props:any ) {
 			/>
 		</g>
 	);
-}
+});
 
 export default DiagramField;

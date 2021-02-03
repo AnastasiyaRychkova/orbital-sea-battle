@@ -1,0 +1,28 @@
+.symbol {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	justify-content: center;
+	font-size: 2.4em;
+}
+
+.name {
+	text-align: center;
+}
+
+.number {
+	transform: translateX( -8px );
+}
+
+.icon {
+	box-sizing: border-box;
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 120px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 2px;
+	border: 2px solid #51CF15;
+}

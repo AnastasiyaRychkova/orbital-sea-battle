@@ -1,4 +1,4 @@
-import DiagramStateType from '../../../lib/game/Diagram/DiagramInterface';
+import DiagramStateType from '../../lib/game/Diagram/DiagramInterface';
 
 enum CellState {
 	'off',

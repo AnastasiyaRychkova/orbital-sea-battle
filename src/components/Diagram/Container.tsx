@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import DownCell from './DownCell';
 import {
 	CELL_WIDTH,
@@ -9,7 +10,7 @@ import {
 import { ContainerProps } from './types';
 import UpCell from './UpCell';
 
-function Container( props: ContainerProps ) {
+const Container = observer(( props: ContainerProps ) => {
 	return (
 		<g>
 			<rect
@@ -36,7 +37,7 @@ function Container( props: ContainerProps ) {
 			/>
 		</g>
 	);
-}
+});
 
 
 export default Container;

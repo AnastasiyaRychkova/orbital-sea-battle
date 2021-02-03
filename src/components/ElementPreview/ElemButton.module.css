@@ -1,0 +1,25 @@
+.button {
+	width: 50px;
+	height: 80px;
+	background-color: #50cf1542;
+	font-size: inherit;
+	border: none;
+	color: #51CF15;
+	font-size: 1.16em;
+	padding: 8px;
+}
+
+.button:hover {
+	background-color: #50cf1552;
+	color: #b1ff33;
+}
+
+.left_button {
+	clip-path: polygon(25px 0, 100% 0, 100% 100%, 25px 100%, 0 50%);
+	text-align: right;
+}
+
+.right_button {
+	clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100% );
+	text-align: left;
+}

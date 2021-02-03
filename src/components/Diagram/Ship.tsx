@@ -1,5 +1,6 @@
 import React from 'react';
-import DiagramStateType from '../../../lib/game/Diagram/DiagramInterface';
+import { observer } from 'mobx-react';
+import DiagramStateType from '../../lib/game/Diagram/DiagramInterface';
 import Container from './Container';
 import {
 	CONTAINER_HEIGHT,
@@ -45,7 +46,7 @@ function buildShip( sizeProps: ShipSize,
 }
 
 
-function Ship( props: ShipProps ) {
+const Ship = observer(( props: ShipProps ) => {
 	const sizeProps = {
 		...props.diagram.getShipPropsByName( props.name ),
 		x: getShipX( props.column, props.vertLine ),
@@ -70,6 +71,6 @@ function Ship( props: ShipProps ) {
 			/>
 		</g>
 	);
-}
+});
 
 export default Ship;

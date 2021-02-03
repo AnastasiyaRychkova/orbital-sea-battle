@@ -1,12 +1,17 @@
-
-#diagram {
+.diagram {
 	height: 85vh;
 	padding: 4% 4% 3% 0;
 }
 
 @media( min-aspect-ratio: 4/3 ) {
-	#diagram {
+	.diagram {
 		width: 100%;
 		box-sizing: border-box;
 	}
+}
+
+.switcher {
+	position: absolute;
+	bottom: 20vh;
+	right: 18vw;
 }

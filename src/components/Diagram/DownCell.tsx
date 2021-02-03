@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeCellClass } from './properties';
+import { observer } from 'mobx-react';
+import { CONTAINER_HEIGHT, CONTAINER_WIDTH, makeCellClass } from './properties';
 import type { CellProps } from './types';
 import './cell.css';
 
-function UpCell( props: CellProps ) {
+const DownCell = observer(( props: CellProps ) => {
 	const {index, diagram} = props;
 	const fn = diagram.cellClickFunction
 		? () => {
@@ -16,8 +17,9 @@ function UpCell( props: CellProps ) {
 			x={props.x}
 			y={props.y}
 			onClick={fn}
+			transform={"rotate( 180 "+(props.x + (CONTAINER_WIDTH)/4)+" "+(props.y + (CONTAINER_HEIGHT)/2)+")"}
 		/>
 	);
-}
+});
 
-export default UpCell;
+export default DownCell;
