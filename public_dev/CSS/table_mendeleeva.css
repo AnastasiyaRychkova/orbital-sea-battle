@@ -1,243 +1,221 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap'); /*шрифт*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap'); /*шрифт*/
+
 html{
-    height: 100%;
+	--main-text-color: #51CF15;
+	--main-bg-color: #00200A;
+	--main-darktext-color: #299601;
+	background: no-repeat linear-gradient(to bottom,var(--main-bg-color), #003C19);
+	font-weight: 300;
+	min-width: 760px;
 }
 
+a{
+	color:var(--main-text-color);
+	text-decoration: none;
+}
+
+h1{
+	font-size: 48px;
+	text-align:center;
+	letter-spacing: 0.2em;
+}
+
+p{
+	line-height: 1.5;
+	word-spacing:0.2em;
+}
+
+h2{
+	font-size:24px;
+	margin:0;
+	font-weight: 500;
+}
+
+html, body, .background-cell{
+	width:100%;
+	margin:0;
+	min-height:100vh;
+}
+/*линии на фоне*/
 body {
-    --main-text-color: #51CF15;
-    --main-bg-color: #00200A;
-    max-width: 1400px;
-    height: 100%;
-    background:  #00200A;   /*для Safari и IE не работает var(--main-text-color)*/
-    background: linear-gradient(to bottom,var(--main-bg-color), #003C19);  /*градиент фона*/
-    background: linear-gradient(to bottom, #00200A, #003C19);  /*градиент фона для IE*/
-    font-family: 'Montserrat', sans-serif;
-    color:var(--main-text-color);
-    color:#51CF15;
-    margin:0 auto;
-        display: -webkit-box;
-        display: -ms-flexbox;
-    display: flex;
-        -webkit-box-orient:vertical;
-        -webkit-box-direction:normal;
-        -ms-flex-direction:column;
-    flex-direction:column;
-        -webkit-box-pack:justify;
-        -ms-flex-pack:justify;
-    justify-content:space-between;
+	background: repeat url(../img/index/bg-lines.png); 
+	overflow: hidden;
 }
 
-.switch{
-        display: -webkit-box;
-        display: -ms-flexbox;
-    display: flex;
-        -webkit-box-orient:horizontal;
-        -webkit-box-direction:normal;
-        -ms-flex-direction:row;
-    flex-direction:row;
-        -ms-flex-pack:distribute;
-    justify-content:space-around;
-
-}
-.switch ul{
-    padding: 0;
-    margin:20px;
-    list-style-type: none;
-        display: -webkit-box;
-        display: -ms-flexbox;
-    display: flex;
+/*клетки на фоне*/
+.background-cell{
+	background:repeat url(../img/index/bg-cell2.png);
+	padding-top:1%;
 }
 
-.switch li{
-    width: 200px;
-    height: 10px;
-    border:1px solid var(--main-text-color);
-    border:1px solid #51CF15; /*для Safari и IE не работает var(--main-text-color)*/
-    margin: auto 30px;
+.table {
+	max-width:1300px;
+	max-height:85vh;
+	min-height: 400px;
+	box-sizing: border-box;
+	font-family:'Montserrat', sans-serif;
+	color:var(--main-text-color);
+	padding:2vh 20px 20px;
+	margin:0 auto;
+	display:grid;
+	grid-template-columns: 0.5fr repeat(18, minmax(3em,1fr));
+	grid-template-rows:repeat(8,auto) 2% repeat(2,auto);
+	overflow: auto;
+	/*скролбар в Mozilla Firefox*/
+	scrollbar-width: thin;
+	scrollbar-color: var(--main-darktext-color) var(--main-bg-color);
 }
 
-.switch li:last-child{
-    background-color: var(--main-text-color);
-    background-color:#51CF15;
+/*дизайн прокрутки в chrome и opera*/
+::-webkit-scrollbar {
+	width: 8px;
+	height:8px;
 }
-
-.button{
-        display: -webkit-box;
-        display: -ms-flexbox;
-    display: flex;
-        -webkit-box-orient:horizontal;
-        -webkit-box-direction:normal;
-        -ms-flex-direction:row;
-    flex-direction:row;
-        -webkit-box-pack:center;
-        -ms-flex-pack:center;
-    justify-content:center;
+::-webkit-scrollbar-track {
+	background-color:var(--main-bg-color);
+	border-radius: 10px;
 }
-
-.button_save{
-    width: 180px;
-    height: 40px;
-    margin:20px;
-    background-color: #C4C4C4;
-}
-
-/*таблица менделеева*/
-.table_mend{
-    margin: -2em 1% 0 1%;
-    display:block;
-}
-
-/*строки таблицы*/
-.table_mend-row{
-    height: 4em;
-        display: -webkit-box;
-        display: -ms-flexbox;
-    display: flex;
+ 
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color:var(--main-darktext-color);
 }
 
 /*ячейки с элементами*/
-.table_mend-row-cell{
-    border: 1px solid var(--main-text-color);
-    border: 1px solid#51CF15; /*почему не работает в IE?????*/
-    padding: 3px;
-        display:-webkit-box;
-        display:-ms-flexbox;
-    display:flex;
-        -ms-flex-preferred-size: 4em;
-    flex-basis: 4em;
-        -ms-flex-negative:0.8;
-    flex-shrink:0.8;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-    flex-direction: column;
-    font-size: 14px;
+.table_cell{
+	border: 1px solid var(--main-text-color);
+	padding: 3px;
+	display:flex;
+	flex-direction: column;
+	font-size: 14px;
+	background: transparent;
 }
 
-/*ячейкм пустые и с номерами групп/периодов*/
-.table_mend-row-empty{
-        display:-webkit-box;
-        display:-ms-flexbox;
-    display:flex;
-    padding: 0px;
-        -ms-flex-preferred-size: 4em;
-    flex-basis: 4em;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-    flex-direction: column;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-    justify-content: center;
-    font-size: 16px;
+.table_cell:hover{
+	background-color: var(--main-text-color);
+	color:var(--main-bg-color);
+	cursor:pointer;
+}
+/*ячейки пустые и с номерами групп/периодов*/
+.table_empty{
+	display:flex;
+	padding: 0px;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 16px;
 }
 
 /*номер элемента*/
 .number{
-    font-weight:bold;
+	font-weight:bold;
 }
 
 /*название элемента*/
 .elem{
-        display:-webkit-box;
-        display:-ms-flexbox;
-    display:flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight:bold;
+	display:flex;
+	justify-content: center;
+	font-size: 22px;
+	font-weight:bold;
 }
 
 /*атомная масса элемента*/
 .weight{
-        display:-webkit-box;
-        display:-ms-flexbox;
-    display:flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-    justify-content: center;
-    font-size: 10px;
+	display:flex;
+	justify-content: center;
+	font-size: 10px;
 }
 
 /*номера групп/периодов*/
 .group{
-    padding: 3px;
-        display:-webkit-box;
-        display:-ms-flexbox;
-    display:flex;
-        -ms-flex-item-align: center;
-    align-self: center;
-    font-weight:bold;
+	padding: 3px;
+	display:flex;
+	align-self: center;
+	font-weight:bold;
+}
+/*для периодов */
+.right{
+	align-self:flex-start;
+	margin-right:10px;
+}
+/*для двух групп 1 и 18 */
+.top{
+	margin-bottom:10px;
+	justify-content: start;
+}
+/*отступ между 7 и 8 строкой*/
+.gap{
+	height:1vh;
+	grid-column: 1 / -1;
 }
 
-/*расстояние между элементами 57-71 и основной частью*/
-.marg_8_str{
-    margin-top:1%;
+.button{
+	display: flex;
+	flex-direction:row;
+	justify-content:center;
+}
+
+/*кнопка возврата в меню*/
+.return{
+	color:var(--main-darktext-color);
+	width:fit-content;
+	font-size: 24px;
+	font-weight: 300;
+	background-color:transparent;
+	border:none;
+	outline:none;
+	cursor: pointer;
+	font-family:'Montserrat', sans-serif;
+	margin-top:5vh;
+}
+.return:hover{
+	color:var(--main-text-color);
 }
 
 @media screen and (max-width:1250px) {
-    .table_mend-row-cell {
-        font-size: 13px;
-    }
-    .elem{
-        font-size: 21px;
-    }
-    .weight{
-        font-size: 9px;
-    }
-    .table_mend-row-empty{
-        font-size: 15px;
-    }
+	.table_mend-row-cell {
+		font-size: 13px;
+	}
+	.elem{
+		font-size: 21px;
+	}
+	.weight{
+		font-size: 9px;
+	}
+	.table_empty{
+		font-size: 15px;
+	}
 }
 
 @media screen and (max-width:1160px) {
-    .table_mend-row-cell {
-        font-size: 12px;
-    }
-    .elem{
-        font-size: 20px;
-    }
-    .weight{
-        font-size: 8px;
-    }
-    .table_mend-row-empty{
-        font-size: 14px;
-    }
+	.table_cell {
+		font-size: 12px;
+	}
+	.elem{
+		font-size: 20px;
+	}
+	.weight{
+		font-size: 8px;
+	}
+	.table_empty{
+		font-size: 14px;
+	}
 }
 
-@media screen and (max-width:1024px) {
-    .table_mend-row-cell {
-        font-size: 11px;
-    }
-    .elem{
-        font-size: 19px;
-    }
-    .weight{
-        font-size: 8px;
-    }
-    .table_mend-row-empty{
-        font-size: 13px;
-    }
-    .table_mend-row{
-        height: 3.5em;
-    }
-}
 
-@media screen and (max-width:950px) {
-    .table_mend-row-cell {
-        font-size: 10px;
-    }
-    .elem{
-        font-size: 18px;
-    }
-    .weight{
-        font-size: 8px;
-    }
-    .table_mend-row-empty{
-        font-size: 12px;
-    }
-    .table_mend-row{
-        height: 3.3em;
-    }
+@media screen and (min-aspect-ratio: 16/10){ 
+	.table_cell {
+		font-size: 1.5vh;
+	}
+	.elem{
+		font-size: 2.5vh;
+	}
+}
+@media screen and (max-height: 600px){ 
+	.table_cell {
+		font-size: 9px;
+	}
+	.elem{
+		font-size: 15px;
+	}
+
 }
