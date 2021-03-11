@@ -479,13 +479,13 @@ const periodicTable: PeriodicTableStructure = [
 		number: 78,
 		name: 	'platinum',
 		symbol: 'Pt',
-		config: new ElemConfig( [ -1, -1, 32765, 0 ] )
+		config: new ElemConfig( [ -1, 4286578687, 32767, 0 ] )
 	},
 	{
 		number: 79,
 		name: 	'gold',
 		symbol: 'Au',
-		config: new ElemConfig( [ -1, -1, 65533, 0 ] )
+		config: new ElemConfig( [ -1, 4286578687, 65535, 0 ] )
 	},
 	{
 		number: 80,
@@ -551,7 +551,7 @@ const periodicTable: PeriodicTableStructure = [
 		number: 90,
 		name: 	'thorium',
 		symbol: 'Th',
-		config: new ElemConfig( [ -1, -1, 83886079, 192 ] )
+		config: new ElemConfig( [ -1, -1, 16777215, 320 ] )
 	},
 	{
 		number: 91,
