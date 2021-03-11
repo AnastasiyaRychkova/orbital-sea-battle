@@ -8,12 +8,12 @@ function MainMenu()
 	return (
 		<nav className={ styles.menu }>
 			<div className={ styles.column }>
-				<MenuButtonDisabled path="/game" text="Play"/>
-				<MenuButton path="/training" text="Training"/>
-				<MenuButtonDisabled path="/about" text="About"/>
-				<MenuButtonDisabled path="/rules" text="Rules"/>
-				<MenuButton path="/theory" text="Theory"/>
-				<MenuButton path="/diagram" text="Diagram"/>
+				<MenuButtonDisabled path="/game" >Play</MenuButtonDisabled>
+				<MenuButton path="/training" >Training</MenuButton>
+				<MenuButtonDisabled path="/about" >About</MenuButtonDisabled>
+				<MenuButtonDisabled path="/rules" >Rules</MenuButtonDisabled>
+				<MenuButton path="/theory" >Theory</MenuButton>
+				<MenuButton path="/diagram" >Diagram</MenuButton>
 			</div>
 		</nav>
 	);

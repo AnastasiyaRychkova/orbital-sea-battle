@@ -4,13 +4,13 @@ import styles from './MenuButton.module.css';
 
 interface IProps {
 	path: string;
-	text: string;
+	children: React.ReactNode;
 }
 
 export default function MenuButtonDisabled(props: IProps)  {
 	return (
 		<div className={ styles.disabled } >
-			{ props.text }
+			{ props.children }
 		</div>
 	);
 }

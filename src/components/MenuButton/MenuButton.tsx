@@ -4,13 +4,13 @@ import styles from './MenuButton.module.css';
 
 interface IProps {
 	path: string;
-	text: string;
+	children: React.ReactNode;
 }
 
-export default function MenuButton(props: IProps)  {
+export default function MenuButton(props: IProps) {
 	return (
 		<Link to={ props.path } className={ styles.choose } >
-			{ props.text }
+			{ props.children }
 		</Link>
 	);
 }
