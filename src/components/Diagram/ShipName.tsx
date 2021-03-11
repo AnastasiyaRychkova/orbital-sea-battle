@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { ShipNameProps } from './types';
+import type { ShipNameProps } from './types';
+import { makeShipNameClass } from './properties';
 
 const ShipName = observer(( props: ShipNameProps ) => {
 	const { diagram, name } = props;
@@ -10,11 +11,9 @@ const ShipName = observer(( props: ShipNameProps ) => {
 		}
 		: undefined;
 
-	const className = 'ship-name' + (diagram.shipNameClickFunction ? '' : ' ship-name-disabled');
-
 	return (
 		<text
-			className={className}
+			className={ makeShipNameClass( diagram ) }
 			x={props.x}
 			y={props.y}
 			onClick={fn}

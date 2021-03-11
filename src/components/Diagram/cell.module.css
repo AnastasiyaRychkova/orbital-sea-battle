@@ -2,17 +2,18 @@
 	stroke: #245a0b;
 }
 
-.cell_off:hover {
+/* .cell_off:hover {
 	stroke: #38a505;
-}
+} */
 
 .cell_on {
 	stroke: #c1ffa5;
+	fill: #1e5f00;
 }
 
-.cell_on:hover {
+/* .cell_on:hover {
 	stroke: #83ee51;
-}
+} */
 
 .cell_hit {
 	stroke: #ffa8a5;
@@ -22,7 +23,8 @@
 	fill: #ee5151;
 } */
 
-.cell-space {
-	fill: white;
-	opacity: 0;
+.ship_name {
+	font: 30px sans-serif;
+	fill: #51CF15;
+	cursor: default;
 }

@@ -1,10 +1,15 @@
 import React from 'react';
 import style from '../../style/ScrolledContainer.module.css';
 import containerStyle from './DiagramContainer.module.css';
+import classNames from 'classnames';
 
-function DiagramContainer( props: any ) {
+interface IProps {
+	children: React.ReactNode,
+}
+
+function DiagramContainer( props: IProps ) {
 	return (
-		<section className={containerStyle.container+' '+style.container}>
+		<section className={classNames( containerStyle.container, style.container )}>
 			{ props.children }
 		</section>
 	);

@@ -1,4 +1,7 @@
 import DiagramStateType from '../../lib/game/Diagram/DiagramInterface';
+import cellStyles from './cell.module.css';
+import diagramStyles from './diagram.module.css';
+import classNames from 'classnames';
 
 enum CellState {
 	'off',
@@ -9,28 +12,37 @@ enum CellState {
 
 export function makeCellClass( index: number, diagram: DiagramStateType ): string
 {
-	let className = `cell_${CellState[diagram.getCellState( index )]}`;
-	if( diagram.isLastShot( index ) )
-		className += ' cell_last';
-	if( diagram.isCellSelected( index ) )
-		className += ' cell_selected';
-	return className;
+	return classNames(
+		cellStyles[ 'cell_' + CellState[ diagram.getCellState( index ) ] ],
+		{
+			[cellStyles.cell_last]: diagram.isLastShot( index ),
+			[cellStyles.cell_selected]: diagram.isCellSelected( index ),
+		},
+	);
 }
 
 export function makeContainerClass( index: number, diagram: DiagramStateType ): string
 {
-	let className = 'cell-container';
-	if( diagram.isContainerSelected( index ) )
-		className += ' cell-container_selected';
-	return className;
+	return classNames({
+		container: true,
+		container_selected: diagram.isContainerSelected( index ),
+	});
+}
+
+export function makeShipNameClass( diagram: DiagramStateType ): string
+{
+	return classNames({
+		[diagramStyles.ship_name]: true,
+		[diagramStyles.ship_name_disabled]: diagram.shipNameClickFunction,
+	});
 }
 
 export function makeShipClass( name: string, diagram: DiagramStateType ): string
 {
-	let className = 'ship';
-	if( diagram.isShipSelected( name ) )
-		className += ' ship_selected';
-	return className;
+	return classNames({
+		ship: true,
+		ship_selected: diagram.isShipSelected( name ),
+	});
 }
 
 export function getDownCellIndexByUpCell( index: number ): number
@@ -49,12 +61,23 @@ export function getNextUpCellIndex( index: number ): number
 	return -Math.abs(2 * index - 7) + 8;
 } */
 
+/**
+ * Расчет координаты X корабля
+ * @param column Индекс столбца (<=> главное квантовое число n - 1)
+ * @param vertLine Расстояние от начала координат в контейнерах
+ * @returns Координата X верхнего левого угла корабля
+ */
 export function getShipX( column: number, vertLine: number ): number
 {
 	// нумерация колонок 0
 	return vertLine * CONTAINER_WIDTH + column * COLUMN_SPACING;
 }
 
+/**
+ * Расчет координаты Y корабля
+ * @param row Индекс строки {0-7}. Нумерация снизу-вверх.
+ * @returns Координата Y верхнего левого угла корабля
+ */
 export function getShipY( row: number ): number
 {
 	return (7 - row) * (CONTAINER_HEIGHT + LINE_SPACING);
@@ -66,7 +89,8 @@ const CONTAINER_WIDTH = 40;
 const CONTAINER_HEIGHT = 40;
 const COLUMN_SPACING = 40;
 const LINE_SPACING = 30;
-const NAME_OFFSET = -20;
+const NAME_X_OFFSET = -20;
+const NAME_Y_OFFSET = 70;
 
 
 
@@ -77,5 +101,6 @@ export {
 	CONTAINER_HEIGHT,
 	COLUMN_SPACING,
 	LINE_SPACING,
-	NAME_OFFSET,
+	NAME_X_OFFSET,
+	NAME_Y_OFFSET,
 }

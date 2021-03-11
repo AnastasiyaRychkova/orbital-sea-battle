@@ -10,10 +10,11 @@ import {
 	getShipX,
 	getShipY,
 	makeShipClass,
-	NAME_OFFSET,
+	NAME_X_OFFSET,
+	NAME_Y_OFFSET,
 } from './properties';
 import ShipName from './ShipName';
-import { ShipProps } from './types';
+import type { ShipProps } from './types';
 
 type ShipSize = {
 	firstCellIndex: number,
@@ -57,8 +58,8 @@ const Ship = observer(( props: ShipProps ) => {
 			{ buildShip( sizeProps, props.diagram ) }
 			<ShipName
 				diagram={props.diagram}
-				x={sizeProps.x + NAME_OFFSET}
-				y={sizeProps.y + CONTAINER_HEIGHT}
+				x={sizeProps.x + NAME_X_OFFSET}
+				y={sizeProps.y + NAME_Y_OFFSET}
 				name={props.name}
 			/>
 			<rect

@@ -7,7 +7,7 @@ import {
 	CONTAINER_WIDTH,
 	makeContainerClass
 } from './properties';
-import { ContainerProps } from './types';
+import type { ContainerProps } from './types';
 import UpCell from './UpCell';
 
 const Container = observer(( props: ContainerProps ) => {

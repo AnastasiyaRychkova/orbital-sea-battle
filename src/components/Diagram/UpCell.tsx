@@ -2,7 +2,6 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { makeCellClass } from './properties';
 import type { CellProps } from './types';
-import './cell.css';
 
 const UpCell = observer(( props: CellProps ) => {
 	const {index, diagram} = props;
