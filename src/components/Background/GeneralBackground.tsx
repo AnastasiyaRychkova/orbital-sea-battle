@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './GeneralBackground.module.css';
 
-function GeneralBackground( props: any )
+interface IProps {
+	children: React.ReactNode,
+}
+
+function GeneralBackground( props: IProps )
 {
 	return (
 		<div className={ styles.background }>

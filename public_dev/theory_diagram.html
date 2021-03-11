@@ -24,286 +24,288 @@
 		<title>Orbital Battleship</title>
 </head>
 <body>
-	<div class="background-cell">
-		<section class="diagram-container">
-			<svg id="diagram" viewBox="-2 0 1520 600" fill="none" preserveAspectRatio="xMidYMid meet">
-				<defs>
-					<!-- <linearGradient id="paint0_linear" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
-						<stop stop-color="#001F09" />
-						<stop offset="1" stop-color="#013E1A" />
-					</linearGradient>
-				</defs> -->
+	<div id="root">
+		<div class="background-cell">
+			<section class="diagram-container">
+				<svg id="diagram" viewBox="-2 0 1520 600" fill="none" preserveAspectRatio="xMidYMid meet">
+					<defs>
+						<!-- <linearGradient id="paint0_linear" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+							<stop stop-color="#001F09" />
+							<stop offset="1" stop-color="#013E1A" />
+						</linearGradient>
+					</defs> -->
+					
+					<!--
+					<rect width="1920" height="1080" fill="url(#paint0_linear)" id="background" />
+					-->
 				
-				<!--
-				<rect width="1920" height="1080" fill="url(#paint0_linear)" id="background" />
-				-->
-			
-				<!-- <svg x="150" y="230" width="1512" height="568" id="diagram" fill="none" > -->
-					<!-- <style>
-						.off {
-							fill: #51CF15;
-							fill-opacity: 0.35;
-						}
-			
-						.on {
-							fill: #51CF15;
-						}
-			
-						.ship-name {
-							font: 30px sans-serif;
-							fill: #51CF15;
-						}
-			
-					</style> -->
-			
-					<!-- <defs> -->
-						
-						<symbol id="cell+">
-							<path d="M12.2071 6.79289C11.8166 6.40237 11.1834 6.40237 10.7929 6.79289L4.42893 13.1569C4.03841 13.5474 4.03841 14.1805 4.42893 14.5711C4.81946 14.9616 5.45262 14.9616 5.84314 14.5711L11.5 8.91421L17.1569 14.5711C17.5474 14.9616 18.1805 14.9616 18.5711 14.5711C18.9616 14.1805 18.9616 13.5474 18.5711 13.1569L12.2071 6.79289ZM12.5 33.5L12.5 7.5L10.5 7.5L10.5 33.5L12.5 33.5Z" />
-						</symbol>
-						
-						<symbol id="cell-">
-							<path d="M30.2071 34.2071C29.8166 34.5976 29.1834 34.5976 28.7929 34.2071L22.4289 27.8431C22.0384 27.4526 22.0384 26.8195 22.4289 26.4289C22.8195 26.0384 23.4526 26.0384 23.8431 26.4289L29.5 32.0858L35.1569 26.4289C35.5474 26.0384 36.1805 26.0384 36.5711 26.4289C36.9616 26.8195 36.9616 27.4526 36.5711 27.8431L30.2071 34.2071ZM30.5 7.5L30.5 33.5L28.5 33.5L28.5 7.5L30.5 7.5Z" />
-						</symbol>
-						
-						<symbol id="cell-container">
-							<rect x="0.5" y="0.5" width="40" height="40" stroke="#51CF15" />
-						</symbol>
-						
-						<g id="ship-s">
-							<use xlink:href="#cell-container" x="0" y="0" />
+					<!-- <svg x="150" y="230" width="1512" height="568" id="diagram" fill="none" > -->
+						<style>
+							.off {
+								fill: #51CF15;
+								fill-opacity: 0.35;
+							}
+				
+							.on {
+								fill: #51CF15;
+							}
+				
+							.ship-name {
+								font: 30px sans-serif;
+								fill: #51CF15;
+							}
+				
+						</style>
+				
+						<!-- <defs> -->
+							
+							<symbol id="cell+">
+								<path d="M12.2071 6.79289C11.8166 6.40237 11.1834 6.40237 10.7929 6.79289L4.42893 13.1569C4.03841 13.5474 4.03841 14.1805 4.42893 14.5711C4.81946 14.9616 5.45262 14.9616 5.84314 14.5711L11.5 8.91421L17.1569 14.5711C17.5474 14.9616 18.1805 14.9616 18.5711 14.5711C18.9616 14.1805 18.9616 13.5474 18.5711 13.1569L12.2071 6.79289ZM12.5 33.5L12.5 7.5L10.5 7.5L10.5 33.5L12.5 33.5Z" />
+							</symbol>
+							
+							<symbol id="cell-">
+								<path d="M30.2071 34.2071C29.8166 34.5976 29.1834 34.5976 28.7929 34.2071L22.4289 27.8431C22.0384 27.4526 22.0384 26.8195 22.4289 26.4289C22.8195 26.0384 23.4526 26.0384 23.8431 26.4289L29.5 32.0858L35.1569 26.4289C35.5474 26.0384 36.1805 26.0384 36.5711 26.4289C36.9616 26.8195 36.9616 27.4526 36.5711 27.8431L30.2071 34.2071ZM30.5 7.5L30.5 33.5L28.5 33.5L28.5 7.5L30.5 7.5Z" />
+							</symbol>
+							
+							<symbol id="cell-container">
+								<rect x="0.5" y="0.5" width="40" height="40" stroke="#51CF15" />
+							</symbol>
+							
+							<g id="ship-s">
+								<use xlink:href="#cell-container" x="0" y="0" />
+							</g>
+				
+							<g id="ship-p">
+								<use xlink:href="#cell-container" x="0" y="0" />
+								<use xlink:href="#cell-container" x="40" y="0" />
+								<use xlink:href="#cell-container" x="80" y="0" />
+							</g>
+				
+							<g id="ship-d">
+								<use xlink:href="#cell-container" x="0" y="0" />
+								<use xlink:href="#cell-container" x="40" y="0" />
+								<use xlink:href="#cell-container" x="80" y="0" />
+								<use xlink:href="#cell-container" x="120" y="0" />
+								<use xlink:href="#cell-container" x="160" y="0" />
+							</g>
+				
+							<g id="ship-f">
+								<use xlink:href="#cell-container" x="0" y="0" />
+								<use xlink:href="#cell-container" x="40" y="0" />
+								<use xlink:href="#cell-container" x="80" y="0" />
+								<use xlink:href="#cell-container" x="120" y="0" />
+								<use xlink:href="#cell-container" x="160" y="0" />
+								<use xlink:href="#cell-container" x="200" y="0" />
+								<use xlink:href="#cell-container" x="240" y="0" />
+							</g>
+							
+						</defs>
+				
+						<g id="level-1">
+							<text class="ship-name" x="10" y="560">1s</text>
+							<use xlink:href="#ship-s" x="30" y="490" id="ship-1s" />
+							<use xlink:href="#cell+" class="off" x="30" y="490" id="cell-0" />
+							<use xlink:href="#cell-" class="off" x="30" y="490" id="cell-1" />
 						</g>
-			
-						<g id="ship-p">
-							<use xlink:href="#cell-container" x="0" y="0" />
-							<use xlink:href="#cell-container" x="40" y="0" />
-							<use xlink:href="#cell-container" x="80" y="0" />
+				
+						<g id="level-2">
+							<text class="ship-name" x="130" y="490">2s</text>
+							<use xlink:href="#ship-s" x="150" y="420" id="ship-2s" />
+							<use xlink:href="#cell+" class="off" x="150" y="420" id="cell-2" />
+							<use xlink:href="#cell-" class="off" x="150" y="420" id="cell-3" />
+							
+							<text class="ship-name" x="90" y="420">2p</text>
+							<use xlink:href="#ship-p" x="110" y="350" id="ship-2p" />
+							<use xlink:href="#cell+" class="off" x="110" y="350" id="cell-4" />
+							<use xlink:href="#cell-" class="off" x="110" y="350" id="cell-5" />
+							<use xlink:href="#cell+" class="off" x="150" y="350" id="cell-6" />
+							<use xlink:href="#cell-" class="off" x="150" y="350" id="cell-7" />
+							<use xlink:href="#cell+" class="off" x="190" y="350" id="cell-8" />
+							<use xlink:href="#cell-" class="off" x="190" y="350" id="cell-9" />
 						</g>
-			
-						<g id="ship-d">
-							<use xlink:href="#cell-container" x="0" y="0" />
-							<use xlink:href="#cell-container" x="40" y="0" />
-							<use xlink:href="#cell-container" x="80" y="0" />
-							<use xlink:href="#cell-container" x="120" y="0" />
-							<use xlink:href="#cell-container" x="160" y="0" />
+				
+						<g id="level-3">
+							<text class="ship-name" x="330" y="420">3s</text>
+							<use xlink:href="#ship-s" x="350" y="350" id="ship-3s" />
+							<use xlink:href="#cell+" class="off" x="350" y="350" id="cell-10" />
+							<use xlink:href="#cell-" class="off" x="350" y="350" id="cell-11" />
+							
+							<text class="ship-name" x="290" y="350">3p</text>
+							<use xlink:href="#ship-p" x="310" y="280" id="ship-3p" />
+							<use xlink:href="#cell+" class="off" x="310" y="280" id="cell-12" />
+							<use xlink:href="#cell-" class="off" x="310" y="280" id="cell-13" />
+							<use xlink:href="#cell+" class="off" x="350" y="280" id="cell-14" />
+							<use xlink:href="#cell-" class="off" x="350" y="280" id="cell-15" />
+							<use xlink:href="#cell+" class="off" x="390" y="280" id="cell-16" />
+							<use xlink:href="#cell-" class="off" x="390" y="280" id="cell-17" />
+							
+							<text class="ship-name" x="250" y="280">3d</text>
+							<use xlink:href="#ship-d" x="270" y="210" id="ship-3d" />
+							<use xlink:href="#cell+" class="off" x="270" y="210" id="cell-20" />
+							<use xlink:href="#cell-" class="off" x="270" y="210" id="cell-21" />
+							<use xlink:href="#cell+" class="off" x="310" y="210" id="cell-22" />
+							<use xlink:href="#cell-" class="off" x="310" y="210" id="cell-23" />
+							<use xlink:href="#cell+" class="off" x="350" y="210" id="cell-24" />
+							<use xlink:href="#cell-" class="off" x="350" y="210" id="cell-25" />
+							<use xlink:href="#cell+" class="off" x="390" y="210" id="cell-26" />
+							<use xlink:href="#cell-" class="off" x="390" y="210" id="cell-27" />
+							<use xlink:href="#cell+" class="off" x="430" y="210" id="cell-28" />
+							<use xlink:href="#cell-" class="off" x="430" y="210" id="cell-29" />
+							
 						</g>
-			
-						<g id="ship-f">
-							<use xlink:href="#cell-container" x="0" y="0" />
-							<use xlink:href="#cell-container" x="40" y="0" />
-							<use xlink:href="#cell-container" x="80" y="0" />
-							<use xlink:href="#cell-container" x="120" y="0" />
-							<use xlink:href="#cell-container" x="160" y="0" />
-							<use xlink:href="#cell-container" x="200" y="0" />
-							<use xlink:href="#cell-container" x="240" y="0" />
+				
+						<g id="level-4">
+							<text class="ship-name" x="610" y="350">4s</text>
+							<use xlink:href="#ship-s" x="630" y="280" id="ship-4s" />
+							<use xlink:href="#cell+" class="off" x="630" y="280" id="cell-18" />
+							<use xlink:href="#cell-" class="off" x="630" y="280" id="cell-19" />
+							
+							<text class="ship-name" x="570" y="280">4p</text>
+							<use xlink:href="#ship-p" x="590" y="210" id="ship-4p" />
+							<use xlink:href="#cell+" class="off" x="590" y="210" id="cell-30" />
+							<use xlink:href="#cell-" class="off" x="590" y="210" id="cell-31" />
+							<use xlink:href="#cell+" class="off" x="630" y="210" id="cell-32" />
+							<use xlink:href="#cell-" class="off" x="630" y="210" id="cell-33" />
+							<use xlink:href="#cell+" class="off" x="670" y="210" id="cell-34" />
+							<use xlink:href="#cell-" class="off" x="670" y="210" id="cell-35" />
+							
+							<text class="ship-name" x="530" y="210">4d</text>
+							<use xlink:href="#ship-d" x="550" y="140" id="ship-4d" />
+							<use xlink:href="#cell+" class="off" x="550" y="140" id="cell-38" />
+							<use xlink:href="#cell-" class="off" x="550" y="140" id="cell-39" />
+							<use xlink:href="#cell+" class="off" x="590" y="140" id="cell-40" />
+							<use xlink:href="#cell-" class="off" x="590" y="140" id="cell-41" />
+							<use xlink:href="#cell+" class="off" x="630" y="140" id="cell-42" />
+							<use xlink:href="#cell-" class="off" x="630" y="140" id="cell-43" />
+							<use xlink:href="#cell+" class="off" x="670" y="140" id="cell-44" />
+							<use xlink:href="#cell-" class="off" x="670" y="140" id="cell-45" />
+							<use xlink:href="#cell+" class="off" x="710" y="140" id="cell-46" />
+							<use xlink:href="#cell-" class="off" x="710" y="140" id="cell-47" />
+							
+							<text class="ship-name" x="490" y="140">4f</text>
+							<use xlink:href="#ship-f" x="510" y="70" id="ship-4f" />
+							<use xlink:href="#cell+" class="off" x="510" y="70" id="cell-56" />
+							<use xlink:href="#cell-" class="off" x="510" y="70" id="cell-57" />
+							<use xlink:href="#cell+" class="off" x="550" y="70" id="cell-58" />
+							<use xlink:href="#cell-" class="off" x="550" y="70" id="cell-59" />
+							<use xlink:href="#cell+" class="off" x="590" y="70" id="cell-60" />
+							<use xlink:href="#cell-" class="off" x="590" y="70" id="cell-61" />
+							<use xlink:href="#cell+" class="off" x="630" y="70" id="cell-62" />
+							<use xlink:href="#cell-" class="off" x="630" y="70" id="cell-63" />
+							<use xlink:href="#cell+" class="off" x="670" y="70" id="cell-64" />
+							<use xlink:href="#cell-" class="off" x="670" y="70" id="cell-65" />
+							<use xlink:href="#cell+" class="off" x="710" y="70" id="cell-66" />
+							<use xlink:href="#cell-" class="off" x="710" y="70" id="cell-67" />
+							<use xlink:href="#cell+" class="off" x="750" y="70" id="cell-68" />
+							<use xlink:href="#cell-" class="off" x="750" y="70" id="cell-69" />
+							
 						</g>
 						
-					</defs>
-			
-					<g id="level-1">
-						<text class="ship-name" x="10" y="560">1s</text>
-						<use xlink:href="#ship-s" x="30" y="490" id="ship-1s" />
-						<use xlink:href="#cell+" class="off" x="30" y="490" id="cell-0" />
-						<use xlink:href="#cell-" class="off" x="30" y="490" id="cell-1" />
-					</g>
-			
-					<g id="level-2">
-						<text class="ship-name" x="130" y="490">2s</text>
-						<use xlink:href="#ship-s" x="150" y="420" id="ship-2s" />
-						<use xlink:href="#cell+" class="off" x="150" y="420" id="cell-2" />
-						<use xlink:href="#cell-" class="off" x="150" y="420" id="cell-3" />
+						<g id="level-5">
+							<text class="ship-name" x="930" y="280">5s</text>
+							<use xlink:href="#ship-s" x="950" y="210" id="ship-5s" />
+							<use xlink:href="#cell+" class="off" x="950" y="210" id="cell-36" />
+							<use xlink:href="#cell-" class="off" x="950" y="210" id="cell-37" />
+							
+							<text class="ship-name" x="890" y="210">5p</text>
+							<use xlink:href="#ship-p" x="910" y="140" id="ship-5p" />
+							<use xlink:href="#cell+" class="off" x="910" y="140" id="cell-48" />
+							<use xlink:href="#cell-" class="off" x="910" y="140" id="cell-49" />
+							<use xlink:href="#cell+" class="off" x="950" y="140" id="cell-50" />
+							<use xlink:href="#cell-" class="off" x="950" y="140" id="cell-51" />
+							<use xlink:href="#cell+" class="off" x="990" y="140" id="cell-52" />
+							<use xlink:href="#cell-" class="off" x="990" y="140" id="cell-53" />
+							
+							<text class="ship-name" x="850" y="140">5d</text>
+							<use xlink:href="#ship-d" x="870" y="70" id="ship-5d" />
+							<use xlink:href="#cell+" class="off" x="870" y="70" id="cell-70" />
+							<use xlink:href="#cell-" class="off" x="870" y="70" id="cell-71" />
+							<use xlink:href="#cell+" class="off" x="910" y="70" id="cell-72" />
+							<use xlink:href="#cell-" class="off" x="910" y="70" id="cell-73" />
+							<use xlink:href="#cell+" class="off" x="950" y="70" id="cell-74" />
+							<use xlink:href="#cell-" class="off" x="950" y="70" id="cell-75" />
+							<use xlink:href="#cell+" class="off" x="990" y="70" id="cell-76" />
+							<use xlink:href="#cell-" class="off" x="990" y="70" id="cell-77" />
+							<use xlink:href="#cell+" class="off" x="1030" y="70" id="cell-78" />
+							<use xlink:href="#cell-" class="off" x="1030" y="70" id="cell-79" />
+							
+							<text class="ship-name" x="810" y="70">5f</text>
+							<use xlink:href="#ship-f" x="830" y="0" id="ship-5f" />
+							<use xlink:href="#cell+" class="off" x="830" y="0" id="cell-88" />
+							<use xlink:href="#cell-" class="off" x="830" y="0" id="cell-89" />
+							<use xlink:href="#cell+" class="off" x="870" y="0" id="cell-90" />
+							<use xlink:href="#cell-" class="off" x="870" y="0" id="cell-91" />
+							<use xlink:href="#cell+" class="off" x="910" y="0" id="cell-92" />
+							<use xlink:href="#cell-" class="off" x="910" y="0" id="cell-93" />
+							<use xlink:href="#cell+" class="off" x="950" y="0" id="cell-94" />
+							<use xlink:href="#cell-" class="off" x="950" y="0" id="cell-95" />
+							<use xlink:href="#cell+" class="off" x="990" y="0" id="cell-96" />
+							<use xlink:href="#cell-" class="off" x="990" y="0" id="cell-97" />
+							<use xlink:href="#cell+" class="off" x="1030" y="0" id="cell-98" />
+							<use xlink:href="#cell-" class="off" x="1030" y="0" id="cell-99" />
+							<use xlink:href="#cell+" class="off" x="1070" y="0" id="cell-100" />
+							<use xlink:href="#cell-" class="off" x="1070" y="0" id="cell-101" />
+						</g>
 						
-						<text class="ship-name" x="90" y="420">2p</text>
-						<use xlink:href="#ship-p" x="110" y="350" id="ship-2p" />
-						<use xlink:href="#cell+" class="off" x="110" y="350" id="cell-4" />
-						<use xlink:href="#cell-" class="off" x="110" y="350" id="cell-5" />
-						<use xlink:href="#cell+" class="off" x="150" y="350" id="cell-6" />
-						<use xlink:href="#cell-" class="off" x="150" y="350" id="cell-7" />
-						<use xlink:href="#cell+" class="off" x="190" y="350" id="cell-8" />
-						<use xlink:href="#cell-" class="off" x="190" y="350" id="cell-9" />
-					</g>
-			
-					<g id="level-3">
-						<text class="ship-name" x="330" y="420">3s</text>
-						<use xlink:href="#ship-s" x="350" y="350" id="ship-3s" />
-						<use xlink:href="#cell+" class="off" x="350" y="350" id="cell-10" />
-						<use xlink:href="#cell-" class="off" x="350" y="350" id="cell-11" />
+						<g id="level-6">
+							<text class="ship-name" x="1210" y="210">6s</text>
+							<use xlink:href="#ship-s" x="1230" y="140" id="ship-6s" />
+							<use xlink:href="#cell+" class="off" x="1230" y="140" id="cell-54" />
+							<use xlink:href="#cell-" class="off" x="1230" y="140" id="cell-55" />
+							
+							<text class="ship-name" x="1170" y="140">6p</text>
+							<use xlink:href="#ship-p" x="1190" y="70" id="ship-6p" />
+							<use xlink:href="#cell+" class="off" x="1190" y="70" id="cell-80" />
+							<use xlink:href="#cell-" class="off" x="1190" y="70" id="cell-81" />
+							<use xlink:href="#cell+" class="off" x="1230" y="70" id="cell-82" />
+							<use xlink:href="#cell-" class="off" x="1230" y="70" id="cell-83" />
+							<use xlink:href="#cell+" class="off" x="1270" y="70" id="cell-84" />
+							<use xlink:href="#cell-" class="off" x="1270" y="70" id="cell-85" />
+							
+							<text class="ship-name" x="1130" y="70">6d</text>
+							<use xlink:href="#ship-d" x="1150" y="0" id="ship-6d" />
+							<use xlink:href="#cell+" class="off" x="1150" y="0" id="cell-102" />
+							<use xlink:href="#cell-" class="off" x="1150" y="0" id="cell-103" />
+							<use xlink:href="#cell+" class="off" x="1190" y="0" id="cell-104" />
+							<use xlink:href="#cell-" class="off" x="1190" y="0" id="cell-105" />
+							<use xlink:href="#cell+" class="off" x="1230" y="0" id="cell-106" />
+							<use xlink:href="#cell-" class="off" x="1230" y="0" id="cell-107" />
+							<use xlink:href="#cell+" class="off" x="1270" y="0" id="cell-108" />
+							<use xlink:href="#cell-" class="off" x="1270" y="0" id="cell-109" />
+							<use xlink:href="#cell+" class="off" x="1310" y="0" id="cell-110" />
+							<use xlink:href="#cell-" class="off" x="1310" y="0" id="cell-111" />
+							
+						</g>
 						
-						<text class="ship-name" x="290" y="350">3p</text>
-						<use xlink:href="#ship-p" x="310" y="280" id="ship-3p" />
-						<use xlink:href="#cell+" class="off" x="310" y="280" id="cell-12" />
-						<use xlink:href="#cell-" class="off" x="310" y="280" id="cell-13" />
-						<use xlink:href="#cell+" class="off" x="350" y="280" id="cell-14" />
-						<use xlink:href="#cell-" class="off" x="350" y="280" id="cell-15" />
-						<use xlink:href="#cell+" class="off" x="390" y="280" id="cell-16" />
-						<use xlink:href="#cell-" class="off" x="390" y="280" id="cell-17" />
-						
-						<text class="ship-name" x="250" y="280">3d</text>
-						<use xlink:href="#ship-d" x="270" y="210" id="ship-3d" />
-						<use xlink:href="#cell+" class="off" x="270" y="210" id="cell-20" />
-						<use xlink:href="#cell-" class="off" x="270" y="210" id="cell-21" />
-						<use xlink:href="#cell+" class="off" x="310" y="210" id="cell-22" />
-						<use xlink:href="#cell-" class="off" x="310" y="210" id="cell-23" />
-						<use xlink:href="#cell+" class="off" x="350" y="210" id="cell-24" />
-						<use xlink:href="#cell-" class="off" x="350" y="210" id="cell-25" />
-						<use xlink:href="#cell+" class="off" x="390" y="210" id="cell-26" />
-						<use xlink:href="#cell-" class="off" x="390" y="210" id="cell-27" />
-						<use xlink:href="#cell+" class="off" x="430" y="210" id="cell-28" />
-						<use xlink:href="#cell-" class="off" x="430" y="210" id="cell-29" />
-						
-					</g>
-			
-					<g id="level-4">
-						<text class="ship-name" x="610" y="350">4s</text>
-						<use xlink:href="#ship-s" x="630" y="280" id="ship-4s" />
-						<use xlink:href="#cell+" class="off" x="630" y="280" id="cell-18" />
-						<use xlink:href="#cell-" class="off" x="630" y="280" id="cell-19" />
-						
-						<text class="ship-name" x="570" y="280">4p</text>
-						<use xlink:href="#ship-p" x="590" y="210" id="ship-4p" />
-						<use xlink:href="#cell+" class="off" x="590" y="210" id="cell-30" />
-						<use xlink:href="#cell-" class="off" x="590" y="210" id="cell-31" />
-						<use xlink:href="#cell+" class="off" x="630" y="210" id="cell-32" />
-						<use xlink:href="#cell-" class="off" x="630" y="210" id="cell-33" />
-						<use xlink:href="#cell+" class="off" x="670" y="210" id="cell-34" />
-						<use xlink:href="#cell-" class="off" x="670" y="210" id="cell-35" />
-						
-						<text class="ship-name" x="530" y="210">4d</text>
-						<use xlink:href="#ship-d" x="550" y="140" id="ship-4d" />
-						<use xlink:href="#cell+" class="off" x="550" y="140" id="cell-38" />
-						<use xlink:href="#cell-" class="off" x="550" y="140" id="cell-39" />
-						<use xlink:href="#cell+" class="off" x="590" y="140" id="cell-40" />
-						<use xlink:href="#cell-" class="off" x="590" y="140" id="cell-41" />
-						<use xlink:href="#cell+" class="off" x="630" y="140" id="cell-42" />
-						<use xlink:href="#cell-" class="off" x="630" y="140" id="cell-43" />
-						<use xlink:href="#cell+" class="off" x="670" y="140" id="cell-44" />
-						<use xlink:href="#cell-" class="off" x="670" y="140" id="cell-45" />
-						<use xlink:href="#cell+" class="off" x="710" y="140" id="cell-46" />
-						<use xlink:href="#cell-" class="off" x="710" y="140" id="cell-47" />
-						
-						<text class="ship-name" x="490" y="140">4f</text>
-						<use xlink:href="#ship-f" x="510" y="70" id="ship-4f" />
-						<use xlink:href="#cell+" class="off" x="510" y="70" id="cell-56" />
-						<use xlink:href="#cell-" class="off" x="510" y="70" id="cell-57" />
-						<use xlink:href="#cell+" class="off" x="550" y="70" id="cell-58" />
-						<use xlink:href="#cell-" class="off" x="550" y="70" id="cell-59" />
-						<use xlink:href="#cell+" class="off" x="590" y="70" id="cell-60" />
-						<use xlink:href="#cell-" class="off" x="590" y="70" id="cell-61" />
-						<use xlink:href="#cell+" class="off" x="630" y="70" id="cell-62" />
-						<use xlink:href="#cell-" class="off" x="630" y="70" id="cell-63" />
-						<use xlink:href="#cell+" class="off" x="670" y="70" id="cell-64" />
-						<use xlink:href="#cell-" class="off" x="670" y="70" id="cell-65" />
-						<use xlink:href="#cell+" class="off" x="710" y="70" id="cell-66" />
-						<use xlink:href="#cell-" class="off" x="710" y="70" id="cell-67" />
-						<use xlink:href="#cell+" class="off" x="750" y="70" id="cell-68" />
-						<use xlink:href="#cell-" class="off" x="750" y="70" id="cell-69" />
-						
-					</g>
-					
-					<g id="level-5">
-						<text class="ship-name" x="930" y="280">5s</text>
-						<use xlink:href="#ship-s" x="950" y="210" id="ship-5s" />
-						<use xlink:href="#cell+" class="off" x="950" y="210" id="cell-36" />
-						<use xlink:href="#cell-" class="off" x="950" y="210" id="cell-37" />
-						
-						<text class="ship-name" x="890" y="210">5p</text>
-						<use xlink:href="#ship-p" x="910" y="140" id="ship-5p" />
-						<use xlink:href="#cell+" class="off" x="910" y="140" id="cell-48" />
-						<use xlink:href="#cell-" class="off" x="910" y="140" id="cell-49" />
-						<use xlink:href="#cell+" class="off" x="950" y="140" id="cell-50" />
-						<use xlink:href="#cell-" class="off" x="950" y="140" id="cell-51" />
-						<use xlink:href="#cell+" class="off" x="990" y="140" id="cell-52" />
-						<use xlink:href="#cell-" class="off" x="990" y="140" id="cell-53" />
-						
-						<text class="ship-name" x="850" y="140">5d</text>
-						<use xlink:href="#ship-d" x="870" y="70" id="ship-5d" />
-						<use xlink:href="#cell+" class="off" x="870" y="70" id="cell-70" />
-						<use xlink:href="#cell-" class="off" x="870" y="70" id="cell-71" />
-						<use xlink:href="#cell+" class="off" x="910" y="70" id="cell-72" />
-						<use xlink:href="#cell-" class="off" x="910" y="70" id="cell-73" />
-						<use xlink:href="#cell+" class="off" x="950" y="70" id="cell-74" />
-						<use xlink:href="#cell-" class="off" x="950" y="70" id="cell-75" />
-						<use xlink:href="#cell+" class="off" x="990" y="70" id="cell-76" />
-						<use xlink:href="#cell-" class="off" x="990" y="70" id="cell-77" />
-						<use xlink:href="#cell+" class="off" x="1030" y="70" id="cell-78" />
-						<use xlink:href="#cell-" class="off" x="1030" y="70" id="cell-79" />
-						
-						<text class="ship-name" x="810" y="70">5f</text>
-						<use xlink:href="#ship-f" x="830" y="0" id="ship-5f" />
-						<use xlink:href="#cell+" class="off" x="830" y="0" id="cell-88" />
-						<use xlink:href="#cell-" class="off" x="830" y="0" id="cell-89" />
-						<use xlink:href="#cell+" class="off" x="870" y="0" id="cell-90" />
-						<use xlink:href="#cell-" class="off" x="870" y="0" id="cell-91" />
-						<use xlink:href="#cell+" class="off" x="910" y="0" id="cell-92" />
-						<use xlink:href="#cell-" class="off" x="910" y="0" id="cell-93" />
-						<use xlink:href="#cell+" class="off" x="950" y="0" id="cell-94" />
-						<use xlink:href="#cell-" class="off" x="950" y="0" id="cell-95" />
-						<use xlink:href="#cell+" class="off" x="990" y="0" id="cell-96" />
-						<use xlink:href="#cell-" class="off" x="990" y="0" id="cell-97" />
-						<use xlink:href="#cell+" class="off" x="1030" y="0" id="cell-98" />
-						<use xlink:href="#cell-" class="off" x="1030" y="0" id="cell-99" />
-						<use xlink:href="#cell+" class="off" x="1070" y="0" id="cell-100" />
-						<use xlink:href="#cell-" class="off" x="1070" y="0" id="cell-101" />
-					</g>
-					
-					<g id="level-6">
-						<text class="ship-name" x="1210" y="210">6s</text>
-						<use xlink:href="#ship-s" x="1230" y="140" id="ship-6s" />
-						<use xlink:href="#cell+" class="off" x="1230" y="140" id="cell-54" />
-						<use xlink:href="#cell-" class="off" x="1230" y="140" id="cell-55" />
-						
-						<text class="ship-name" x="1170" y="140">6p</text>
-						<use xlink:href="#ship-p" x="1190" y="70" id="ship-6p" />
-						<use xlink:href="#cell+" class="off" x="1190" y="70" id="cell-80" />
-						<use xlink:href="#cell-" class="off" x="1190" y="70" id="cell-81" />
-						<use xlink:href="#cell+" class="off" x="1230" y="70" id="cell-82" />
-						<use xlink:href="#cell-" class="off" x="1230" y="70" id="cell-83" />
-						<use xlink:href="#cell+" class="off" x="1270" y="70" id="cell-84" />
-						<use xlink:href="#cell-" class="off" x="1270" y="70" id="cell-85" />
-						
-						<text class="ship-name" x="1130" y="70">6d</text>
-						<use xlink:href="#ship-d" x="1150" y="0" id="ship-6d" />
-						<use xlink:href="#cell+" class="off" x="1150" y="0" id="cell-102" />
-						<use xlink:href="#cell-" class="off" x="1150" y="0" id="cell-103" />
-						<use xlink:href="#cell+" class="off" x="1190" y="0" id="cell-104" />
-						<use xlink:href="#cell-" class="off" x="1190" y="0" id="cell-105" />
-						<use xlink:href="#cell+" class="off" x="1230" y="0" id="cell-106" />
-						<use xlink:href="#cell-" class="off" x="1230" y="0" id="cell-107" />
-						<use xlink:href="#cell+" class="off" x="1270" y="0" id="cell-108" />
-						<use xlink:href="#cell-" class="off" x="1270" y="0" id="cell-109" />
-						<use xlink:href="#cell+" class="off" x="1310" y="0" id="cell-110" />
-						<use xlink:href="#cell-" class="off" x="1310" y="0" id="cell-111" />
-						
-					</g>
-					
-					<g id="level-7">
-						<text class="ship-name" x="1410" y="140">7s</text>
-						<use xlink:href="#ship-s" x="1430" y="70" id="ship-7s" />
-						<use xlink:href="#cell+" class="off" x="1430" y="70" id="cell-86" />
-						<use xlink:href="#cell-" class="off" x="1430" y="70" id="cell-87" />
-						
-						<text class="ship-name" x="1370" y="70">7p</text>
-						<use xlink:href="#ship-p" x="1390" y="0" id="ship-7p" />
-						<use xlink:href="#cell+" class="off" x="1390" y="0" id="cell-112" />
-						<use xlink:href="#cell-" class="off" x="1390" y="0" id="cell-113" />
-						<use xlink:href="#cell+" class="off" x="1430" y="0" id="cell-114" />
-						<use xlink:href="#cell-" class="off" x="1430" y="0" id="cell-115" />
-						<use xlink:href="#cell+" class="off" x="1470" y="0" id="cell-116" />
-						<use xlink:href="#cell-" class="off" x="1470" y="0" id="cell-117" />
-					</g>
-				<!-- </svg> -->
-
-			</svg>
-			<div class="elem-preview">
-				<button type="button" class="elem-btn elem-preview__perv-btn">Ca</button>
-				<div class="elem-preview__elem-icon">
-					<input type="number" class="elem-preview__elem-number" value="21" max="118" min="1" />
-					<span class="elem-preview__elem-symbol">Sc</span>
-					<span class="elem-preview__elem-name">scandium</span>
+						<g id="level-7">
+							<text class="ship-name" x="1410" y="140">7s</text>
+							<use xlink:href="#ship-s" x="1430" y="70" id="ship-7s" />
+							<use xlink:href="#cell+" class="off" x="1430" y="70" id="cell-86" />
+							<use xlink:href="#cell-" class="off" x="1430" y="70" id="cell-87" />
+							
+							<text class="ship-name" x="1370" y="70">7p</text>
+							<use xlink:href="#ship-p" x="1390" y="0" id="ship-7p" />
+							<use xlink:href="#cell+" class="off" x="1390" y="0" id="cell-112" />
+							<use xlink:href="#cell-" class="off" x="1390" y="0" id="cell-113" />
+							<use xlink:href="#cell+" class="off" x="1430" y="0" id="cell-114" />
+							<use xlink:href="#cell-" class="off" x="1430" y="0" id="cell-115" />
+							<use xlink:href="#cell+" class="off" x="1470" y="0" id="cell-116" />
+							<use xlink:href="#cell-" class="off" x="1470" y="0" id="cell-117" />
+						</g>
+					<!-- </svg> -->
+		
+				</svg>
+				<div class="elem-preview">
+					<button type="button" class="elem-btn elem-preview__perv-btn">Ca</button>
+					<div class="elem-preview__elem-icon">
+						<input type="number" class="elem-preview__elem-number" value="21" max="118" min="1" />
+						<span class="elem-preview__elem-symbol">Sc</span>
+						<span class="elem-preview__elem-name">scandium</span>
+					</div>
+					<button type="button" class="elem-btn elem-preview__next-btn">Ti</button>
 				</div>
-				<button type="button" class="elem-btn elem-preview__next-btn">Ti</button>
-			</div>
-		</section>
+			</section>
+		</div>
 	</div>
 </body>
 </html>

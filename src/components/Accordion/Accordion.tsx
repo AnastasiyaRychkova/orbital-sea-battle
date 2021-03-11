@@ -7,11 +7,17 @@ interface IProps {
 	children: React.ReactNode
 }
 
-export default function Accordion(props: IProps)  {
+export default function Accordion(props: IProps) {
 	return (
 		<details className={ styles.details } open={ props.open }>
-			<summary className={ styles.button }><h2>{props.title}</h2></summary>
+			<summary className={ styles.button }>
+				<span className={ styles.title }>
+					{props.title}
+				</span>
+			</summary>
+
 			{props.children}
+
 		</details>
 	);
 }
