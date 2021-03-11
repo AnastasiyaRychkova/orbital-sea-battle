@@ -10,8 +10,8 @@ interface IProps {
 export default function Page404( {title = "Ошибка 404"}: IProps) {
 	return (
 		<div className={ styles.container }>
-			<h1>{title}</h1>
-			<p>Запрашиваемая страница не найдена</p>
+			<h1 className={styles.title}>{title}</h1>
+			<p className={styles.subtitle}>Page Not Found</p>
 			<LoadingCircle />
 			<ReturnToMain />
 		</div>

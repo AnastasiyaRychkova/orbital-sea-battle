@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './TheoryPage.module.css';
-import scrollStyle from '../../style/ScrolledContainer.module.css';
 import Accordion from '../../components/Accordion/Accordion'
 import ReturnToMain from '../../components/ReturnToMain/ReturnToMain'
 import GeneralBackground from '../../components/Background/GeneralBackground';
@@ -8,9 +7,9 @@ import GeneralBackground from '../../components/Background/GeneralBackground';
 export default function TheoryPage() {
 	return (
 		<GeneralBackground>
-			<div className={ styles.content+' '+scrollStyle.container }>
-				<h1>ТЕОРИЯ</h1>
-				<span>
+			<div className={ styles.content }>
+				<h1 className={ styles.pageTitle }>Theory</h1>
+				<span className={ styles.introduction }>
 					<p>The Orbital Battleship is&nbsp;designed to&nbsp;reinforce the knowledge of&nbsp;atomic structure. Some of&nbsp;the main principles and ideas that are used in&nbsp;the game process are explained below.</p>
 					<p>It&nbsp;is&nbsp;worth noting that the game had been designed as&nbsp;an&nbsp;assessment and reinforcement tool of&nbsp;the existing knowledge.</p>
 				</span>

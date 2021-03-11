@@ -4,6 +4,6 @@ import styles from './ReturnToMain.module.css';
 
 export default function ReturnToMain()  {
 	return (
-		<Link to="/" className={ styles.return }>Вернуться на главную</Link>
+		<Link to="/" className={ styles.return }>Return</Link>
 	);
 }
