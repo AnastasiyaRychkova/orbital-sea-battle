@@ -1,37 +1,46 @@
+@value colors: '../../style/colors.css';
+@value primaryDark, primary, dark from colors;
+
+@value typography: '../../style/typography.css';
+@value mediumWeight from typography;
+
 /*кнопки главного меню и их состояния*/
 .choose {
-	cursor: pointer;
-	font-size: 18px;
-	letter-spacing: 0.2em;
-	width: 14em;
-	border: 3px solid var(--main-darktext-color);
-	text-align: center;
-	padding: 0.5em;
 	margin: 0.4em 0;
-	background-color: transparent;
-	color: var(--main-text-color);
+	width: 14em;
+	padding: 0.5em;
 	outline: none;
+	border: 3px solid primaryDark;
+	background-color: transparent;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0.2em;
+	color: primary;
+	font-size: 18px;
+	font-weight: mediumWeight;
 }
 
 .choose:hover {
-	background-color: var(--main-text-color);
-	border-color: var(--main-text-color);
-	color: var(--main-bg-color);
+	border-color: primary;
+	background-color: primary;
+	color: dark;
 }
 
 .disabled {
-	cursor: default;
 	opacity: 0.4;
-	font-size: 18px;
-	letter-spacing: 0.2em;
-	width: 14em;
-	border: 3px solid var(--main-darktext-color);
-	text-align: center;
-	padding: 0.5em;
 	margin: 0.4em 0;
-	background-color: transparent;
-	color: var(--main-text-color);
+	width: 14em;
+	padding: 0.5em;
 	outline: none;
+	border: 3px solid primaryDark;
+	background-color: transparent;
+	cursor: default;
+	text-align: center;
+	letter-spacing: 0.2em;
+	color: primary;
+	font-size: 18px;
+	font-weight: mediumWeight;
 }
 
 @media screen and (max-width:1300px) {

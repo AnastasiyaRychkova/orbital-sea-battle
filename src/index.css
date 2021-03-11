@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
 html {
-	/*убрать видимость прокрутки*/
-	scrollbar-width: none; /* Firefox */
 	background: no-repeat linear-gradient(to bottom, #00200A, #003C19);
 	color: #51CF15;
+	font-family:'Montserrat', sans-serif;
+	font-weight: 300;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/*убрать видимость прокрутки*/
+	scrollbar-width: none; /* Firefox */
 }
 
 /*убрать видимость прокрутки*/
@@ -10,20 +16,13 @@ html {
 	width: 0px;
 }
 
-body {
-	margin: 0;
-	font-family: 'Montserrat', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-	min-height: 100%;
-}
-
 html, body {
-	height: 100%;
 	margin: 0;
+	height: 100%;
 	padding: 0;
 	overflow: hidden;
+}
+
+body {
+	background: repeat url(./img/main/bg-lines.png);
 }

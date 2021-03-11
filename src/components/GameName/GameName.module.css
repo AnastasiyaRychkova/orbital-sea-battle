@@ -1,8 +1,11 @@
+@value colors: '../../style/colors.css';
+@value primary, dark from colors;
+
 /*название игры*/
 .name {
 	margin: 5vh auto 10vh;
-		display: -webkit-box;
-		display: -ms-flexbox;
+/* 		display: -webkit-box;
+		display: -ms-flexbox; */
 	display: flex;
 	font-weight: 500;
 	font-size: 46px;
@@ -12,15 +15,15 @@
 .name_orbital {
 	max-width: 6em;
 	padding: 0.15em 0.5em;
-	border: 3px solid var(--main-text-color);	
+	border: 3px solid primary;
 }
 
 .name_battleship{
 	padding: 0.2em 0.45em;
-	background-color: var(--main-text-color);
-	color: var(--main-bg-color);
-		-webkit-transform: translate( -1.4em, 1.4em );
-		-ms-transform: translate( -1.4em, 1.4em );
+	background-color: primary;
+	color: dark;
+/* 		-webkit-transform: translate( -1.4em, 1.4em );
+		-ms-transform: translate( -1.4em, 1.4em ); */
 	transform: translate( -1.4em, 1.4em );
 }
 

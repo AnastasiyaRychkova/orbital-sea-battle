@@ -1,0 +1,50 @@
+@value lineHeight_M: 1.5;
+@value wordSpacing_M: 0.2em;
+@value letterSpacing_M: 0.2em;
+
+@value lightWeight: 300;
+@value mediumWeight: 500;
+@value boldWeight: 700;
+
+.extraLargeText {
+	font-size: 48px;
+	letter-spacing: 0.2em;
+}
+
+.largeText {
+	font-size: 24px;
+}
+
+.mediumText {
+	font-size: 16px;
+}
+
+@media screen and (max-width:1300px) {
+	.extraLargeText {
+		font-size: 38px;
+	}
+
+	.largeText {
+		font-size: 20px;
+	}
+}
+
+.centered {
+	text-align: center;
+}
+
+.light {
+	font-weight: 300;
+}
+
+.medium {
+	font-weight: 500;
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}

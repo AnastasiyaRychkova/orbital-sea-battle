@@ -1,29 +1,36 @@
+@value colors: '../../style/colors.css';
+@value primaryDark, primary from colors;
+
+@value typography: '../../style/typography.css';
+@value mediumText, mediumWeight from typography;
+
 /*подвал*/
 .privacy {
 	position: relative;
 	height: 5em;
 }
 
-.privacy img {
+.line {
 	position: absolute;
-	bottom: 20%;
 	right: -10%;
+	bottom: 20%;
 	mix-blend-mode: overlay;
 }
 
 .button {
-	font-family: 'Montserrat', sans-serif;
+	composes: mediumText;
 	position: absolute;
 	right: 13%;
 	bottom: 40%;
-	font-size: 16px;
-	background-color: transparent;
-	border: none;
 	outline: none;
+	border: none;
+	background-color: transparent;
 	cursor: pointer;
-	color:var(--main-darktext-color);
+	text-decoration: none;
+	color: primaryDark;
+	font-weight: mediumWeight;
 }
 
 .button:hover {
-	color: var(--main-text-color);
+	color: primary;
 }
