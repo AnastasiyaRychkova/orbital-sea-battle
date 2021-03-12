@@ -20,7 +20,7 @@ function DiagramInfoPage()
 	return(
 		<GeneralBackground>
 			<DiagramContainer>
-				<Diagram diagram={diagramState} className={style.diagram} />
+				<Diagram diagram={diagramState} className={style.diagram} zooming={true} />
 				<ElementPreview className={style.switcher} state={elementState} />
 				<ReturnToMain />
 			</DiagramContainer>
