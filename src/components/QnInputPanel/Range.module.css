@@ -1,0 +1,109 @@
+@value colors: '../../style/colors.css';
+@value background, main, clickableElement, subtitle, darkBacking, lightBacking from colors;
+
+@value effects: '../../style/effects.css';
+@value weakGlowText from effects;
+
+.range {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input {
+	-webkit-appearance: none;
+	display: flex;
+	height: .75em;
+	background-color: transparent;
+	width: 100%;
+}
+
+/* Ползунок */
+.input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 0;
+	height: 0;
+	box-sizing: content-box;
+	border: .8em solid transparent;
+	border-bottom-color: var(--selected);
+	border-radius: .2em;
+	transform: translateY(-1.2em) scaleY(1.7);
+	background-color: transparent;
+}
+
+.input::-webkit-slider-thumb:hover {
+	border-bottom-color: var(--selected-hover);
+}
+
+.input::-webkit-slider-thumb:active {
+	border-bottom-color: subtitle;
+}
+
+.input::-moz-range-thumb {
+	width: 0;
+	height: 0;
+	box-sizing: content-box;
+	border: .8em solid transparent;
+	border-bottom-color: var(--selected);
+	border-radius: .2em;
+	transform: translateY(-.8em) scaleY(1.7);
+	background-color: transparent;
+}
+
+.input::-moz-range-thumb:hover {
+	border-bottom-color: var(--selected-hover);
+}
+
+.input::-moz-range-thumb:active {
+	border-bottom-color: subtitle;
+}
+
+
+/* Рейка */
+.input::-webkit-slider-runnable-track {
+	border-radius: .5em;
+	height: .625em;
+	background-image: linear-gradient(90deg, var(--background) 0.125em, lightBacking 0.125em);
+	background-size: 14.3% .6em;
+	background-position-x: calc(-7.2% - 0.125em);
+	border-radius: .3em;
+	border: none;
+	box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+	z-index: 0;
+}
+
+
+.input::-moz-range-track {
+	border-radius: .5em;
+	height: .625em;
+	background-image: linear-gradient(90deg, var(--background) 0.125em, lightBacking 0.125em);
+	background-size: 14.3% .6em;
+	background-position-x: calc(-7.2% - 0.125em);
+	border-radius: .3em;
+	border: none;
+	box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+	z-index: 0;
+}
+
+.datalist {
+	display: flex;
+	justify-content: space-between;
+	width: calc( 100% - 5% );
+	margin-bottom: .7em;
+	user-select: none;
+
+}
+
+.label {
+	composes: regularBold from '../../style/typography.css';
+	display: flex;
+	justify-content: center;
+	color: var(--valid-label);
+	width: 1.6em;
+	padding: 0;
+}
+
+.label[data-selected="true"] {
+	text-shadow: weakGlowText;
+	color: var(--selected);
+}
