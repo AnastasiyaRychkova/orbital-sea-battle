@@ -8,15 +8,15 @@ import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInte
 interface IProps {
 	min: number,
 	max: number,
-	name: string,
-	storeKey: QN,
+	name?: string,
+	storeKey?: QN,
 	width: string,
 	controller?: IGameFieldController,
 }
 
 function make( props: IProps ): JSX.Element[]
 {
-	const selected = Number( props.controller!.filter.getValue( props.storeKey ) );
+	const selected = Number( props.controller!.filter.getValue( props.storeKey! ) );
 	const res: JSX.Element[] = [];
 
 	for( let i = props.min; i <= props.max; i++ ) {
@@ -40,8 +40,10 @@ function make( props: IProps ): JSX.Element[]
 const Range = inject( "controller" )(observer(( props: IProps ) =>
 {
 	const listId = props.name + "-tickmarks"
-	return (
-		<div className={styles.range} style={{width: props.width}}>
+	return ( props.name === undefined || props.storeKey === undefined ) ?
+		(<span>Missing parameters 'name' and 'storeKey'</span>) 
+		:
+		(<div className={styles.range} style={{width: props.width}}>
 			<datalist className={styles.datalist} id={listId}>
 				{make( props )}
 			</datalist>
@@ -54,11 +56,13 @@ const Range = inject( "controller" )(observer(( props: IProps ) =>
 				step="1"
 				value={props.controller!.filter.getValue( props.storeKey )}
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					props.controller!.filter.setValue( props.storeKey, e.target.value );
-				}} />
+					props.controller!.filter.setValue( props.storeKey!, e.target.value );
+				}
+				}
+			/>
 
 		</div>
-	);
+		);
 }));
 
 export default Range;

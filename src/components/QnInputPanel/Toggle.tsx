@@ -9,8 +9,8 @@ import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInte
 
 interface IProps {
 	values: string[],
-	name: string,
-	storeKey: QN,
+	name?: string,
+	storeKey?: QN,
 	type: ToggleType,
 	theme: ToggleTheme,
 	width?: string,
@@ -19,13 +19,13 @@ interface IProps {
 
 function make( props: IProps ): JSX.Element[] {
 	const res = [];
-	const checkedValue = props.controller!.filter.getValue( props.storeKey );
+	const checkedValue = props.controller!.filter.getValue( props.storeKey! );
 
 	for( let i = props.values.length - 1; i >= 0; i-- ) {
 		res.push(
 			<ToggleButton
 				value={props.values[i]}
-				toggleName={props.name}
+				toggleName={props.name!}
 				type={props.type}
 				theme={props.theme}
 				checked={props.values[i] === checkedValue}
@@ -35,7 +35,7 @@ function make( props: IProps ): JSX.Element[] {
 								&& e.target.value === checkedValue 
 									? undefined
 									: e.target.value;
-					props.controller!.filter.setValue( props.storeKey, value );
+					props.controller!.filter.setValue( props.storeKey!, value );
 				}} />
 		);
 	}
@@ -44,7 +44,11 @@ function make( props: IProps ): JSX.Element[] {
 
 const Volume = inject( "controller" )(observer(( props: IProps ) =>
 	<div className={styles.scale} style={{width: props.width || 'auto'}}>
-		{ make( props ) }
+		{
+			( props.name === undefined || props.storeKey === undefined ) ?
+				<span>Missing parameters 'name' and 'storeKey'</span> :
+				make( props )
+		}
 	</div>
 ));
 

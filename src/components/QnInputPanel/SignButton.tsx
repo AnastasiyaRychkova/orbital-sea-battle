@@ -5,15 +5,18 @@ import type { QN } from './Store';
 import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInterface';
 
 interface IProps {
-	name: string,
+	name?: string,
+	storeKey?: QN,
 	label: string,
-	storeKey: QN,
 	width?: string,
 	controller?: IGameFieldController,
 }
 
 
 const SignButton = inject( "controller" )(observer(( props: IProps ) => {
+	if( props.name === undefined || props.storeKey === undefined )
+		return (<span>Missing parameters 'name' and 'storeKey'</span>);
+
 	const checked = props.controller!.filter.getValue( props.storeKey ) === '1';
 	return (
 		<div className={styles.container} style={{width: props.width || 'auto'}}>
@@ -23,7 +26,7 @@ const SignButton = inject( "controller" )(observer(( props: IProps ) => {
 				name={props.name}
 				type="checkbox"
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					props.controller!.filter.setValue( props.storeKey, e.target.checked ? '1' : '-1' );
+					props.controller!.filter.setValue( props.storeKey!, e.target.checked ? '1' : '-1' );
 				}}
 				checked={checked} />
 			<label className={styles.button} htmlFor={props.name}>

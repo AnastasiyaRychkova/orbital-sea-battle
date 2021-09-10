@@ -5,6 +5,7 @@ import Toggle from './Toggle';
 import Range from './Range';
 import { ToggleTheme, ToggleType } from './types';
 import SignButton from './SignButton';
+import ConfirmButton from './ConfirmButton';
 
 function Panel() {
 	return (
@@ -12,17 +13,13 @@ function Panel() {
 			<InputValue name="n" storeKey="n" withSwitcher={true}>
 				<Toggle
 					values={['1','2','3','4','5','6','7']}
-					name="n"
 					width="13.5em"
-					storeKey="n"
 					type={ToggleType.radio}
 					theme={ToggleTheme.default} />
 			</InputValue>
 			<InputValue name="l" storeKey="l" withSwitcher={true}>
 				<Toggle
 					values={['s', 'p', 'd', 'f']}
-					name="l"
-					storeKey="l"
 					type={ToggleType.radio}
 					theme={ToggleTheme.squareL} />
 			</InputValue>
@@ -30,16 +27,12 @@ function Panel() {
 				<Range
 					min={-3}
 					max={3}
-					name="m"
-					width="14em"
-					storeKey="m" />
+					width="14em" />
 			</InputValue>
-			<InputValue name="m" sub="S" storeKey="s" withSwitcher={true}>
-				<SignButton
-					name="s"
-					storeKey="s"
-					label="1/2" />
+			<InputValue name="s" sub="S" storeKey="s" withSwitcher={true}>
+				<SignButton label="1/2" />
 			</InputValue>
+			<ConfirmButton></ConfirmButton>
 		</form>
 	);
 }
