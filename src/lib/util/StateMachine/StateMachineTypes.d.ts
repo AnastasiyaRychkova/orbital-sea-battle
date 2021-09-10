@@ -42,7 +42,7 @@ export type StateListConfig = {
 	[key: StateName]: StateNodeConfig
 };
 
-/** Описание конечного автомата */
+/** Описание конечного автомата. Объект для инициализации */
 export type MachineConfig = {
 	/** Название начального состояния */
 	initial: StateName,
@@ -60,7 +60,7 @@ export type MachineConfig = {
 	exit?: ActionFunction,
 
 	/** Контекстный-объект передаваемый в во все  */
-	context: object,
+	context?: object,
 };
 
 /** Список событий, которые могут инициализировать переход в другое состояние */

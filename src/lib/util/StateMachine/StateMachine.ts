@@ -244,7 +244,7 @@ class StateMachine
 	 * @param action Side-effect function
 	 */
 	private _callActionFunction( action: ActionFunction|undefined ): void
-	{
+	{ // TODO: обернуть в try..catch и сделать асинхронным
 		action && action( this.value, this.#context);
 	}
 
