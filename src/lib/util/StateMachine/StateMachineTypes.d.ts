@@ -1,80 +1,81 @@
-export type TERMINAL = '__END__';
+export type TerminalStr = '__END__';
+export const TERMINAL = '__END__'
 
 /** Название состояния */
-export type StateName = string;
+// export type StateName = string;
 
 /** Название события */
-export type EventName = string;
+// export type EventName = string;
 
 /** Side-effect function
  * @param state Текущее состояние автомата
  * @param context Контекст-объект текущего конечного автомата
  */
-export type ActionFunction = ( state: StateName, context?: object ) => void;
+export type ActionFunction<StateName extends string> = ( state: StateName, context?: object ) => void;
 
 
 // --- Initialization configurations ---
 
 /** Описание перехода в другое состояние */
-export type Transition = {
+export type Transition<StateName extends string> = {
 	/** Конечное состояние */
-	to: StateName,
+	to: StateName | TerminalStr,
 
 	/** Side-effect function
 	 * 
 	 * *Вызывается после перехода*
 	 */
-	do?: ActionFunction
+	do?: ActionFunction<StateName>
 };
 
 /** Описание отложенного перехода в другое состояние */
-export type DelayedTransitionConfig = {
+export type DelayedTransitionConfig<StateName extends string> = {
 	after: number
-} & Transition;
+} & Transition<StateName>;
 
 /** Объект отложенного перехода */
-export type DelayedTransition = {
+export type DelayedTransition<StateName extends string> = {
 	timeoutId: number
-} & DelayedTransitionConfig;
+} & DelayedTransitionConfig<StateName>;
 
 /** Описание состояний конечного автомата */
-export type StateListConfig = {
-	[key: StateName]: StateNodeConfig
+export type StateListConfig<StateName extends string, EventName extends string> = {
+	[key: StateName]: StateNodeConfig<StateName, EventName>
 };
 
 /** Описание конечного автомата. Объект для инициализации */
-export type MachineConfig = {
+export type MachineConfig<StateName extends string, EventName extends string> = {
 	/** Название начального состояния */
 	initial: StateName,
 
 	/** Состояния автомата */
-	states: StateListConfig,
+	states: StateListConfig<StateName, EventName>,
 
 	/** Название состояния родительского автомата, в которое нужно его перевести после окончания работы текущего */
 	onDone?: StateName,
 
 	/** Функция, вызываемая при запуске автомата */
-	entry?: ActionFunction,
+	entry?: ActionFunction<StateName>,
 
 	/** Функция, вызываемая по окончании работы автомата */
-	exit?: ActionFunction,
+	exit?: ActionFunction<StateName>,
 
 	/** Контекстный-объект передаваемый в во все  */
 	context?: object,
 };
 
 /** Список событий, которые могут инициализировать переход в другое состояние */
-export type EventListConfig = {
-	[key: EventName]: StateName | TERMINAL | Transition
+export type EventListConfig<StateName extends string, EventName extends string> = {
+	[key: EventName]: StateName | TerminalStr | Transition
 };
 
 /** Описание состояния */
-export type StateNodeConfig = {
+export type StateNodeConfig<StateName extends string, EventName extends string> = {
 	/** Вложенный автомат, который запуститься с начала после перехода в текущее состояние */
-	invoke?: MachineConfig,
+	invoke?: MachineConfig<StateName, EventName>,
 
 	/** События, которые могут инициировать переход в другое состояние */
-	on?: EventListConfig,
+	on?: EventListConfig<StateName, EventName>,
 
 	/** Автоматический переход в другое состояние после перехода в текущее через заданный промежуток времени */
 	delay?: DelayedTransitionConfig,
@@ -84,32 +85,32 @@ export type StateNodeConfig = {
 // --- State Machine Types ---
 
 /** Конечный автомат */
-export type MachineNode = {
+export type MachineNode<StateName extends string, EventName extends string> = {
 	#states: Map<StateName, StateNode>,
 	#current: StateName,
 	#initial: StateName,
 	#onDone?: EventName,
-	#entry?: ActionFunction,
-	#exit?: ActionFunction,
+	#entry?: ActionFunction<StateName>,
+	#exit?: ActionFunction<StateName>,
 	#context?: object,
-	#parent?: MachineNode,
+	#parent?: MachineNode<StateName, EventName>,
 
 	/** Инициировать событие в данном конечном автомате */
-	send: ( event: EventName ) => StateName,
+	send: ( event: EventName ) => StateName|TerminalStr,
 };
 
 /** Состояние — звено конечного автомата */
-export type StateNode = {
+export type StateNode<StateName extends string, EventName extends string> = {
 	/** Название */
 	value: StateName,
 
 	/** События, которые могут быть инициированы в данном состоянии */
-	events?: Map<EventName, Transition>,
+	events?: Map<EventName, Transition<StateName|TerminalStr>>,
 
 	/** Вложенный автомат */
-	invoke?: MachineNode,
+	invoke?: MachineNode<StateName, EventName>,
 
 	/** Автоматический переход в другое состояние после перехода
 	 * в текущее через заданный промежуток времени */
-	delay?: DelayedTransition,
+	delay?: DelayedTransition<StateName>,
 };
