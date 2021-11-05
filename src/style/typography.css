@@ -6,6 +6,27 @@
 @value mediumWeight: 500;
 @value boldWeight: 700;
 
+
+.regularBold {
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 1em;
+	line-height: 120%;
+	letter-spacing: 0.135em;
+}
+
+.h3 {
+	font-weight: bold;
+	font-size: 1.125em;
+	line-height: 120%;
+	letter-spacing: 0.135em;
+}
+
+
+
+
+
 .extraLargeText {
 	font-size: 48px;
 	letter-spacing: 0.2em;

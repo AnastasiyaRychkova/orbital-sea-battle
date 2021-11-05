@@ -3,8 +3,34 @@
 @value light: #a2ffb6;
 @value dark: #00200A;
 
-/* .test {
-	color: #51CF15;
-	color: #a2ffb6;
-	color: #00200A;
-} */
+@value background: #1E2C26;
+@value main: #61C35A;
+@value subtitle: #40843C;
+@value text: #96C2AF;
+@value nonClickableElement: #627661;
+@value clickableElement: #9CDF9A;
+@value menu: #2C4135;
+@value darkBacking: #15211C;
+@value lightBacking: #2E3D36;
+@value subElement: #517465;
+@value error: #C03F37;
+@value inactiveArrow: #446249;
+@value missing: #6F362E;
+
+
+/* FIXME: Удалить */
+.test {
+	color: #1E2C26; /* background */
+	color: #61C35A; /* main */
+	color: #40843C; /* subtitle */
+	color: #96C2AF; /* text */
+	color: #627661; /* nonClickableElement */
+	color: #9CDF9A; /* clickableElement */
+	color: #2C4135; /* menu */
+	color: #15211C; /* darkBacking */
+	color: #2E3D36; /* lightBacking */
+	color: #517465; /* subElement */
+	color: #C03F37; /* error */
+	color: #446249; /* inactiveArrow */
+	color: #6F362E; /* missing */
+}

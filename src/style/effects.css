@@ -1,0 +1,11 @@
+@value glow: 0px 0px 13px rgba (81, 207, 21, 0.5), 2px 4px 5px rgba (0, 0, 0, 0.15);
+@value weakGlow: 0px 0px 5px rgba (81, 207, 21, 0.4), 2px 4px 4px rgba (0, 0, 0, 0.1);
+@value highGlow: 0px 0px 2px rgba (81, 207, 21, 1), 0px 4px 4px rgba (0, 0, 0, 0.25);
+@value lightGlow: 0px 0px 10px rgba (150, 194, 175, 0.2);
+@value redGlow: 0px 0px 13px rgba (192, 63, 55, 0.5), 2px 4px 5px rgba (0, 0, 0, 0.15);
+@value shade: 0px 0px 10px rgba (150, 194, 175, 0.2), 3px 6px 10px rgba (0, 0, 0, 0.7);
+@value miniShadow: 2px 4px 4px rgba (0, 0, 0, 0.15);
+
+@value weakGlowText: 2px 4px 4px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(81, 207, 21, 0.4);
+
+@value checkPattern: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0, linear-gradient( 90deg, rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0;
