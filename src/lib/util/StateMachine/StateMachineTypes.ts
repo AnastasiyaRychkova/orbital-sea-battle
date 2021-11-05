@@ -1,3 +1,7 @@
+import ITimer from "../Timer/TimerInterface";
+
+type Seconds = number;
+
 export type TerminalStr = '__END__';
 export const TERMINAL = '__END__'
 
@@ -30,17 +34,18 @@ export type Transition<StateName extends string> = {
 
 /** Описание отложенного перехода в другое состояние */
 export type DelayedTransitionConfig<StateName extends string> = {
-	after: number
+	after: Seconds
 } & Transition<StateName>;
 
 /** Объект отложенного перехода */
 export type DelayedTransition<StateName extends string> = {
-	timeoutId: number
+	timeout: ITimer
 } & DelayedTransitionConfig<StateName>;
+
 
 /** Описание состояний конечного автомата */
 export type StateListConfig<StateName extends string, EventName extends string> = {
-	[key: StateName]: StateNodeConfig<StateName, EventName>
+	[key in StateName]: StateNodeConfig<StateName, EventName>;
 };
 
 /** Описание конечного автомата. Объект для инициализации */
@@ -66,7 +71,7 @@ export type MachineConfig<StateName extends string, EventName extends string> = 
 
 /** Список событий, которые могут инициализировать переход в другое состояние */
 export type EventListConfig<StateName extends string, EventName extends string> = {
-	[key: EventName]: StateName | TerminalStr | Transition
+	[key in EventName]?: StateName | TerminalStr | Transition<StateName>;
 };
 
 /** Описание состояния */
@@ -77,8 +82,21 @@ export type StateNodeConfig<StateName extends string, EventName extends string> 
 	/** События, которые могут инициировать переход в другое состояние */
 	on?: EventListConfig<StateName, EventName>,
 
-	/** Автоматический переход в другое состояние после перехода в текущее через заданный промежуток времени */
-	delay?: DelayedTransitionConfig,
+	/** Автоматический переход в другое состояние после перехода в текущее 
+	 * через заданный промежуток времени */
+	delay?: DelayedTransitionConfig<StateName>,
+
+	/** Функция, которая всегда вызывается после перехода в данное состояние.
+	 * 
+	 * StateNode[entry] --> Transition[do] --> Machine[entry]
+	 */
+	entry?: ActionFunction<StateName>,
+
+	/** Функция, которая всегда вызывается после перехода в данное состояние.
+	 * 
+	 * StateNode[exit] --> Machine[exit]
+	 */
+	 exit?: ActionFunction<StateName>,
 };
 
 
@@ -86,7 +104,8 @@ export type StateNodeConfig<StateName extends string, EventName extends string> 
 
 /** Конечный автомат */
 export type MachineNode<StateName extends string, EventName extends string> = {
-	#states: Map<StateName, StateNode>,
+	/*
+	#states: Map<StateName, StateNode<StateName, EventName>,
 	#current: StateName,
 	#initial: StateName,
 	#onDone?: EventName,
@@ -94,6 +113,7 @@ export type MachineNode<StateName extends string, EventName extends string> = {
 	#exit?: ActionFunction<StateName>,
 	#context?: object,
 	#parent?: MachineNode<StateName, EventName>,
+	*/
 
 	/** Инициировать событие в данном конечном автомате */
 	send: ( event: EventName ) => StateName|TerminalStr,
@@ -113,4 +133,16 @@ export type StateNode<StateName extends string, EventName extends string> = {
 	/** Автоматический переход в другое состояние после перехода
 	 * в текущее через заданный промежуток времени */
 	delay?: DelayedTransition<StateName>,
+
+	/** Функция, которая всегда вызывается после перехода в данное состояние.
+	 * 
+	 * StateNode[entry] --> Transition[do] --> Machine[entry]
+	 */
+	entry?: ActionFunction<StateName>,
+
+	/** Функция, которая всегда вызывается после перехода в данное состояние.
+	 * 
+	 * StateNode[exit] --> Event: Transition[do] --> Machine[exit]
+	 */
+	exit?: ActionFunction<StateName>,
 };
