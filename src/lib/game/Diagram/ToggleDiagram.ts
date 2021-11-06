@@ -1,10 +1,10 @@
 import {
-	DiagramCell,
+	SpinIndex,
 	SpinState,
 } from '../ChemicalElement/DiagramCell';
 import ElemConfig from '../ChemicalElement/ElemConfig';
-import Diagram from './Diagram';
-import { Ship } from './Ship';
+import Diagram from './DiagramStatic';
+// import { Ship } from './Ship';
 
 /** Переключаемая диаграмма */
 export class ToggleDiagram extends Diagram
@@ -16,11 +16,11 @@ export class ToggleDiagram extends Diagram
 
 	private static readonly SIZE: number = 118;
 
-	constructor() 
+	constructor()
 	{
 		super();
-		for ( let i = 0; i <  ToggleDiagram.SIZE; i++ )
-			this.#configuration[ i ] =  0;
+		for ( let i = 0; i < ToggleDiagram.SIZE; i++ )
+			this.#configuration[ i ] = 0;
 	}
 
 	/**
@@ -28,11 +28,11 @@ export class ToggleDiagram extends Diagram
 	 * 
 	 * @param cell Ячейка
 	 */
-	toggleCell( cell: DiagramCell ): void
+/* 	toggleCell( cell: SpinIndex ): void
 	{
 		if ( !this.#disabled )
 			this.#configuration[ cell.value ] = ( this.#configuration[ cell.value ] == 0 ) ? 1 : 0;
-	}
+	} */
 	
 	/**
 	 * Переключить состояние всего корабля.
@@ -40,23 +40,23 @@ export class ToggleDiagram extends Diagram
 	 * 
 	 * @param ship Корабль
 	 */
-	toggleShip( ship: Ship ): void
-	{
-		if ( !this.#disabled )
-		{
-			const newState = this._newShipState( ship );
-			for( let i = ship.firstCell.value; i <= ship.lastCell.value; i++  )
-				this.#configuration[ i ] = newState;
-		}
-	}
+	// toggleShip( ship: Ship ): void
+	// {
+	// 	if ( !this.#disabled )
+	// 	{
+	// 		const newState = this._newShipState( ship );
+	// 		for( let i = ship.firstCell.value; i <= ship.lastCell.value; i++  )
+	// 			this.#configuration[ i ] = newState;
+	// 	}
+	// }
 
-	private _newShipState( ship: Ship ): SpinState
-	{
-		for( let i = ship.firstCell.value; i <= ship.lastCell.value; i++  )
-			if ( this.#configuration[ i ] == 0 )
-				return 1;
-		return 0;
-	}
+	// private _newShipState( ship: Ship ): SpinState
+	// {
+	// 	for( let i = ship.firstCell.value; i <= ship.lastCell.value; i++  )
+	// 		if ( this.#configuration[ i ] == 0 )
+	// 			return 1;
+	// 	return 0;
+	// }
 
 	get disabled(): boolean
 	{
@@ -73,10 +73,10 @@ export class ToggleDiagram extends Diagram
 	 * 
 	 * @param state Конфигурация химического элемента
 	 */
-	setState( state: ElemConfig ): void
+/* 	setState( state: ElemConfig ): void
 	{
 		this.#configuration = state.toArray();
-	}
+	} */
 
 	/**
 	 * Возвращает текущую конфигурацию химического элемента диаграммы
