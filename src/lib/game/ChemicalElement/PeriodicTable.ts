@@ -1,16 +1,21 @@
+import converter from './QNConverter';
+import QNConverterInterface from './QNConverterInterface';
+
 import {
 	default as ElemConfig,
-} from './ChemicalElement/ElemConfig';
+} from './ElemConfig';
 
 import type {
 	ChemicalElement,
-} from './ChemicalElement/ChemicalElement';
+} from './ChemicalElement';
 
-// TODO: Добавить квантовые числа
+
 type PeriodicTableStructure = Array<ChemicalElement>;
 
 /**
  * Таблица Менделеева
+ * 
+ * *\* Внутри корабля индексы расставлены лева направо*
  */
 const periodicTable: PeriodicTableStructure = [
 	{
@@ -731,16 +736,23 @@ type PeriodicTableType = {
 /** 
  * Периодическая таблица химических элементов
  */
-
 class PeriodicTable
 {
 	#table = periodicTable;
+	#converter: QNConverterInterface = converter;
 
 	getByNumber( number: number ): ChemicalElement
 	{
 		return this.#table[ number - 1 ];
 	}
+
+	get converter(): QNConverterInterface
+	{
+		return this.#converter;
+	}
 }
+
+
 
 const periodicTableInstance = new PeriodicTable();
 
