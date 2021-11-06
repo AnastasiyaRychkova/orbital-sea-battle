@@ -1,19 +1,21 @@
+import Timer from "../Timer/Timer";
 import {
 	MachineConfig,
-	ActionFunction,
-	StateNodeConfig,
-	EventListConfig,
 	StateListConfig,
+	StateNodeConfig,
 	StateNode,
+	EventListConfig,
 	Transition,
-	TERMINAL,
+	ActionFunction,
 	TerminalStr,
+	TERMINAL,
 } from "./StateMachineTypes";
 
 /** **Конечный автомат**
  * — это система с конечным, известным количеством состояний,
  * условия переходов между которыми фиксированы и известны,
  * а текущим всегда является ровно одно состояние.
+ * SM_State = State | TerminalStr
  */
 class StateMachine<State extends string, Event extends string>
 {
@@ -51,6 +53,7 @@ class StateMachine<State extends string, Event extends string>
 		this.#context = config.context;
 		this.#parent = parent;
 
+		this._goToState = this._goToState.bind( this );
 		this.#states = this._createStateMap( config.states );
 		this._start();
 	}
@@ -112,9 +115,11 @@ class StateMachine<State extends string, Event extends string>
 
 		if( config.delay )
 			state.delay = {
-				timeoutId: -1,
+				timeout: new Timer(),
 				...config.delay,
 			}
+		state.entry = config.entry;
+		state.exit = config.exit;
 		
 		return state;
 	}
@@ -177,8 +182,13 @@ class StateMachine<State extends string, Event extends string>
 		if( this._isFinishing( nextState ) )
 			return this._end( eventTransition );
 
+		this._callActionFunction( this.#current.exit );
+		
 		this._changeCurrentState( nextState as State );
+
+		this._callActionFunction( this.#current.entry );
 		this._callActionFunction( action );
+		
 		this._startTimer();
 
 		if( this._hasNestedStateMachine() )
@@ -220,6 +230,7 @@ class StateMachine<State extends string, Event extends string>
 	private _start(): State
 	{
 		this._changeCurrentState( this.#initial );
+		this._callActionFunction( this.#current.entry );
 		this._callActionFunction( this.#entry );
 		this._startTimer();
 
@@ -235,6 +246,7 @@ class StateMachine<State extends string, Event extends string>
 	 */
 	private _end( eventTransition: Transition<State|TerminalStr> ): State | TerminalStr
 	{
+		this._callActionFunction( this.#current.exit );
 		this._callActionFunction( eventTransition.do );
 		this._callActionFunction( this.#exit );
 
@@ -245,9 +257,21 @@ class StateMachine<State extends string, Event extends string>
 	 * Вызвать side-effect функцию
 	 * @param action Side-effect function
 	 */
-	private _callActionFunction( action: ActionFunction<State>|undefined ): void
-	{ // TODO: обернуть в try..catch и сделать асинхронным
-		action && action( this.value, this.#context);
+	private async _callActionFunction( action: ActionFunction<State>|undefined ): Promise<void>
+	{
+		if( action )
+		{
+			const promise = async () => {
+				return action( this.value, this.#context);
+			}
+
+			try {
+				await promise();
+			}
+			catch( error ) {
+				
+			}
+		}
 	}
 
 	/**
@@ -258,7 +282,7 @@ class StateMachine<State extends string, Event extends string>
 		if( this.#current.delay
 			&& this.#current.delay.after > 0
 		)
-			this.#current.delay.timeoutId = window.setTimeout(
+			this.#current.delay.timeout.start(
 				this._goToState,
 				this.#current.delay.after,
 				{
@@ -275,8 +299,7 @@ class StateMachine<State extends string, Event extends string>
 	{
 		if( this.#current.delay )
 		{
-			window.clearTimeout( this.#current.delay.timeoutId );
-			this.#current.delay.timeoutId = -1;
+			this.#current.delay.timeout.stop();
 		}
 
 		if( this._hasNestedStateMachine() )
