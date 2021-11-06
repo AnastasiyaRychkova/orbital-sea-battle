@@ -1,5 +1,6 @@
 import type { OrbitalStr } from "./QuantumNumbers";
 import IntInRange from '../../util/IntInRange';
+import IQuantumNumber from "./QuantumNumberInterface";
 
 /**
  * **Орбитальное квантовое число (l)**
@@ -15,18 +16,18 @@ import IntInRange from '../../util/IntInRange';
  * 2 | d
  * 3 | f
  */
-export default class OrbitalQN extends IntInRange
+export default class OrbitalQN extends IntInRange implements IQuantumNumber
 {
 	static readonly LETTERS: OrbitalStr[] = [ 's', 'p', 'd', 'f' ];
 
 	static readonly MIN: number = 0;
 	static readonly MAX: number = 3;
 
-	constructor( symbol: OrbitalStr | number = 's' )
+	constructor( symbol: string|number|OrbitalQN = 's' )
 	{
-		super( typeof symbol === "number"
-				? symbol
-				: OrbitalQN.LETTERS.indexOf( symbol )
+		super( typeof symbol === "string"
+				? OrbitalQN.LETTERS.indexOf( symbol as OrbitalStr )
+				: symbol
 		);
 	}
 
@@ -50,5 +51,10 @@ export default class OrbitalQN extends IntInRange
 	set string( newValue: OrbitalStr )
 	{
 		this._number = OrbitalQN.strToNum( newValue );
+	}
+
+	toString(): string
+	{
+		return OrbitalQN.LETTERS[ this._number ];
 	}
 }

@@ -1,4 +1,5 @@
 import IntInRange from '../../util/IntInRange';
+import IQuantumNumber from './QuantumNumberInterface';
 
 /**
  * **Магнитное квантовое число (m)**
@@ -6,18 +7,23 @@ import IntInRange from '../../util/IntInRange';
  * Характеризует положение электронной орбитали в пространстве
  * и принимает целочисленные значения от -I до +I, включая 0.
  */
-export default class MagneticQN extends IntInRange
+export default class MagneticQN extends IntInRange implements IQuantumNumber
 {
 	static readonly MIN: number = -3;
 	static readonly MAX: number = 3;
 
-	constructor( number: number = 0 )
+	constructor( value: number|MagneticQN = 0 )
 	{
-		super( number );
+		super( value );
 	}
 
-	protected static range( number: number ): number
+	protected static normalize( number: number ): number
 	{
-		return super.range( number, MagneticQN );
+		return super.normalize( number, MagneticQN );
+	}
+
+	toString(): string
+	{
+		return this._number.toString();
 	}
 }

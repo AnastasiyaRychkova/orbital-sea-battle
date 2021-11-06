@@ -1,4 +1,5 @@
 import IntInRange from '../../util/IntInRange';
+import IQuantumNumber from './QuantumNumberInterface';
 
 /**
  * **Главное квантовое число (n)**
@@ -8,19 +9,24 @@ import IntInRange from '../../util/IntInRange';
  * Принимает целые значения (n = 1, 2, 3 ... 7)
  * и соответствует номеру периода.
  */
-export default class MainQN extends IntInRange
+export default class MainQN extends IntInRange implements IQuantumNumber
 {
 	static readonly MIN: number = 1;
 	static readonly MAX: number = 7;
 
-	constructor( number: number = MainQN.MIN )
+	constructor( value: number|MainQN = MainQN.MIN )
 	{
-		super( number );
+		super( value );
 	}
 
-	protected static range( number: number ): number
+	protected static normalize( number: number ): number
 	{
-		return super.range( number, MainQN );
+		return super.normalize( number, MainQN );
+	}
+
+	toString(): string
+	{
+		return this._number.toString();
 	}
 }
 

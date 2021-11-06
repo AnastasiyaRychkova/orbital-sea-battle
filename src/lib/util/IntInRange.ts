@@ -1,3 +1,8 @@
+type Segment = {
+	MIN: number,
+	MAX: number,
+}
+
 /**
  * Класс, контролирующий нахождение значения
  * в допустимом диапазоне и в виде целого числа
@@ -6,9 +11,11 @@ export default class IntInRange
 {
 	protected _number: number;
 
-	constructor( number: number )
+	constructor( value: number|IntInRange )
 	{
-		this._number = IntInRange.normalize( number, this.constructor as any );
+		this._number = typeof value === 'number'
+			? IntInRange.normalize( value, this.constructor as any )
+			: value._number;
 	}
 
 	static readonly MIN: number = 0;
@@ -19,19 +26,14 @@ export default class IntInRange
 	 * @param number Преобразуемое значение
 	 * @param QNClass Статический класс, который содержит граничные значения. Данный класс должен содержать свойства MIN и MAX
 	 */
-	protected static range( number: number, QNClass: typeof IntInRange = IntInRange ): number
+	protected static normalize( number: number, QNClass: Segment ): number
 	{
 		if( number < QNClass.MIN )
 			number = QNClass.MIN;
 		else if( number > QNClass.MAX )
 			number = QNClass.MAX;
 		
-		return number;
-	}
-
-	protected static normalize( number: number, QNClass: typeof IntInRange ): number
-	{
-		return QNClass.range( Math.round( number ), QNClass );
+		return Math.round( number );
 	}
 
 	get value(): number
@@ -45,16 +47,16 @@ export default class IntInRange
 	}
 
 	/**
-	 * Присваивает значение квантового числа только в том случае,
+	 * Присваивает значение только в том случае,
 	 * если они имеют один тип
-	 * @param QuantumNumber Квантовое число
+	 * @param value Число
 	 */
-	assign( QuantumNumber: IntInRange ): typeof QuantumNumber
+	assign( value: IntInRange ): typeof value
 	{
-		if( this.constructor === QuantumNumber.constructor )
-			this._number = QuantumNumber._number;
+		if( this.constructor === value.constructor )
+			this._number = value._number;
 		else
-			this.value = QuantumNumber.value;
+			this.value = value.value;
 		return this;
 	}
 }
