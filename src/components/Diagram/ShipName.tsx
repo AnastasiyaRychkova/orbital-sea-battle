@@ -1,22 +1,30 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import type { ShipNameProps } from './types';
-import { makeShipNameClass } from './properties';
+/* import DiagramStateType from '../../lib/game/Diagram/DiagramInterface';
+import classNames from 'classnames'; */
+import styles from './diagram.module.css';
 
-const ShipName = observer(( props: ShipNameProps ) => {
-	const { diagram, name } = props;
-	const fn = diagram.shipNameClickFunction
-		? () => {
-			diagram.shipNameClickFunction!( name );
-		}
-		: undefined;
+interface IProps {
+	name: string,
+	x: number,
+	y: number,
+}
+
+/* function makeShipNameClass( diagram: DiagramStateType ): string
+{
+	return classNames({
+		[styles.ship_name]: true,
+		[styles.ship_name_disabled]: diagram.shipNameClickFunction,
+	});
+} */
+
+const ShipName = observer(( props: IProps ) => {
 
 	return (
 		<text
-			className={ makeShipNameClass( diagram ) }
+			className={ styles.shipName }
 			x={props.x}
 			y={props.y}
-			onClick={fn}
 		>
 			{props.name}
 		</text>

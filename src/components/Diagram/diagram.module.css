@@ -1,5 +1,37 @@
-.ship_name {
-	font: 30px sans-serif;
-	fill: #51CF15;
+@value colors: '../../style/colors.css';
+@value main from colors;
+
+@value effects: '../../style/effects.css';
+@value weakGlowText from effects;
+
+.shipName {
+	fill: main;
+	opacity: .5;
 	cursor: default;
+	text-shadow: weakGlowText;
+	font-size: 1.5em;
+	font-family: 'Montserrat';
+	font-weight: normal;
+}
+
+.container {
+	stroke: main;
+}
+
+.containerSelected {
+	stroke: #d1ffd0;
+	filter: drop-shadow(0px 0px 2px #ACF3A9);
+	fill: #4b6d4a18;
+}
+
+.ship {
+	stroke: main;
+}
+
+.shipSelected {
+	stroke: #d1ffd0;
+	filter: drop-shadow(0px 0px 2px #ACF3A9);
+	fill: #4b6d4a18;
+	/* filter: drop-shadow(0px 0px 2px white);
+	stroke: white; */
 }

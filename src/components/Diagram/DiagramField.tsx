@@ -1,109 +1,106 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import Ship from './Ship';
-import type DiagramStateType from '../../lib/game/Diagram/DiagramInterface'
+import {MainQN, OrbitalQN} from '../../lib/game/ChemicalElement/QuantumNumbers';
 
-type DiagramProps = {
-	diagram: DiagramStateType,
-}
 
-const DiagramField = observer((props: DiagramProps) => {
+const DiagramField = observer(() => {
 	return (
 		<g>
-			<Ship
-				column={0} row={0} vertLine={0}
-				diagram={props.diagram}
-				name="1s"
+			<Ship qn={{
+					n: new MainQN( 1 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={1} row={1} vertLine={2}
-				diagram={props.diagram}
-				name="2s"
+			<Ship qn={{
+					n: new MainQN( 2 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={1} row={2} vertLine={1}
-				diagram={props.diagram}
-				name="2p"
+			<Ship qn={{
+					n: new MainQN( 2 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
-			<Ship
-				column={2} row={2} vertLine={6}
-				diagram={props.diagram}
-				name="3s"
+			<Ship qn={{
+					n: new MainQN( 3 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={2} row={3} vertLine={5}
-				diagram={props.diagram}
-				name="3p"
+			<Ship qn={{
+					n: new MainQN( 3 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
-			<Ship
-				column={2} row={4} vertLine={4}
-				diagram={props.diagram}
-				name="3d"
+			<Ship qn={{
+					n: new MainQN( 3 ),
+					l: new OrbitalQN( 'd' ),
+				}}
 			/>
-			<Ship
-				column={3} row={3} vertLine={12}
-				diagram={props.diagram}
-				name="4s"
+			<Ship qn={{
+					n: new MainQN( 4 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={3} row={4} vertLine={11}
-				diagram={props.diagram}
-				name="4p"
+			<Ship qn={{
+					n: new MainQN( 4 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
-			<Ship
-				column={3} row={5} vertLine={10}
-				diagram={props.diagram}
-				name="4d"
+			<Ship qn={{
+					n: new MainQN( 4 ),
+					l: new OrbitalQN( 'd' ),
+				}}
 			/>
-			<Ship
-				column={3} row={6} vertLine={9}
-				diagram={props.diagram}
-				name="4f"
+			<Ship qn={{
+					n: new MainQN( 4 ),
+					l: new OrbitalQN( 'f' ),
+				}}
 			/>
-			<Ship
-				column={4} row={4} vertLine={19}
-				diagram={props.diagram}
-				name="5s"
+			<Ship qn={{
+					n: new MainQN( 5 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={4} row={5} vertLine={18}
-				diagram={props.diagram}
-				name="5p"
+			<Ship qn={{
+					n: new MainQN( 5 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
-			<Ship
-				column={4} row={6} vertLine={17}
-				diagram={props.diagram}
-				name="5d"
+			<Ship qn={{
+					n: new MainQN( 5 ),
+					l: new OrbitalQN( 'd' ),
+				}}
 			/>
-			<Ship
-				column={4} row={7} vertLine={16}
-				diagram={props.diagram}
-				name="5f"
+			<Ship qn={{
+					n: new MainQN( 5 ),
+					l: new OrbitalQN( 'f' ),
+				}}
 			/>
-			<Ship
-				column={5} row={5} vertLine={25}
-				diagram={props.diagram}
-				name="6s"
+			<Ship qn={{
+					n: new MainQN( 6 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={5} row={6} vertLine={24}
-				diagram={props.diagram}
-				name="6p"
+			<Ship qn={{
+					n: new MainQN( 6 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
-			<Ship
-				column={5} row={7} vertLine={23}
-				diagram={props.diagram}
-				name="6d"
+			<Ship qn={{
+					n: new MainQN( 6 ),
+					l: new OrbitalQN( 'd' ),
+				}}
 			/>
-			<Ship
-				column={6} row={6} vertLine={29}
-				diagram={props.diagram}
-				name="7s"
+			<Ship qn={{
+					n: new MainQN( 7 ),
+					l: new OrbitalQN( 's' ),
+				}}
 			/>
-			<Ship
-				column={6} row={7} vertLine={28}
-				diagram={props.diagram}
-				name="7p"
+			<Ship qn={{
+					n: new MainQN( 7 ),
+					l: new OrbitalQN( 'p' ),
+				}}
 			/>
 		</g>
 	);

@@ -14,12 +14,18 @@ import {
 import Container from './Container';
 import ShipName from './ShipName';
 
-import { MainQN, OrbitalQN, MagneticQN, QuantumNumbers } from '../../lib/game/ChemicalElement/QuantumNumbers';
+import { MainQN, OrbitalQN, MagneticQN, ShipQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
 import type { Coordinates } from './types';
 import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInterface';
 
+import styles from './diagram.module.css';
+
+
+const COL_WIDTH: readonly number[] = [ 1, 3, 5, 7, 7, 5, 3 ];
+const COL_WIDTH_INTEGRAL: readonly number[] = [ 0, 1, 4, 9, 16, 23, 28 ];
+
 interface IProps {
-	qn: QuantumNumbers,
+	qn: ShipQN,
 	controller?: IGameFieldController,
 }
 
@@ -75,8 +81,8 @@ function makeName( n: MainQN, l: OrbitalQN ): string
 function makeShipClass( props: IProps ): string
 {
 	return classNames({
-		ship: true,
-		ship_selected: props.controller!.filter.isShipSelected( props.qn ),
+		[styles.ship]: true,
+		[styles.shipSelected]: props.controller!.filter.isShipSelected( props.qn ),
 	});
 }
 
@@ -89,13 +95,14 @@ function buildShip( n: MainQN,
 {
 	let m = calcSmallestMagneticNumber( length );
 	const ship = [];
+	let { x, y } = coordinates;
 
 	for (let i = 0; i < length; i++) {
 		ship.push(
 			<Container
 				key={name + m}
-				x={coordinates.x}
-				y={coordinates.y}
+				x={x}
+				y={y}
 				qn={{n: n,
 					l: l,
 					m: new MagneticQN( m ),}}
@@ -103,7 +110,7 @@ function buildShip( n: MainQN,
 		);
 
 		m++;
-		coordinates.x += CONTAINER_WIDTH;
+		x += CONTAINER_WIDTH;
 	}
 
 	return ship;
@@ -133,50 +140,32 @@ function calcLength( l: OrbitalQN ): number {
 function calcCoordinates( n: MainQN, l: OrbitalQN ): Coordinates
 {
 	return {
-		x: getX( n ),
-		y: getY( l ),
+		x: getX( n, l ),
+		y: getY( n, l ),
 	};
 }
 
 /**
  * Вычисляет координату X верхнего левого угла корабля
  * @param n Главное число корабля
+ * @param l Орбитальное число корабля
  * @returns Координату X верхнего левого угла корабля
  */
-function getX( n: MainQN ): number
+function getX( n: MainQN, l: OrbitalQN ): number
 {
-	/* 
-	1 (0) - 0
-	2 (1) - (1)Wc + Ws
-	3 (2) - (1+3)Wc + 2*Ws
-	4 (3) - (1+3+5)Wc + 3*Ws
-	5 (4) - (1+3+5+7)Wc + 4*Ws
-	6 (5) - (1+3+5+7+9 - 2*1)Wc + 5*Ws
-	7 (6) - (1+3+5+7+9+11 - 2*3)Wc + 6*Ws
-
-	8 (7) - (1+3+5+7+9+11+13 - 2*5)Wc + 7*Ws
-
-
-	i = n-1
-	x = (( 2 a1 + d(i-1) ) / 2 * i -
-	- (i >= r ?
-			2 ( 2(i-r) + 1) ) * Wc : 0 ) +
-	+ i Ws
-	*/
 	const i = n.value - 1;
-	return i
-			? i * i - ( i >= 5 ? ( 4 * i - 9 ) * CONTAINER_WIDTH : 0 ) + i * COLUMN_SPACING
-			: 0;
+	return ( COL_WIDTH_INTEGRAL[i] + ( COL_WIDTH[i] - calcLength( l ) ) / 2 ) * CONTAINER_WIDTH + i * COLUMN_SPACING;
 }
 
 /**
  * Вычисляет координату Y верхнего левого угла корабля
+ * @param n Главное число корабля
  * @param l Орбитальное число корабля
  * @returns Координату Y верхнего левого угла корабля
  */
-function getY( l: OrbitalQN ): number
+function getY( n: MainQN, l: OrbitalQN ): number
 {
-	return ( 7 - l.value ) * ( CONTAINER_HEIGHT + LINE_SPACING );
+	return ( 8 - n.value - l.value ) * ( CONTAINER_HEIGHT + LINE_SPACING );
 }
 
 /**

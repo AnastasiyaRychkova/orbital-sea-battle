@@ -1,12 +1,10 @@
 import React from 'react';
 import CellSymbol from './CellSymbol';
 import DiagramField from './DiagramField';
-import type DiagramStateType from '../../lib/game/Diagram/DiagramInterface';
 import panzoom from 'panzoom';
 import type {PanZoom} from 'panzoom';
 
 interface IProps {
-	diagram: DiagramStateType,
 	zooming: boolean,
 	className: string,
 }
@@ -41,13 +39,18 @@ class Diagram extends React.Component<IProps>
 
 	render() {
 		return(
-			<svg className={(this.props as IProps).className} viewBox="-30 -2 1520 602" fill="none" preserveAspectRatio="xMidYMid meet">
+			<svg className={(this.props as IProps).className} 
+				viewBox="-30 -2 1520 602"
+				fill="none"
+				preserveAspectRatio="xMidYMid meet">
+
 				<defs>
 					<CellSymbol />
 				</defs>
 				<g ref={this.field}>
-					<DiagramField diagram={(this.props as IProps).diagram} />
+						<DiagramField />
 				</g>
+
 			</svg>
 		)
 	}

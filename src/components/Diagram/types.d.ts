@@ -1,4 +1,4 @@
-import type DiagramStateType from '../../lib/game/Diagram/DiagramInterface'
+import type IDiagram from '../../lib/game/Diagram/DiagramInterface'
 
 // ---- CELL ------
 
@@ -6,22 +6,28 @@ export enum CellState
 {
 	off,
 	on,
-	hit,
 	miss,
+	hit,
+};
+
+export type Coordinates = {
+	x: number,
+	y: number,
 };
 
 export type CellProps = {
-	diagram: DiagramStateType,
+	diagram: IDiagram,
 	x: number,
 	y: number,
 	index: number,
+	isDown?: boolean,
 };
 
 
 // ---- CONTAINER ------
 
 export type ContainerProps = {
-	diagram: DiagramStateType,
+	diagram: IDiagram,
 	x: number,
 	y: number,
 	upCell: number,
@@ -32,7 +38,7 @@ export type ContainerProps = {
 // ---- SHIP NAME ------
 
 export type ShipNameProps = {
-	diagram: DiagramStateType,
+	diagram: IDiagram,
 	x: number,
 	y: number,
 	name: string,
@@ -42,7 +48,7 @@ export type ShipNameProps = {
 // ---- SHIP ------
 
 export type ShipProps = {
-	diagram: DiagramStateType,
+	diagram: IDiagram,
 	column: number,
 	row: number,
 	vertLine: number,
