@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import DiagramShootingPage from './pages/diagram_shooting/DiagramShootingPage';
+// import App from './App';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<DiagramShootingPage />
 	</React.StrictMode>,
 	document.getElementById('root')
 );

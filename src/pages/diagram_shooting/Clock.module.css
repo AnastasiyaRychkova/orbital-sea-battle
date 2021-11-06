@@ -1,0 +1,24 @@
+@value colors: '../../style/colors.css';
+@value background, text from colors;
+
+.clock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: .3em .5em;
+	border-radius: .4em;
+	box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.15), 0px 0px 13px rgba(81, 207, 21, 0.5);
+	background-color: text;
+	color: background;
+	font-family: inherit;
+	font-weight: bold;
+}
+
+.clock > span {
+	margin: 0 .3em;
+	width: 2em;
+}
+
+.clock > span:first-child {
+	text-align: right;
+}

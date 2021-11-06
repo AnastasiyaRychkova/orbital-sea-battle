@@ -1,0 +1,131 @@
+@value colors: '../../style/colors.css';
+@value text, lightBacking, background, subElement, nonClickableElement from colors;
+@value effects: '../../style/effects.css';
+@value lightGlow from effects;
+
+.btn {
+	padding: .8em 2em;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: bold;
+	width: 12em;
+}
+
+.nextBtn {
+	composes: btn;
+	border: none;
+	background-color: text;
+	color: lightBacking;
+}
+
+.nextBtn:hover {
+	box-shadow: lightGlow;
+	background-color: subElement;
+	cursor: pointer;
+	color: text;
+}
+
+.nextBtn:active {
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: lightBacking;
+}
+
+.prevBtn {
+	composes: btn;
+	margin-right: 1em;
+	border: 2px solid text;
+	background-color: transparent;
+	color: text;
+}
+
+.prevBtn:hover {
+	box-shadow: lightGlow;
+	background-color: subElement;
+	cursor: pointer;
+	color: text;
+}
+
+.prevBtn:active {
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: lightBacking;
+}
+
+.window {
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+	max-width: 800px;
+	color: text;
+	font-weight: 500;
+}
+
+.content {
+	min-width: 500px;
+	max-width: 1200px;
+	min-height: 250px;
+	line-height: 1.6em;
+}
+
+.content p {
+	margin: .5em 0;
+}
+
+.contentCenter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btnContainer {
+	display: flex;
+	justify-content: center;
+	margin-top: 1.5em;
+}
+
+.important {
+	letter-spacing: .06em;
+	color: #aed6c5;
+	font-weight: 700;
+}
+
+.content .importantInfo {
+	margin: 1.2em 0 .8em;
+	padding: 1em 1.6em;
+	background-color: lightBacking;
+}
+
+.content strong {
+	text-decoration: underline;
+	font-weight: 500;
+}
+
+.steps {
+	margin-left: .3em;
+	color: nonClickableElement;
+	font-size: .85em;
+	font-weight: 500;
+}
+
+
+.generalQuestion {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 300px;
+	height: 395px;
+}
+
+.firstInterface {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 300px;
+	height: 500px;
+}
+
+.secondInterface {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 300px;
+	height: 790px;
+}

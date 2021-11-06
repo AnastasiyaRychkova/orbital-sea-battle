@@ -1,0 +1,48 @@
+.page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0, linear-gradient(
+90deg
+, rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0;
+	background-color: #1E2C26;
+	background-size: 3em 3em;
+}
+
+.diagram {
+	padding: 20px 32px;
+	margin-bottom: 10em;
+}
+
+.diagram:focus {
+	outline: none;
+}
+
+.taskCounter {
+	margin-top: 1em;
+}
+
+.clock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 4em;
+}
+
+.processInfo {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	position: absolute;
+	bottom: 13em;
+}
+
+@media (max-width: 1400px) {
+	.processInfo {
+		font-size: 12px;
+	}
+}
