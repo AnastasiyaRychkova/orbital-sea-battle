@@ -1,5 +1,6 @@
+import { makeObservable, observable, action } from "mobx";
 import {
-	DiagramCell as Spin,
+	SpinIndex as SpinIndex,
 	calcCellState,
 	EDiagramCellState as CellState,
 } from './DiagramCell';
@@ -12,28 +13,36 @@ import type { SpinMark, SpinState } from './DiagramCell';
  * 118 состояний спинов разделены на 4 группы:
  * 3 группы по 32 спина и 1 на 22.
  */
-class ElemConfig
+class ElemConfig implements ElemConfig
 {
 	/** Конфигурация элемента в бинарном виде */
-	#config: Int32Array;
+	config: Int32Array;
 
 	private static readonly MAX_LENGTH: number = 4;
 
 	constructor( buf?: Int32Array | number[] )
 	{
+		makeObservable( this, {
+			
+			config: observable,
+			
+			write: action,
+			update: action,
+		});
+
 		if( buf === undefined )
 		{
-			this.#config = ElemConfig._createZeroArray();
+			this.config = ElemConfig._createZeroArray();
 			return;
 		}
 		
 		if( buf.length === ElemConfig.MAX_LENGTH )
 		{
-			this.#config = ElemConfig._createCopyOfArray( buf );
+			this.config = ElemConfig._createCopyOfArray( buf );
 			return;
 		}
 
-		this.#config = ElemConfig._createCopyOfCustomLengthArray( buf );
+		this.config = ElemConfig._createCopyOfCustomLengthArray( buf );
 		
 	}
 
@@ -80,7 +89,7 @@ class ElemConfig
 	static isEqual( elem1: ElemConfig, elem2: ElemConfig ): boolean
 	{
 		for( let i = 0; i < ElemConfig.MAX_LENGTH; i++ )
-			if( elem1.#config[ i ] != elem2.#config[ i ] )
+			if( elem1.config[ i ] !== elem2.config[ i ] )
 				return false;
 
 		return true;
@@ -94,16 +103,16 @@ class ElemConfig
 	 * 
 	 * @param spin Индекс спина
 	 */
-	hasSpin( spin: Spin ): boolean
+	hasSpin( spin: SpinIndex ): boolean
 	{
-		return this._isMarked( spin.value ) != 0;
+		return this._isMarked( spin.value ) !== 0;
 	}
 
 	private _isMarked( spinIndex: number ): SpinState
 	{
 		const chunk = ElemConfig._chunkIndexBySpinIndex( spinIndex );
 		const index = ElemConfig._indexInChunkBySpinIndex( spinIndex );
-		return (( this.#config[ chunk ] >> index ) & 1 ) as SpinState;
+		return (( this.config[ chunk ] >> index ) & 1 ) as SpinState;
 	}
 
 	private static _makeMaskForSingular( spinIndex: number ): number
@@ -129,11 +138,23 @@ class ElemConfig
 	 * @param spin Индекс спина
 	 * @param state Отмечен ли спин
 	 */
-	write( spin: Spin, state: SpinMark | SpinState ): ElemConfig
+	write( spin: SpinIndex, state: SpinMark | SpinState ): ElemConfig
+	{
+		this.writeWithoutUpdate( spin, state );
+		this.update();
+		return this;
+	}
+
+	writeWithoutUpdate( spin: SpinIndex, state: SpinMark | SpinState ): ElemConfig
 	{
 		state ? this._mark( spin.value )
 				:	this._remove( spin.value );
 		return this;
+	}
+
+	update()
+	{
+		this.config = new Int32Array( this.config );
 	}
 
 	/**
@@ -144,7 +165,7 @@ class ElemConfig
 	private _mark( index: number ): void
 	{
 		const mask = ElemConfig._makeMaskForSingular( index );
-		this.#config[ ElemConfig._chunkIndexBySpinIndex( index ) ] |= mask;
+		this.config[ ElemConfig._chunkIndexBySpinIndex( index ) ] |= mask;
 	}
 
 	/**
@@ -155,7 +176,7 @@ class ElemConfig
 	private _remove( index: number ): void
 	{
 		const mask = ElemConfig._makeMaskForSingular( index );
-		this.#config[ ElemConfig._chunkIndexBySpinIndex( index ) ] &= ~mask;
+		this.config[ ElemConfig._chunkIndexBySpinIndex( index ) ] &= ~mask;
 	}
 
 	/**
@@ -163,10 +184,9 @@ class ElemConfig
 	 */
 	toArray(): SpinState[]
 	{
-		const maxSpinNumber: number = Spin.MAX + 1;
 		const result: SpinState[] = [];
 
-		for( let spinIndex = 0; spinIndex < maxSpinNumber; spinIndex++ )
+		for( let spinIndex = 0; spinIndex <= SpinIndex.MAX; spinIndex++ )
 			result.push( this._isMarked( spinIndex ) );
 
 		return result;
@@ -179,11 +199,32 @@ class ElemConfig
 	toNumArray(): number[]
 	{
 		return [
-			this.#config[0],
-			this.#config[1],
-			this.#config[2],
-			this.#config[3],
+			this.config[0],
+			this.config[1],
+			this.config[2],
+			this.config[3],
 		];
+	}
+
+	/** Создать копию объекта */
+	clone(): ElemConfig
+	{
+		return new ElemConfig( this.config );
+	}
+
+	/**
+	 * Вычислить состояние (enum) спина по указанному индексу 
+	 * @param spinIndex Индекс спина, у которого запрашивается состояние
+	 * @param element Схема элемента
+	 * @param shots Схема выстрелов
+	 * @returns Перечислительный тип состояния спина элемента
+	 */
+	static getCellState( spinIndex: SpinIndex,
+						 element: ElemConfig,
+						 shots: ElemConfig
+						): CellState
+	{
+		return calcCellState( element.hasSpin( spinIndex ), shots.hasSpin( spinIndex ) );
 	}
 
 	/**
@@ -197,7 +238,7 @@ class ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= Spin.MAX; i++ )
+		for( let i = 0; i <= SpinIndex.MAX; i++ )
 			result.push( calcCellState( diagram._isMarked( i ), shots._isMarked( i ) ) );
 		
 		return result;
@@ -213,7 +254,7 @@ class ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= Spin.MAX; i++ )
+		for( let i = 0; i <= SpinIndex.MAX; i++ )
 		{
 			const state: CellState = calcCellState( diagram._isMarked( i ), shots._isMarked( i ) );
 			result.push( state === CellState.on ? CellState.off : state );
@@ -231,7 +272,7 @@ class ElemConfig
 
 	private _writeSpinArrayInConfig( spinArray: SpinState[] ): void
 	{
-		const iterator = Spin.iterator();
+		const iterator = SpinIndex.iterator();
 		for (const spin of iterator)
 		{
 			const spinState = spinArray[ spin.value ] || 0;

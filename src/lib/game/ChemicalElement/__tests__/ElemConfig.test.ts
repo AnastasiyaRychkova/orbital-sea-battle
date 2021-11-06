@@ -1,4 +1,4 @@
-import { DiagramCell, EDiagramCellState } from "../DiagramCell";
+import { SpinIndex, EDiagramCellState } from "../DiagramCell";
 import ElemConfig from "../ElemConfig";
 
 import type { SpinState } from '../DiagramCell';
@@ -53,16 +53,16 @@ describe( 'Element Configuration', ()=> {
 
 	test( 'check the last marked spin', () => {
 		const platinum = new ElemConfig( [ -1, -1, 32765, 0 ] );
-		expect( platinum.hasSpin( new DiagramCell( 78 ) ) ).toBeTruthy();
+		expect( platinum.hasSpin( new SpinIndex( 78 ) ) ).toBeTruthy();
 	});
 
 	test( 'check the first unmarked spin', () => {
 		const platinum = new ElemConfig( [ -1, -1, 32765, 0 ] );
-		expect( platinum.hasSpin( new DiagramCell( 79 ) ) ).not.toBeTruthy();
+		expect( platinum.hasSpin( new SpinIndex( 79 ) ) ).not.toBeTruthy();
 	});
 
 	test( 'check mark spin', () => {
-		const spin: DiagramCell = new DiagramCell( 96 );
+		const spin: SpinIndex = new SpinIndex( 96 );
 
 		expect( new ElemConfig()
 					.write( spin, true )
@@ -71,7 +71,7 @@ describe( 'Element Configuration', ()=> {
 	});
 
 	test( 'check remove spin', () => {
-		const spin: DiagramCell = new DiagramCell( 96 );
+		const spin: SpinIndex = new SpinIndex( 96 );
 
 		expect( new ElemConfig( [-1,-1,-1,-1] )
 					.write( spin, false )
@@ -107,7 +107,7 @@ describe( 'Element Configuration', ()=> {
 	];
 
 	test( 'check the construction of the Configuration by the long array of spins', () => {
-		const expectedArray = firstSpinArray.slice( DiagramCell.MIN, DiagramCell.MAX + 1 );
+		const expectedArray = firstSpinArray.slice( SpinIndex.MIN, SpinIndex.MAX + 1 );
 		expect( ElemConfig.createFromSpinArray( firstSpinArray ).toArray() ).toEqual( expectedArray );
 		firstSpinArray = expectedArray;
 	});
@@ -117,7 +117,7 @@ describe( 'Element Configuration', ()=> {
 	});
 
 	test( 'check the construction of the Configuration by the short array of spins', () => {
-		firstSpinArray = firstSpinArray.slice( DiagramCell.MIN, 32 );
+		firstSpinArray = firstSpinArray.slice( SpinIndex.MIN, 32 );
 		expect( ElemConfig.isEqual( ElemConfig.createFromSpinArray( firstSpinArray ), new ElemConfig() ) ).toBeTruthy();
 	});
 
