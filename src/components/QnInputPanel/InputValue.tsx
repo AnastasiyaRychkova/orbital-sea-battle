@@ -1,4 +1,4 @@
-import React, { ReactChildren } from 'react';
+import React from 'react';
 import { observer, inject } from "mobx-react";
 import styles from './style.module.css';
 import Switcher from './Switcher';
@@ -26,24 +26,35 @@ function injectProps( children: React.ReactNode, props: Object )
 
 const InputValue = inject( "controller" )(observer(( props: IProps ) => {
 	const filter = props.controller!.filter;
+	const isFilterEnabled = !filter.isDisable( props.storeKey );
 	return (
-		<fieldset className={styles.inputValue} data-switch-on={!filter.isDisable( props.storeKey )}>
+		<fieldset
+			className={styles.inputValue}
+			data-switch-on={isFilterEnabled}
+		>
 			<span className={styles.name}>
 				{props.name}
-				{props.sub ? <sub className={styles.sub}>{props.sub}</sub> : ''}
+				{props.sub
+					?
+					<sub className={styles.sub}>
+						{props.sub}
+					</sub>
+					:
+					''
+				}
 			</span>
 			<div className={styles.row}>
 				{props.withSwitcher
 					? <Switcher
 						id={'qn-switcher-' + props.storeKey}
-						switchOn={false}
+						switchOn={isFilterEnabled}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-							filter.setDisable( props.storeKey, !e.target.checked );
+							filter.setDisable( props.storeKey, !e.target.checked ); // isFilterEnabled
 						}} />
 					: ''
 				}
 				{injectProps( props.children, {
-					name: props.name,
+					name: props.name + (props.sub ? props.sub : ''),
 					storeKey: props.storeKey,
 				})}
 			</div>

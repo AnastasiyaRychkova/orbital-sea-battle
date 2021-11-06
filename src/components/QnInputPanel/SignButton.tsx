@@ -26,7 +26,7 @@ const SignButton = inject( "controller" )(observer(( props: IProps ) => {
 				name={props.name}
 				type="checkbox"
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					props.controller!.filter.setValue( props.storeKey!, e.target.checked ? '1' : '-1' );
+					props.controller!.filter.setValue( props.storeKey!, e.target.checked ? '+1/2' : '-1/2' );
 				}}
 				checked={checked} />
 			<label className={styles.button} htmlFor={props.name}>

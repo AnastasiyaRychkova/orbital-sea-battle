@@ -14,10 +14,14 @@ function Switcher( props: IProps ) {
 				className={styles.inputSwitcher}
 				id={props.id}
 				type="checkbox"
-				defaultChecked={props.switchOn}
+				checked={props.switchOn}
 				onChange={props.onChange} />
-			<label className={styles.switcher} htmlFor={props.id}></label>
-			<label className={styles.switcherBillet} htmlFor={props.id} ></label>
+			<label
+				className={styles.switcher}
+				htmlFor={props.id}></label>
+			<label
+				className={styles.switcherBillet}
+				htmlFor={props.id} ></label>
 		</div>
 	);
 }

@@ -17,9 +17,12 @@ interface IProps {
 	controller?: IGameFieldController,
 }
 
+
 function make( props: IProps ): JSX.Element[] {
 	const res = [];
-	const checkedValue = props.controller!.filter.getValue( props.storeKey! );
+	let checkedValue = props.controller!.filter.getValue( props.storeKey! );
+	if( checkedValue && props.storeKey === 's' )
+		checkedValue = checkedValue === '1' ? '+1/2' : '-1/2';
 
 	for( let i = props.values.length - 1; i >= 0; i-- ) {
 		res.push(
@@ -31,11 +34,7 @@ function make( props: IProps ): JSX.Element[] {
 				checked={props.values[i] === checkedValue}
 				key={props.values[i]}
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					const value = props.type === ToggleType.checkbox
-								&& e.target.value === checkedValue 
-									? undefined
-									: e.target.value;
-					props.controller!.filter.setValue( props.storeKey!, value );
+					props.controller!.filter.setValue( props.storeKey!, e.target.value );
 				}} />
 		);
 	}
