@@ -1,3 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Prompt:wght@500&display=swap');
+
+
+html {
+	--primary-font: 'Montserrat';
+	--secondary-font: 'Prompt';
+}
+
+
+
+/*----------  Headers  ----------*/
+
+.header {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+}
+
+.header-1 {
+	composes: header;
+	letter-spacing: 0.02em;
+	font-size: 3.75em;
+}
+
+.header-2 {
+	composes: header;
+	letter-spacing: 0.02em;
+	font-size: 3em;
+}
+
+.header-3 {
+	composes: header;
+	letter-spacing: 0.05em;
+	font-size: 1.5em;
+}
+
+.header-4 {
+	composes: header;
+	letter-spacing: 0.05em;
+	font-size: 1.12em;
+}
+
+
+/* --- Large Headers --- */
+
+.large-header {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: normal;
+	font-style: normal;
+}
+
+.large-header-1 {
+	composes: large-header;
+	letter-spacing: 0.04em;
+	font-size: 3.75em;
+}
+
+.large-header-2 {
+	composes: large-header;
+	letter-spacing: 0.05em;
+	font-size: 3em;
+}
+
+
+
+/*----------  Text  ----------*/
+
+.text {
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+}
+
+.text-r-large {
+	composes: text;
+	line-height: 100%;
+	letter-spacing: 0.1em;
+	font-size: 3em;
+	font-weight: normal;
+}
+
+.text-b-big {
+	composes: text;
+	letter-spacing: 0em;
+	font-size: 1.5em;
+}
+
+.text-b-normal {
+	composes: text;
+	letter-spacing: 0.05em;
+	font-size: 1em;
+}
+
+.text-m-normal {
+	composes: text;
+	letter-spacing: 0.05em;
+	font-size: 1em;
+}
+
+.text-b-small {
+	composes: text;
+	letter-spacing: 0.05em;
+	font-size: 0.88em;
+}
+
+.text-m-small {
+	composes: text;
+	letter-spacing: 0.05em;
+	font-size: 0.88em;
+}
+
+.text-b-tiny {
+	composes: text;
+	letter-spacing: 0.08em;
+	font-size: 0.62em;
+}
+
+.text-m-tiny {
+	composes: text;
+	letter-spacing: 0.08em;
+	font-size: 0.62em;
+}
+
+
+
+/*----------  Long Text  ----------*/
+
+.long-text {
+	line-height: 140%;
+	font-family: var(--secondary-font);
+	font-weight: 500;
+	font-style: normal;
+}
+
+.long-text-m-medium {
+	composes: long-text;
+	font-size: 1.25em;
+}
+
+.long-text-m-normal {
+	composes: long-text;
+	letter-spacing: 0.05em;
+	font-size: 1em;
+}
+
+.long-text-m-medium {
+	composes: long-text;
+	letter-spacing: 0.05em;
+	font-size: 0.88em;
+}
+
+
+
+/*----------  Buttons  ----------*/
+
+.button {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+}
+
+.button-large {
+	composes: button;
+	letter-spacing: 0.05em;
+	font-size: 1.88em;
+}
+
+.button-big {
+	composes: button;
+	letter-spacing: 0.05em;
+	font-size: 1.5em;
+}
+
+.button-medium {
+	composes: button;
+	letter-spacing: 0.05em;
+	font-size: 1.25em;
+}
+
+.button-normal {
+	composes: button;
+	letter-spacing: 0.08em;
+	font-size: 1em;
+}
+
+.button-small {
+	composes: button;
+	letter-spacing: 0.08em;
+	font-size: 0.88em;
+}
+
+.button-tiny {
+	composes: button;
+	letter-spacing: 0.08em;
+	font-size: 0.62em;
+}
+
+
+
+/*----------  Diagram  ----------*/
+
+.chemical-element {
+	line-height: 100%;
+	font-family: var(--primary-font);
+	font-size: 1.75em;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.element-weight {
+	line-height: 120%;
+	letter-spacing: 0.08em;
+	font-family: var(--primary-font);
+	font-size: 0.5em;
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @value lineHeight_M: 1.5;
 @value wordSpacing_M: 0.2em;
 @value letterSpacing_M: 0.2em;
@@ -8,19 +253,19 @@
 
 
 .regularBold {
-	font-family: Montserrat;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 1em;
 	line-height: 120%;
 	letter-spacing: 0.135em;
+	font-family: Montserrat;
+	font-size: 1em;
+	font-weight: bold;
+	font-style: normal;
 }
 
 .h3 {
-	font-weight: bold;
-	font-size: 1.125em;
 	line-height: 120%;
 	letter-spacing: 0.135em;
+	font-size: 1.125em;
+	font-weight: bold;
 }
 
 
@@ -28,8 +273,8 @@
 
 
 .extraLargeText {
-	font-size: 48px;
 	letter-spacing: 0.2em;
+	font-size: 48px;
 }
 
 .largeText {

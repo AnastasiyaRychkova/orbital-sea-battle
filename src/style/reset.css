@@ -1,0 +1,15 @@
+* {
+	font-size: inherit;
+}
+
+button {
+	border: none;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: default;
+}

@@ -1,4 +1,4 @@
-@value primary: #51CF15;
+/* @value primary: #51CF15;
 @value primaryDark: #299601;
 @value light: #a2ffb6;
 @value dark: #00200A;
@@ -16,21 +16,93 @@
 @value error: #C03F37;
 @value inactiveArrow: #446249;
 @value missing: #6F362E;
+*/
+
+
+@value white: #FFFFFF;
+@value primary-50: #EAF8E9;
+@value primary-100: #C4ECC3;
+@value primary-200: #9CDF9A;
+@value primary-300: #79CF76;
+@value primary-400: #61C35A;
+@value primary-500: #4EA448;
+@value primary-600: #40843C;
+@value primary-700: #2D5E2A;
+@value primary-800: #284A25;
+@value primary-900: #1D341C;
+@value secondary-50: #B6E4D0;
+@value secondary-100: #96C2AF;
+@value secondary-200: #71AA91;
+@value secondary-300: #5A8C77;
+@value secondary-400: #517465;
+@value secondary-500: #456356;
+@value secondary-600: #354E43;
+@value secondary-700: #2C463A;
+@value secondary-800: #1E2C26;
+@value secondary-900: #15211C;
+@value disable-50: #EEF3EE;
+@value disable-100: #D0DFCF;
+@value disable-200: #B1CAB0;
+@value disable-300: #A0B09F;
+@value disable-400: #899988;
+@value disable-500: #627661;
+@value disable-600: #566B5B;
+@value disable-700: #3A4D40;
+@value disable-800: #2E3D36;
+@value disable-900: #1C221E;
+@value error-50: #FFECEB;
+@value error-100: #FFC0BC;
+@value error-200: #FFA19B;
+@value error-300: #FA7971;
+@value error-400: #EB564D;
+@value error-500: #C03F37;
+@value error-600: #9C2F28;
+@value error-700: #7E281C;
+@value error-800: #6A281F;
+@value error-900: #57241D;
 
 
 /* FIXME: Удалить */
 .test {
-	color: #1E2C26; /* background */
-	color: #61C35A; /* main */
-	color: #40843C; /* subtitle */
-	color: #96C2AF; /* text */
-	color: #627661; /* nonClickableElement */
-	color: #9CDF9A; /* clickableElement */
-	color: #2C4135; /* menu */
-	color: #15211C; /* darkBacking */
-	color: #2E3D36; /* lightBacking */
-	color: #517465; /* subElement */
-	color: #C03F37; /* error */
-	color: #446249; /* inactiveArrow */
-	color: #6F362E; /* missing */
+	--white: #FFFFFF;
+	--primary-50: #EAF8E9;
+	--primary-100: #C4ECC3;
+	--primary-200: #9CDF9A;
+	--primary-300: #79CF76;
+	--primary-400: #61C35A;
+	--primary-500: #4EA448;
+	--primary-600: #40843C;
+	--primary-700: #2D5E2A;
+	--primary-800: #284A25;
+	--primary-900: #1D341C;
+	--secondary-50: #B6E4D0;
+	--secondary-100: #96C2AF;
+	--secondary-200: #71AA91;
+	--secondary-300: #5A8C77;
+	--secondary-400: #517465;
+	--secondary-500: #456356;
+	--secondary-600: #354E43;
+	--secondary-700: #2C463A;
+	--secondary-800: #1E2C26;
+	--secondary-900: #15211C;
+	--disable-50: #EEF3EE;
+	--disable-100: #D0DFCF;
+	--disable-200: #B1CAB0;
+	--disable-300: #A0B09F;
+	--disable-400: #899988;
+	--disable-500: #627661;
+	--disable-600: #566B5B;
+	--disable-700: #3A4D40;
+	--disable-800: #2E3D36;
+	--disable-900: #1C221E;
+	--error-50: #FFECEB;
+	--error-100: #FFC0BC;
+	--error-200: #FFA19B;
+	--error-300: #FA7971;
+	--error-400: #EB564D;
+	--error-500: #C03F37;
+	--error-600: #9C2F28;
+	--error-700: #7E281C;
+	--error-800: #6A281F;
+	--error-900: #57241D;
 }

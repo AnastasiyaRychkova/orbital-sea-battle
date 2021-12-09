@@ -1,0 +1,327 @@
+body {
+	margin: auto;
+	background: var(--checkPattern);
+	background-color: var(--secondary-800);
+	background-size: 3em 3em;
+}
+
+::-webkit-scrollbar {
+	background-color: var(--secondary-900);
+	width: .88em;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--secondary-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--secondary-500);
+}
+
+::-webkit-scrollbar-thumb:active {
+	background-color: var(--primary-700);
+}
+
+button {
+	font-size: inherit;
+}
+
+section.buttons {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	row-gap: 4em;
+}
+
+section.buttons > .row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3em;
+}
+
+section.buttons > .row > .column {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 300px;
+	gap: 1.2em;
+}
+
+
+section.buttons button {
+	width: 100%;
+}
+
+section.buttons button.m {
+	width: 80%;
+}
+
+section.buttons button.s {
+	width: 60%;
+}
+
+
+.default-button {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	padding: 0.625em;
+}
+
+
+/*=============================================
+=                   Button                   =
+=============================================*/
+
+
+.default-button.primary {
+	border: none;
+	background-color: var(--primary-400);
+	color: var(--primary-900);
+}
+
+.default-button.primary:hover {
+	box-shadow: var(--glow__button--light--l);
+	background-color: var(--primary-200);
+}
+
+.default-button.primary:active {
+	box-shadow: none;
+	background-color: var(--primary-600);
+}
+
+.default-button.primary:disabled {
+	background-color: var(--disable-900);
+	color: var(--disable-500);
+}
+
+.default-button.primary:disabled:hover {
+	box-shadow: none;
+}
+
+
+.default-button.secondary {
+	border: 2px solid currentColor;
+	background-color: var(--primary-400);
+	background-color: transparent;
+	color: var(--primary-400);
+}
+
+.default-button.secondary:hover {
+	border-color: var(--primary-200);
+	box-shadow: var(--glow__button--primary--l);
+	background-color: var(--secondary-900);
+}
+
+.default-button.secondary:active {
+	border-color: currentColor;
+	box-shadow: none;
+	background-color: transparent;
+	color: var(--primary-600);
+}
+
+.default-button.secondary:disabled {
+	border: none;
+	background-color: var(--disable-800);
+	color: var(--disable-500);
+}
+
+.default-button.secondary:disabled:hover {
+	box-shadow: none;
+}
+
+.default-button.secondary > span {
+	text-shadow: var(--shadow__button-text);
+}
+
+.default-button.secondary:disabled > span {
+	text-shadow: none;
+}
+
+
+
+/*=============================================
+=              Button With Icon              =
+=============================================*/
+
+
+.button-with-icon {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	column-gap: 1em;
+	padding: 1em 1.5em;
+}
+
+.button-with-icon > span {
+	text-align: left;
+}
+
+
+.button-with-icon.l > .icon {
+	width: 3em;
+	height: 3em;
+}
+
+.button-with-icon.m {
+	padding: .75em 1.25em;
+}
+
+.button-with-icon.m > .icon {
+	width: 2.5em;
+	height: 2.5em;
+}
+
+.button-with-icon.s {
+	padding: .5em 1em;
+}
+
+.button-with-icon.s > .icon {
+	width: 2em;
+	height: 2em;
+}
+
+
+.button-with-icon.primary.muted {
+	background-color: var(--secondary-100);
+	color: var(--secondary-700);
+}
+
+.button-with-icon.primary.muted:hover {
+	box-shadow: var(--glow__button--light--m);
+	color: var(--secondary-500);
+}
+
+.button-with-icon.primary.muted:active {
+	box-shadow: none;
+	background-color: var(--secondary-300);
+	color: var(--secondary-700);
+}
+
+
+
+.button-with-icon.primary.muted:disabled,
+.button-with-icon.secondary.muted:disabled,
+.button-with-icon.secondary.bright:disabled,
+.button-with-icon.secondary.dark:disabled {
+	border: none;
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+}
+
+.button-with-icon.primary.muted:disabled:hover,
+.button-with-icon.secondary.muted:disabled:hover,
+.button-with-icon.secondary.bright:disabled:hover,
+.button-with-icon.secondary.dark:disabled:hover {
+	box-shadow: none;
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+}
+
+
+
+.button-with-icon.secondary.muted {
+	border-style: solid;
+	border-color: currentColor;
+	background-color: transparent;
+	color: var(--secondary-100);
+}
+
+.button-with-icon.secondary.muted.l {
+	border-width: 3px;
+}
+
+.button-with-icon.secondary.muted.s {
+	border-width: 1.5px;
+}
+
+.button-with-icon.secondary.muted:hover {
+	box-shadow: var(--glow__button--light--m);
+	color: var(--secondary-50);
+}
+
+.button-with-icon.secondary.muted:active {
+	box-shadow: none;
+	color: var(--secondary-300);
+}
+
+
+
+.button-with-icon.secondary.bright {
+	border-style: solid;
+	border-color: currentColor;
+	background-color: transparent;
+	color: var(--primary-400);
+}
+
+.button-with-icon.secondary.bright.l {
+	border-width: 3px;
+}
+
+.button-with-icon.secondary.bright.s {
+	border-width: 1.5px;
+}
+
+.button-with-icon.secondary.bright:hover {
+	box-shadow: var(--glow__button--primary--m);
+	color: var(--primary-200);
+}
+
+.button-with-icon.secondary.bright:active {
+	box-shadow: none;
+	color: var(--primary-600);
+}
+
+
+
+.button-with-icon.secondary.dark {
+	background-color: var(--disable-800);
+	color: var(--primary-400);
+}
+
+.button-with-icon.secondary.dark:hover {
+	background-color: var(--disable-700);
+	color: var(--primary-200);
+}
+
+.button-with-icon.secondary.dark:active {
+	background-color: var(--disable-800);
+	color: var(--primary-600);
+}
+
+
+
+/*=============================================
+=                 Icon Button                 =
+=============================================*/
+
+
+div.icon-box {
+	color: var(--primary-400);
+}
+
+div.icon-box--100 {
+	width: 100px;
+	height: 100px;
+}
+
+div.icon-box--30 {
+	width: 30px;
+	height: 30px;
+}
+
+.icon {
+	display: block;
+	flex-shrink: 0;
+}
+
+.icon > svg {
+	color: inherit;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
