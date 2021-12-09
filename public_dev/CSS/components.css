@@ -33,18 +33,21 @@ section.buttons {
 	row-gap: 4em;
 }
 
-section.buttons > .row {
+.row {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 3em;
 }
 
-section.buttons > .row > .column {
+.column {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	width: 300px;
 	gap: 1.2em;
+}
+
+section.buttons > .row > .column {
+	width: 300px;
 }
 
 
@@ -164,7 +167,6 @@ section.buttons button.s {
 
 .button-with-icon.l > .icon {
 	width: 3em;
-	height: 3em;
 }
 
 .button-with-icon.m {
@@ -173,7 +175,6 @@ section.buttons button.s {
 
 .button-with-icon.m > .icon {
 	width: 2.5em;
-	height: 2.5em;
 }
 
 .button-with-icon.s {
@@ -182,7 +183,6 @@ section.buttons button.s {
 
 .button-with-icon.s > .icon {
 	width: 2em;
-	height: 2em;
 }
 
 
@@ -296,7 +296,7 @@ section.buttons button.s {
 
 
 /*=============================================
-=                 Icon Button                 =
+=                    Icon                     =
 =============================================*/
 
 
@@ -314,14 +314,151 @@ div.icon-box--30 {
 	height: 30px;
 }
 
+
 .icon {
 	display: block;
 	flex-shrink: 0;
+	position: relative;
+	min-width: 10px;
+}
+
+.icon::after {
+	display: block;
+	width: 100%;
+	height: 0;
+	padding-top: 100%;
+	content: '';
 }
 
 .icon > svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+
 	color: inherit;
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
+}
+
+
+
+
+/*=============================================
+=                 Icon Button                 =
+=============================================*/
+
+section.buttons > .row > .icon-buttons {
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+div.icon-buttons button.icon-button {
+	width: 50px;
+}
+
+.light-bg {
+	background-color: var(--secondary-100);
+}
+
+div.icon-buttons > .light-bg {
+	padding: 1em;
+	display: inline-flex;
+	gap: 1em;
+}
+/* -------------------------- */
+
+button.icon-button > .icon {
+	width: 100%;
+}
+
+/* --- Default --- */
+
+button.icon-button {
+	padding: 0;
+	background-color: transparent;
+	color: var(--secondary-100);
+}
+
+button.icon-button:hover {
+	color: var(--secondary-200);
+}
+
+button.icon-button:hover svg {
+	filter: drop-shadow( var(--glow__button--light--m) );
+}
+
+button.icon-button:active {
+	color: var(--secondary-300);
+}
+
+button.icon-button:active svg {
+	filter: none;
+}
+
+button.icon-button:disabled {
+	color: var(--disable-700);
+}
+
+button.icon-button:disabled:hover svg {
+	filter: none;
+}
+
+/* --- Inversive --- */
+
+button.icon-button.inversive {
+	color: var(--secondary-700);
+}
+
+button.icon-button.inversive:hover {
+	color: var(--secondary-500);
+}
+
+button.icon-button.inversive:hover svg {
+	filter: drop-shadow( var(--glow__button--primary--m) );
+}
+
+button.icon-button.inversive:active {
+	color: var(--secondary-800);
+}
+
+button.icon-button.inversive:active svg {
+	filter: none;
+}
+
+button.icon-button.inversive:disabled {
+	color: var(--disable-400);
+}
+
+button.icon-button.inversive:disabled:hover svg {
+	filter: none;
+}
+
+
+/* --- With backing --- */
+
+button.icon-button.backing {
+	box-sizing: border-box;
+	padding: .75em;
+	color: var(--secondary-100);
+	background-color: var(--secondary-600);
+}
+
+button.icon-button.backing:hover {
+	color: var(--secondary-50);
+	background-color: var(--secondary-500);
+}
+
+button.icon-button.backing:hover svg {
+	filter: none;
+}
+
+button.icon-button.backing:active {
+	color: var(--secondary-100);
+	background-color: var(--secondary-700);
+}
+
+button.icon-button.backing:disabled {
+	color: var(--disable-700);
+	background-color: var(--disable-900);
 }
