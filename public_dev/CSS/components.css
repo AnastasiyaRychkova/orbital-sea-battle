@@ -370,97 +370,97 @@ div.icon-buttons > .light-bg {
 }
 /* -------------------------- */
 
-button.icon-button > .icon {
+.icon-button > .icon {
 	width: 100%;
 }
 
 /* --- Default --- */
 
-button.icon-button {
+.icon-button {
 	padding: 0;
 	background-color: transparent;
 	color: var(--secondary-100);
 }
 
-button.icon-button:hover {
+.icon-button:hover {
 	color: var(--secondary-200);
 }
 
-button.icon-button:hover svg {
+.icon-button:hover svg {
 	filter: drop-shadow( var(--glow__button--light--m) );
 }
 
-button.icon-button:active {
+.icon-button:active {
 	color: var(--secondary-300);
 }
 
-button.icon-button:active svg {
+.icon-button:active svg {
 	filter: none;
 }
 
-button.icon-button:disabled {
+.icon-button:disabled {
 	color: var(--disable-700);
 }
 
-button.icon-button:disabled:hover svg {
+.icon-button:disabled:hover svg {
 	filter: none;
 }
 
 /* --- Inversive --- */
 
-button.icon-button.inversive {
+.icon-button.inversive {
 	color: var(--secondary-700);
 }
 
-button.icon-button.inversive:hover {
+.icon-button.inversive:hover {
 	color: var(--secondary-500);
 }
 
-button.icon-button.inversive:hover svg {
+.icon-button.inversive:hover svg {
 	filter: drop-shadow( var(--glow__button--primary--m) );
 }
 
-button.icon-button.inversive:active {
+.icon-button.inversive:active {
 	color: var(--secondary-800);
 }
 
-button.icon-button.inversive:active svg {
+.icon-button.inversive:active svg {
 	filter: none;
 }
 
-button.icon-button.inversive:disabled {
+.icon-button.inversive:disabled {
 	color: var(--disable-400);
 }
 
-button.icon-button.inversive:disabled:hover svg {
+.icon-button.inversive:disabled:hover svg {
 	filter: none;
 }
 
 
 /* --- With backing --- */
 
-button.icon-button.backing {
+.icon-button.backing {
 	box-sizing: border-box;
 	padding: .5em;
 	background-color: var(--secondary-600);
 	color: var(--secondary-100);
 }
 
-button.icon-button.backing:hover {
+.icon-button.backing:hover {
 	background-color: var(--secondary-500);
 	color: var(--secondary-50);
 }
 
-button.icon-button.backing:hover svg {
+.icon-button.backing:hover svg {
 	filter: none;
 }
 
-button.icon-button.backing:active {
+.icon-button.backing:active {
 	background-color: var(--secondary-700);
 	color: var(--secondary-100);
 }
 
-button.icon-button.backing:disabled {
+.icon-button.backing:disabled {
 	background-color: var(--disable-900);
 	color: var(--disable-700);
 }
@@ -639,6 +639,7 @@ footer.window__actions {
 	align-items: flex-start;
 	column-gap: 1em;
 	padding: 1em;
+	padding-right: 0;
 	box-shadow: var(--shadow__input);
 	background-color: var(--secondary-900);
 	color: var(--secondary-100);
@@ -654,6 +655,7 @@ footer.window__actions {
 	align-items: flex-start;
 	flex-grow: 1;
 	column-gap: 1.5em;
+	animation: open-task 1s ease forwards;
 }
 
 .task__description {
@@ -664,12 +666,15 @@ footer.window__actions {
 
 .task__close-btn {
 	width: 2em;
-	margin-right: .5em;
+	margin-right: 1.5em;
 }
 
-
-.task[data-closed=true] .task__content {
+.task input.task__checkbox {
 	display: none;
+}
+
+.task > .task__checkbox:checked ~ .task__content {
+	animation: close-task 1s ease forwards;
 }
 
 
@@ -677,6 +682,7 @@ footer.window__actions {
 .task.m {
 	column-gap: .75em;
 	padding: .75em;
+	padding-right: 0;
 }
 
 .task.m .task__content {
@@ -693,7 +699,7 @@ footer.window__actions {
 
 .task.m .task__close-btn {
 	width: 1.7em;
-	margin-right: .25em;
+	margin-right: 1em;
 }
 
 
@@ -702,6 +708,7 @@ footer.window__actions {
 .task.s {
 	column-gap: .5em;
 	padding: .5em;
+	padding-right: 0;
 }
 
 .task.s .task__content {
@@ -718,5 +725,39 @@ footer.window__actions {
 
 .task.s .task__close-btn {
 	width: 1.5em;
-	margin-right: .25em;
+	margin-right: .75em;
+}
+
+
+
+@keyframes open-task {
+	from {
+		font-size: 0;
+		opacity: 0;
+	}
+
+	50% {
+		font-size: inherit;
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes close-task {
+	from {
+		opacity: 1;
+	}
+
+	50% {
+		font-size: inherit;
+		opacity: 0;
+	}
+
+	to {
+		font-size: 0;
+		opacity: 0;
+	}
 }

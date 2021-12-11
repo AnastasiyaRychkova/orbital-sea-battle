@@ -15,7 +15,8 @@
 	<section class="tasks">
 		<div class="row">
 			<div class="column">
-				<div class="task l">
+				<label class="task l">
+					<input type="checkbox" class="task__checkbox" id="task">
 					<span class="icon task__info-icon">
 						<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 							<circle cx="20" cy="20" r="13.8" stroke="currentColor" stroke-width="2.4"/>
@@ -32,7 +33,7 @@
 								Используйте панель внизу экрана
 							</span>
 						</div>
-						<button type="button" class="icon-button task__close-btn">
+						<label class="icon-button task__close-btn">
 							<span class="icon">
 								<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 									<line x1="8.69706" y1="8" x2="32" y2="31.3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
@@ -40,10 +41,11 @@
 								</svg>
 								
 							</span>
-						</button>
+						</label>
 					</div>
-				</div>
-				<div class="task m">
+				</label>
+				<label class="task m">
+					<input type="checkbox" class="task__checkbox" id="task">
 					<span class="icon task__info-icon">
 						<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 							<circle cx="20" cy="20" r="13.8" stroke="currentColor" stroke-width="2.4"/>
@@ -60,7 +62,7 @@
 								Используйте панель внизу экрана
 							</span>
 						</div>
-						<button type="button" class="icon-button task__close-btn">
+						<label class="icon-button task__close-btn">
 							<span class="icon">
 								<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 									<line x1="8.69706" y1="8" x2="32" y2="31.3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
@@ -68,10 +70,11 @@
 								</svg>
 								
 							</span>
-						</button>
+						</label>
 					</div>
-				</div>
-				<div class="task s" data-closed="true">
+				</label>
+				<label class="task s" data-closed="false">
+					<input type="checkbox" class="task__checkbox" id="task">
 					<span class="icon task__info-icon">
 						<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 							<circle cx="20" cy="20" r="13.8" stroke="currentColor" stroke-width="2.4"/>
@@ -88,7 +91,7 @@
 								Используйте панель внизу экрана
 							</span>
 						</div>
-						<button type="button" class="icon-button task__close-btn">
+						<label for="task" class="icon-button task__close-btn">
 							<span class="icon">
 								<svg width="40" height="40" viewBox="0 0 40 40" fill="none">
 									<line x1="8.69706" y1="8" x2="32" y2="31.3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
@@ -96,9 +99,9 @@
 								</svg>
 								
 							</span>
-						</button>
+						</label>
 					</div>
-				</div>
+				</label>
 			</div>
 		</div>
 	</section>
