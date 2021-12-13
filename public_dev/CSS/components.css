@@ -589,7 +589,7 @@ aside.modal-window {
 	backdrop-filter: blur(4px);
 }
 
-aside.modal-window[closed=true] {
+aside.modal-window[data-closed=true] {
 	display: none;
 }
 

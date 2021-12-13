@@ -1,0 +1,90 @@
+@value sizes: '../../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value  secondary-100,
+		secondary-900,
+from colors;
+
+@value effects: '../../style/effects.css';
+@value glow__button--light--m from effects;
+
+
+.modalWindow {
+	box-sizing: border-box;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+
+	width: 100vw;
+	min-height: max(100%, 100vh);
+	padding: 2em;
+	overflow-y: auto;
+
+	background-color: rgba(30, 44, 38, 0.9);
+	backdrop-filter: blur(4px);
+}
+
+
+.window {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	margin: 0;
+
+	max-width: 50em;
+	min-height: 25em;
+	padding: 2em;
+
+	box-shadow: glow__button--light--m;
+	background-color: secondary-900;
+	color: secondary-100;
+}
+
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+/* Big Notebook */
+@media (min-width: laptop) {
+
+	.window h2 > span {
+		composes: header-3 from '../../style/typography.css';
+	}
+	
+	.window p {
+		composes: long-text-m-normal from '../../style/typography.css';
+	}
+}
+
+/* Tablet or Small Notebook */
+@media (max-width: mobile) and (max-width: laptop) {
+
+	.window {
+		min-height: 20em;
+	}
+
+	.window h2 > span {
+		composes: header-3 from '../../style/typography.css';
+	}
+	
+	.window p {
+		composes: long-text-m-normal from '../../style/typography.css';
+	}
+}
+
+/* Smartphone */
+@media (max-width: mobile) {
+	.window {
+		min-height: 17em;
+	}
+}
+
+
