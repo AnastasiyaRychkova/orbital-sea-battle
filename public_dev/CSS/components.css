@@ -685,10 +685,6 @@ aside.modal-window > .window.progress {
 =                    Task                    =
 =============================================*/
 
-.task {
-	max-width: 38em;
-}
-
 .tasks {
 	align-items: flex-start;
 }
@@ -700,6 +696,7 @@ aside.modal-window > .window.progress {
 	display: flex;
 	align-items: flex-start;
 	column-gap: 1em;
+	max-width: 38em;
 	padding: 1em;
 	padding-right: 0;
 	box-shadow: var(--shadow__input);
@@ -841,7 +838,8 @@ aside.modal-window > .window.progress {
 	display: flex;
 	align-items: center;
 	column-gap: 1em;
-	padding: .75em 1em;
+	padding: 1em;
+	padding-left: .75em;
 	background-color: var(--secondary-900);
 	color: var(--secondary-100);
 }
@@ -853,20 +851,16 @@ aside.modal-window > .window.progress {
 .mini-info__message {
 	display: flex;
 	flex-direction: column;
-	row-gap: .25em;
+	row-gap: .125em;
 }
 
 .mini-info.m {
-	column-gap: .5em;
-	padding: .5em .75em;
+	column-gap: .75em;
+	padding: .75em;
 }
 
 .mini-info.m .icon {
 	width: 2em;
-}
-
-.mini-info.m > .mini-info__message {
-	row-gap: .125em;
 }
 
 .mini-info.s {

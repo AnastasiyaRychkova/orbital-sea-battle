@@ -9,6 +9,7 @@ type GlyphStore = {
 const glyphs: GlyphStore = {
 	'cross': require( './cross' ).default,
 	'info': require( './info' ).default,
+	'shot': require( './shot' ).default,
 };
 
 function getGlyph( type: Glyph ) {

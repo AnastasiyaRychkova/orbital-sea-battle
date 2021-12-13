@@ -1,2 +1,3 @@
 export type Glyph = | 'cross'
-					| 'info';
+					| 'info'
+					| 'shot';

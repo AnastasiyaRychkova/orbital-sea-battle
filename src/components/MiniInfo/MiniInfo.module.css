@@ -1,0 +1,85 @@
+@value sizes: '../../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value  secondary-100,
+		secondary-900,
+from colors;
+
+
+.miniInfo {
+	display: flex;
+	align-items: center;
+	column-gap: 1em;
+	padding: 1em;
+	padding-left: .75em;
+	background-color: secondary-900;
+	color: secondary-100;
+}
+
+.icon {
+	width: 2.25em;
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	row-gap: .125em;
+}
+
+.captionText {
+	composes: button-tiny from '../../style/typography.css';
+}
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+/* Big Screen */
+@media (min-width: laptop) {
+
+	.valueText {
+		composes: button-big from '../../style/typography.css';
+	}
+}
+
+
+/* Tablet or Small Notebook */
+@media (max-width: mobile) and (max-width: laptop) {
+
+	.miniInfo {
+		column-gap: .75em;
+		padding: .75em;
+	}
+	
+	.icon {
+		width: 2em;
+	}
+
+	.valueText {
+		composes: button-medium from '../../style/typography.css';
+	}
+}
+
+
+/* Smartphone */
+@media (max-width: mobile) {
+
+	.miniInfo {
+		column-gap: .5em;
+		padding: .5em .75em;
+	}
+	
+	.icon {
+		width: 1.75em;
+	}
+	
+	.message {
+		row-gap: 0;
+	}
+
+	.valueText {
+		composes: button-normal from '../../style/typography.css';
+	}
+}
