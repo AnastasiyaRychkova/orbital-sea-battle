@@ -1,1 +1,2 @@
-export type Glyph = | 'cross';
+export type Glyph = | 'cross'
+					| 'info';
