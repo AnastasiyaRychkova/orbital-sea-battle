@@ -1,5 +1,5 @@
 @value sizes: '../../../style/display.css';
-@value mobile, tablet, laptop from sizes;
+@value mobile, laptop from sizes;
 
 @value colors: '../../../style/colors.css';
 @value  primary-200,
