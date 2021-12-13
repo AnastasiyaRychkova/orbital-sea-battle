@@ -113,7 +113,6 @@ section.buttons button.s {
 
 .default-button.secondary {
 	border: 2px solid currentColor;
-	background-color: var(--primary-400);
 	background-color: transparent;
 	color: var(--primary-400);
 }
@@ -316,6 +315,7 @@ div.icon-box--30 {
 	height: 30px;
 }
 
+/* -------------------------- */
 
 .icon {
 	display: block;
@@ -1013,7 +1013,7 @@ ul.filter__body {
 	list-style: none;
 }
 
-.filter__tab :checked ~ .filter__body {
+.filter__tab[data-open="true"] .filter__body {
 	display: flex;
 }
 

@@ -1,0 +1,128 @@
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@value colors: '../../../style/colors.css';
+@value  primary-200,
+		primary-400,
+		primary-600,
+		primary-900,
+		secondary-900,
+		disabled-500,
+		disabled-800,
+		disabled-900,
+from colors;
+
+@value effects: '../../../style/effects.css';
+@value  glow__button--light--l,
+		glow__button--primary--l,
+		shadow__button-text
+from effects;
+
+
+
+
+.button {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	padding: 0.625em;
+}
+
+
+/*----------  Primary  ----------*/
+
+.primary {
+	composes: button;
+	background-color: primary-400;
+	color: primary-900;
+}
+
+.primary:hover {
+	box-shadow: glow__button--light--l;
+	background-color: primary-200;
+}
+
+.primary:active {
+	background-color: primary-600;
+}
+
+.primary:disabled {
+	background-color: primary-900;
+	color: disabled-500;
+}
+
+.primary:disabled:hover {
+	box-shadow: none;
+}
+
+
+/*----------  Secondary  ----------*/
+
+.secondary {
+	composes: button;
+	border: 2px solid currentColor;
+	background-color: transparent;
+	color: primary-400;
+}
+
+.secondary:hover {
+	border-color: primary-200;
+	box-shadow: glow__button--primary--l;
+	background-color: secondary-900;
+}
+
+.secondary:active {
+	border-color: currentColor;
+	box-shadow: none;
+	background-color: transparent;
+	color: primary-600;
+}
+
+.secondary:disabled {
+	border: none;
+	background-color: primary-800;
+	color: disabled-500;
+}
+
+.secondary:disabled:hover {
+	box-shadow: none;
+}
+
+.secondary .text {
+	text-shadow: shadow__button-text;
+}
+
+.secondary:disabled .text {
+	text-shadow: none;
+}
+
+
+
+/*=============================================
+=                    Text                    =
+=============================================*/
+
+.text {
+	composes: button-medium from '../../../style/typography.css';
+}
+
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+
+@media (max-width: mobile) and (max-width: laptop) {
+	.text {
+		composes: button-normal from '../../../style/typography.css';
+	}
+}
+
+@media (max-width: mobile) {
+	.text {
+		composes: button-small from '../../../style/typography.css';
+	}
+}

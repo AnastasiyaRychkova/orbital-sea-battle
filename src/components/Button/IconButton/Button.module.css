@@ -1,0 +1,106 @@
+@value colors: '../../../style/colors.css';
+@value  secondary-100,
+		secondary-200,
+		secondary-300,
+		secondary-500,
+		secondary-600,
+		secondary-700,
+		secondary-800,
+		disable-400,
+		disable-700,
+		disable-900,
+from colors;
+
+@value effects: '../../../style/effects.css';
+@value  glow__button--light--m,
+		glow__button--primary--m,
+from effects;
+
+.button {
+	padding: 0;
+	background-color: transparent;
+	color: secondary-100;
+}
+
+.button:hover {
+	color: secondary-200;
+}
+
+.button:hover svg {
+	filter: drop-shadow( var(--glow__button--light--m) );
+}
+
+.button:active {
+	color: secondary-300;
+}
+
+.button:active svg {
+	filter: none;
+}
+
+.button:disabled {
+	color: disable-700;
+}
+
+.button:disabled:hover svg {
+	filter: none;
+}
+
+/* --- Inversive --- */
+
+.inversive {
+	color: secondary-700;
+}
+
+.inversive:hover {
+	color: secondary-500;
+}
+
+.inversive:hover svg {
+	filter: drop-shadow( var(--glow__button--primary--m) );
+}
+
+.inversive:active {
+	color: secondary-800;
+}
+
+.inversive:active svg {
+	filter: none;
+}
+
+.inversive:disabled {
+	color: disable-400;
+}
+
+.inversive:disabled:hover svg {
+	filter: none;
+}
+
+
+/* --- With backing --- */
+
+.backing {
+	box-sizing: border-box;
+	padding: .5em;
+	background-color: secondary-600;
+	color: secondary-100;
+}
+
+.backing:hover {
+	background-color: secondary-500;
+	color: secondary-50;
+}
+
+.backing:hover svg {
+	filter: none;
+}
+
+.backing:active {
+	background-color: secondary-700;
+	color: secondary-100;
+}
+
+.backing:disabled {
+	background-color: disable-900;
+	color: disable-700;
+}
