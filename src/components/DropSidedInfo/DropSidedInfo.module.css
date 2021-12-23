@@ -50,10 +50,6 @@
 	cursor: pointer;
 }
 
-.closeBtn:hover {
-	color: primary-200;
-}
-
 .closeBtn:active {
 	color: primary-500;
 }
@@ -66,6 +62,12 @@
 	animation: close-task 1s ease forwards;
 }
 
+
+@media screen and (hover: hover) {
+	.closeBtn:hover {
+		color: primary-200;
+	}
+}
 
 .messageText {
 	composes: button from '../../style/typography.css';

@@ -27,13 +27,9 @@ from effects;
 
 .primary {
 	composes: button;
+	border: none;
 	background-color: primary-400;
 	color: primary-900;
-}
-
-.primary:hover {
-	box-shadow: glow__button--light--l;
-	background-color: primary-200;
 }
 
 .primary:active {
@@ -45,10 +41,6 @@ from effects;
 	color: disabled-500;
 }
 
-.primary:disabled:hover {
-	box-shadow: none;
-}
-
 
 /*----------  Secondary  ----------*/
 
@@ -57,12 +49,6 @@ from effects;
 	border: 2px solid currentColor;
 	background-color: transparent;
 	color: primary-400;
-}
-
-.secondary:hover {
-	border-color: primary-200;
-	box-shadow: glow__button--primary--l;
-	background-color: secondary-900;
 }
 
 .secondary:active {
@@ -78,16 +64,37 @@ from effects;
 	color: disabled-500;
 }
 
-.secondary:disabled:hover {
-	box-shadow: none;
-}
-
 .secondary .text {
 	text-shadow: shadow__button-text;
 }
 
 .secondary:disabled .text {
 	text-shadow: none;
+}
+
+
+
+/*----------  Hover  ----------*/
+
+@media screen and (hover: hover) {
+	.primary:hover {
+		box-shadow: glow__button--light--l;
+		background-color: primary-200;
+	}
+	
+	.primary:disabled:hover {
+		box-shadow: none;
+	}
+
+	.secondary:hover {
+		border-color: primary-200;
+		box-shadow: glow__button--primary--l;
+		background-color: secondary-900;
+	}
+	
+	.secondary:disabled:hover {
+		box-shadow: none;
+	}
 }
 
 

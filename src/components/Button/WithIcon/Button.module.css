@@ -81,11 +81,6 @@
 	color: secondary-100;
 }
 
-.button.secondary.muted:hover {
-	box-shadow: glow__button--light--m;
-	color: secondary-50;
-}
-
 .button.secondary.muted:active {
 	box-shadow: none;
 	color: secondary-300;
@@ -102,11 +97,6 @@
 	color: primary-400;
 }
 
-.button.secondary.bright:hover {
-	box-shadow: glow__button--primary--m;
-	color: primary-200;
-}
-
 .button.secondary.bright:active {
 	box-shadow: none;
 	color: primary-600;
@@ -121,15 +111,34 @@
 	color: primary-400;
 }
 
-.button.secondary.dark:hover {
-	background-color: disable-700;
-	color: primary-200;
-}
-
 .button.secondary.dark:active {
 	background-color: disable-800;
 	color: primary-600;
 }
+
+
+
+/*----------  Hover  ----------*/
+
+@media screen and (hover: hover)  {
+
+	.button.secondary.muted:hover {
+		box-shadow: glow__button--light--m;
+		color: secondary-50;
+	}
+	
+	.button.secondary.bright:hover {
+		box-shadow: glow__button--primary--m;
+		color: primary-200;
+	}
+
+	.button.secondary.dark:hover {
+		background-color: disable-700;
+		color: primary-200;
+	}
+}
+
+
 
 
 /*=============================================
