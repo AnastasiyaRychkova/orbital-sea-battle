@@ -1,20 +1,8 @@
 @value colors: '../../../style/colors.css';
-@value  secondary-100,
-		secondary-200,
-		secondary-300,
-		secondary-500,
-		secondary-600,
-		secondary-700,
-		secondary-800,
-		disable-400,
-		disable-700,
-		disable-900,
-from colors;
+@value secondary-100, secondary-200, secondary-300, secondary-500, secondary-600, secondary-700, secondary-800, disable-400, disable-700, disable-900 from colors;
 
 @value effects: '../../../style/effects.css';
-@value  glow__button--light--m,
-		glow__button--primary--m,
-from effects;
+@value  glow__button--light--m, glow__button--primary--m from effects;
 
 .button {
 	padding: 0;

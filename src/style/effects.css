@@ -17,9 +17,12 @@
 @value shadow__input: 2px 2px 3px rgba(5, 20, 13, 0.4);
 @value shadow__filter: 0px 0px 10px rgba(150, 194, 175, 0.2), 3px 6px 10px rgba(0, 0, 0, 0.4);
 
-@value glow__diagram-diagram-selection: 0px 0px 8px rgba(241, 255, 252, 1), 0px 0px 3px rgba(231, 255, 231, 1);
-@value glow__diagram-arrow-selection: 0px 0px 6px rgba(182, 243, 229, 1), 0px 0px 4px rgba(232, 255, 245, 1);
-@value glow__diagram-arrow-selection--error: 0px 0px 10px rgba(255, 89, 89, 1), 0px 0px 4px rgba(255, 185, 185, 0.5);
+@value glow__diagram-selection-1: 0px 0px 8px rgba(241, 255, 252, 1);
+@value glow__diagram-selection-2: 0px 0px 3px rgba(231, 255, 231, 1);
+@value glow__arrow-selection-1: 0px 0px 6px rgba(182, 243, 229, 1);
+@value glow__arrow-selection-2: 0px 0px 4px rgba(232, 255, 245, 1);
+@value glow__arrow-selection--error-1: 0px 0px 10px rgba(255, 89, 89, 1);
+@value glow__arrow-selection--error-2: 0px 0px 4px rgba(255, 185, 185, 0.5);
 
 @value glow__button--primary--l: 0px 0px 20px rgba(78, 164, 72, 0.4);
 @value glow__button--primary--m: 0px 0px 10px rgba(78, 164, 72, 0.5);
@@ -38,9 +41,9 @@
 	--shadow__input: 2px 2px 3px rgba(5, 20, 13, 0.4);
 	--shadow__filter: 0px 0px 10px rgba(150, 194, 175, 0.2), 3px 6px 10px rgba(0, 0, 0, 0.4);
 
-	--glow__diagram-diagram-selection: 0px 0px 8px rgba(241, 255, 252, 1), 0px 0px 3px rgba(231, 255, 231, 1);
-	--glow__diagram-arrow-selection: 0px 0px 6px rgba(182, 243, 229, 1), 0px 0px 4px rgba(232, 255, 245, 1);
-	--glow__diagram-arrow-selection--error: 0px 0px 10px rgba(255, 89, 89, 1), 0px 0px 4px rgba(255, 185, 185, 0.5);
+	--glow__diagram-selection: 0px 0px 8px rgba(241, 255, 252, 1), 0px 0px 3px rgba(231, 255, 231, 1);
+	--glow__arrow-selection: 0px 0px 6px rgba(182, 243, 229, 1), 0px 0px 4px rgba(232, 255, 245, 1);
+	--glow__arrow-selection--error: 0px 0px 10px rgba(255, 89, 89, 1), 0px 0px 4px rgba(255, 185, 185, 0.5);
 
 	--glow__button--primary--l: 0px 0px 20px rgba(78, 164, 72, 0.4);
 	--glow__button--primary--m: 0px 0px 10px rgba(78, 164, 72, 0.5);

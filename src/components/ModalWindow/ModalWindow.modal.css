@@ -56,11 +56,13 @@ from colors;
 @media (min-width: laptop) {
 
 	.window h2 > span {
-		composes: header-3 from '../../style/typography.css';
+		composes: header from '../../style/typography.css';
+	composes: header-3 from '../../style/typography.css';
 	}
 	
 	.window p {
-		composes: long-text-m-normal from '../../style/typography.css';
+		composes: long-text from '../../style/typography.css';
+	composes: long-text-m-normal from '../../style/typography.css';
 	}
 }
 
@@ -72,11 +74,13 @@ from colors;
 	}
 
 	.window h2 > span {
-		composes: header-3 from '../../style/typography.css';
+		composes: header from '../../style/typography.css';
+	composes: header-3 from '../../style/typography.css';
 	}
 	
 	.window p {
-		composes: long-text-m-normal from '../../style/typography.css';
+		composes: long-text from '../../style/typography.css';
+	composes: long-text-m-normal from '../../style/typography.css';
 	}
 }
 

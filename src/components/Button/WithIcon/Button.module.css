@@ -1,6 +1,12 @@
 @value sizes: '../../../style/display.css';
 @value mobile, laptop from sizes;
 
+@value colors: '../../../style/colors.css';
+@value secondary-50, secondary-100, secondary-300, secondary-500, secondary-700, disable-600, disable-700, disable-800, primary-200, primary-400, primary-600 from colors;
+
+@value effects: '../../../style/effects.css';
+@value glow__button--light--m, glow__button--primary--m from effects;
+
 .button {
 	box-sizing: border-box;
 	display: flex;
@@ -12,7 +18,7 @@
 }
 
 .icon {
-	width: 3em;
+	width: 2.5em;
 }
 
 
@@ -28,14 +34,13 @@
 }
 
 .button.primary.muted:hover {
-	box-shadow: var(--glow__button--light--m);
-	color: secondary-500;
+	background-color: secondary-50;
+	box-shadow: glow__button--light--m;
 }
 
 .button.primary.muted:active {
 	box-shadow: none;
 	background-color: secondary-300;
-	color: secondary-700;
 }
 
 
@@ -132,8 +137,10 @@
 =============================================*/
 
 .text {
+	composes: button from '../../../style/typography.css';
 	composes: button-medium from '../../../style/typography.css';
 	text-align: left;
+	word-wrap: break-word;
 }
 
 
@@ -142,21 +149,17 @@
 =============================================*/
 
 /* Tablet or Small Notebook */
-@media (max-width: mobile) and (max-width: laptop) {
+@media (min-width: mobile) and (max-width: laptop) {
 	.button {
 		padding: .75em 1.25em;
 	}
 	
 	.icon {
-		width: 2.5em;
+		width: 2em;
 	}
 
 	.button.secondary {
 		border-width: 2.8px;
-	}
-
-	.text {
-		composes: button-normal from '../../../style/typography.css';
 	}
 }
 
@@ -167,14 +170,10 @@
 	}
 	
 	.icon {
-		width: 2em;
+		width: 1.8em;
 	}
 
 	.button.secondary {
 		border-width: 2px;
-	}
-
-	.text {
-		composes: button-small from '../../../style/typography.css';
 	}
 }

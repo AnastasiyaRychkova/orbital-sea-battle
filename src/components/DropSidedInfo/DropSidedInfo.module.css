@@ -1,11 +1,8 @@
-@value sizes: '../../../style/display.css';
+@value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
 @value colors: '../../style/colors.css';
-@value  primary-500,
-		secondary-100,
-		secondary-900,
-from colors;
+@value  primary-500, secondary-100, secondary-900 from colors;
 
 @value effects: '../../style/effects.css';
 @value shadow__input from effects;
@@ -50,6 +47,7 @@ from colors;
 	margin-right: 1.5em;
 	width: 2em;
 	color: primary-500;
+	cursor: pointer;
 }
 
 .closeBtn:hover {
@@ -69,6 +67,16 @@ from colors;
 }
 
 
+.messageText {
+	composes: button from '../../style/typography.css';
+	composes: button-medium from '../../style/typography.css';
+}
+
+.commentText {
+	composes: long-text from '../../style/typography.css';
+	composes: long-text-m-normal from '../../style/typography.css';
+}
+
 
 
 
@@ -76,20 +84,8 @@ from colors;
 =               Media Requests               =
 =============================================*/
 
-@media (min-width: laptop) {
-
-	.messageText {
-		composes: button-big from '../../style/typography.css';
-	}
-	
-	.commentText {
-		composes: long-text-m-medium from '../../style/typography.css';
-	}
-}
-
-
 /* Tablet or Small Notebook */
-@media (max-width: mobile) and (max-width: laptop) {
+@media (min-width: mobile) and (max-width: laptop) {
 
 	.task {
 		column-gap: .75em;
@@ -106,20 +102,12 @@ from colors;
 	}
 	
 	.description {
-		row-gap: .25em;
+		row-gap: .15em;
 	}
 	
 	.closeBtn {
 		margin-right: 1em;
 		width: 1.7em;
-	}
-
-	.messageText {
-		composes: button-medium from '../../style/typography.css';
-	}
-	
-	.commentText {
-		composes: long-text-m-normal from '../../style/typography.css';
 	}
 }
 
@@ -141,20 +129,12 @@ from colors;
 	}
 	
 	.description {
-		row-gap: .25em;
+		row-gap: .1em;
 	}
 	
 	.closeBtn {
 		margin-right: .75em;
 		width: 1.5em;
-	}
-	
-	.messageText {
-		composes: button-normal from '../../style/typography.css';
-	}
-	
-	.commentText {
-		composes: long-text-m-small from '../../style/typography.css';
 	}
 }
 

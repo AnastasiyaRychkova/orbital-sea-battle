@@ -16,30 +16,31 @@ html {
 	font-family: var(--primary-font);
 	font-weight: bold;
 	font-style: normal;
+
+	--large: 3.75em;
+	--big: 3em;
+	--medium: 1.5em;
+	--normal: 1.12em;
 }
 
 .header-1 {
-	composes: header;
 	letter-spacing: 0.02em;
-	font-size: 3.75em;
+	font-size: var(--large);
 }
 
 .header-2 {
-	composes: header;
 	letter-spacing: 0.02em;
-	font-size: 3em;
+	font-size: var(--big);
 }
 
 .header-3 {
-	composes: header;
 	letter-spacing: 0.05em;
-	font-size: 1.5em;
+	font-size: var(--medium);
 }
 
 .header-4 {
-	composes: header;
 	letter-spacing: 0.05em;
-	font-size: 1.12em;
+	font-size: var(--normal);
 }
 
 
@@ -51,18 +52,19 @@ html {
 	font-family: var(--primary-font);
 	font-weight: normal;
 	font-style: normal;
+
+	--large: 3.75em;
+	--big: 3em;
 }
 
 .large-header-1 {
-	composes: large-header;
 	letter-spacing: 0.04em;
-	font-size: 3.75em;
+	font-size: var(--large);
 }
 
 .large-header-2 {
-	composes: large-header;
 	letter-spacing: 0.05em;
-	font-size: 3em;
+	font-size: var(--big);
 }
 
 
@@ -74,58 +76,62 @@ html {
 	font-family: var(--primary-font);
 	font-weight: bold;
 	font-style: normal;
+
+	--large: 3em;
+	--big: 1.5em;
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
+	--tiny: 0.62em;
 }
 
 .text-r-large {
-	composes: text;
 	line-height: 100%;
 	letter-spacing: 0.1em;
-	font-size: 3em;
+	font-size: var(--large);
 	font-weight: normal;
 }
 
 .text-b-big {
-	composes: text;
 	letter-spacing: 0em;
-	font-size: 1.5em;
+	font-size: var(--big);
+}
+
+.text-b-medium {
+	letter-spacing: 0.02em;
+	font-size: var(--medium);
 }
 
 .text-b-normal {
-	composes: text;
 	letter-spacing: 0.05em;
-	font-size: 1em;
+	font-size: var(--normal);
 }
 
 .text-m-normal {
-	composes: text;
 	letter-spacing: 0.05em;
-	font-size: 1em;
+	font-size: var(--normal);
 	font-weight: 500;
 }
 
 .text-b-small {
-	composes: text;
 	letter-spacing: 0.05em;
-	font-size: 0.88em;
+	font-size: var(--small);
 }
 
 .text-m-small {
-	composes: text;
 	letter-spacing: 0.05em;
-	font-size: 0.88em;
+	font-size: var(--small);
 	font-weight: 500;
 }
 
 .text-b-tiny {
-	composes: text;
 	letter-spacing: 0.08em;
-	font-size: 0.62em;
+	font-size: var(--tiny);
 }
 
 .text-m-tiny {
-	composes: text;
 	letter-spacing: 0.08em;
-	font-size: 0.62em;
+	font-size: var(--tiny);
 	font-weight: 500;
 }
 
@@ -138,23 +144,24 @@ html {
 	font-family: var(--secondary-font);
 	font-weight: 500;
 	font-style: normal;
+
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
 }
 
 .long-text-m-medium {
-	composes: long-text;
-	font-size: 1.25em;
+	font-size: var(--medium);
 }
 
 .long-text-m-normal {
-	composes: long-text;
 	letter-spacing: 0.05em;
-	font-size: 1em;
+	font-size: var(--normal);
 }
 
 .long-text-m-small {
-	composes: long-text;
 	letter-spacing: 0.05em;
-	font-size: 0.88em;
+	font-size: var(--small);
 }
 
 
@@ -167,42 +174,43 @@ html {
 	font-family: var(--primary-font);
 	font-weight: bold;
 	font-style: normal;
+
+	--large: 1.88em;
+	--big: 1.5em;
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
+	--tiny: 0.62em;
 }
 
 .button-large {
-	composes: button;
 	letter-spacing: 0.05em;
-	font-size: 1.88em;
+	font-size: var(--large);
 }
 
 .button-big {
-	composes: button;
 	letter-spacing: 0.05em;
-	font-size: 1.5em;
+	font-size: var(--big);
 }
 
 .button-medium {
-	composes: button;
 	letter-spacing: 0.05em;
-	font-size: 1.25em;
+	font-size: var(--medium);
 }
 
 .button-normal {
-	composes: button;
 	letter-spacing: 0.08em;
-	font-size: 1em;
+	font-size: var(--normal);
 }
 
 .button-small {
-	composes: button;
 	letter-spacing: 0.08em;
-	font-size: 0.88em;
+	font-size: var(--small);
 }
 
 .button-tiny {
-	composes: button;
 	letter-spacing: 0.08em;
-	font-size: 0.62em;
+	font-size: var(--tiny);
 }
 
 
@@ -227,6 +235,70 @@ html {
 }
 
 
+@media (min-width: 540px) and (max-width: 1300px) {
+	.header {
+		--large: 3em;
+		--big: 1.5em;
+		--medium: 1.12em;
+		--normal: 1.12em;
+	}
+
+	.large-header {
+		--large: 3em;
+		--big: 2em;
+	}
+
+	.text {
+		--large: 2em;
+		--big: 1.25em;
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+		--tiny: 0.62em;
+	}
+	
+	.button {
+		--large: 1.5em;
+		--big: 1.25em;
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+		--tiny: 0.62em;
+	}
+
+}
+
+@media (max-width: 540px) {
+	.header {
+		--large: 1.5em;
+		--big: 1.12em;
+		--medium: 1.12em;
+		--normal: 1.12em;
+	}
+	
+	.large-header {
+		--large: 2em;
+		--big: 1.5em;
+	}
+	
+	.text {
+		--large: 1.5em;
+		--big: 1em;
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
+		--tiny: 0.62em;
+	}
+	
+	.button {
+		--large: 1.25em;
+		--big: 1em;
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
+		--tiny: 0.62em;
+	}
+}
 
 
 

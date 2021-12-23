@@ -1,10 +1,8 @@
-@value sizes: '../../../style/display.css';
+@value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
 @value colors: '../../style/colors.css';
-@value  secondary-100,
-		secondary-900,
-from colors;
+@value secondary-100, secondary-900 from colors;
 
 
 .miniInfo {
@@ -28,7 +26,13 @@ from colors;
 }
 
 .captionText {
+	composes: button from '../../style/typography.css';
 	composes: button-tiny from '../../style/typography.css';
+}
+
+.valueText {
+	composes: button from '../../style/typography.css';
+	composes: button-big from '../../style/typography.css';
 }
 
 
@@ -36,17 +40,8 @@ from colors;
 =               Media Requests               =
 =============================================*/
 
-/* Big Screen */
-@media (min-width: laptop) {
-
-	.valueText {
-		composes: button-big from '../../style/typography.css';
-	}
-}
-
-
 /* Tablet or Small Notebook */
-@media (max-width: mobile) and (max-width: laptop) {
+@media (min-width: mobile) and (max-width: laptop) {
 
 	.miniInfo {
 		column-gap: .75em;
@@ -55,10 +50,6 @@ from colors;
 	
 	.icon {
 		width: 2em;
-	}
-
-	.valueText {
-		composes: button-medium from '../../style/typography.css';
 	}
 }
 
@@ -77,9 +68,5 @@ from colors;
 	
 	.message {
 		row-gap: 0;
-	}
-
-	.valueText {
-		composes: button-normal from '../../style/typography.css';
 	}
 }

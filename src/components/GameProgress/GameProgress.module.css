@@ -2,11 +2,7 @@
 @value laptop from devices;
 
 @value colors: '../../style/colors.css';
-@value  secondary-50,
-		secondary-100,
-		disable-500,
-		disable-600,
-from colors;
+@value  secondary-50, secondary-100, disable-500, disable-600 from colors;
 
 .gameProgress {
 	box-sizing: border-box;
@@ -60,15 +56,18 @@ from colors;
 =                    Text                    =
 =============================================*/
 
-.levelName {
+.nameText {
+	composes: text from '../../style/typography.css';
 	composes: text-b-normal from '../../style/typography.css';
 }
 
 .levelText {
+	composes: text from '../../style/typography.css';
 	composes: text-b-normal from '../../style/typography.css';
 }
 
 .scoreText {
+	composes: text from '../../style/typography.css';
 	composes: text-m-normal from '../../style/typography.css';
 }
 
@@ -95,18 +94,5 @@ from colors;
 
 	.progressBar {
 		height: .375em;
-	}
-
-
-	.levelName {
-		composes: text-b-small from '../../style/typography.css';
-	}
-	
-	.levelText {
-		composes: text-b-small from '../../style/typography.css';
-	}
-	
-	.scoreText {
-		composes: text-m-small from '../../style/typography.css';
 	}
 }
