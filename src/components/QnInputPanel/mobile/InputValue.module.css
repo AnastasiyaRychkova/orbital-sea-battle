@@ -1,0 +1,141 @@
+@value colors: '../../../style/colors.css';
+@value secondary-100, secondary-50, secondary-300, secondary-800, secondary-900, primary-400, disable-500, disable-700, disable-800, error-50, error-100, error-700, error-800, error-900 from colors;
+
+@value effects: '../../../style/effects.css';
+@value shadow__input from effects;
+
+
+.tab {
+	background-color: disable-800;
+}
+
+.tab > input {
+	display: none;
+}
+
+.titleBlock {
+	display: flex;
+	align-items: center;
+	column-gap: .3em;
+	padding: .25em;
+	padding-left: .5em;
+	cursor: pointer;
+}
+
+.title {
+	display: block;
+	width: 1.56em;
+	text-align: center;
+}
+
+.value {
+	box-sizing: border-box;
+	display: block;
+	width: 3.625em;
+	height: 1.688em;
+	padding: .25em;
+	border-bottom: 1px solid transparent;
+	background-color: disable-700;
+	text-align: center;
+	color: secondary-50;
+}
+
+.titleBlock.undefined {
+	background: linear-gradient(315deg, disable-800 50%, disable-800 90%, secondary-300 90%, secondary-300 100%);
+}
+
+.tab :checked + .titleBlock {
+	background: secondary-900;
+	color: primary-400;
+}
+
+.tab :checked + .titleBlock .value {
+	border-color: primary-400;
+	background-color: secondary-800;
+	color: secondary-50;
+}
+
+/* - Disabled - */
+:disabled + .titleBlock {
+	background: disable-800;
+	color: disable-500;
+}
+
+:disabled + .titleBlock > .value {
+	background: disable-800;
+	color: disable-500;
+}
+
+/* - Invalid - */
+.tab.invalid .titleBlock {
+	background: error-800;
+	color: error-100;
+}
+
+.tab.invalid .value {
+	background: error-700;
+	color: error-50;
+}
+
+.tab.invalid :checked + .titleBlock {
+	background: secondary-900;
+	color: primary-400;
+}
+
+.tab.invalid :checked + .titleBlock > .value {
+	background: error-900;
+	color: error-50;
+}
+
+
+
+/* --- Body --- */
+
+ul.body {
+	box-sizing: border-box;
+	display: none;
+	position: absolute;
+	left: 0;
+	justify-content: center;
+	column-gap: .25em;
+
+	opacity: 0;
+	margin: 0;
+	width: 100%;
+	height: 4.5em;
+	padding: .75em 1.25em;
+
+	box-shadow: shadow__input;
+	background-color: secondary-900;
+	list-style: none;
+	transition: opacity .2s ease .5s;
+}
+
+.tab > :checked ~ .body {
+	display: flex;
+	opacity: 1;
+}
+
+.toggleBtn {
+	flex-grow: 1;
+}
+
+
+/*=============================================
+=                    Text                    =
+=============================================*/
+
+.titleText {
+	composes: text from '../../../style/typography.css';
+	composes: text-m-normal from '../../../style/typography.css';
+}
+
+.titleSubText {
+	composes: text from '../../../style/typography.css';
+	composes: text-m-normal from '../../../style/typography.css';
+}
+
+.valueText {
+	composes: text from '../../../style/typography.css';
+	composes: text-b-medium from '../../../style/typography.css';
+}

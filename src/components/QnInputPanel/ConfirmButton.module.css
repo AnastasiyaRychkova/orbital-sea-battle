@@ -1,42 +1,69 @@
 @value colors: '../../style/colors.css';
-@value main, nonClickableElement, clickableElement, lightBacking from colors;
+@value primary-400, primary-600, primary-900, secondary-600, secondary-800, secondary-900, disable-600 from colors;
 
 @value effects: '../../style/effects.css';
-@value weakGlowText from effects;
+@value shadow__input, shadow__button-text, glow__button--primary--m from effects;
 
 
 .button {
-	composes: largeText from '../../style/typography.css';
-	width: 4.5em;
-	border: none;
-	border: 2px solid main;
-	border-radius: 50%;
-	box-shadow: 2px 2px 3px rgba(5, 20, 13, 0.4);
-	background-color: lightBacking;
+	box-sizing: border-box;
+	width: 6.25em;
+
+	border: 2px solid primary-400;
+	box-shadow: shadow__input;
+	background-color: secondary-800;
 	cursor: pointer;
-	text-transform: uppercase;
-	color: main;
-	box-shadow: 2px 2px 3px rgba(5, 20, 13, 0.4);
-	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	margin: 0 .5em;
+	text-shadow: shadow__button-text;
+	color: primary-400;
 }
 
-.button:hover {
-	color: clickableElement;
-	border-color: clickableElement;
-	box-shadow: weakGlowText;
+.button.mobile {
+	width: auto;
+	height: auto;
+	padding: .5em .625em;
 }
+
+@media (hover: hover) {
+	.button {
+		transition-duration: .2s;
+		transition-property: background-color, color, border-color;
+		transition-timing-function: ease;
+	}
+
+	.button:hover {
+		border-color: primary-400;
+		box-shadow: glow__button--primary--m;
+		background-color: primary-400;
+		color: secondary-900;
+	}
+
+	.button:disable:hover {
+		border-color: disable-600;
+		box-shadow: shadow__input;
+		background-color: secondary-800;
+		cursor: default;
+		color: disable-600;
+	}
+}
+
 
 .button:active {
-	color: lightBacking;
-	border-color: main;
-	box-shadow: weakGlowText;
-	background-color: main;
+	border-color: primary-600;
+	box-shadow: shadow__input;
+	background-color: primary-600;
+	color: primary-900;
 }
 
 .button:disabled {
-	border-color: nonClickableElement;
+	border-color: disable-600;
+	box-shadow: shadow__input;
+	background-color: secondary-800;
 	cursor: default;
-	color: nonClickableElement;
-	box-shadow: 2px 2px 3px rgba(5, 20, 13, 0.4);
+	color: disable-600;
 }
+
+.text {
+	composes: button from '../../style/typography.css';
+	composes: button-big from '../../style/typography.css';
+}
+

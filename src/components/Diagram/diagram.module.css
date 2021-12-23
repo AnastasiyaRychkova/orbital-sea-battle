@@ -1,37 +1,33 @@
 @value colors: '../../style/colors.css';
-@value main from colors;
+@value primary-50, primary-400, secondary-200, secondary-800, secondary-900 from colors;
 
 @value effects: '../../style/effects.css';
-@value weakGlowText from effects;
+@value glow__diagram-selection-1, glow__diagram-selection-2 from effects;
 
 .shipName {
-	fill: main;
-	opacity: .5;
+	fill: secondary-200;
 	cursor: default;
-	text-shadow: weakGlowText;
 	font-size: 1.5em;
-	font-family: 'Montserrat';
+	font-family: var(--primary-font);
 	font-weight: normal;
+	user-select: none;
 }
 
 .container {
-	stroke: main;
+	stroke: #A1FDD666;
 }
 
-.containerSelected {
-	stroke: #d1ffd0;
-	filter: drop-shadow(0px 0px 2px #ACF3A9);
-	fill: #4b6d4a18;
+rect.selected {
+	stroke: primary-50;
+	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
 }
 
 .ship {
-	stroke: main;
+	stroke: transparent;
 }
 
-.shipSelected {
-	stroke: #d1ffd0;
-	filter: drop-shadow(0px 0px 2px #ACF3A9);
-	fill: #4b6d4a18;
-	/* filter: drop-shadow(0px 0px 2px white);
-	stroke: white; */
+
+.task {
+	stroke: primary-400;
+	fill: secondary-900;
 }

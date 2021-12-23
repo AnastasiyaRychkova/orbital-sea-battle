@@ -1,0 +1,54 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value primary-200, secondary-900 from colors;
+
+@value effects: '../../style/effects.css';
+@value shadow__input from effects;
+
+
+.inputValue {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: .25em .75em .875em;
+	border: none;
+	box-shadow: shadow__input;
+	background-color: secondary-900;
+	color: primary-200;
+	row-gap: .5em;
+	user-select: none;
+}
+
+.row {
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+	column-gap: .25em;
+	margin: 0;
+	height: 3em;
+	padding: 0;
+	list-style: none;
+}
+
+.titleText {
+	composes: text from '../../style/typography.css';
+	composes: text-b-medium from '../../style/typography.css';
+}
+
+.titleSubText {
+	composes: text from '../../style/typography.css';
+	composes: text-m-small from '../../style/typography.css';
+}
+
+@media (min-width: mobile) and (max-width: laptop) {
+	.row {
+		height: 2.5em;
+	}
+
+	.inputValue {
+		padding: .2em .5em .5em;
+		row-gap: .2em;
+	}
+}

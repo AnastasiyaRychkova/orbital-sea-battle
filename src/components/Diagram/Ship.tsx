@@ -81,8 +81,8 @@ function makeName( n: MainQN, l: OrbitalQN ): string
 function makeShipClass( props: IProps ): string
 {
 	return classNames({
+		[styles.selected]: props.controller!.filter.isShipSelected( props.qn ),
 		[styles.ship]: true,
-		[styles.shipSelected]: props.controller!.filter.isShipSelected( props.qn ),
 	});
 }
 

@@ -40,9 +40,9 @@ const CELL_WIDTH = 20;
 const CELL_HEIGHT = 40;
 const CONTAINER_WIDTH = 40;
 const CONTAINER_HEIGHT = 40;
-const COLUMN_SPACING = 40;
+const COLUMN_SPACING = 30;
 const LINE_SPACING = 30;
-const NAME_X_OFFSET = -20;
+const NAME_X_OFFSET = -13;
 const NAME_Y_OFFSET = 70;
 
 

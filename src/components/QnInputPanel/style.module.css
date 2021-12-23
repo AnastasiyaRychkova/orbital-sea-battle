@@ -1,98 +1,53 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
 @value colors: '../../style/colors.css';
-@value background, main, nonClickableElement, menu, darkBacking, lightBacking, error, subtitle, subElement, text from colors;
+@value disable-800 from colors;
+
+@value effects: '../../style/effects.css';
+@value shadow__input from effects;
+
 
 .panel {
 	display: flex;
-	position: absolute;
-	bottom: 3em;
-	padding: 1.25em 1.25em;
-	box-shadow: 3px 6px 10px rgba(0, 0, 0, 0.4), 0px 0px 10px rgba(150, 194, 175, 0.2);
-	background-color: menu;
+	justify-content: flex-end;
+	align-items: stretch;
+	column-gap: 1em;
+	padding: 0;
+	padding-right: 1em;
 }
 
-@media (max-width: 1400px) {
-	.panel {
-		font-size: 12px;
-	}
-}
-
-@media (max-width: 950px) {
-	.panel {
-		font-size: 10px;
-	}
-}
-
-.inputValue {
-	--background: darkBacking;
-
-	--selected: main;
-	--default: lightBacking;
-	--invalid: background;
-	--error: error;
-
-	--selected-text: lightBacking;
-	--default-text: subElement;
-	--invalid-text: menu;
-	--error-text: lightBacking;
-
-	--valid-label: #9ddf9a80;
-
-	--selected-hover: #85D67F;
-	--default-hover: #3F4E47;
-	--invalid-hover: #293631;
-	--error-hover: #E1645C;
-
-	--selected-text-hover: lightBacking;
-	--default-text-hover: text;
-	--invalid-text-hover: subtitle;
-	--error-text-hover: lightBacking;
-
-
+.inputsRow {
 	display: flex;
-	position: relative;
-	align-items: center;
-	flex-direction: column;
-	margin: 0 .75em;
-	border: none;
-	box-shadow: 2px 2px 3px rgba(5, 20, 13, 0.4);
-	background-color: var(--background);
-	color: var(--selected);
+	flex-wrap: wrap;
+	column-gap: 1em;
+	box-shadow: shadow__input;
+	background-color: disable-800;
+	column-gap: 1em;
+	padding: .5em;
 }
 
-.inputValue[data-switch-on="false"] {
-	--background: background;
-
-	--selected: nonClickableElement;
-	--default: #33403A;
-	--invalid: #28332E;
-	--error: #605A59;
-
-	--selected-text: lightBacking;
-	--default-text: subElement;
-	--invalid-text: menu;
-	--error-text: lightBacking;
-
-	--valid-label: #62766180;
-}
-
-.row {
+.inputPair {
 	display: flex;
-	align-items: center;
-	flex-direction: row;
+	column-gap: 1em;
+	flex-basis: 0;
 }
 
-.name {
-	text-align: center;
-	line-height: 120%;
-	letter-spacing: 0.135em;
-	font-family: Montserrat;
-	font-size: 1.5em;
-	font-weight: bold;
-	font-style: normal;
+@media (max-width: 904px) {
+	.inputsRow {
+		flex-basis: 0;
+	}
+
 }
 
-.sub {
-	vertical-align: baseline;
-	font-size: .5em;
-	margin-left: -.15em;
+@media (min-width: mobile) and (max-width: laptop) {
+
+	.inputsRow {
+		column-gap: .5em;
+		row-gap: .5em;
+	}
+
+	.inputPair {
+		column-gap: .5em;
+	}
 }

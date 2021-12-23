@@ -45,10 +45,10 @@ export default Cell;
 function makeCellClass( props: IProps ): string
 {
 	return classNames(
-		styles[ 'cell_' + CellState[ props.controller!.getCellState( props.qn ) ] ],
+		styles[ CellState[ props.controller!.getCellState( props.qn ) ] ],
 		{
-			[styles.cell_last]: props.controller!.isLastShot( props.qn ),
-			[styles.cell_selected]: props.controller!.filter.isCellSelected( props.qn ),
+			[styles.last]: props.controller!.isLastShot( props.qn ),
+			[styles.selected]: props.controller!.filter.isCellSelected( props.qn ),
 		},
 	);
 }

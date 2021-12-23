@@ -60,6 +60,6 @@ function makeContainerClass( props: IProps ): string
 {
 	return classNames({
 		[styles.container]: true,
-		[styles.containerSelected]: props.controller!.filter.isContainerSelected( props.qn ),
+		[styles.selected]: props.controller!.filter.isContainerSelected( props.qn ),
 	});
 }
