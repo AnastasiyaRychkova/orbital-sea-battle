@@ -1,29 +1,34 @@
+import React from 'react';
 import { Provider, observer } from 'mobx-react';
-import React, { useEffect } from 'react';
-import Diagram from '../../components/Diagram/Diagram';
-import Panel from '../../components/QnInputPanel/Panel';
-import PanelWithSwitchers from '../../components/QnInputPanel/PanelWithSwitchers';
+
 import Filter from '../../lib/game/Diagram/Filter/Filter';
 import DiagramState from '../../lib/game/Diagram/Diagram';
 import periodicTable from '../../lib/game/ChemicalElement/PeriodicTable';
 import GameFieldController from './GameFieldController';
+import uiStore from '../../client/UIStore';
 import TaskManager from './TaskManager';
 import Metrics from './Metrics';
 import { default as Experiment, State } from './Experiment';
+
+
+import Diagram from '../../components/Diagram/Diagram';
+import FilterPanel from '../../components/QnInputPanel/Filter';
+
 import InstructionWindow from './InstructionWindow';
 import WelcomeWindow from './WelcomeWindow';
 import FirstInterfaceEvaluating from './I_InterfaceEvaluating';
 import SecondInterfaceEvaluating from './II_InterfaceEvaluating';
 import ThanksWindow from './ThanksWindow';
 import TaskCounter from './TaskCounter';
-
-import styles from './style.module.css';
 import TaskResult from './TaskResult';
 import Clock from './Clock';
 
+import styles from './style.module.css';
 
 
-const filter = new Filter( periodicTable.converter, {type: 'radio'} );
+
+
+const filter = new Filter( periodicTable.converter );
 const diagram = new DiagramState( periodicTable );
 const taskManager = new TaskManager( diagram, filter );
 const metrics = new Metrics();
@@ -74,25 +79,11 @@ const windows: Windows<State> = {
 const DiagramShootingPage = observer( () => {
 	const window = windows[ experiment.state ];
 
-	useEffect( () => {
-		switch( experiment.state ) {
-			case 'interface1':
-				filter.setType( 'checkbox' );
-				break;
-			case 'interface2':
-				filter.setType( 'radio' );
-				break;
-			default:
-				break;
-		}
-		
-	} );
-
 	const isInterfaceTesting = experiment.state.indexOf( 'interface' ) >= 0;
 
 	return (
 		<div className={styles.page}>
-			<Provider controller={ diagramController }>
+			<Provider controller={ diagramController } ui={uiStore}>
 				{
 				window !== undefined
 					?
@@ -104,7 +95,7 @@ const DiagramShootingPage = observer( () => {
 				}
 				<Diagram
 					className={styles.diagram}
-					zooming={false} />
+					zooming />
 				<div className={styles.processInfo}>
 					{
 						isInterfaceTesting
@@ -131,15 +122,10 @@ const DiagramShootingPage = observer( () => {
 					correct={experiment.lastTaskCorrectness} />
 				: ''
 				}
+				
+				<FilterPanel className={styles.filter} />
+				
 
-				{
-				experiment.state === 'interface1'
-				? <Panel />
-				:
-				experiment.state === 'interface2'
-					? <PanelWithSwitchers />
-					: ''
-				}
 			</Provider>
 			
 		</div>

@@ -62,7 +62,7 @@ class GameFieldController implements IGameFieldController, IExperimentController
 
 
 	sendFunction = () => {
-		if( !this.filter.doesSpecifyCell() )
+		if( !this.filter.doesSpecifyCell )
 			return;
 		console.log( 'send' );
 		const filterState = this.filter.getState() as CellQN

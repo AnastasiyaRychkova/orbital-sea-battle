@@ -1,7 +1,6 @@
 import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
 
 export type StoreKey = 'n'|'l'|'m'|'s';
-export type FilterType = 'checkbox'|'radio';
 
 interface IFilter
 {
@@ -15,11 +14,9 @@ interface IFilter
 	isDisable( key: StoreKey ): boolean; // TOTHINK: Может переименовать на isOn() и switch()?
 	setDisable( key: StoreKey, newState: boolean ): void;
 
-	doesSpecifyCell(): boolean;
+	doesSpecifyCell: boolean;
 	getState(): QuantumNumbers;
 	reset(): void;
-
-	setType( type: FilterType ): void;
 
 	disabled: boolean;
 }

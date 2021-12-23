@@ -31,7 +31,7 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 4 ), new SpinIndex( 5 ) ],
 					'0': [ new SpinIndex( 6 ), new SpinIndex( 7 ) ],
-					'1': [ new SpinIndex( 8 ), new SpinIndex( 9 ) ],
+					'+1': [ new SpinIndex( 8 ), new SpinIndex( 9 ) ],
 				}
 			},
 	
@@ -43,15 +43,15 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 12 ), new SpinIndex( 13 ) ],
 					'0': [ new SpinIndex( 14 ), new SpinIndex( 15 ) ],
-					'1': [ new SpinIndex( 16 ), new SpinIndex( 17 ) ],
+					'+1': [ new SpinIndex( 16 ), new SpinIndex( 17 ) ],
 				},
 	
 				'd': {
 					'-2': [ new SpinIndex( 20 ), new SpinIndex( 21 ) ],
 					'-1': [ new SpinIndex( 22 ), new SpinIndex( 23 ) ],
 					'0': [ new SpinIndex( 24 ), new SpinIndex( 25 ) ],
-					'1': [ new SpinIndex( 26 ), new SpinIndex( 27 ) ],
-					'2': [ new SpinIndex( 28 ), new SpinIndex( 29 ) ],
+					'+1': [ new SpinIndex( 26 ), new SpinIndex( 27 ) ],
+					'+2': [ new SpinIndex( 28 ), new SpinIndex( 29 ) ],
 				}
 			},
 	
@@ -63,15 +63,15 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 30 ), new SpinIndex( 31 ) ],
 					'0': [ new SpinIndex( 32 ), new SpinIndex( 33 ) ],
-					'1': [ new SpinIndex( 34 ), new SpinIndex( 35 ) ],
+					'+1': [ new SpinIndex( 34 ), new SpinIndex( 35 ) ],
 				},
 	
 				'd': {
 					'-2': [ new SpinIndex( 38 ), new SpinIndex( 39 ) ],
 					'-1': [ new SpinIndex( 40 ), new SpinIndex( 41 ) ],
 					'0': [ new SpinIndex( 42 ), new SpinIndex( 43 ) ],
-					'1': [ new SpinIndex( 44 ), new SpinIndex( 45 ) ],
-					'2': [ new SpinIndex( 46 ), new SpinIndex( 47 ) ],
+					'+1': [ new SpinIndex( 44 ), new SpinIndex( 45 ) ],
+					'+2': [ new SpinIndex( 46 ), new SpinIndex( 47 ) ],
 				},
 	
 				'f': {
@@ -79,9 +79,9 @@ class QNConverter implements QNConverterInterface
 					'-2': [ new SpinIndex( 58 ), new SpinIndex( 59 ) ],
 					'-1': [ new SpinIndex( 60 ), new SpinIndex( 61 ) ],
 					'0': [ new SpinIndex( 62 ), new SpinIndex( 63 ) ],
-					'1': [ new SpinIndex( 64 ), new SpinIndex( 65 ) ],
-					'2': [ new SpinIndex( 66 ), new SpinIndex( 67 ) ],
-					'3': [ new SpinIndex( 68 ), new SpinIndex( 69 ) ],
+					'+1': [ new SpinIndex( 64 ), new SpinIndex( 65 ) ],
+					'+2': [ new SpinIndex( 66 ), new SpinIndex( 67 ) ],
+					'+3': [ new SpinIndex( 68 ), new SpinIndex( 69 ) ],
 				}
 			},
 	
@@ -93,15 +93,15 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 48 ), new SpinIndex( 49 ) ],
 					'0': [ new SpinIndex( 50 ), new SpinIndex( 51 ) ],
-					'1': [ new SpinIndex( 52 ), new SpinIndex( 53 ) ],
+					'+1': [ new SpinIndex( 52 ), new SpinIndex( 53 ) ],
 				},
 	
 				'd': {
 					'-2': [ new SpinIndex( 70 ), new SpinIndex( 71 ) ],
 					'-1': [ new SpinIndex( 72 ), new SpinIndex( 73 ) ],
 					'0': [ new SpinIndex( 74 ), new SpinIndex( 75 ) ],
-					'1': [ new SpinIndex( 76 ), new SpinIndex( 77 ) ],
-					'2': [ new SpinIndex( 78 ), new SpinIndex( 79 ) ],
+					'+1': [ new SpinIndex( 76 ), new SpinIndex( 77 ) ],
+					'+2': [ new SpinIndex( 78 ), new SpinIndex( 79 ) ],
 				},
 	
 				'f': {
@@ -109,9 +109,9 @@ class QNConverter implements QNConverterInterface
 					'-2': [ new SpinIndex( 90 ), new SpinIndex( 91 ) ],
 					'-1': [ new SpinIndex( 92 ), new SpinIndex( 93 ) ],
 					'0': [ new SpinIndex( 94 ), new SpinIndex( 95 ) ],
-					'1': [ new SpinIndex( 96 ), new SpinIndex( 97 ) ],
-					'2': [ new SpinIndex( 98 ), new SpinIndex( 99 ) ],
-					'3': [ new SpinIndex( 100 ), new SpinIndex( 101 ) ],
+					'+1': [ new SpinIndex( 96 ), new SpinIndex( 97 ) ],
+					'+2': [ new SpinIndex( 98 ), new SpinIndex( 99 ) ],
+					'+3': [ new SpinIndex( 100 ), new SpinIndex( 101 ) ],
 				}
 			},
 			
@@ -123,15 +123,15 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 80 ), new SpinIndex( 81 ) ],
 					'0': [ new SpinIndex( 82 ), new SpinIndex( 83 ) ],
-					'1': [ new SpinIndex( 84 ), new SpinIndex( 85 ) ],
+					'+1': [ new SpinIndex( 84 ), new SpinIndex( 85 ) ],
 				},
 	
 				'd': {
 					'-2': [ new SpinIndex( 102 ), new SpinIndex( 103 ) ],
 					'-1': [ new SpinIndex( 104 ), new SpinIndex( 105 ) ],
 					'0': [ new SpinIndex( 106 ), new SpinIndex( 107 ) ],
-					'1': [ new SpinIndex( 108 ), new SpinIndex( 109 ) ],
-					'2': [ new SpinIndex( 110 ), new SpinIndex( 111 ) ],
+					'+1': [ new SpinIndex( 108 ), new SpinIndex( 109 ) ],
+					'+2': [ new SpinIndex( 110 ), new SpinIndex( 111 ) ],
 				}
 			},
 	
@@ -143,7 +143,7 @@ class QNConverter implements QNConverterInterface
 				'p': {
 					'-1': [ new SpinIndex( 112 ), new SpinIndex( 113 ) ],
 					'0': [ new SpinIndex( 114 ), new SpinIndex( 115 ) ],
-					'1': [ new SpinIndex( 116 ), new SpinIndex( 117 ) ],
+					'+1': [ new SpinIndex( 116 ), new SpinIndex( 117 ) ],
 				}
 			}
 		}
@@ -177,7 +177,7 @@ class QNConverter implements QNConverterInterface
 			return undefined;
 
 		for (const box of Object.values( block ) )
-			indexes.push( ... box );
+			indexes.push( ...box );
 		
 		return indexes;
 	}

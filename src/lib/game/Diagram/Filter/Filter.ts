@@ -8,17 +8,12 @@ import {
 	CellQN,
 } from "../../ChemicalElement/QuantumNumbers";
 import IFilter from "./FilterInterface";
-import type { StoreKey, FilterType } from "./FilterInterface";
+import type { StoreKey } from "./FilterInterface";
 import INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
-import RadioNote from "./RadioNote";
 import IQNConverter from "../../ChemicalElement/QNConverterInterface";
 
 
-
-type FilterOptions = {
-	type: FilterType,
-}
 
 type StoreType = Map<StoreKey, INote>;
 
@@ -31,25 +26,22 @@ type StoreType = Map<StoreKey, INote>;
 class Filter implements IFilter
 {
 	store: StoreType;
-	type: FilterType;
 	_disabled: boolean;
 	private _converter: IQNConverter;
 
-	constructor( qnConverter: IQNConverter, options?: FilterOptions )
+	constructor( qnConverter: IQNConverter )
 	{
 		makeObservable( this, {
 			store: observable,
-			type: observable,
 			_disabled: observable,
 
 			disabled: computed,
+			doesSpecifyCell: computed,
 			setValue: action,
 			setDisable: action,
 			reset: action,
-			setType: action,
 		});
 
-		this.type = options?.type || 'checkbox';
 		this.store = this._createDefaultStore();
 		this._disabled = true;
 		this._converter = qnConverter;
@@ -69,29 +61,16 @@ class Filter implements IFilter
 
 	private _createDefaultStore(): StoreType
 	{
-		switch( this.type )
-		{
-			case 'checkbox':
-				return new Map<StoreKey, INote>([
-					['n', new CheckboxNote() ],
-					['l', new CheckboxNote() ],
-					['m', new CheckboxNote() ],
-					['s', new CheckboxNote() ],
-				]);
-		
-			default:
-				return new Map<StoreKey, INote>([
-					['n', new RadioNote( new MainQN( 1 ) ) ],
-					['l', new RadioNote( new OrbitalQN( 's' ) ) ],
-					['m', new RadioNote( new MagneticQN( 0 ) ) ],
-					['s', new RadioNote( new SpinQN( 1 ) ) ],
-				]);
-		}
-		
+		return new Map<StoreKey, INote>([
+			['n', new CheckboxNote() ],
+			['l', new CheckboxNote() ],
+			['m', new CheckboxNote() ],
+			['s', new CheckboxNote() ],
+		]);
 	}
 
 	getValue = ( key: StoreKey ) =>
-		this.store.get( key )?.getValueAsString();
+		this.store.get( key )?.getAsString();
 
 	setValue = ( key: StoreKey, value: string ) => {
 		if( this._disabled )
@@ -125,28 +104,17 @@ class Filter implements IFilter
 
 
 	isDisable = ( key: StoreKey ) => {
-		return this._disabled || !this._get( key ).isSat();
+		return this._disabled || this._get( key ).isDisabled();
 	}
 
 	setDisable = ( key: StoreKey, value: boolean ) => {
-		if( this._disabled )
-			return;
-
-		if( value )
-			this._get( key ).reset();
-		else
-			this._get( key ).activate();
+		this._get( key ).setDisabled( value );
 	};
 
 	
 
 	isShipSelected( qn: QuantumNumbers ): boolean
 	{
-		/* const fsS = this._isFilterSetted( 's' );
-		const fsM = this._isFilterSetted( 'm' );
-		const cF = this._checkFilters( qn, ['n', 'l'], true );
-		console.log( 'isSelected', qn, this.store );
-		return !fsS && !fsM && cF; */
 		return !this._isFilterSetted( 's' )
 			&& !this._isFilterSetted( 'm' )
 			&& this._checkFilters( qn, ['n', 'l'], true );
@@ -165,17 +133,24 @@ class Filter implements IFilter
 			&& this._checkFilters( qn, ['n', 'l', 'm'] );
 	}
 
-	
-	private _checkFilters( checkedQN: QuantumNumbers,
-							keys: StoreKey[],
-							strict: boolean = false ): boolean
+	/**
+	 * Проверить, проходит ли проверку образец по фильтру.
+	 * 
+	 * Фильтр может содержать деактивированные или неустановленные значения. Они не мешают поверке.
+	 * @param qn Образец
+	 * @param keys Проверяемые квантовые числа
+	 * @returns Соответствует ли образец фильтру
+	 */
+	private _checkFilters( qn: QuantumNumbers, keys: StoreKey[], strict: boolean = false ): boolean
 	{
-		let equalFilters: number = 0;
+		let equalFilters = 0;
 
 		for( const key of keys ) {
 			const note = this._get( key )!;
-			if( note.isSat() ) {
-				if( note.isEqual( checkedQN[ key ] ) )
+
+			if( note.isSat() )
+			{
+				if( note.isEqual( qn[ key ] ) )
 					equalFilters++;
 				else
 					return false;
@@ -184,10 +159,16 @@ class Filter implements IFilter
 		return strict ? equalFilters > 0 : true;
 	}
 
-
-	private _isEqualQN( checkedQN: QuantumNumbers, key: StoreKey ): boolean
+	/**
+	 * Проверка на эквивалентность с учетом статуса активации фильтра
+	 * @param qn Образец
+	 * @param keys Проверяемые квантовые числа
+	 * @returns Есть ли точное совпадение
+	 */
+	private _isEqualQN( qn: QuantumNumbers, key: StoreKey ): boolean
 	{
-		return this._get( key ).isEqual( checkedQN[ key ] );
+		const note = this._get( key )!;
+		return !note.isDisabled() && note.isEqual( qn[ key ] );;
 	}
 
 	private _isFilterSetted( key: StoreKey ): boolean
@@ -195,7 +176,7 @@ class Filter implements IFilter
 		return this._get( key ).isSat();
 	}
 
-	doesSpecifyCell(): boolean
+	get doesSpecifyCell(): boolean
 	{
 		if( this._disabled )
 			return false;
@@ -205,7 +186,6 @@ class Filter implements IFilter
 				return false;
 			}
 		}
-
 		const state = this.getState();
 		return this._converter.getCellIndex( state as CellQN ) !== undefined;
 	}
@@ -213,25 +193,16 @@ class Filter implements IFilter
 	getState(): QuantumNumbers
 	{
 		return {
-			n: this._get( 'n' )!.getValue() as MainQN | undefined,
-			l: this._get( 'l' )!.getValue() as OrbitalQN | undefined,
-			m: this._get( 'm' )!.getValue() as MagneticQN | undefined,
-			s: this._get( 's' )!.getValue() as SpinQN | undefined,
+			n: this._get( 'n' )!.get() as MainQN | undefined,
+			l: this._get( 'l' )!.get() as OrbitalQN | undefined,
+			m: this._get( 'm' )!.get() as MagneticQN | undefined,
+			s: this._get( 's' )!.get() as SpinQN | undefined,
 		}
 	}
 
 	reset(): void
 	{
 		this.store = this._createDefaultStore();
-	}
-
-	setType( type: FilterType ): void
-	{
-		if( this.type === type )
-			return;
-
-		this.type = type;
-		this.reset();
 	}
 }
 

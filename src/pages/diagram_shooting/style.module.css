@@ -1,3 +1,6 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
 .page {
 	display: flex;
 	justify-content: center;
@@ -10,15 +13,24 @@
 , rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0;
 	background-color: #1E2C26;
 	background-size: 3em 3em;
+	position: relative;
 }
 
+
 .diagram {
-	padding: 20px 32px;
-	margin-bottom: 10em;
+	height: 100%;
+	width: 100%;
 }
 
 .diagram:focus {
 	outline: none;
+}
+
+.filter {
+	position: absolute;
+	bottom: 3em;
+	right: calc( 50% - 546px );
+	justify-content: center;
 }
 
 .taskCounter {
@@ -38,11 +50,27 @@
 	flex-direction: column;
 	width: 100%;
 	position: absolute;
-	bottom: 13em;
+	top: 2em;
 }
 
 @media (max-width: 1400px) {
 	.processInfo {
 		font-size: 12px;
 	}
+}
+
+@media (min-width: mobile) and (max-width: laptop) {
+	.filter {
+		bottom: 1em;
+		right: calc( 50% - 452px );
+	}
+}
+
+@media (max-width: 904px) {
+	.filter {
+		justify-content: flex-end;
+		bottom: 1em;
+		right: 0;
+	}
+
 }

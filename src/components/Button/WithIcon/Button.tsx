@@ -41,8 +41,8 @@ const Button: FC<IProps> = ({
 			type="button"
 			onClick={onClick}
 			className={cn( styles, ['button', priority, theme], className )} >
+				<Icon type={glyph} className={styles.icon}/>
 				<span className={styles.text}>
-					<Icon type={glyph} className={styles.icon}/>
 					{value}
 				</span>
 		</button>

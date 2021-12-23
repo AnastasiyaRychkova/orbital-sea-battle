@@ -9,9 +9,11 @@ class SpinQN implements IQuantumNumber
 {
 	protected _number: SpinType;
 
-	constructor( value: number = 1 )
+	constructor( value: number|string = 1 )
 	{
-		this._number = SpinQN.normalize( value );
+		this._number = ( typeof value === 'string' )
+						? (value === '+1/2' ? 1 : -1)
+						: SpinQN.normalize( value );
 	}
 
 	protected static normalize( newValue: number )
@@ -31,7 +33,7 @@ class SpinQN implements IQuantumNumber
 
 	toString(): string
 	{
-		return this._number > 0 ? '1' : '-1';
+		return this._number > 0 ? '+1/2' : '-1/2';
 	}
 }
 

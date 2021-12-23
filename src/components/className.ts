@@ -5,19 +5,19 @@ type Styles = {
 
 export default function cn(
 	styles: Styles,
-	props: Array<string|undefined>,
-	otherClasses?: string,
+	classes: Array<string|undefined>,
+	sideClasses?: string,
 	): string
 {
 	let className = '';
 
-	props.forEach(( prop ) => {
-		if( prop )
-			className += styles[prop] + ' ';
+	classes.forEach(( classStr ) => {
+		if( classStr )
+			className += styles[classStr] + ' ';
 	});
 
-	if( otherClasses )
-		className += otherClasses;
+	if( sideClasses )
+		className += sideClasses;
 
 	return className;
 }

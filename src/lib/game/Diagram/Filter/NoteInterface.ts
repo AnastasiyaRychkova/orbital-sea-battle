@@ -7,11 +7,13 @@ interface INote
 {
 	isEqual( qn: IQuantumNumber | undefined ): boolean;
 	set( qn: IQuantumNumber ): void;
-	getValueAsString(): string;
-	getValue(): IQuantumNumber | undefined;
+	getAsString(): string;
+	get(): IQuantumNumber | undefined;
 
+	/** Установлено ли значение. Если фильтр деактивирован, то метод возвращает `false`. */
 	isSat(): boolean;
-	activate(): void;
+	isDisabled(): boolean;
+	setDisabled( disabled: boolean ): void;
 	reset(): void;
 }
 

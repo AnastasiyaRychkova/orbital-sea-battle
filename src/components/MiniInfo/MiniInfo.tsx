@@ -15,7 +15,7 @@ interface IProps {
 	provider: InfoProvider,
 
 	/** Подпись под значением */
-	caption?: number,
+	caption?: string,
 
 	/** Название иконки */
 	glyph: Glyph,
@@ -43,11 +43,10 @@ const MiniInfo: FC<IProps> = observer(({
 				<span className={styles.valueText}>
 					{provider.valueAsString()}
 				</span>
-				{ caption ?
+				{ caption &&
 					<span className={styles.captionText}>
 						{caption}
 					</span>
-					: ''
 				}
 			</div>
 		</div>

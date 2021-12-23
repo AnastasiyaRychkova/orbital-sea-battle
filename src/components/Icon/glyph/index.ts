@@ -1,19 +1,11 @@
-import React from "react";
-import { Glyph } from "./type";
+import info from "./info";
+import cross from "./cross";
+import shot from "./shot";
 
-type GlyphStore = {
-	[name in Glyph]: JSX.Element;
-};
-
-
-const glyphs: GlyphStore = {
-	'cross': require( './cross' ).default,
-	'info': require( './info' ).default,
-	'shot': require( './shot' ).default,
-};
-
-function getGlyph( type: Glyph ) {
-	return glyphs[ type ];
+const glyphs = {
+	info,
+	cross,
+	shot,
 }
 
-export default getGlyph;
+export default glyphs;
