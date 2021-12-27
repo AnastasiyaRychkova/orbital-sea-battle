@@ -1,123 +1,176 @@
 {
-	"start": [
-		{
-			"type": "start",
-			"url": "/",
-			"header": "",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Пройдите обучение к интерактивному компоненту игры."
-				},
-				{
-					"type": "paragraph",
-					"value": "Следуйте инструкциям и не переживайте за результат. Ваши ошибки помогут нам усовершенствовать игру."
-				}
-			],
-			"actions": [
-				{
-					"value": "Начать",
-					"glyph": "play",
-					"to": "lesson"
-				}
-			]
-		}
-	],
-	"lesson": [
-		{
+	"/": {
+		"type": "start",
+		"header": "",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Пройдите обучение к интерактивному компоненту игры."
+			},
+			{
+				"type": "paragraph",
+				"value": "Следуйте инструкциям и не переживайте за результат. Ваши ошибки помогут нам усовершенствовать игру."
+			}
+		],
+		"actions": [
+			{
+				"value": "Начать",
+				"glyph": "play",
+				"to": "/lesson/qn/w/instruction"
+			}
+		]
+	},
+
+	"/lesson/qn/w/instruction": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Привет! Давай начнем обучение!",
+		"subheader": "шаг 1/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "В этой игре вам предстоит «стрелять» по химической диаграмме, позволяющей отобразить распределение электронов в атоме."
+			},
+			{
+				"type": "paragraph",
+				"value": "Если вы совсем не знаете химию — не страшно! Вы для нас тоже очень ценный респондент."
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/lesson/qn/w/diagram"
+			}
+		]
+	},
+	"/lesson/qn/w/diagram": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Что за диаграмма?",
+		"subheader": "шаг 2/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Диаграмма состоит из 7 столбцов (электронных оболочек), которые в свою очередь состоят из 1-4 строк (электронных подоболочек). Те состоят из 1-7 контейнеров (электронных облаков), внутри которых всегда 2 стрелки (электрона)."
+			},
+			{
+				"type": "paragraph",
+				"value": "Стрелять мы будем по стрелкам (электронам). Для этого нужно будет вводить их «координаты», то есть квантовые числа."
+			},
+			{
+				"type": "paragraph",
+				"value": "Давайте разберемся, как это делать!"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "lesson/qn/w/n"
+			}
+		]
+	},
+	"lesson/qn/w/n": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Главное квантовое число (n)",
+		"subheader": "шаг 3/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Главное квантовое число (n) определяет столбец на диаграмме."
+			},
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Попробуйте выбрать 3 столбец. Для этого отметьте соответствующее значение на панели ввода."
+			}
+		],
+		"actions": [
+			{
+				"value": "Приступить",
+				"to": "/lesson/qn/t/n"
+			},
+			{
+				"value": "Назад",
+				"to": "/lesson/qn/w/diagram"
+			}
+		]
+	},
+	"/lesson/qn/t/n": {
+		"type": "task",
+		"target": "filter",
+		"event": "change",
+		"expected": [
+			{
+				"prop": "n",
+				"value": "3"
+			}
+		],
+		"infallibility": false,
+		"next": "/lesson/qn/r/n",
+		"message": "Выберете 3 столбец",
+		"comment": "Используйте панель ввода внизу экрана"
+	},
+	"/lesson/qn/r/n": {
+		"type": "window",
+		"style": "modal",
+		"header": "Выполнено",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/lesson/qn/w/l"
+			}
+		]
+	},
+	"/lesson/qn/w/l": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Орбитальное квантовое число (l)",
+		"subheader": "шаг 4/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Орбитальное квантовое число (l) определяет строку внутри столбца."
+			},
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Выберете все вторые снизу строки."
+			}
+		],
+		"actions": [
+			{
+				"value": "Приступить",
+				"to": "/lesson/qn/t/l"
+			}
+		]
+	},
+	"/lesson/qn/t/l": {
+		"type": "task",
+		"target": "filter",
+		"event": "change",
+		"expected": [
+			{
+				"prop": "l",
+				"value": "2"
+			}
+		],
+		"infallibility": false,
+		"next": "/lesson/qn/r/l",
+		"message": "Выберете все вторые снизу строки",
+		"comment": "Используйте панель ввода внизу экрана"
+	},
+	"/lesson/qn/r/l": {
 			"type": "window",
-			"url": "/lesson/qn/w/instruction",
-			"style": "instruction",
-			"header": "Привет! Давай начнем обучение!",
-			"subheader": "шаг 1/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "В этой игре вам предстоит «стрелять» по химической диаграмме, позволяющей отобразить распределение электронов в атоме."
-				},
-				{
-					"type": "paragraph",
-					"value": "Если вы совсем не знаете химию — не страшно! Вы для нас тоже очень ценный респондент."
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/w/diagram",
-			"style": "instruction",
-			"header": "Что за диаграмма?",
-			"subheader": "шаг 2/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Диаграмма состоит из 7 столбцов (электронных оболочек), которые в свою очередь состоят из 1-4 строк (электронных подоболочек). Те состоят из 1-7 контейнеров (электронных облаков), внутри которых всегда 2 стрелки (электрона)."
-				},
-				{
-					"type": "paragraph",
-					"value": "Стрелять мы будем по стрелкам (электронам). Для этого нужно будет вводить их «координаты», то есть квантовые числа."
-				},
-				{
-					"type": "paragraph",
-					"value": "Давайте разберемся, как это делать!"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "lesson/qn/w/n",
-			"style": "instruction",
-			"header": "Главное квантовое число (n)",
-			"subheader": "шаг 3/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Главное квантовое число (n) определяет столбец на диаграмме."
-				},
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Попробуйте выбрать 3 столбец. Для этого отметьте соответствующее значение на панели ввода."
-				}
-			],
-			"actions": [
-				{
-					"value": "Приступить",
-					"to": "NEXT"
-				},
-				{
-					"value": "Назад",
-					"to": "BACK"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/qn/t/n",
-			"target": "filter",
-			"event": "change",
-			"expected": [
-				{
-					"prop": "n",
-					"value": "3"
-				}
-			],
-			"infallibility": false
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/r/n",
 			"style": "modal",
 			"header": "Выполнено",
 			"content": [
@@ -132,422 +185,357 @@
 			"actions": [
 				{
 					"value": "Далее",
-					"to": "NEXT"
+					"to": "/lesson/qn/w/m"
 				}
 			]
 		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/w/l",
-			"style": "instruction",
-			"header": "Орбитальное квантовое число (l)",
-			"subheader": "шаг 4/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Орбитальное квантовое число (l) определяет строку внутри столбца."
-				},
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Выберете все вторые снизу строки."
-				}
-			],
-			"actions": [
-				{
-					"value": "Приступить",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/qn/t/l",
-			"target": "filter",
-			"event": "change",
-			"expected": [
-				{
-					"prop": "l",
-					"value": "2"
-				}
-			],
-			"infallibility": false
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/r/l",
-			"style": "modal",
-			"header": "Выполнено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/w/m",
-			"style": "instruction",
-			"header": "Магнитное квантовое число (m)",
-			"subheader": "шаг 5/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Магнитное квантовое число (m) определяет контейнер внутри строки."
-				},
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Попробуйте выбрать -2 контейнеры."
-				}
-			],
-			"actions": [
-				{
-					"value": "Приступить",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/qn/t/m",
-			"target": "filter",
-			"event": "change",
-			"expected": [
-				{
-					"prop": "m",
-					"value": "-2"
-				}
-			],
-			"infallibility": false
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/r/m",
-			"style": "modal",
-			"header": "Выполнено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/w/s",
-			"style": "instruction",
-			"header": "Спиновое квантовое число (s)",
-			"subheader": "шаг 6/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"value": "Спиновое квантовое число (s) определяет стрелку внутри контейнера. "
-				},
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Попробуйте выбрать все стрелки вниз."
-				}
-			],
-			"actions": [
-				{
-					"value": "Приступить",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/qn/t/s",
-			"target": "filter",
-			"event": "change",
-			"expected": [
-				{
-					"prop": "s",
-					"value": "-1/2"
-				}
-			],
-			"infallibility": false
-		},
-		{
-			"type": "window",
-			"url": "/lesson/qn/r/s",
-			"style": "modal",
-			"header": "Выполнено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/lesson/combinations/w",
-			"style": "instruction",
-			"header": "С теорией закончили. Теперь поупражняемся!",
-			"subheader": "шаг 7/7",
-			"content": [
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Отмечайте комбинации квантовых чисел согласно заданиям в левом верхнем углу."
-				}
-			],
-			"actions": [
-				{
-					"value": "Приступить",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/combinations/t",
-			"target": "diagram",
-			"event": "shot",
-			"expected": [
-				["5", "d", "", ""],
-				["", "p", "+1", ""],
-				["4", "", "0", ""],
-				["3", "d", "-1"],
-				["2", "s", "0", "+1/2"]
-			],
-			"infallibility": false
-		},
-		{
-			"type": "window",
-			"url": "/lesson/combinations/r",
-			"style": "modal",
-			"header": "Выполнено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/lesson/training/w",
-			"style": "instruction",
-			"header": "Теперь можем пострелять!",
-			"content": [
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Вводите координаты мигающих стрелок и жмите кнопку «Пуск»."
-				},
-				{
-					"type": "paragraph",
-					"variant": 1,
-					"value": "Баллы начисляются только за правильно отмеченные стрелки."
-				}
-			],
-			"actions": [
-				{
-					"value": "Начать",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/lesson/training/t",
-			"target": "diagram",
-			"event": "shot",
-			"expected": [
-				["4", "d", "+2", "-1/2"],
-				["5", "f", "-3", "-1/2"],
-				["6", "p", "0", "+1/2"],
-				["7", "s", "0", "-1/2"],
-				["1", "s", "0", "+1/2"]
-			],
-			"infallibility": true
-		},
-		{
-			"type": "window",
-			"url": "/lesson/training/r",
-			"style": "modal",
-			"header": "Вы успешно прошли обучение!",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Продолжить",
-					"to": "set"
-				},
-				{
-					"value": "Завершить",
-					"to": "feedback"
-				}
-			]
-		}
-	],
-	"feedback": [
-		{
-			"type": "window",
-			"url": "/feedback/w/assessment",
-			"style": "modal",
-			"header": "Насколько вам понравилось?",
-			"content": [
-				{
-					"type": "mark",
-					"value": "assessment"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "window",
-			"url": "/feedback/w/difficulty",
-			"style": "modal",
-			"header": "Насколько вам было легко?",
-			"content": [
-				{
-					"type": "mark",
-					"value": "difficulty"
-				}
-			],
-			"actions": [
-				{
-					"value": "Закончить",
-					"to": "end"
-				},
-				{
-					"value": "Назад",
-					"to": "BACK"
-				}
-			]
-		}
-	],
-	"end": [
-		{
-			"type": "window",
-			"url": "/feedback/w/difficulty",
-			"style": "modal",
-			"header": "Спасибо за ваше участие!",
-			"content": [],
-			"actions": [
-				{
-					"value": "Пройти заново",
-					"to": "start"
-				},
-				{
-					"value": "Продолжить играть",
-					"to": "set"
-				}
-			]
-		}
-	],
-	"set": [
-		{
-			"type": "window",
-			"url": "/set/w",
-			"style": "instruction",
-			"header": "Стреляйте по стрелкам!",
-			"content": [
-				{
-					"type": "paragraph",
-					"style": "strong",
-					"value": "Вводите координаты мигающих стрелок и жмите кнопку «Пуск»."
-				},
-				{
-					"type": "paragraph",
-					"variant": 1,
-					"value": "Баллы начисляются только за правильно отмеченные стрелки."
-				}
-			],
-			"actions": [
-				{
-					"value": "Начать",
-					"to": "NEXT"
-				}
-			]
-		},
-		{
-			"type": "task",
-			"url": "/set/t",
-			"target": "diagram",
-			"event": "shot",
-			"expected": "generate",
-			"length": 5,
-			"infallibility": true
-		},
-		{
-			"type": "window",
-			"url": "/set/r",
-			"style": "modal",
-			"header": "Пройдено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "BACK"
-				},
-				{
-					"value": "Завершить",
-					"to": "feedback"
-				}
-			]
-		}
-	]
+	"/lesson/qn/w/m": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Магнитное квантовое число (m)",
+		"subheader": "шаг 5/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Магнитное квантовое число (m) определяет контейнер внутри строки."
+			},
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Попробуйте выбрать -2 контейнеры."
+			}
+		],
+		"actions": [
+			{
+				"value": "Приступить",
+				"to": "/lesson/qn/t/m"
+			}
+		]
+	},
+	"/lesson/qn/t/m": {
+		"type": "task",
+		"target": "filter",
+		"event": "change",
+		"expected": [
+			{
+				"prop": "m",
+				"value": "-2"
+			}
+		],
+		"infallibility": false,
+		"next": "/lesson/qn/r/m",
+		"message": "Выберете все -2 контейнеры",
+		"comment": "Используйте панель ввода внизу экрана"
+	},
+	"/lesson/qn/r/m": {
+		"type": "window",
+		"style": "modal",
+		"header": "Выполнено",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/lesson/qn/w/s"
+			}
+		]
+	},
+	"/lesson/qn/w/s": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Спиновое квантовое число (s)",
+		"subheader": "шаг 6/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"value": "Спиновое квантовое число (s) определяет стрелку внутри контейнера. "
+			},
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Попробуйте выбрать все стрелки вниз."
+			}
+		],
+		"actions": [
+			{
+				"value": "Приступить",
+				"to": "/lesson/qn/t/s"
+			}
+		]
+	},
+	"/lesson/qn/t/s": {
+		"type": "task",
+		"target": "filter",
+		"event": "change",
+		"expected": [
+			{
+				"prop": "s",
+				"value": "-1/2"
+			}
+		],
+		"infallibility": false,
+		"next": "/lesson/qn/r/s",
+		"message": "Выберете все стрелки вниз",
+		"comment": "Используйте панель ввода внизу экрана"
+	},
+	"/lesson/qn/r/s": {
+		"type": "window",
+		"style": "modal",
+		"header": "Выполнено",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/lesson/combinations/w"
+			}
+		]
+	},
+	"/lesson/combinations/w": {
+		"type": "window",
+		"style": "instruction",
+		"header": "С теорией закончили. Теперь поупражняемся!",
+		"subheader": "шаг 7/7",
+		"content": [
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Отмечайте комбинации квантовых чисел согласно заданиям в левом верхнем углу."
+			}
+		],
+		"actions": [
+			{
+				"value": "Приступить",
+				"to": "/lesson/combinations/t"
+			}
+		]
+	},
+	"/lesson/combinations/t": {
+		"type": "task",
+		"url": "/lesson/combinations/t",
+		"target": "diagram",
+		"event": "shot",
+		"expected": [
+			["5", "d", "", ""],
+			["", "p", "+1", ""],
+			["4", "", "0", ""],
+			["3", "d", "-1"],
+			["2", "s", "0", "+1/2"]
+		],
+		"infallibility": false,
+		"next": "/lesson/combinations/r",
+		"message": "Введите координаты мигающих элементов диаграммы",
+		"comment": "Используйте панель ввода внизу экрана"
+	},
+	"/lesson/combinations/r": {
+		"type": "window",
+		"style": "modal",
+		"header": "Выполнено",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/lesson/training/w"
+			}
+		]
+	},
+	"/lesson/training/w": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Теперь можем пострелять!",
+		"content": [
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Вводите координаты мигающих стрелок и жмите кнопку «Пуск»."
+			},
+			{
+				"type": "paragraph",
+				"variant": 1,
+				"value": "Баллы начисляются только за правильно отмеченные стрелки."
+			}
+		],
+		"actions": [
+			{
+				"value": "Начать",
+				"to": "/lesson/training/t"
+			}
+		]
+	},
+	"/lesson/training/t": {
+		"type": "task",
+		"target": "diagram",
+		"event": "shot",
+		"expected": [
+			["4", "d", "+2", "-1/2"],
+			["5", "f", "-3", "-1/2"],
+			["6", "p", "0", "+1/2"],
+			["7", "s", "0", "-1/2"],
+			["1", "s", "0", "+1/2"]
+		],
+		"infallibility": true,
+		"next": "/lesson/training/r",
+		"message": "Вводите координаты мигающих стрелок и жмите Пуск",
+		"comment": "Время засекается"
+	},
+	"/lesson/training/r": {
+		"type": "window",
+		"style": "modal",
+		"header": "Вы успешно прошли обучение!",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Продолжить",
+				"to": "/set/w"
+			},
+			{
+				"value": "Завершить",
+				"to": "/feedback/w/assessment"
+			}
+		]
+	},
+	"/feedback/w/assessment": {
+		"type": "window",
+		"style": "modal",
+		"header": "Насколько вам понравилось?",
+		"content": [
+			{
+				"type": "mark",
+				"value": "assessment"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/feedback/w/difficulty"
+			}
+		]
+	},
+	"/feedback/w/difficulty": {
+		"type": "window",
+		"style": "modal",
+		"header": "Насколько вам было легко?",
+		"content": [
+			{
+				"type": "mark",
+				"value": "difficulty"
+			}
+		],
+		"actions": [
+			{
+				"value": "Закончить",
+				"to": "/end"
+			},
+			{
+				"value": "Назад",
+				"to": "/feedback/w/assessment"
+			}
+		]
+	},
+	"/end": {
+		"type": "window",
+		"style": "modal",
+		"header": "Спасибо за ваше участие!",
+		"content": [],
+		"actions": [
+			{
+				"value": "Пройти заново",
+				"to": "/"
+			},
+			{
+				"value": "Продолжить играть",
+				"to": "/set/w"
+			}
+		]
+	},
+	"/set/w": {
+		"type": "window",
+		"style": "instruction",
+		"header": "Стреляйте по стрелкам!",
+		"content": [
+			{
+				"type": "paragraph",
+				"style": "strong",
+				"value": "Вводите координаты мигающих стрелок и жмите кнопку «Пуск»."
+			},
+			{
+				"type": "paragraph",
+				"variant": 1,
+				"value": "Баллы начисляются только за правильно отмеченные стрелки."
+			}
+		],
+		"actions": [
+			{
+				"value": "Начать",
+				"to": "/set/t"
+			}
+		]
+	},
+	"/set/t": {
+		"type": "task",
+		"url": "/set/t",
+		"target": "diagram",
+		"event": "shot",
+		"expected": "generate",
+		"length": 5,
+		"infallibility": true,
+		"next": "/set/r",
+		"message": "Вводите координаты мигающих стрелок и жмите Пуск",
+		"comment": "Время засекается"
+	},
+	"/set/r": {
+		"type": "window",
+		"url": "/set/r",
+		"style": "modal",
+		"header": "Пройдено",
+		"content": [
+			{
+				"type": "progress",
+				"variant": 1
+			},
+			{
+				"type": "results"
+			}
+		],
+		"actions": [
+			{
+				"value": "Далее",
+				"to": "/set/t"
+			},
+			{
+				"value": "Завершить",
+				"to": "/feedback/w/assessment"
+			}
+		]
+	}
 }
