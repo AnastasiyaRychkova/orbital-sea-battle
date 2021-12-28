@@ -38,12 +38,13 @@ interface IProps {
 
 
 const InputValue = inject( "controller" )(observer(( props: IProps ) => {
+	!props.controller && console.error( 'Filter(desktop).InputValue: controller is undefined' );
 	const filter = props.controller!.filter;
-	const isFilterEnabled = !filter.isDisable( props.storeKey );
+	const isFilterDisabled = filter.isDisable( props.storeKey );
 	return (
 		<div
 			className={styles.inputValue}
-			data-switch-on={isFilterEnabled}
+			data-switch-off={isFilterDisabled}
 		>
 			<span className={styles.titleText}>
 				{props.name}
@@ -56,7 +57,7 @@ const InputValue = inject( "controller" )(observer(( props: IProps ) => {
 			</span>
 
 			<ul className={styles.row}>
-				{ make( props ) }
+				{ make( props, isFilterDisabled ) }
 			</ul>
 		</div>
 	)
@@ -69,7 +70,8 @@ function make({
 	storeKey: key,
 	theme,
 	values,
-}: IProps ): JSX.Element[]
+}: IProps,
+	isFilterDisabled: boolean ): JSX.Element[]
 {
 	const filter = controller!.filter;
 	let checkedValue = filter.getValue( key );
@@ -82,6 +84,7 @@ function make({
 				toggleName={key}
 				theme={theme}
 				checked={value === checkedValue}
+				disabled={isFilterDisabled}
 				onChange={
 					(e: React.ChangeEvent<HTMLInputElement>) => {
 						filter.setValue( key, e.target.value );

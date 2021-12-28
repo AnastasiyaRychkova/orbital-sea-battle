@@ -1,0 +1,66 @@
+@value colors: '../../../style/colors.css';
+@value primary-200, secondary-100 from colors;
+
+.header {
+	margin: 0;
+	padding: 0;
+}
+
+.headerText {
+	composes: header from '../../../style/typography.css';
+	composes: header-4 from '../../../style/typography.css';
+	color: primary-200;
+}
+
+.paragraph {
+	margin-bottom: .75em;
+	padding: 0;
+}
+
+.paragraphText {
+	composes: long-text from '../../../style/typography.css';
+	composes: long-text-m from '../../../style/typography.css';
+	color: secondary-100;
+}
+
+
+
+
+/*----------  Modal Window  ----------*/
+
+.mwHeader {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	padding: 0;
+}
+
+.mwHeader.center {
+	justify-content: center;
+}
+
+.mwContent {
+	display: flex;
+	flex-direction: column;
+}
+
+.mwActions {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	column-gap: 1em;
+	margin-top: 3em;
+}
+
+.mwActions.left {
+	justify-content: right;
+}
+
+.mwActions.center {
+	justify-content: center;
+}
+
+.mwButton {
+	min-width: 33%;
+}

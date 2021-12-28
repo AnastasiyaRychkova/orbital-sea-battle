@@ -1,4 +1,5 @@
 import React, {FC, MouseEventHandler} from 'react';
+import { Link } from "react-router-dom";
 import cn from '../../className';
 
 import Icon from '../../Icon/Icon';
@@ -22,7 +23,13 @@ interface IProps {
 	theme: Theme,
 
 	/** Функция по нажатию */
-	onClick?: MouseEventHandler<HTMLButtonElement>,
+	onClick?: MouseEventHandler<HTMLAnchorElement>,
+	
+	/** URL */
+	to?: string,
+	
+	/** Нужно ли переопределить путь */
+	replace?: boolean,
 
 	/** Стили, переданные родителями */
 	className?: string,
@@ -35,17 +42,20 @@ const Button: FC<IProps> = ({
 	theme,
 	className,
 	onClick,
+	to = '#',
+	replace = false,
 }) => {
 	return (
-		<button
-			type="button"
+		<Link
+			to={to}
+			replace={replace}
 			onClick={onClick}
 			className={cn( styles, ['button', priority, theme], className )} >
 				<Icon type={glyph} className={styles.icon}/>
 				<span className={styles.text}>
 					{value}
 				</span>
-		</button>
+		</Link>
 	);
 };
 

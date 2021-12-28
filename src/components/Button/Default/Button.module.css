@@ -2,7 +2,7 @@
 @value mobile, laptop from sizes;
 
 @value colors: '../../../style/colors.css';
-@value primary-200, primary-400, primary-600, primary-900, secondary-900, disabled-500, disabled-800, disabled-900 from colors;
+@value primary-200, primary-400, primary-600, primary-900, secondary-800, secondary-900, disabled-500, disabled-800, disabled-900 from colors;
 
 @value effects: '../../../style/effects.css';
 @value  glow__button--light--l,
@@ -47,14 +47,14 @@ from effects;
 .secondary {
 	composes: button;
 	border: 2px solid currentColor;
-	background-color: transparent;
+	background-color: secondary-800;
 	color: primary-400;
 }
 
 .secondary:active {
 	border-color: currentColor;
 	box-shadow: none;
-	background-color: transparent;
+	background-color: secondary-800;
 	color: primary-600;
 }
 

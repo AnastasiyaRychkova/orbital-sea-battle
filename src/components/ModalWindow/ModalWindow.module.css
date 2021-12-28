@@ -1,0 +1,60 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value secondary-100, secondary-900 from colors;
+
+@value effects: '../../style/effects.css';
+@value glow__button--primary--m from effects;
+
+
+.modalWindow {
+	box-sizing: border-box;
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	z-index: 100;
+
+	width: 100vw;
+	min-height: max(100%, 100vh);
+	padding: 2em;
+	overflow-y: auto;
+
+	background-color: rgba(21, 33, 28, 0.9);
+	backdrop-filter: blur(4px);
+}
+
+
+.window {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	margin: 0;
+
+	max-width: 50em;
+	padding: 2em;
+
+	box-shadow: glow__button--primary--m;
+	background-color: secondary-900;
+	color: secondary-100;
+}
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+
+/* Smartphone */
+@media (max-height: mobile), (max-width: mobile) {
+	.modalWindow {
+		padding: 1em;
+	}
+}
+
+

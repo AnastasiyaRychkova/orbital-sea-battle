@@ -2,6 +2,7 @@
 	"/": {
 		"type": "start",
 		"header": "",
+		"style": "start",
 		"content": [
 			{
 				"type": "paragraph",
@@ -65,11 +66,11 @@
 		"actions": [
 			{
 				"value": "Далее",
-				"to": "lesson/qn/w/n"
+				"to": "/lesson/qn/w/n"
 			}
 		]
 	},
-	"lesson/qn/w/n": {
+	"/lesson/qn/w/n": {
 		"type": "window",
 		"style": "instruction",
 		"header": "Главное квантовое число (n)",
@@ -100,12 +101,7 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [
-			{
-				"prop": "n",
-				"value": "3"
-			}
-		],
+		"expected": [["3", "", "", ""]],
 		"infallibility": false,
 		"next": "/lesson/qn/r/n",
 		"message": "Выберете 3 столбец",
@@ -158,12 +154,7 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [
-			{
-				"prop": "l",
-				"value": "2"
-			}
-		],
+		"expected": [["", "2", "", ""]],
 		"infallibility": false,
 		"next": "/lesson/qn/r/l",
 		"message": "Выберете все вторые снизу строки",
@@ -216,12 +207,7 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [
-			{
-				"prop": "m",
-				"value": "-2"
-			}
-		],
+		"expected": [["", "", "-2", ""]],
 		"infallibility": false,
 		"next": "/lesson/qn/r/m",
 		"message": "Выберете все -2 контейнеры",
@@ -274,12 +260,7 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [
-			{
-				"prop": "s",
-				"value": "-1/2"
-			}
-		],
+		"expected": [["", "", "", "-1/2"]],
 		"infallibility": false,
 		"next": "/lesson/qn/r/s",
 		"message": "Выберете все стрелки вниз",
@@ -326,7 +307,6 @@
 	},
 	"/lesson/combinations/t": {
 		"type": "task",
-		"url": "/lesson/combinations/t",
 		"target": "diagram",
 		"event": "shot",
 		"expected": [
@@ -416,7 +396,7 @@
 		"actions": [
 			{
 				"value": "Продолжить",
-				"to": "/set/w"
+				"to": "/lesson/set/w"
 			},
 			{
 				"value": "Завершить",
@@ -474,11 +454,11 @@
 			},
 			{
 				"value": "Продолжить играть",
-				"to": "/set/w"
+				"to": "/lesson/set/w"
 			}
 		]
 	},
-	"/set/w": {
+	"/lesson/set/w": {
 		"type": "window",
 		"style": "instruction",
 		"header": "Стреляйте по стрелкам!",
@@ -497,25 +477,23 @@
 		"actions": [
 			{
 				"value": "Начать",
-				"to": "/set/t"
+				"to": "/lesson/set/t"
 			}
 		]
 	},
-	"/set/t": {
+	"/lesson/set/t": {
 		"type": "task",
-		"url": "/set/t",
 		"target": "diagram",
 		"event": "shot",
 		"expected": "generate",
 		"length": 5,
 		"infallibility": true,
-		"next": "/set/r",
+		"next": "/lesson/set/r",
 		"message": "Вводите координаты мигающих стрелок и жмите Пуск",
 		"comment": "Время засекается"
 	},
-	"/set/r": {
+	"/lesson/set/r": {
 		"type": "window",
-		"url": "/set/r",
 		"style": "modal",
 		"header": "Пройдено",
 		"content": [
@@ -530,7 +508,7 @@
 		"actions": [
 			{
 				"value": "Далее",
-				"to": "/set/t"
+				"to": "/lesson/set/t"
 			},
 			{
 				"value": "Завершить",

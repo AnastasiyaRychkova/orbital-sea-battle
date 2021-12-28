@@ -11,7 +11,7 @@
 
 
 
-@value checkPattern: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0, linear-gradient( 90deg, rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0;
+@value checkPattern: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
 
 @value shadow__button-text: 0px 4px 4px rgba(0, 0, 0, 0.25);
 @value shadow__input: 2px 2px 3px rgba(5, 20, 13, 0.4);

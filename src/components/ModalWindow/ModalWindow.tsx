@@ -1,14 +1,15 @@
+import { observer } from 'mobx-react';
 import React, {FC} from 'react';
 import cn from '../className';
 import styles from './ModalWindow.module.css';
 
 interface IProps {
-	className: string,
+	className?: string,
 	children: React.ReactNode,
 }
 
 
-const ModalWindow: FC<IProps> = ({
+const ModalWindow: FC<IProps> = observer( ({
 	className,
 	children,
 }) => {
@@ -19,6 +20,6 @@ const ModalWindow: FC<IProps> = ({
 			</section>
 		</aside>
 	);
-};
+});
 
 export default ModalWindow;

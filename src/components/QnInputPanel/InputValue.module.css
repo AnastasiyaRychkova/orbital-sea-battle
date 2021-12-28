@@ -2,7 +2,7 @@
 @value mobile, laptop from sizes;
 
 @value colors: '../../style/colors.css';
-@value primary-200, secondary-900 from colors;
+@value primary-200, secondary-800, secondary-900, disable-600 from colors;
 
 @value effects: '../../style/effects.css';
 @value shadow__input from effects;
@@ -19,6 +19,11 @@
 	color: primary-200;
 	row-gap: .5em;
 	user-select: none;
+}
+
+.inputValue[data-switch-off=true] {
+	background-color: secondary-800;
+	color: disable-600;
 }
 
 .row {
