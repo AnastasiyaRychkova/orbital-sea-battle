@@ -1,7 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { useParams } from 'react-router-dom';
-import MiniInfo from '../../components/MiniInfo/MiniInfo';
+import MiniInfo from '../../../components/MiniInfo/MiniInfo';
 
 type RouterParams = {
 	state: 'qn'|'combinations'|'training'|'set',

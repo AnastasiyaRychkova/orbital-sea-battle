@@ -6,11 +6,11 @@ import {
 	Route,
 } from "react-router-dom";
 
-import uiStore from '../../client/UIStore';
+import uiStore from '../../../client/UIStore';
 
 import Start from './StartPage';
 import ShootingPage from './ShootingPage';
-import Analytics from '../../components/Analytics/Analytics';
+import Analytics from '../../../components/Analytics/Analytics';
 import PageManager from './PageManager';
 
 

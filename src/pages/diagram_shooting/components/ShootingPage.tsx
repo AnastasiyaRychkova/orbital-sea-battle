@@ -2,16 +2,16 @@ import React, {Suspense} from 'react';
 import { Provider, observer } from 'mobx-react';
 import { Route } from "react-router-dom";
 
-import page from './ExpPage';
-import Controller from './Controller';
+import page from '../ExpPage';
+import Controller from '../Controller';
 
-import FilterPanel from '../../components/QnInputPanel/Filter';
-import DropSidedInfo from '../../components/DropSidedInfo/DropSidedInfo';
+import FilterPanel from '../../../components/QnInputPanel/Filter';
+import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
 import TaskInfoBlock from './TaskInfoBlock';
-import ModalWindowBuilder from '../../components/ModalWindow/ModalWindowBuilder';
+import ModalWindowBuilder from '../../../components/ModalWindow/ModalWindowBuilder';
 import styles from './style.module.css';
 
-const Diagram = React.lazy(() => import( '../../components/Diagram/Diagram'));
+const Diagram = React.lazy(() => import( '../../../components/Diagram/Diagram'));
 
 
 const controller = new Controller();
