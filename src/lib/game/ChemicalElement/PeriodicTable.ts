@@ -1,5 +1,5 @@
-import converter from './QNConverter';
-import QNConverterInterface from './QNConverterInterface';
+import converter from './QNScheme';
+import QNSchemeInterface from './QNSchemeInterface';
 
 import {
 	default as ElemConfig,
@@ -739,14 +739,14 @@ type PeriodicTableType = {
 class PeriodicTable
 {
 	#table = periodicTable;
-	#converter: QNConverterInterface = converter;
+	#converter: QNSchemeInterface = converter;
 
 	getByNumber( number: number ): ChemicalElement
 	{
 		return this.#table[ number - 1 ];
 	}
 
-	get converter(): QNConverterInterface
+	get converter(): QNSchemeInterface
 	{
 		return this.#converter;
 	}

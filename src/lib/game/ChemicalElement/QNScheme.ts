@@ -1,5 +1,5 @@
 import { SpinIndex } from "./DiagramCell";
-import QNConverterInterface from "./QNConverterInterface";
+import QNSchemeInterface from "./QNSchemeInterface";
 import { CellQN, ShipQN } from "./QuantumNumbers";
 
 
@@ -9,7 +9,7 @@ type ColumnType = { [key: string]: BlockType };
 
 type ChartType = { [key: string]: ColumnType };
 
-class QNConverter implements QNConverterInterface
+class QNScheme implements QNSchemeInterface
 {
 	private correspondenceTable: ChartType;
 
@@ -190,7 +190,7 @@ class QNConverter implements QNConverterInterface
 }
 
 
-const converterInstance = new QNConverter();
+const qnScheme = new QNScheme();
 
 
-export default converterInstance;
+export default qnScheme;

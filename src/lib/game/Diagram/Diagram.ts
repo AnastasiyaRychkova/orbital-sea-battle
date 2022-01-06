@@ -1,14 +1,12 @@
 import { makeObservable, observable, action, computed } from "mobx";
 
-import IEventEmitter from "../../util/EventEmitter/EventEmitterInterface";
-import EventEmitterAdapter from "../../util/EventEmitter/EventEmitter";
 import { EDiagramCellState, SpinIndex } from "../ChemicalElement/DiagramCell";
 import ElemConfig from "../ChemicalElement/ElemConfig";
 import PeriodicTableInterface from "../ChemicalElement/PeriodicTableInterface";
 
-import type { CellQN, ShipQN } from "../ChemicalElement/QuantumNumbers";
+import type { CellQN, QuantumNumbers, ShipQN } from "../ChemicalElement/QuantumNumbers";
 import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
-import EventEmitterInterface from "../../util/EventEmitter/EventEmitterInterface";
+import EventProvider from "../../util/EventEmitter/EventProvider";
 
 
 
@@ -22,20 +20,19 @@ import EventEmitterInterface from "../../util/EventEmitter/EventEmitterInterface
  * * Параметр `disabled` блокирует выполнение игровых команд (🎲)
  * * Оповещает о совершении событий
  */
-class Diagram implements IDiagram {
+class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements IDiagram {
 	readonly periodicTable: PeriodicTableInterface;
 	_state!: ElemConfig;
 	_shots!: ElemConfig;
 	_lastShotIndex?: SpinIndex;
 	_disabled: boolean; // TODO: rename diagram.disabled => .editable
 
-	private emitter: IEventEmitter = new EventEmitterAdapter();
-
 
 	// private static readonly SIZE: number = 118;
 
 
 	constructor(periodicTable: PeriodicTableInterface) {
+		super();
 		makeObservable(this, {
 
 			_state: observable,
@@ -215,26 +212,10 @@ class Diagram implements IDiagram {
 		this._lastShotIndex = undefined;
 	}
 
-	on( event: DiagramEvent, func: Function ): EventEmitterInterface
+	highlight( quantumNumbers: QuantumNumbers ): void
 	{
-		return this.emitter.on( event, func );
+		/* TODO: Реализация отметки задания на диаграмме */
 	}
-
-	once( event: DiagramEvent, func: Function ): EventEmitterInterface
-	{
-		return this.emitter.once( event, func );
-	}
-
-	remove( event: DiagramEvent, func: Function ): EventEmitterInterface
-	{
-		return this.emitter.remove( event, func );
-	}
-
-	private _emit( event: DiagramEvent, data?: DiagramEventData ): EventEmitterInterface
-	{
-		return this.emitter.emit( event, data );
-	}
-
 }
 
 

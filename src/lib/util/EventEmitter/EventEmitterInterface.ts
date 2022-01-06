@@ -1,12 +1,8 @@
-interface EventEmitterInterface
+import IEventProvider from './EventProviderInterface';
+
+interface IEventEmitter<T extends string, D> extends IEventProvider<T>
 {
-	on( event: string, func: Function ): EventEmitterInterface;
-
-	once( event: string, func: Function ): EventEmitterInterface;
-
-	emit( event: string, data?: object ): EventEmitterInterface;
-
-	remove( event: string, func: Function ): EventEmitterInterface;
+	emit( event: string, data?: D ): IEventEmitter<T, D>;
 }
 
-export default EventEmitterInterface;
+export default IEventEmitter;

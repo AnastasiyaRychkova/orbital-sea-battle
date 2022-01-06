@@ -1,13 +1,13 @@
-import EventEmitterInterface from "./EventEmitterInterface";
+import IEventEmitter from "./EventEmitterInterface";
 // FIXME: Браузерный emitter возвращает CustomEvent, а не переданные значения
-class BrowserEventEmitter extends EventTarget implements EventEmitterInterface
+class BrowserEventEmitter<T extends string, D> extends EventTarget implements IEventEmitter<T, D>
 {
 	constructor()
 	{
 		super();
 	}
 
-	on( event: string, callback: Function): EventEmitterInterface
+	on( event: T, callback: Function): IEventEmitter<T,D>
 	{
 		this.addEventListener(
 			event,
@@ -16,7 +16,7 @@ class BrowserEventEmitter extends EventTarget implements EventEmitterInterface
 		return this;
 	}
 
-	once( event: string, callback: Function): EventEmitterInterface
+	once( event: T, callback: Function): IEventEmitter<T,D>
 	{
 		this.addEventListener(
 			event,
@@ -28,7 +28,7 @@ class BrowserEventEmitter extends EventTarget implements EventEmitterInterface
 		return this;
 	}
 
-	emit( event: string, data?: object ): EventEmitterInterface
+	emit( event: T, data?: D ): IEventEmitter<T,D>
 	{
 		this.dispatchEvent( new CustomEvent( event, {
 			detail: data,
@@ -36,7 +36,7 @@ class BrowserEventEmitter extends EventTarget implements EventEmitterInterface
 		return this;
 	}
 
-	remove(event: string, callback: Function): EventEmitterInterface
+	remove(event: T, callback: Function): IEventEmitter<T,D>
 	{
 		this.removeEventListener( event, callback as EventListener );
 		return this;

@@ -7,15 +7,18 @@ import {
 	QuantumNumbers,
 	CellQN,
 } from "../../ChemicalElement/QuantumNumbers";
-import IFilter from "./FilterInterface";
-import type { StoreKey } from "./FilterInterface";
+
+import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface.d";
 import INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
-import IQNConverter from "../../ChemicalElement/QNConverterInterface";
+import IQNScheme from "../../ChemicalElement/QNSchemeInterface";
+import EventProvider from "../../../util/EventEmitter/EventProvider";
 
 
 
-type StoreType = Map<StoreKey, INote>;
+type StoreType = {
+	[key in StoreKey]: INote;
+};
 
 
 /**
@@ -23,20 +26,32 @@ type StoreType = Map<StoreKey, INote>;
  * 
  * Вычисляет, какие элементы диаграммы соответствуют заданным квантовым числам
  */
-class Filter implements IFilter
+class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFilter
 {
 	store: StoreType;
 	_disabled: boolean;
-	private _converter: IQNConverter;
+	private _converter: IQNScheme;
 
-	constructor( qnConverter: IQNConverter )
+	private readonly _stateScheme = {
+		n: 0,
+		l: 1,
+		m: 2,
+		s: 3,
+	};
+
+
+	constructor( qnConverter: IQNScheme )
 	{
+		super();
 		makeObservable( this, {
 			store: observable,
 			_disabled: observable,
 
 			disabled: computed,
+			state: computed,
 			doesSpecifyCell: computed,
+			_stateAsString: computed,
+
 			setValue: action,
 			setDisable: action,
 			reset: action,
@@ -61,16 +76,16 @@ class Filter implements IFilter
 
 	private _createDefaultStore(): StoreType
 	{
-		return new Map<StoreKey, INote>([
-			['n', new CheckboxNote() ],
-			['l', new CheckboxNote() ],
-			['m', new CheckboxNote() ],
-			['s', new CheckboxNote() ],
-		]);
+		return {
+			n: new CheckboxNote(),
+			l: new CheckboxNote(),
+			m: new CheckboxNote(),
+			s: new CheckboxNote(),
+		};
 	}
 
 	getValue = ( key: StoreKey ) =>
-		this.store.get( key )?.getAsString();
+		this._get( key ).getAsString();
 
 	setValue = ( key: StoreKey, value: string ) => {
 		if( this._disabled )
@@ -78,12 +93,20 @@ class Filter implements IFilter
 
 		const note = this._get( key );
 		note.set( this._makeQN( key, value ) );
+
+		this._emit(
+			'changed',
+			{
+				state: this._stateAsString,
+				scheme: this._stateScheme,
+			}
+		);
 		return this;
 	};
 
 	private _get( key: StoreKey ): INote
 	{
-		return this.store.get( key )!;
+		return this.store[ key ];
 	}
 
 	private _makeQN( key: StoreKey, value: string )
@@ -181,23 +204,29 @@ class Filter implements IFilter
 		if( this._disabled )
 			return false;
 
-		for( const qNumber of this.store.values() ) {
+		for( const qNumber of Object.values(this.store) ) {
 			if( !qNumber.isSat() ) {
 				return false;
 			}
 		}
-		const state = this.getState();
+		const state = this.state;
 		return this._converter.getCellIndex( state as CellQN ) !== undefined;
 	}
 
-	getState(): QuantumNumbers
+	get state(): QuantumNumbers
 	{
 		return {
-			n: this._get( 'n' )!.get() as MainQN | undefined,
-			l: this._get( 'l' )!.get() as OrbitalQN | undefined,
-			m: this._get( 'm' )!.get() as MagneticQN | undefined,
-			s: this._get( 's' )!.get() as SpinQN | undefined,
+			n: this._get( 'n' ).get() as MainQN | undefined,
+			l: this._get( 'l' ).get() as OrbitalQN | undefined,
+			m: this._get( 'm' ).get() as MagneticQN | undefined,
+			s: this._get( 's' ).get() as SpinQN | undefined,
 		}
+	}
+
+	get _stateAsString(): StringState
+	{
+		return Object.values(this.store)
+					 .map((value) => value.getAsString()) as StringState;
 	}
 
 	reset(): void

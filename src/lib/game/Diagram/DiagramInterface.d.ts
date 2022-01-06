@@ -1,5 +1,6 @@
+import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
-import type { CellQN, ShipQN,
+import type { CellQN, QuantumNumbers, ShipQN,
 } from "../ChemicalElement/QuantumNumbers";
 
 
@@ -83,10 +84,6 @@ export default interface IDiagram
 	/** Отчистить диаграмму и выстрелы */
 	reset(): void;
 
-
-	on( event: DiagramEvent, func: Function ): EventEmitterInterface;
-
-	once( event: DiagramEvent, func: Function ): EventEmitterInterface;
-
-	remove( event: DiagramEvent, func: Function ): EventEmitterInterface;
+	/** Отметить элементы диаграммы */
+	highlight( quantumNumbers: QuantumNumbers ): void;
 }

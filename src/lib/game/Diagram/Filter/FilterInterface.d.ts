@@ -2,7 +2,16 @@ import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
 
 export type StoreKey = 'n'|'l'|'m'|'s';
 
-interface IFilter
+export type StringState = [string, string, string, string];
+
+export type FilterEvent = 'changed';
+export type FilterEventData = {
+	state: StringState,
+	scheme: {[k in StoreKey]: number},
+}
+
+
+export default interface IFilter
 {
 	isCellSelected( qn: QuantumNumbers ): boolean;
 	isContainerSelected( qn: QuantumNumbers ): boolean;
@@ -15,11 +24,8 @@ interface IFilter
 	setDisable( key: StoreKey, newState: boolean ): void;
 
 	doesSpecifyCell: boolean;
-	getState(): QuantumNumbers;
+	state: QuantumNumbers;
 	reset(): void;
 
 	disabled: boolean;
 }
-
-
-export default IFilter;
