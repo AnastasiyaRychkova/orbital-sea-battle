@@ -36,7 +36,7 @@ const Panel: FC<IProps> = ({className}) => {
 						name="m"
 						sub="S"
 						storeKey="s"
-						values={['+1/2','-1/2']}
+						values={['+1/2','−1/2']}
 						theme={ToggleTheme.squareM} />
 				</div>
 			</div>
