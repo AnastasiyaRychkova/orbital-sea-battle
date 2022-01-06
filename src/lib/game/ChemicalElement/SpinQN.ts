@@ -9,6 +9,10 @@ class SpinQN implements IQuantumNumber
 {
 	protected _number: SpinType;
 
+	/**
+	 * 
+	 * @param value Number( 1 | -1) || String( '+1/2' | )
+	 */
 	constructor( value: number|string = 1 )
 	{
 		this._number = ( typeof value === 'string' )
@@ -33,7 +37,7 @@ class SpinQN implements IQuantumNumber
 
 	toString(): string
 	{
-		return this._number > 0 ? '+1/2' : '-1/2';
+		return this._number > 0 ? '+1/2' : '−1/2';
 	}
 }
 

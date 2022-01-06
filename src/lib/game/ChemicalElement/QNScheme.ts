@@ -1,6 +1,7 @@
 import { SpinIndex } from "./DiagramCell";
 import QNSchemeInterface from "./QNSchemeInterface";
 import { CellQN, ShipQN } from "./QuantumNumbers";
+import SpinQN from "./SpinQN";
 
 
 type BoxType = [SpinIndex, SpinIndex];
@@ -8,6 +9,10 @@ type BlockType = { [key: string]: BoxType };
 type ColumnType = { [key: string]: BlockType };
 
 type ChartType = { [key: string]: ColumnType };
+
+type SchemeElem = BoxType | BlockType | ColumnType;
+
+
 
 class QNScheme implements QNSchemeInterface
 {
@@ -187,9 +192,33 @@ class QNScheme implements QNSchemeInterface
 		return this.correspondenceTable[ qn.n.value ][ qn.l.toString() ];
 	}
 	
+	getRandomCellQN(): [string, string, string, string]
+	{
+		const res: string[] = [];
+
+		this._randomQN( Object.entries( this.correspondenceTable ), res );
+		if( res.length !== 4 )
+			throw new Error("The generated array has a length not equal to 4");
+
+		return res as [string, string, string, string];
+	}
+
+	private _randomQN( elements: [string, SchemeElem][], res: string[]): void
+	{
+		let random = Math.ceil( Math.random() * elements.length );
+		random = random ? random - 1 : 0;
+		const [qn, value] = elements[ random ];
+
+		res.push( qn );
+
+		if( value instanceof Array )
+			res.push(Math.random() > 0.5 ? '+1/2' : '−1/2' );
+		else
+			this._randomQN( Object.entries( value ), res );
+	}
 }
 
-
+ 
 const qnScheme = new QNScheme();
 
 

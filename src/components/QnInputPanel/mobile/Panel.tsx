@@ -57,7 +57,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						name='m'
 						sub='S'
 						storeKey='s'
-						values={['+1/2','-1/2']}
+						values={['+1/2','−1/2']}
 						open={store.openTab === 's'}
 						openTabHandle={store.openTabHandle} />
 				</div>
