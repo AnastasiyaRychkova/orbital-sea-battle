@@ -15,6 +15,9 @@ interface IProps {
 	/** Функция по нажатию */
 	onClick?: MouseEventHandler<HTMLAnchorElement>,
 
+	/** Отключена ли кнопка */
+	disabled?: boolean,
+
 	/** URL */
 	to?: string,
 
@@ -32,13 +35,14 @@ const Button: FC<IProps> = ({
 	onClick,
 	to = '#',
 	replace = false,
+	disabled = false,
 }) => {
 	return (
 		<Link
 			to={to}
 			replace={replace}
 			onClick={onClick}
-			className={cn( styles, ['button', priority], className )} >
+			className={cn( styles, ['button', priority, (disabled ? 'disabled' : undefined)], className )} >
 				<span className={styles.text}>
 					{value}
 				</span>

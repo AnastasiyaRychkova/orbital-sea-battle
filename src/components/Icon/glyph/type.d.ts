@@ -1,3 +1,9 @@
 export type Glyph = | 'cross'
 					| 'info'
-					| 'shot';
+					| 'shot'
+					| 'clock'
+					| 'hit'
+					| 'accuracy'
+					| 'play'
+					| 'full_screen'
+					;

@@ -1,22 +1,13 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
+import {achievements} from "../../client/core";
 import cn from '../className';
-import styles from './GameProgress.module.css';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import styles from './GameProgress.module.css';
 
-
-type ProgressInfo = {
-	level?: number,
-	name?: string,
-	score: number,
-	goal: number,
-}
 
 
 interface IProps {
-	/** Объект с информацией об игровом прогрессе (уровне) */
-	progress: ProgressInfo,
-
 	/** Нужно ли указывать уровень цифрой */
 	withLevel?: boolean,
 
@@ -31,7 +22,6 @@ interface IProps {
 }
 
 const GameProgress: FC<IProps> = observer(({
-	progress,
 	withLevel,
 	withName,
 	withScore,
@@ -39,35 +29,33 @@ const GameProgress: FC<IProps> = observer(({
 }) => {
 	return (
 		<div className={cn( styles, ['gameProgress'], className )}>
-			{ withLevel && progress.level ?
+			{ withLevel && achievements.level ?
 				<div className={styles.levelNumber}>
 					<span className={styles.levelText}>
-						{progress.level}
+						{achievements.level}
 					</span>
 				</div>
 				: ''
 			}
 			<div className={styles.progress}>
 				<div className={styles.scheme}>
-					{ withName && progress.name ?
-						<div className={styles.levelName}>
-							<span className={styles.nameText}>
-								{progress.name}
-							</span>
-						</div>
-						: ''
-					}
-					<ProgressBar
-						value={progress.score / progress.goal}
-						className={styles.progressBar} />
-				</div>
-				{ withScore ?
-					<div className={styles.score}>
-						<span className={styles.scoreText}>
-							{progress.score}/{progress.goal}
+					{ withName && achievements.name &&
+					<div className={styles.levelName}>
+						<span className={styles.nameText}>
+							{achievements.name}
 						</span>
 					</div>
-					: ''
+					}
+					<ProgressBar
+						value={achievements.score / achievements.goal}
+						className={styles.achievementsBar} />
+				</div>
+				{ withScore &&
+				<div className={styles.score}>
+					<span className={styles.scoreText}>
+						{achievements.score}/{achievements.goal}
+					</span>
+				</div>
 				}
 			</div>
 		</div>

@@ -173,7 +173,7 @@
 }
 
 /* Smartphone */
-@media (max-width: mobile) {
+@media (max-width: mobile), (max-height: mobile) {
 	.button {
 		padding: .5em 1em;
 	}

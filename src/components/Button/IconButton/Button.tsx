@@ -11,7 +11,7 @@ export type Theme = 'backing' | 'inversive';
 
 interface IProps {
 	/** Название иконки */
-	type: Glyph,
+	glyph: Glyph,
 
 	/** Стиль кнопки */
 	theme?: Theme,
@@ -25,7 +25,7 @@ interface IProps {
 
 
 const Button: FC<IProps> = ({
-	type,
+	glyph,
 	theme,
 	onClick,
 	className,
@@ -35,7 +35,7 @@ const Button: FC<IProps> = ({
 			type="button"
 			onClick={onClick}
 			className={cn( styles, ['button', theme], className )} >
-				<Icon type={type} />
+				<Icon type={glyph} />
 		</button>
 	);
 };

@@ -6,9 +6,7 @@ import styles from './MiniInfo.module.css';
 
 import type { Glyph } from '../Icon/glyph/type';
 
-type InfoProvider = {
-	valueAsString: () => string,
-}
+type InfoProvider = string | number;
 
 interface IProps {
 	/** Объект, предоставляющий выводимую информацию */
@@ -41,7 +39,7 @@ const MiniInfo: FC<IProps> = observer(({
 			<Icon type={glyph} className={styles.icon} />
 			<div className={styles.message}>
 				<span className={styles.valueText}>
-					{provider.valueAsString()}
+					{provider}
 				</span>
 				{ caption &&
 					<span className={styles.captionText}>

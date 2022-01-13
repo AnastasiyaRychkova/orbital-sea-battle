@@ -1,12 +1,12 @@
 @value colors: '../../../style/colors.css';
-@value secondary-100, secondary-50, secondary-300, secondary-800, secondary-900, primary-400, disable-500, disable-700, disable-800, error-50, error-100, error-700, error-800, error-900 from colors;
+@value secondary-100, secondary-50, error-400, secondary-800, secondary-900, primary-400, disable-500, disable-600, disable-700, disable-800, disable-900, error-50, error-100, error-700, error-800, error-900 from colors;
 
 @value effects: '../../../style/effects.css';
 @value shadow__input from effects;
 
 
 .tab {
-	background-color: disable-800;
+	background-color: disable-700;
 }
 
 .tab > input {
@@ -35,13 +35,13 @@
 	height: 1.688em;
 	padding: .25em;
 	border-bottom: 1px solid transparent;
-	background-color: disable-700;
+	background-color: disable-600;
 	text-align: center;
 	color: secondary-50;
 }
 
 .titleBlock.undefined {
-	background: linear-gradient(315deg, disable-800 50%, disable-800 90%, secondary-300 90%, secondary-300 100%);
+	background: linear-gradient(315deg, disable-700 50%, disable-700 90%, error-400 90%, error-400 100%);
 }
 
 .tab :checked + .titleBlock {

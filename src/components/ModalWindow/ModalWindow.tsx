@@ -14,8 +14,8 @@ const ModalWindow: FC<IProps> = observer( ({
 	children,
 }) => {
 	return (
-		<aside className={cn( styles, ['modalWindow'], className )} data-closed="false">
-			<section className={styles.window}>
+		<aside className={styles.modalWindow} data-closed="false">
+			<section className={cn( styles, ['window'], className )}>
 				{children}
 			</section>
 		</aside>

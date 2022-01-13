@@ -33,7 +33,7 @@
 	flex-basis: 0;
 }
 
-@media (max-width: 904px) {
+@media (max-width: 940px) {
 	.inputsRow {
 		flex-basis: 0;
 	}

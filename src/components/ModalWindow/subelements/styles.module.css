@@ -1,5 +1,8 @@
+@value sizes: '../../../style/display.css';
+@value mobile, laptop from sizes;
+
 @value colors: '../../../style/colors.css';
-@value primary-200, secondary-100 from colors;
+@value primary-200, secondary-100, secondary-800 from colors;
 
 .header {
 	margin: 0;
@@ -19,7 +22,7 @@
 
 .paragraphText {
 	composes: long-text from '../../../style/typography.css';
-	composes: long-text-m from '../../../style/typography.css';
+	composes: long-text-m-normal from '../../../style/typography.css';
 	color: secondary-100;
 }
 
@@ -27,6 +30,14 @@
 
 
 /*----------  Modal Window  ----------*/
+
+.mWindow {
+	width: min( 52em, 100%);
+}
+
+.mWindow.modal {
+	width: min( 52em, 100%);
+}
 
 .mwHeader {
 	display: flex;
@@ -36,8 +47,9 @@
 	padding: 0;
 }
 
-.mwHeader.center {
+.mwHeader.modal {
 	justify-content: center;
+	text-align: center;
 }
 
 .mwContent {
@@ -49,18 +61,64 @@
 	display: flex;
 	align-items: center;
 	flex-direction: row-reverse;
-	column-gap: 1em;
+	flex-wrap: wrap;
+	gap: 1em;
 	margin-top: 3em;
 }
 
-.mwActions.left {
+.mwActions.instruction {
 	justify-content: right;
 }
 
-.mwActions.center {
+.mwActions.modal {
 	justify-content: center;
 }
 
 .mwButton {
-	min-width: 33%;
+	min-width: 18em;
+}
+
+.mwResults {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	justify-content: center;
+	flex-wrap: wrap;
+	column-gap: 1em;
+	margin-top: 1em;
+}
+
+.mwMiniInfo {
+	background-color: secondary-800;
+}
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+
+@media (max-width: laptop) and (min-width: mobile) {
+	.mWindow {
+		width: min( 50em, 100%);
+	}
+	
+	.mWindow.modal {
+		width: min( 46em, 100%);
+	}
+}
+
+/* Smartphone */
+@media (max-height: mobile), (max-width: mobile) {
+	.mWindow {
+		width: min( 40em, 100%);
+	}
+	
+	.mWindow.modal {
+		width: min( 37em, 100%);
+	}
+	
+	.mwButton {
+		min-width: 12.5em;
+	}
 }

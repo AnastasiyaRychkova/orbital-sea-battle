@@ -5,10 +5,7 @@
 @value primary-200, primary-400, primary-600, primary-900, secondary-800, secondary-900, disabled-500, disabled-800, disabled-900 from colors;
 
 @value effects: '../../../style/effects.css';
-@value  glow__button--light--l,
-		glow__button--primary--l,
-		shadow__button-text
-from effects;
+@value glow__button--light--l, glow__button--primary--l, shadow__button-text from effects;
 
 
 
@@ -19,7 +16,11 @@ from effects;
 	align-items: center;
 	flex-direction: row;
 	justify-content: center;
-	padding: 0.625em;
+	padding: 0.625em 1em;
+}
+
+.disabled {
+	pointer-events: none;
 }
 
 
@@ -29,15 +30,18 @@ from effects;
 	composes: button;
 	border: none;
 	background-color: primary-400;
+	border: 2px solid primary-400;
 	color: primary-900;
 }
 
 .primary:active {
 	background-color: primary-600;
+	border-color: primary-600;
 }
 
-.primary:disabled {
+.primary.disabled {
 	background-color: primary-900;
+	border-color: primary-900;
 	color: disabled-500;
 }
 
@@ -58,7 +62,7 @@ from effects;
 	color: primary-600;
 }
 
-.secondary:disabled {
+.secondary.disabled {
 	border: none;
 	background-color: primary-800;
 	color: disabled-500;
@@ -80,9 +84,10 @@ from effects;
 	.primary:hover {
 		box-shadow: glow__button--light--l;
 		background-color: primary-200;
+		border-color: primary-200;
 	}
 	
-	.primary:disabled:hover {
+	.primary.disabled:hover {
 		box-shadow: none;
 	}
 
@@ -92,7 +97,7 @@ from effects;
 		background-color: secondary-900;
 	}
 	
-	.secondary:disabled:hover {
+	.secondary.disabled:hover {
 		box-shadow: none;
 	}
 }
