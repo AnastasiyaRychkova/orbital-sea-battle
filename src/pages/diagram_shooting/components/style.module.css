@@ -1,23 +1,26 @@
-@value sizes: '../../style/display.css';
+@value sizes: '../../../style/display.css';
 @value mobile, laptop from sizes;
 
 .page {
+
+	--page-padding-x: .75em;
+	--page-padding-y: .75em;
 	display: flex;
-	justify-content: center;
+	position: relative;
 	align-items: center;
 	flex-direction: column;
+	justify-content: center;
 	width: 100vw;
 	height: 100vh;
 	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255, 255, 255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
 	background-color: #1E2C26;
 	background-size: 3em 3em;
-	position: relative;
 }
 
 
 .diagram {
-	height: 100%;
 	width: 100%;
+	height: 100%;
 }
 
 .diagram:focus {
@@ -26,29 +29,39 @@
 
 .filter {
 	position: absolute;
-	bottom: 3em;
 	right: calc( 50% - 546px );
+	bottom: var(--page-padding-y);
 	justify-content: center;
 }
 
-.taskCounter {
-	margin-top: 1em;
-}
-
-.clock {
+.leftPageCorner {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 4em;
-}
-
-.processInfo {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 100%;
 	position: absolute;
-	top: 2em;
+	top: var(--page-padding-y);
+	left: var(--page-padding-x);
+	flex-direction: column;
+	max-width: 45%;
+	user-select: none;
+	row-gap: .75em;
+	pointer-events: none;
+}
+
+.rightPageCorner {
+	display: flex;
+	position: absolute;
+	align-items: flex-start;
+	top: 0;
+	right: 0;
+	user-select: none;
+	column-gap: 0em;
+}
+
+.progressBar {
+	width: 30em;
+}
+
+.fullScreenBtn {
+	width: 2.8em;
 }
 
 @media (max-width: 1400px) {
@@ -58,17 +71,55 @@
 }
 
 @media (min-width: mobile) and (max-width: laptop) {
+	.page {
+		--page-padding-x: .5em;
+		--page-padding-y: .5em;
+	}
+
+	.leftPageCorner {
+		row-gap: .5em;
+		max-width: 50%;
+	}
+
+	.progressBar {
+		width: 25em;
+	}
+
 	.filter {
-		bottom: 1em;
 		right: calc( 50% - 452px );
+		bottom: 1em;
 	}
 }
 
-@media (max-width: 904px) {
-	.filter {
-		justify-content: flex-end;
-		bottom: 1em;
-		right: 0;
+@media (max-width: 940px) {
+	.leftPageCorner {
+		max-width: min( 80%, 29.4em );
 	}
 
+	.filter {
+		right: 0;
+		bottom: 1em;
+		justify-content: flex-end;
+	}
+
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+	.page {
+		--page-padding-x: .25em;
+		--page-padding-y: .25em;
+	}
+	
+	.leftPageCorner {
+		row-gap: .5em;
+		max-width: 80%;
+	}
+
+	.progressBar {
+		width: 18em;
+	}
+	
+	.fullScreenBtn {
+		width: 2em;
+	}
 }

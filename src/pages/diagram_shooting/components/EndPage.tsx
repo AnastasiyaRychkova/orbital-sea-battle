@@ -4,13 +4,23 @@ import ModalWindowBuilder from '../../../components/ModalWindow/ModalWindowBuild
 import page from '../ExpPage';
 import progress from '../ExpProcess';
 
+const newSessionClick = () => {
+	progress.newSession();
+}
+
+
 const EndPage = observer( () => {
 	return (
 		<div className="page">
 			<ModalWindowBuilder
 				provider={page}
 				variant={progress.variant}
-				assessments={progress.assessments} />
+				assessments={progress.assessments}
+				buttons={{
+					secondary: {
+						onClick: newSessionClick,
+					}
+				}} />
 		</div>
 	);
 } );

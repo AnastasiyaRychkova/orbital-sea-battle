@@ -256,6 +256,12 @@ html {
 		--small: 0.62em;
 		--tiny: 0.62em;
 	}
+
+	.long-text {
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+	}
 	
 	.button {
 		--large: 1.5em;
@@ -268,7 +274,7 @@ html {
 
 }
 
-@media (max-width: 540px) {
+@media (max-width: 540px), (max-height: 540px) {
 	.header {
 		--large: 1.5em;
 		--big: 1.12em;
@@ -288,6 +294,12 @@ html {
 		--normal: 0.8em;
 		--small: 0.72em;
 		--tiny: 0.62em;
+	}
+
+	.long-text {
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
 	}
 	
 	.button {

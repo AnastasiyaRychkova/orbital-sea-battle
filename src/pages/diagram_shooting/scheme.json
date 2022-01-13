@@ -1,13 +1,9 @@
 {
 	"/": {
-		"type": "start",
-		"header": "",
+		"type": "window",
+		"header": "Пройдите обучение к интерактивному компоненту игры.",
 		"style": "start",
 		"content": [
-			{
-				"type": "paragraph",
-				"value": "Пройдите обучение к интерактивному компоненту игры."
-			},
 			{
 				"type": "paragraph",
 				"value": "Следуйте инструкциям и не переживайте за результат. Ваши ошибки помогут нам усовершенствовать игру."
@@ -103,29 +99,10 @@
 		"event": "change",
 		"expected": [["3", "", "", ""]],
 		"infallibility": false,
-		"next": "/lesson/qn/r/n",
+		"next": "/lesson/qn/w/l",
 		"message": "Выберете 3 столбец",
-		"comment": "Используйте панель ввода внизу экрана"
-	},
-	"/lesson/qn/r/n": {
-		"type": "window",
-		"style": "modal",
-		"header": "Выполнено",
-		"content": [
-			{
-				"type": "progress",
-				"variant": 1
-			},
-			{
-				"type": "results"
-			}
-		],
-		"actions": [
-			{
-				"value": "Далее",
-				"to": "/lesson/qn/w/l"
-			}
-		]
+		"comment": "Используйте панель ввода внизу экрана",
+		"cost": 10
 	},
 	"/lesson/qn/w/l": {
 		"type": "window",
@@ -154,32 +131,13 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [["", "2", "", ""]],
+		"expected": [["", "p", "", ""]],
 		"infallibility": false,
-		"next": "/lesson/qn/r/l",
+		"next": "/lesson/qn/w/m",
 		"message": "Выберете все вторые снизу строки",
-		"comment": "Используйте панель ввода внизу экрана"
+		"comment": "Используйте панель ввода внизу экрана",
+		"cost": 10
 	},
-	"/lesson/qn/r/l": {
-			"type": "window",
-			"style": "modal",
-			"header": "Выполнено",
-			"content": [
-				{
-					"type": "progress",
-					"variant": 1
-				},
-				{
-					"type": "results"
-				}
-			],
-			"actions": [
-				{
-					"value": "Далее",
-					"to": "/lesson/qn/w/m"
-				}
-			]
-		},
 	"/lesson/qn/w/m": {
 		"type": "window",
 		"style": "instruction",
@@ -209,29 +167,10 @@
 		"event": "change",
 		"expected": [["", "", "-2", ""]],
 		"infallibility": false,
-		"next": "/lesson/qn/r/m",
+		"next": "/lesson/qn/w/s",
 		"message": "Выберете все -2 контейнеры",
-		"comment": "Используйте панель ввода внизу экрана"
-	},
-	"/lesson/qn/r/m": {
-		"type": "window",
-		"style": "modal",
-		"header": "Выполнено",
-		"content": [
-			{
-				"type": "progress",
-				"variant": 1
-			},
-			{
-				"type": "results"
-			}
-		],
-		"actions": [
-			{
-				"value": "Далее",
-				"to": "/lesson/qn/w/s"
-			}
-		]
+		"comment": "Используйте панель ввода внизу экрана",
+		"cost": 10
 	},
 	"/lesson/qn/w/s": {
 		"type": "window",
@@ -260,13 +199,14 @@
 		"type": "task",
 		"target": "filter",
 		"event": "change",
-		"expected": [["", "", "", "-1/2"]],
+		"expected": [["", "", "", "−1/2"]],
 		"infallibility": false,
-		"next": "/lesson/qn/r/s",
+		"next": "/lesson/qn/r",
 		"message": "Выберете все стрелки вниз",
-		"comment": "Используйте панель ввода внизу экрана"
+		"comment": "Используйте панель ввода внизу экрана",
+		"cost": 10
 	},
-	"/lesson/qn/r/s": {
+	"/lesson/qn/r": {
 		"type": "window",
 		"style": "modal",
 		"header": "Выполнено",
@@ -274,9 +214,6 @@
 			{
 				"type": "progress",
 				"variant": 1
-			},
-			{
-				"type": "results"
 			}
 		],
 		"actions": [
@@ -307,19 +244,20 @@
 	},
 	"/lesson/combinations/t": {
 		"type": "task",
-		"target": "diagram",
-		"event": "shot",
+		"target": "filter",
+		"event": "change",
 		"expected": [
 			["5", "d", "", ""],
 			["", "p", "+1", ""],
 			["4", "", "0", ""],
-			["3", "d", "-1"],
+			["3", "d", "-1", ""],
 			["2", "s", "0", "+1/2"]
 		],
 		"infallibility": false,
 		"next": "/lesson/combinations/r",
 		"message": "Введите координаты мигающих элементов диаграммы",
-		"comment": "Используйте панель ввода внизу экрана"
+		"comment": "Используйте панель ввода внизу экрана",
+		"cost": 20
 	},
 	"/lesson/combinations/r": {
 		"type": "window",
@@ -329,9 +267,6 @@
 			{
 				"type": "progress",
 				"variant": 1
-			},
-			{
-				"type": "results"
 			}
 		],
 		"actions": [
@@ -369,16 +304,19 @@
 		"target": "diagram",
 		"event": "shot",
 		"expected": [
-			["4", "d", "+2", "-1/2"],
-			["5", "f", "-3", "-1/2"],
+			["4", "d", "+2", "−1/2"],
+			["5", "f", "-3", "−1/2"],
 			["6", "p", "0", "+1/2"],
-			["7", "s", "0", "-1/2"],
+			["7", "s", "0", "−1/2"],
 			["1", "s", "0", "+1/2"]
 		],
 		"infallibility": true,
 		"next": "/lesson/training/r",
 		"message": "Вводите координаты мигающих стрелок и жмите Пуск",
-		"comment": "Время засекается"
+		"comment": "Время засекается",
+		"cost": 25,
+		"bonusTime": 10,
+		"bonusCost": 10
 	},
 	"/lesson/training/r": {
 		"type": "window",
@@ -396,7 +334,7 @@
 		"actions": [
 			{
 				"value": "Продолжить",
-				"to": "/lesson/set/w"
+				"to": "/lesson/game/w"
 			},
 			{
 				"value": "Завершить",
@@ -411,7 +349,7 @@
 		"content": [
 			{
 				"type": "mark",
-				"value": "assessment"
+				"value": "satisfaction"
 			}
 		],
 		"actions": [
@@ -449,16 +387,16 @@
 		"content": [],
 		"actions": [
 			{
-				"value": "Пройти заново",
-				"to": "/"
+				"value": "Продолжить играть",
+				"to": "/lesson/game/w"
 			},
 			{
-				"value": "Продолжить играть",
-				"to": "/lesson/set/w"
+				"value": "Пройти заново",
+				"to": "/"
 			}
 		]
 	},
-	"/lesson/set/w": {
+	"/lesson/game/w": {
 		"type": "window",
 		"style": "instruction",
 		"header": "Стреляйте по стрелкам!",
@@ -477,22 +415,25 @@
 		"actions": [
 			{
 				"value": "Начать",
-				"to": "/lesson/set/t"
+				"to": "/lesson/game/t"
 			}
 		]
 	},
-	"/lesson/set/t": {
+	"/lesson/game/t": {
 		"type": "task",
 		"target": "diagram",
 		"event": "shot",
 		"expected": "generate",
 		"length": 5,
 		"infallibility": true,
-		"next": "/lesson/set/r",
+		"next": "/lesson/game/r",
 		"message": "Вводите координаты мигающих стрелок и жмите Пуск",
-		"comment": "Время засекается"
+		"comment": "Время засекается",
+		"cost": 25,
+		"bonusTime": 10,
+		"bonusCost": 10
 	},
-	"/lesson/set/r": {
+	"/lesson/game/r": {
 		"type": "window",
 		"style": "modal",
 		"header": "Пройдено",
@@ -508,7 +449,7 @@
 		"actions": [
 			{
 				"value": "Далее",
-				"to": "/lesson/set/t"
+				"to": "/lesson/game/t"
 			},
 			{
 				"value": "Завершить",

@@ -9,64 +9,59 @@ import MiniInfo from '../../components/MiniInfo/MiniInfo';
 import './components.css';
 import '../../style/colors.css';
 import '../../style/reset.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import achievements from '../../client/AchievementSystem';
 
-const miniInfoProvider = {
-	valueAsString: () => '2/5'
-}
-
-const progress = {
-	level: 2,
-	name: 'Лейтенант',
-	score: 14,
-	goal: 20,
-}
-
-
+achievements.receive( 60 );
 
 const Test = () => {
 	return (
-		<div className='test'>
-			<section className="tasks">
-				<div className="row">
-					<div className="column tasks">
-						<DropSidedInfo message='Выберете 2 ряд диаграммы' comment='Используйте панель внизу экрана' />
+		<Router>
+			<div className='test'>
+				<section className="tasks">
+					<div className="row">
+						<div className="column tasks">
+							<DropSidedInfo message='Выберете 2 ряд диаграммы' comment='Используйте панель внизу экрана' />
+						</div>
+						<div className="column mini-infos">
+							<MiniInfo provider='2/5' caption='выстрелов' glyph='shot' />
+						</div>
 					</div>
-					<div className="column mini-infos">
-						<MiniInfo provider={miniInfoProvider} caption='выстрелов' glyph='shot' />
+				</section>
+				<section className="progress">
+					<div className="row">
+						<div className="column">
+							<GameProgress />
+							<GameProgress withScore />
+							<GameProgress withLevel />
+							<GameProgress withName />
+							<GameProgress withLevel withScore />
+							<GameProgress withLevel withName />
+							<GameProgress withScore withName />
+						</div>
 					</div>
-				</div>
-			</section>
-			<section className="progress">
-				<div className="row">
-					<div className="column">
-						<GameProgress progress={progress} />
-						<GameProgress progress={progress} withScore />
-						<GameProgress progress={progress} withLevel />
-						<GameProgress progress={progress} withName />
-						<GameProgress progress={progress} withLevel withScore />
-						<GameProgress progress={progress} withLevel withName />
-						<GameProgress progress={progress} withScore withName />
+				</section>
+				<section className="buttons">
+					<div className="row">
+						<div className="column">
+							<Button value='Button' priority='primary' />
+							<Button value='Button' priority='secondary' />
+						</div>
+						<div className="column">
+							<ButtonWithIcon value='Приоритетное действие' priority='primary' theme='muted' glyph='info' />
+							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='muted' glyph='info' />
+							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='bright' glyph='info' />
+							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='dark' glyph='info' />
+						</div>
+						<div className="column">
+							<IconButton glyph='cross' className='icon-button' />
+							<IconButton glyph='cross' className='icon-button' theme='inversive' />
+							<IconButton glyph='cross' theme='backing' className='icon-button' />
+						</div>
 					</div>
-				</div>
-			</section>
-			<section className="buttons">
-				<div className="row">
-					<div className="column">
-						<Button value='Button' priority='primary' />
-						<Button value='Button' priority='secondary' />
-					</div>
-					<div className="column">
-						<ButtonWithIcon value='Приоритетное действие' priority='primary' theme='muted' glyph='info' />
-						<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='muted' glyph='info' />
-						<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='bright' glyph='info' />
-						<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='dark' glyph='info' />
-					</div>
-					<div className="column">
-						<IconButton type='cross' className='icon-button' />
-					</div>
-				</div>
-			</section>
-		</div>
+				</section>
+			</div>
+		</Router>
 	);
 };
 

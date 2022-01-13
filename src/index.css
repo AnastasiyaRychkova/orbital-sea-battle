@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Prompt:wght@500&display=swap');
 
 html {
-	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0, linear-gradient(
-90deg
-, rgba(255,255,255, 0) 2.9em, rgba(0, 143, 71, .15) 3em) 0 0;
+	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255, 255, 255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
 	background-color: #1E2C26;
+	background-size: 3em 3em;
 	color: #96C2AF;
 	font-family:'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
