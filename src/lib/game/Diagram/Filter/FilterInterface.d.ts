@@ -1,17 +1,17 @@
+import IEventProvider from "../../../util/EventEmitter/EventProviderInterface";
 import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
 
 export type StoreKey = 'n'|'l'|'m'|'s';
 
 export type StringState = [string, string, string, string];
 
-export type FilterEvent = 'changed';
+export type FilterEvent = 'change';
 export type FilterEventData = {
 	state: StringState,
-	scheme: {[k in StoreKey]: number},
 }
 
 
-export default interface IFilter
+export default interface IFilter extends IEventProvider<FilterEvent>
 {
 	isCellSelected( qn: QuantumNumbers ): boolean;
 	isContainerSelected( qn: QuantumNumbers ): boolean;

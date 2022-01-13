@@ -32,13 +32,6 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 	_disabled: boolean;
 	private _converter: IQNScheme;
 
-	private readonly _stateScheme = {
-		n: 0,
-		l: 1,
-		m: 2,
-		s: 3,
-	};
-
 
 	constructor( qnConverter: IQNScheme )
 	{
@@ -95,10 +88,9 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		note.set( this._makeQN( key, value ) );
 
 		this._emit(
-			'changed',
+			'change',
 			{
 				state: this._stateAsString,
-				scheme: this._stateScheme,
 			}
 		);
 		return this;

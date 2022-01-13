@@ -4,8 +4,8 @@ import { EDiagramCellState, SpinIndex } from "../ChemicalElement/DiagramCell";
 import ElemConfig from "../ChemicalElement/ElemConfig";
 import PeriodicTableInterface from "../ChemicalElement/PeriodicTableInterface";
 
-import type { CellQN, QuantumNumbers, ShipQN } from "../ChemicalElement/QuantumNumbers";
-import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
+import type { CellQN, ShipQN } from "../ChemicalElement/QuantumNumbers";
+import IDiagram, { DiagramEvent, DiagramEventData, QNStringScheme } from "./DiagramInterface";
 import EventProvider from "../../util/EventEmitter/EventProvider";
 
 
@@ -212,9 +212,9 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		this._lastShotIndex = undefined;
 	}
 
-	highlight( quantumNumbers: QuantumNumbers ): void
+	highlight( quantumNumbers: QNStringScheme ): void
 	{
-		/* TODO: Реализация отметки задания на диаграмме */
+		/* FIXME: Реализация отметки задания на диаграмме */
 	}
 }
 
