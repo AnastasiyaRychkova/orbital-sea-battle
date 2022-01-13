@@ -1,12 +1,19 @@
 import IBrowser from "./BrowserInterface";
+import fullScreenService, { FullScreenServiceType } from "./FullScreenService";
+
+
+
+
 
 class Browser implements IBrowser
 {
 	device!: "desktop" | "tablet" | "mobile";
+	fullScreen: FullScreenServiceType;
 
 	constructor()
 	{
 		this.defineDevice();
+		this.fullScreen = fullScreenService;
 	}
 
 	defineDevice()
@@ -41,6 +48,17 @@ class Browser implements IBrowser
 		window.onbeforeprint = function() {
 			return true;
 		}
+	}
+
+
+	onTabClose( callback: () => void ): void
+	{
+		window.addEventListener( 'unload', callback );
+	}
+
+	sendInBackground( to: string, data: FormData ): void
+	{
+		navigator.sendBeacon( to, data );
 	}
 }
 

@@ -1,0 +1,24 @@
+{
+	"levels": [
+		{
+			"name": "Junior",
+			"goal": 100
+		},
+		{
+			"name": "Middle",
+			"goal": 250
+		},
+		{
+			"name": "Senior",
+			"goal": 400
+		},
+		{
+			"name": "Master",
+			"goal": 400
+		},
+		{
+			"name": "God",
+			"goal": 9999
+		}
+	]
+}

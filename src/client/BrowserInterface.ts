@@ -5,6 +5,8 @@ interface IBrowser
 	preventTabClose(): void;
 	permitTabClose(): void;
 
+	onTabClose( callback: () => void ): void;
+
 	device: Device;
 }
 
