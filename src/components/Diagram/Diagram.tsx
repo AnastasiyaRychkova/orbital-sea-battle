@@ -3,32 +3,34 @@ import CellSymbol from './CellSymbol';
 import DiagramField from './DiagramField';
 import panzoom from 'panzoom';
 import type {PanZoom} from 'panzoom';
+import IDiagram from '../../lib/game/Diagram/DiagramInterface';
 
 interface IProps {
+	diagram: IDiagram,
 	zooming: boolean,
 	className: string,
 }
 
 class Diagram extends React.Component<IProps>
 {
-	field: React.RefObject<SVGGElement>;
+	fieldRef: React.RefObject<SVGGElement>;
 	zoomHandle: PanZoom|null;
 	isZooming: boolean;
 
 	constructor( props: IProps )
 	{
 		super( props );
-		this.field = React.createRef();
+		this.fieldRef = React.createRef();
 		this.zoomHandle = null;
 		this.isZooming = this.props.zooming;
 	}
 
 	componentDidMount()
 	{
-		if( this.field.current )
+		if( this.fieldRef.current )
 		{
 			if( this.isZooming ) {
-				this.zoomHandle = panzoom( this.field.current, {
+				this.zoomHandle = panzoom( this.fieldRef.current, {
 					bounds: true,
 					boundsPadding: 0.3,
 					maxZoom: 3,
@@ -83,9 +85,9 @@ class Diagram extends React.Component<IProps>
 	}
 
 	__fix = () => {
-		if( this.zoomHandle && this.field.current && !this.#fixed ) {
-			console.log( 'fix', this.field.current.style.transform );
-			this.field.current.style.removeProperty( 'transform' );
+		if( this.zoomHandle && this.fieldRef.current && !this.#fixed ) {
+			console.log( 'fix', this.fieldRef.current.style.transform );
+			this.fieldRef.current.style.removeProperty( 'transform' );
 			this.#fixed = true;
 			this.__unsubscribeOnFix();
 		}
@@ -103,8 +105,8 @@ class Diagram extends React.Component<IProps>
 				<defs>
 					<CellSymbol />
 				</defs>
-				<g ref={this.field} id='diagram-field'>
-						<DiagramField />
+				<g ref={this.fieldRef} id='diagram-field'>
+						<DiagramField diagram={this.props.diagram} />
 				</g>
 
 			</svg>

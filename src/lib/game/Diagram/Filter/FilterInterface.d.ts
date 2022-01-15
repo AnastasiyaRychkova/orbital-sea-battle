@@ -17,15 +17,15 @@ export default interface IFilter extends IEventProvider<FilterEvent>
 	isContainerSelected( qn: QuantumNumbers ): boolean;
 	isShipSelected( qn: QuantumNumbers ): boolean;
 
-	getValue( key: StoreKey ): string|undefined;
+	getValue( key: StoreKey ): string;
 	setValue( key: StoreKey, value?: string ): void;
 	
 	isDisable( key: StoreKey ): boolean; // TOTHINK: Может переименовать на isOn() и switch()?
 	setDisable( key: StoreKey, newState: boolean ): void;
 
-	doesSpecifyCell: boolean;
 	state: QuantumNumbers;
 	reset(): void;
 
 	disabled: boolean;
+	mode: ''|'block'|'box'|'cell';
 }

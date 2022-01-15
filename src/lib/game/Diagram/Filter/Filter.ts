@@ -5,13 +5,11 @@ import {
 	MagneticQN,
 	SpinQN,
 	QuantumNumbers,
-	CellQN,
 } from "../../ChemicalElement/QuantumNumbers";
 
 import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface.d";
 import INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
-import IQNScheme from "../../ChemicalElement/QNSchemeInterface";
 import EventProvider from "../../../util/EventEmitter/EventProvider";
 
 
@@ -29,11 +27,11 @@ type StoreType = {
 class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFilter
 {
 	store: StoreType;
+	mode: ''|'block'|'box'|'cell';
 	_disabled: boolean;
-	private _converter: IQNScheme;
 
 
-	constructor( qnConverter: IQNScheme )
+	constructor()
 	{
 		super();
 		makeObservable( this, {
@@ -42,17 +40,17 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 
 			disabled: computed,
 			state: computed,
-			doesSpecifyCell: computed,
 			_stateAsString: computed,
 
 			setValue: action,
 			setDisable: action,
 			reset: action,
+			_updateMode: action,
 		});
 
 		this.store = this._createDefaultStore();
+		this.mode = '';
 		this._disabled = true;
-		this._converter = qnConverter;
 	}
 
 	
@@ -77,6 +75,26 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		};
 	}
 
+	_updateMode()
+	{
+		if( this.store.s.isSat() )
+		{
+			this.mode = 'cell';
+			return;
+		}
+		if( this.store.m.isSat() )
+		{
+			this.mode = 'box';
+			return;
+		}
+		if( this.store.l.isSat() || this.store.n.isSat() )
+		{
+			this.mode = 'block';
+			return;
+		}
+		this.mode = '';
+	}
+
 	getValue = ( key: StoreKey ) =>
 		this._get( key ).getAsString();
 
@@ -84,8 +102,8 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		if( this._disabled )
 			return;
 
-		const note = this._get( key );
-		note.set( this._makeQN( key, value ) );
+		this._get( key ).set( this._makeQN( key, value ) );
+		this._updateMode();
 
 		this._emit(
 			'change',
@@ -124,20 +142,20 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 
 	setDisable = ( key: StoreKey, value: boolean ) => {
 		this._get( key ).setDisabled( value );
+		this._updateMode();
 	};
 
 	
 
 	isShipSelected( qn: QuantumNumbers ): boolean
 	{
-		return !this._isFilterSetted( 's' )
-			&& !this._isFilterSetted( 'm' )
+		return this.mode === 'block'
 			&& this._checkFilters( qn, ['n', 'l'], true );
 	}
 
 	isContainerSelected( qn: QuantumNumbers ): boolean
 	{
-		return !this._isFilterSetted( 's' )
+		return this.mode === 'box'
 			&& this._isEqualQN( qn, 'm' )
 			&& this._checkFilters( qn, ['n', 'l'] );
 	}
@@ -184,25 +202,6 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 	{
 		const note = this._get( key )!;
 		return !note.isDisabled() && note.isEqual( qn[ key ] );;
-	}
-
-	private _isFilterSetted( key: StoreKey ): boolean
-	{
-		return this._get( key ).isSat();
-	}
-
-	get doesSpecifyCell(): boolean
-	{
-		if( this._disabled )
-			return false;
-
-		for( const qNumber of Object.values(this.store) ) {
-			if( !qNumber.isSat() ) {
-				return false;
-			}
-		}
-		const state = this.state;
-		return this._converter.getCellIndex( state as CellQN ) !== undefined;
 	}
 
 	get state(): QuantumNumbers

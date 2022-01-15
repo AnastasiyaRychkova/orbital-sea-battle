@@ -1,106 +1,57 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { observer } from 'mobx-react';
 import Ship from './Ship';
-import {MainQN, OrbitalQN} from '../../lib/game/ChemicalElement/QuantumNumbers';
+import IDiagram from '../../lib/game/Diagram/DiagramInterface';
 
 
-const DiagramField = observer(() => {
+interface IProps {
+	diagram: IDiagram,
+}
+
+
+const DiagramField: FC<IProps> = observer(({
+	diagram,
+}) => {
+	const state = diagram.observableState;
 	return (
 		<g>
-			<Ship qn={{
-					n: new MainQN( 1 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '1', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 2 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '2', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 2 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '2', 'p' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 3 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '3', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 3 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '3', 'p' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 3 ),
-					l: new OrbitalQN( 'd' ),
-				}}
+			<Ship block={state.getBlock( '3', 'd' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 4 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '4', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 4 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '4', 'p' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 4 ),
-					l: new OrbitalQN( 'd' ),
-				}}
+			<Ship block={state.getBlock( '4', 'd' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 4 ),
-					l: new OrbitalQN( 'f' ),
-				}}
+			<Ship block={state.getBlock( '4', 'f' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 5 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '5', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 5 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '5', 'p' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 5 ),
-					l: new OrbitalQN( 'd' ),
-				}}
+			<Ship block={state.getBlock( '5', 'd' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 5 ),
-					l: new OrbitalQN( 'f' ),
-				}}
+			<Ship block={state.getBlock( '5', 'f' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 6 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '6', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 6 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '6', 'p' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 6 ),
-					l: new OrbitalQN( 'd' ),
-				}}
+			<Ship block={state.getBlock( '6', 'd' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 7 ),
-					l: new OrbitalQN( 's' ),
-				}}
+			<Ship block={state.getBlock( '7', 's' )!}
 			/>
-			<Ship qn={{
-					n: new MainQN( 7 ),
-					l: new OrbitalQN( 'p' ),
-				}}
+			<Ship block={state.getBlock( '7', 'p' )!}
 			/>
 		</g>
 	);

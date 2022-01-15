@@ -15,15 +15,22 @@
 
 .container {
 	stroke: #A1FDD666;
+	fill: none;
 }
 
-rect.selected {
+.shipStroke.filtered,
+.container.filtered {
 	stroke: primary-50;
 	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
 }
 
-.ship {
+.shipStroke {
 	stroke: transparent;
+	fill: none;
+}
+
+.shipFill {
+	fill: none;
 }
 
 

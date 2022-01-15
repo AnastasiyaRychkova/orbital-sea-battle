@@ -30,7 +30,7 @@ const Panel: FC<IProps> = ({className}) => {
 						name="m"
 						sub="L"
 						storeKey="m"
-						values={['-3','-2','-1','0','+1','+2','+3']}
+						values={['+3','+2','+1','0','-1','-2','-3']}
 						theme={ToggleTheme.default} />
 					<InputValue
 						name="m"

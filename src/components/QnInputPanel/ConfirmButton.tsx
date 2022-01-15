@@ -1,11 +1,11 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
 import styles from './ConfirmButton.module.css';
-import IFilter from '../../lib/game/Diagram/Filter/FilterInterface';
+import IDiagram from '../../lib/game/Diagram/DiagramInterface';
 
 type ControllerType = {
 	fire: () => void,
-	filter: IFilter,
+	diagram: IDiagram,
 }
 
 interface IProps {
@@ -19,7 +19,7 @@ const ConfirmButton = inject( "controller" )(observer(( props: IProps ) => {
 			className={makeClassName( props.mobile )}
 			type="button"
 			onClick={props.controller!.fire}
-			disabled={!(props.controller!.filter.doesSpecifyCell)}
+			disabled={!(props.controller!.diagram.observableState.doesSpecifyCell)}
 		>
 			<span className={styles.text}>
 				Пуск

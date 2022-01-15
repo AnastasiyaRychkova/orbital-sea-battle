@@ -352,6 +352,7 @@ class ExpProcess
 	{
 		const isResultWindow = url.match( /.+\/r(\/.+)*/ ) !== null;
 		this.#checkPoint = isResultWindow ? nextURL : url;
+		storage.setPrimitive( 'url', this.#checkPoint );
 
 		const isGame = url.includes( 'game' );
 		this.#wishToPlay = this.#wishToPlay || isGame;

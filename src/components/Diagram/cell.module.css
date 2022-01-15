@@ -4,23 +4,23 @@
 @value effects: '../../style/effects.css';
 @value glow__arrow-selection-1, glow__arrow-selection-2, glow__arrow-selection--error-1, glow__arrow-selection--error-2 from effects;
 
-.off {
+.cell {
 	fill: secondary-600;
 	stroke: secondary-600;
 }
 
-.on {
+.selected {
 	fill: primary-300;
 	stroke: primary-300;
 	animation: blink 1.4s ease-in infinite both;
 }
 
-.hit {
+.selected.damage {
 	fill: error-400;
 	stroke: error-400;
 }
 
-.miss {
+.damage {
 	fill: custom-white;
 	stroke: custom-white;
 }
@@ -28,26 +28,26 @@
 
 /*----------  Selected  ----------*/
 
-.off.selected {
+.cell.filtered {
 	fill: secondary-400;
 	stroke: secondary-900;
 	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
 }
 
-.on.selected {
+.selected.filtered {
 	fill: primary-200;
 	stroke: primary-700;
 	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
 	animation: blink-select 1s ease-in infinite both;
 }
 
-.hit.selected {
+.selected.damage.filtered {
 	fill: error-900;
 	stroke: error-600;
 	filter: drop-shadow(glow__arrow-selection--error-1) drop-shadow(glow__arrow-selection--error-2);
 }
 
-.miss.selected {
+.damage.filtered {
 	fill: error-600;
 	stroke: error-100;
 	filter: drop-shadow(glow__arrow-selection--error-1) drop-shadow(glow__arrow-selection--error-2);

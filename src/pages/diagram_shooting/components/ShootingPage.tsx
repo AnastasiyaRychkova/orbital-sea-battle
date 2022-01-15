@@ -70,6 +70,7 @@ const ShootingPage = observer(() => {
 
 				<Suspense fallback={<div className={styles.diagram}></div>}>
 					<Diagram
+						diagram={controller.diagram}
 						className={styles.diagram}
 						zooming />
 				</Suspense>

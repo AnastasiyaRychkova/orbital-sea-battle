@@ -1,65 +1,42 @@
-import React from 'react';
-import { observer, inject } from 'mobx-react';
-import classNames from 'classnames';
-import {
-	CELL_WIDTH,
-	CONTAINER_HEIGHT,
-	CONTAINER_WIDTH,
-} from './properties';
+import React, {FC} from 'react';
+import { observer } from 'mobx-react';
 import Cell from './Cell';
-import { ContainerQN, SpinQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
-import styles from './diagram.module.css';
-import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInterface';
+import ContainerSelection from './ContainerSelection';
+import type { BoxType } from '../../lib/game/Diagram/ObjectState.d';
+import { CELL_WIDTH } from './properties';
+
 
 interface IProps {
 	x: number,
 	y: number,
-	qn: ContainerQN,
-	controller?: IGameFieldController,
+	box: BoxType,
 }
 
 
-const Container = inject( "controller" )(observer(( props: IProps ) => {
+const Container: FC<IProps> = observer(({
+	x,
+	y,
+	box,
+}) => {
 	return (
 		<g>
-			<rect
-				className={makeContainerClass( props )}
-				x={props.x}
-				y={props.y}
-				width={CONTAINER_WIDTH}
-				height={CONTAINER_HEIGHT}
-				strokeWidth="1"
-				fill="none"
+			<ContainerSelection
+				x={x} y={y}
+				box={box} />
+
+			<Cell
+				x={x + 2}
+				y={y + 4}
+				cell={box.children['+1/2']}
 			/>
 			<Cell
-				x={props.x + 2}
-				y={props.y + 4}
-				qn={{
-					...props.qn,
-					s: new SpinQN( 1 ),
-				}}
-			/>
-			<Cell
-				x={props.x + CELL_WIDTH - 2}
-				y={props.y - 4}
-				qn={{
-					...props.qn,
-					s: new SpinQN( -1 ),
-				}}
+				x={x + CELL_WIDTH - 2}
+				y={y - 4}
+				cell={box.children['−1/2']}
 			/>
 		</g>
 	);
-}));
+});
 
 
 export default Container;
-
-
-
-function makeContainerClass( props: IProps ): string
-{
-	return classNames({
-		[styles.container]: true,
-		[styles.selected]: props.controller!.filter.isContainerSelected( props.qn ),
-	});
-}

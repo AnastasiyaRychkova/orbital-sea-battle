@@ -2,6 +2,7 @@ import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
 import type { CellQN, ShipQN,
 } from "../ChemicalElement/QuantumNumbers";
+import { StateType } from "./ObjectState.d";
 
 
 /** События, которые генерирует диаграмма */
@@ -21,20 +22,9 @@ export type QNStringScheme = [string, string, string, string];
 
 export default interface IDiagram extends IEventProvider<DiagramEvent>
 {
-	/**
-	 * Получить enum состояние ячейки диаграммы
-	 * @param quantumNumbers 4 квантовых числа
-	 */
-	getCellState( quantumNumbers: CellQN ): EDiagramCellState
 	
-	// TOTHINK: Может устанавливать `EDiagramCellState` состояние?
-	/**
-	 * Установить состояние состояние ячейки без затрагивания выстрелов
-	 * @param quantumNumbers 4 квантовых числа
-	 * @param state Устанавливаемое значение ячейки в состоянии диаграммы
-	 */
-	setCellState( quantumNumbers: CellQN, state: boolean ): void;
-	
+	observableState: StateType;
+
 	/**
 	 * Был ли последний выстрел произведен в данную ячейку
 	 * @param quantumNumbers 4 квантовых числа
