@@ -2,7 +2,7 @@
 @value mobile, laptop from sizes;
 
 @value colors: '../../style/colors.css';
-@value primary-200, secondary-800, secondary-900, disable-600 from colors;
+@value secondary-200, secondary-800, secondary-900, disable-600 from colors;
 
 @value effects: '../../style/effects.css';
 @value shadow__input from effects;
@@ -16,7 +16,7 @@
 	border: none;
 	box-shadow: shadow__input;
 	background-color: secondary-900;
-	color: primary-200;
+	color: secondary-200;
 	row-gap: .5em;
 	user-select: none;
 }

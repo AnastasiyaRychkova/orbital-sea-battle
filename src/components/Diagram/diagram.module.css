@@ -1,5 +1,5 @@
 @value colors: '../../style/colors.css';
-@value primary-50, primary-400, secondary-200, secondary-800, secondary-900 from colors;
+@value primary-50, primary-100, primary-200, primary-400, secondary-200, secondary-800, secondary-900 from colors;
 
 @value effects: '../../style/effects.css';
 @value glow__diagram-selection-1, glow__diagram-selection-2 from effects;
@@ -18,10 +18,26 @@
 	fill: none;
 }
 
-.shipStroke.filtered,
 .container.filtered {
 	stroke: primary-50;
 	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
+}
+
+.container.highlighted {
+	fill: secondary-900;
+	stroke: primary-400;
+	stroke-width: 2;
+}
+
+.container.highlighted.filtered {
+	fill: secondary-900;
+	stroke: primary-400;
+	filter: drop-shadow(glow__diagram-selection-2);
+}
+
+
+.shipFill {
+	fill: none;
 }
 
 .shipStroke {
@@ -29,12 +45,21 @@
 	fill: none;
 }
 
-.shipFill {
-	fill: none;
+.shipFill.highlighted {
+	fill: secondary-900;
 }
 
-
-.task {
+.shipStroke.highlighted {
 	stroke: primary-400;
-	fill: secondary-900;
+	stroke-width: 2;
+}
+
+.shipStroke.highlighted.filtered {
+	stroke: primary-400;
+	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
+}
+
+.shipStroke.filtered {
+	stroke: primary-100;
+	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
 }

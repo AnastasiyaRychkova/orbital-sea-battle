@@ -6,7 +6,7 @@ import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
 interface INote
 {
 	isEqual( qn: IQuantumNumber | undefined ): boolean;
-	set( qn: IQuantumNumber ): void;
+	set( qn?: IQuantumNumber ): void;
 	getAsString(): string;
 	get(): IQuantumNumber | undefined;
 

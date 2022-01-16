@@ -7,6 +7,7 @@ import {
 	CONTAINER_HEIGHT,
 	CONTAINER_WIDTH,
 } from './properties';
+import { observer } from 'mobx-react';
 
 
 
@@ -17,7 +18,7 @@ interface IProps {
 }
 
 
-const ContainerSelection: FC<IProps> = ({
+const ContainerSelection: FC<IProps> = observer(({
 	x,
 	y,
 	box,
@@ -27,6 +28,7 @@ const ContainerSelection: FC<IProps> = ({
 			className={cn({
 				[styles.container]: true,
 				[styles.filtered]: box.filtered,
+				[styles.highlighted]: box.highlighted,
 			})}
 			x={x}
 			y={y}
@@ -35,7 +37,7 @@ const ContainerSelection: FC<IProps> = ({
 			strokeWidth="1"
 		/>
 	);
-};
+});
 
 
 export default ContainerSelection;

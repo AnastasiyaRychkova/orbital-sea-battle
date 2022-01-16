@@ -11,10 +11,10 @@
 
 	border: 2px solid primary-400;
 	box-shadow: shadow__input;
-	background-color: secondary-800;
+	background-color: primary-400;
 	cursor: pointer;
 	text-shadow: shadow__button-text;
-	color: primary-400;
+	color: secondary-900;
 }
 
 .button.mobile {
@@ -31,9 +31,9 @@
 	}
 
 	.button:hover {
-		border-color: primary-400;
+		border-color: primary-200;
 		box-shadow: glow__button--primary--m;
-		background-color: primary-400;
+		background-color: primary-200;
 		color: secondary-900;
 	}
 

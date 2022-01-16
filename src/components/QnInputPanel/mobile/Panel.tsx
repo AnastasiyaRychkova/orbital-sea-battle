@@ -50,7 +50,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						name='m'
 						sub='L'
 						storeKey='m'
-						values={['-3','-2','-1','0','+1','+2','+3']}
+						values={['+3','+2','+1','0','-1','-2','-3']}
 						open={store.openTab === 'm'}
 						openTabHandle={store.openTabHandle} />
 					<InputValue

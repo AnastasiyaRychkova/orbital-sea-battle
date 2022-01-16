@@ -31,28 +31,32 @@ const Ship: FC<IProps> = observer(( {
 } ) => {
 	const location = calcCoordinates( block.qn );
 	const name = makeName( block.qn );
+	const maxM = block.qn.l.value;
 
 	return (
-		<ShipSelection
-			location={location}
-			block={block} >
-			{
-				Object.entries( block.children ).map( ([ key, box ], i ) => (
-					<Container
-						key={name + key}
-						x={location.x + i * CONTAINER_WIDTH}
-						y={location.y}
-						box={box}
-						/>
-				) )
-			}
-
+		<g>
+			<ShipSelection
+				location={location}
+				block={block} >
+				{
+					Object.entries( block.children )
+						.map( ([ key, box ] ) => (
+						<Container
+							key={name + key}
+							x={location.x + (maxM - box.qn.m.value) * CONTAINER_WIDTH}
+							y={location.y}
+							box={box}
+							/>
+					) )
+				}
+			</ShipSelection>
 			<ShipName
 				x={location.x + NAME_X_OFFSET}
 				y={location.y + NAME_Y_OFFSET}
 				name={name}
 			/>
-		</ShipSelection>
+		</g>
+
 	);
 });
 

@@ -82,8 +82,7 @@ class TaskBuilder
 	}
 
 	private _filterTaskEntry = ( task: ExpectedTaskValues ) => {
-		console.log( task );
-		this.#filter.reset();
+		this.#diagram.reset();
 		this.#filter.disabled = false;
 		this.#diagram.highlight( task );
 
@@ -123,8 +122,6 @@ class TaskBuilder
 	}
 
 	private _diagramTaskEntry = ( task: ExpectedTaskValues ) => {
-		console.log( task );
-		this.#filter.reset();
 		this.#diagram.reset();
 		this.#diagram.highlight( task );
 		this.#filter.disabled = false;

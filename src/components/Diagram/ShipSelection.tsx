@@ -9,6 +9,7 @@ import {
 	CONTAINER_HEIGHT,
 	CONTAINER_WIDTH,
 } from './properties';
+import { observer } from 'mobx-react';
 
 
 
@@ -19,7 +20,7 @@ interface IProps {
 }
 
 
-const ShipSelection: FC<IProps> = ({
+const ShipSelection: FC<IProps> = observer(({
 	location,
 	block,
 	children,
@@ -55,7 +56,7 @@ const ShipSelection: FC<IProps> = ({
 			/>
 		</>
 	);
-};
+});
 
 
 /**

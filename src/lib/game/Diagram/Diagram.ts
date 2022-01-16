@@ -1,11 +1,11 @@
 import { makeObservable, observable, action, computed } from "mobx";
 
-import { EDiagramCellState, SpinIndex } from "../ChemicalElement/DiagramCell";
+import { stringSchemeToQuantumNumbers } from "../ChemicalElement/QuantumNumbers";
+import { SpinIndex } from "../ChemicalElement/DiagramCell";
 import State from "./ObjectState";
-import PeriodicTableInterface from "../ChemicalElement/PeriodicTableInterface";
 
-import type { CellQN, ShipQN } from "../ChemicalElement/QuantumNumbers";
-import IDiagram, { DiagramEvent, DiagramEventData, QNStringScheme } from "./DiagramInterface";
+import type { CellQN, ShipQN, QNStringScheme } from "../ChemicalElement/QuantumNumbers";
+import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
 import EventProvider from "../../util/EventEmitter/EventProvider";
 import { StateType } from "./ObjectState.d";
 import IFilter from "./Filter/FilterInterface";
@@ -123,13 +123,18 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 
 	reset(): void
 	{
+		this._filter?.reset();
+		this._highlight?.reset();
 		this._state = new State( this._filter, this._highlight );
 		this._lastShotIndex = undefined;
 	}
 
-	highlight( quantumNumbers: QNStringScheme ): void
+	highlight( qnScheme: QNStringScheme ): void
 	{
-		/* FIXME: Реализация отметки задания на диаграмме */
+		if( !this._highlight )
+			return;
+		console.log(qnScheme);
+		this._highlight.setState( stringSchemeToQuantumNumbers( qnScheme ) );
 	}
 }
 

@@ -37,11 +37,13 @@ class Note implements INote
 		return this._qNumber !== undefined && this._qNumber.value === qn?.value;
 	}
 
-	set( qn: IQuantumNumber ): void
+	set( qn?: IQuantumNumber ): void
 	{
-		this._qNumber = this._qNumber?.value === qn.value
-						? undefined
-						: qn;
+		this._qNumber = qn
+						? (this._qNumber?.value === qn.value
+							? undefined
+							: qn)
+						: undefined;
 	}
 
 	getAsString(): string

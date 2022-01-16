@@ -1,5 +1,5 @@
 @value colors: '../../style/colors.css';
-@value custom-white, primary-200, primary-300, primary-700, secondary-400, secondary-600, secondary-900, error-100, error-400, error-600, error-900 from colors;
+@value custom-white, primary-50, primary-200, primary-300, primary-400, secondary-400, secondary-600, secondary-900, error-100, error-400, error-600, error-900 from colors;
 
 @value effects: '../../style/effects.css';
 @value glow__arrow-selection-1, glow__arrow-selection-2, glow__arrow-selection--error-1, glow__arrow-selection--error-2 from effects;
@@ -34,9 +34,16 @@
 	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
 }
 
-.selected.filtered {
-	fill: primary-200;
-	stroke: primary-700;
+.cell.highlighted {
+	fill: primary-300;
+	stroke: primary-300;
+	filter: drop-shadow(0px 0px 5px rgba(127, 234, 120, 0.59));
+	animation: blink 1.5s ease-in infinite both;
+}
+
+.cell.highlighted.filtered {
+	fill: primary-400;
+	stroke: primary-50;
 	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
 	animation: blink-select 1s ease-in infinite both;
 }
@@ -57,27 +64,27 @@
 
 @keyframes blink {
 	0% {
-		fill: primary-300;
-		stroke: primary-300;
+		fill: primary-400;
+		stroke: primary-400;
 	}
 	50% {
-		fill: #fffbc0;
-		stroke: #fffbc0;
-		filter: drop-shadow(0px 0px 4px #fffbc0);
+		fill: primary-200;
+		stroke: primary-200;
+		filter: drop-shadow(0px 0px 5px rgba(128, 234, 120, 0));
 	}
 	100% {
-		fill: primary-300;
-		stroke: primary-300;
+		fill: primary-400;
+		stroke: primary-400;
 	}
 }
 
 @keyframes blink-select {
 	0% {
-		fill: primary-200;
+		fill: primary-400;
 	}
 	50% {
-		fill: #fffbc0;
-		filter: drop-shadow(0px 0px 4px #fffbc0);
+		fill: secondary-400;
+		filter: drop-shadow(0px 0px 5px rgba(128, 234, 120, 0));
 	}
 	100% {
 		fill: primary-200;

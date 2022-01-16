@@ -1,5 +1,6 @@
 import IEventProvider from "../../../util/EventEmitter/EventProviderInterface";
 import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
+import INote from "./NoteInterface";
 
 export type StoreKey = 'n'|'l'|'m'|'s';
 
@@ -24,8 +25,12 @@ export default interface IFilter extends IEventProvider<FilterEvent>
 	setDisable( key: StoreKey, newState: boolean ): void;
 
 	state: QuantumNumbers;
+	setState( qn: QuantumNumbers ): void;
 	reset(): void;
 
 	disabled: boolean;
 	mode: ''|'block'|'box'|'cell';
+	isBoxMode: boolean;
+
+	_get( key: StoreKey ): INote;
 }

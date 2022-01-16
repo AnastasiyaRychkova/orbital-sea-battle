@@ -37,6 +37,7 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		makeObservable( this, {
 			store: observable,
 			_disabled: observable,
+			mode: observable,
 
 			disabled: computed,
 			state: computed,
@@ -44,13 +45,14 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 
 			setValue: action,
 			setDisable: action,
+			setState: action,
 			reset: action,
 			_updateMode: action,
 		});
 
 		this.store = this._createDefaultStore();
 		this.mode = '';
-		this._disabled = true;
+		this._disabled = false;
 	}
 
 	
@@ -95,6 +97,11 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		this.mode = '';
 	}
 
+	get isBoxMode(): boolean
+	{
+		return this.mode === 'box';
+	}
+
 	getValue = ( key: StoreKey ) =>
 		this._get( key ).getAsString();
 
@@ -114,7 +121,7 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		return this;
 	};
 
-	private _get( key: StoreKey ): INote
+	_get( key: StoreKey ): INote
 	{
 		return this.store[ key ];
 	}
@@ -201,7 +208,7 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 	private _isEqualQN( qn: QuantumNumbers, key: StoreKey ): boolean
 	{
 		const note = this._get( key )!;
-		return !note.isDisabled() && note.isEqual( qn[ key ] );;
+		return !note.isDisabled() && note.isEqual( qn[ key ] );
 	}
 
 	get state(): QuantumNumbers
@@ -212,6 +219,16 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 			m: this._get( 'm' ).get() as MagneticQN | undefined,
 			s: this._get( 's' ).get() as SpinQN | undefined,
 		}
+	}
+
+	setState( qn: QuantumNumbers ): void
+	{
+		this.store.n.set( qn.n );
+		this.store.l.set( qn.l );
+		this.store.m.set( qn.m );
+		this.store.s.set( qn.s );
+
+		this._updateMode();
 	}
 
 	get _stateAsString(): StringState

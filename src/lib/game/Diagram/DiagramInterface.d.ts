@@ -1,6 +1,6 @@
 import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
-import type { CellQN, ShipQN,
+import type { CellQN, ShipQN, QNStringScheme
 } from "../ChemicalElement/QuantumNumbers";
 import { StateType } from "./ObjectState.d";
 
@@ -18,7 +18,6 @@ export type DiagramEventData = {
 	qn: CellQN | ShipQN,
 }
 
-export type QNStringScheme = [string, string, string, string];
 
 export default interface IDiagram extends IEventProvider<DiagramEvent>
 {
