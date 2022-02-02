@@ -1,11 +1,11 @@
 @value colors: '../../style/colors.css';
-@value primary-50, primary-100, primary-200, primary-400, secondary-200, secondary-800, secondary-900 from colors;
+@value primary-50, primary-100, primary-200, primary-400, secondary-100, secondary-800, secondary-900 from colors;
 
 @value effects: '../../style/effects.css';
 @value glow__diagram-selection-1, glow__diagram-selection-2 from effects;
 
 .shipName {
-	fill: secondary-200;
+	fill: secondary-100;
 	cursor: default;
 	font-size: 1.5em;
 	font-family: var(--primary-font);
@@ -15,12 +15,13 @@
 
 .container {
 	stroke: #A1FDD666;
+	stroke-width: 2;
 	fill: none;
 }
 
 .container.filtered {
 	stroke: primary-50;
-	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
+	filter: drop-shadow(glow__diagram-selection-2);
 }
 
 .container.highlighted {
@@ -43,6 +44,7 @@
 .shipStroke {
 	stroke: transparent;
 	fill: none;
+	stroke-width: 2;
 }
 
 .shipFill.highlighted {
@@ -60,6 +62,6 @@
 }
 
 .shipStroke.filtered {
-	stroke: primary-100;
-	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
+	stroke: primary-50;
+	filter: drop-shadow(glow__diagram-selection-2);
 }

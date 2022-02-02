@@ -32,8 +32,9 @@
 .window {
 	box-sizing: border-box;
 	display: flex;
-	flex-direction: column;
 	align-items: stretch;
+	flex-direction: column;
+	z-index: 130;
 	margin: 0;
 
 	padding: 2em;

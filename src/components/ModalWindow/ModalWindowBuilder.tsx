@@ -13,7 +13,20 @@ import Assessment from '../Assessment/Assessment';
 import styles from './subelements/styles.module.css';
 import { ButtonActions, MWScheme, TaskResults, UserAssessment } from './types';
 
+import diagram from '../../img/exp/diagram.png';
+import n from '../../img/exp/n.png';
+import l from '../../img/exp/l.png';
+import m from '../../img/exp/m.png';
+import s from '../../img/exp/s.png';
 
+
+const img: {[key: string]: string} = {
+	diagram,
+	n,
+	l,
+	m,
+	s
+};
 
 
 interface IProps {
@@ -63,9 +76,13 @@ const ModalWindowBuilder: FC<IProps> = observer( ( props ) => {
 					{
 						case 'paragraph':
 							return (
-								<Paragraph key={'paragraph'+index}>
+								<Paragraph style={elem.style} key={'paragraph'+index}>
 									{elem.value}
 								</Paragraph>
+							);
+						case 'image':
+							return (
+								<img className={styles.mwImage} src={img[elem.value || '']} alt='' key={'image'+index} />
 							);
 						case 'progress':
 							return (

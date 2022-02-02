@@ -18,7 +18,7 @@ const Star: FC<IProps> = ({
 	const callback = useCallback(() => {
 		onChange && onChange( name, value );
 	},
-	[]);
+	[name, value, onChange]);
 	return (
 		<>
 			<input

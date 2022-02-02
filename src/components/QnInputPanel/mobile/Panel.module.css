@@ -19,6 +19,7 @@
 
 .inputsRow {
 	position: relative;
+	pointer-events: auto;
 }
 
 .tabs {

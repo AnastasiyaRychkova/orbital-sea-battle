@@ -36,7 +36,6 @@ class Diagram extends React.Component<IProps>
 					maxZoom: 3,
 					minZoom: 0.1,
 					onTouch: (e) => {
-						console.log(e);
 						return false;
 					}
 				} );

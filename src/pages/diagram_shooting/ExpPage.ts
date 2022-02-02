@@ -1,4 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
+import { browser } from '../../client/core';
 
 import scheme from './scheme.json';
 import progress from './ExpProcess';
@@ -7,6 +8,7 @@ import Tasker from './Tasker/Tasker';
 import type {TaskScheme, TaskType, URL, WindowScheme, } from './ExpPage.d';
 import type { TaskerEventData, TaskerEventObject } from './Tasker/types';
 import type { MWScheme, TaskResults } from "../../components/ModalWindow/types";
+import type { TaskKey } from './ExpProcess.d';
 
 
 
@@ -19,6 +21,7 @@ class ExpPage
 	#location: string = '';
 	#taskBuilder: TaskBuilder | null = null;
 	_tasker: Tasker<TaskValues, EventData> | null = null;
+	#fullscreenInit: boolean;
 
 
 	constructor()
@@ -32,6 +35,7 @@ class ExpPage
 			apply: action,
 		});
 		this._completeTaskHandler = this._completeTaskHandler.bind( this );
+		this.#fullscreenInit = browser.device === 'mobile';
 	}
 
 	setTaskBuilder( taskBuilder: TaskBuilder ): void
@@ -85,12 +89,26 @@ class ExpPage
 			resultsLocation: destination.next,
 		}
 		this.window = null;
+
+		if( this.#fullscreenInit )
+		{
+			browser.fullScreen.on();
+			this.#fullscreenInit = false;
+		}
 	}
 
 	private _completeTaskHandler( event: TaskerEventObject ):void
 	{
 		const results = event.detail;
 		this.results = this._makeResultsObject( results );
+
+		type TaskType = {key: TaskKey|'game'};
+		const task = scheme[ this.#location as URL ];
+		if( !task ) {
+			console.error( 'Page', 'Location was not found', this.#location );
+			return;
+		}
+		progress.addTaskResults( (task as TaskType).key, results );
 		//FIXME: Complete
 	}
 

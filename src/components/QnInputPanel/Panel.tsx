@@ -4,6 +4,7 @@ import ConfirmButton from './ConfirmButton';
 import styles from './style.module.css';
 import { ToggleTheme } from './types';
 import cn from '../className';
+import { MainQN, OrbitalQN, MagneticQN, SpinQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
 
 interface IProps {
 	className?: string,
@@ -17,12 +18,25 @@ const Panel: FC<IProps> = ({className}) => {
 					<InputValue
 						name="n"
 						storeKey="n"
-						values={['1','2','3','4','5','6','7']}
+						values={[
+							new MainQN(1),
+							new MainQN(2),
+							new MainQN(3),
+							new MainQN(4),
+							new MainQN(5),
+							new MainQN(6),
+							new MainQN(7)
+						]}
 						theme={ToggleTheme.default} />
 					<InputValue
 						name="l"
 						storeKey="l"
-						values={['s', 'p', 'd', 'f']}
+						values={[
+							new OrbitalQN('s'),
+							new OrbitalQN('p'),
+							new OrbitalQN('d'),
+							new OrbitalQN('f')
+						]}
 						theme={ToggleTheme.squareL} />
 				</div>
 				<div className={styles.inputPair}>
@@ -30,13 +44,24 @@ const Panel: FC<IProps> = ({className}) => {
 						name="m"
 						sub="L"
 						storeKey="m"
-						values={['+3','+2','+1','0','-1','-2','-3']}
+						values={[
+							new MagneticQN(3),
+							new MagneticQN(2),
+							new MagneticQN(1),
+							new MagneticQN(0),
+							new MagneticQN(-1),
+							new MagneticQN(-2),
+							new MagneticQN(-3)
+						]}
 						theme={ToggleTheme.default} />
 					<InputValue
 						name="m"
 						sub="S"
 						storeKey="s"
-						values={['+1/2','−1/2']}
+						values={[
+							new SpinQN(1),
+							new SpinQN(-1)
+						]}
 						theme={ToggleTheme.squareM} />
 				</div>
 			</div>

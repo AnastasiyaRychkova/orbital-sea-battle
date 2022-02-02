@@ -133,7 +133,6 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 	{
 		if( !this._highlight )
 			return;
-		console.log(qnScheme);
 		this._highlight.setState( stringSchemeToQuantumNumbers( qnScheme ) );
 	}
 }

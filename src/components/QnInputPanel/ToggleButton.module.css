@@ -23,6 +23,7 @@
 .text {
 	composes: button from '../../style/typography.css';
 	composes: button-normal from '../../style/typography.css';
+	text-transform: lowercase;
 }
 
 
@@ -39,7 +40,7 @@
 	padding: .1em;
 	border: none;
 	background-color: secondary-600;
-	color: primary-100;
+	color: primary-50;
 	min-width: 1.875em;
 }
 
@@ -75,6 +76,7 @@
 .thin.invalid {
 	background-color: secondary-800;
 	color: secondary-100;
+	pointer-events: none;
 }
 
 .thin:active {
@@ -128,12 +130,13 @@
 	border: 2px solid primary-400;
 	background-color: secondary-900;
 	text-shadow: shadow__button-text;
-	color: primary-400;
+	color: primary-200;
 }
 
 .squareL {
 	font-size: 1.25em;
 	min-width: 2.4em;
+	padding-bottom: .15em;
 }
 
 
@@ -172,6 +175,7 @@
 	border-color: disable-700;
 	background-color: disable-900;
 	color: disable-400;
+	pointer-events: none;
 }
 
 .square.invalid:active {

@@ -73,8 +73,6 @@ class Note implements INote
 		this._qNumber = undefined;
 	}
 
-	
-
 }
 
 

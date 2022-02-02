@@ -337,10 +337,10 @@ class DiagramState
 			return false;
 
 		const f = this._env.filter;
-		return this.getColumn( f.getValue( 'n' ) )
-				?.getBlock( f.getValue( 'l' ) )
-				?.getBox( f.getValue( 'm' ) )
-				?.getCell( f.getValue( 's' ) ) !== undefined;
+		return this.getColumn( f.getValueAsString( 'n' ) )
+				?.getBlock( f.getValueAsString( 'l' ) )
+				?.getBox( f.getValueAsString( 'm' ) )
+				?.getCell( f.getValueAsString( 's' ) ) !== undefined;
 	}
 
 	hasSpin( spin: SpinIndex ): boolean

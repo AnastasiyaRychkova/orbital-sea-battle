@@ -9,6 +9,9 @@ class SpinQN implements IQuantumNumber
 {
 	protected _number: SpinType;
 
+	static readonly MIN: number = -1;
+	static readonly MAX: number = 1;
+
 	/**
 	 * 
 	 * @param value Number( 1 | -1) || String( '+1/2' | )

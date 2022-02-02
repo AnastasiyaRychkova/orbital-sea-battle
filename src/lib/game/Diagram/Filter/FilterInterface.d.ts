@@ -1,4 +1,5 @@
 import IEventProvider from "../../../util/EventEmitter/EventProviderInterface";
+import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
 import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
 import INote from "./NoteInterface";
 
@@ -14,12 +15,12 @@ export type FilterEventData = {
 
 export default interface IFilter extends IEventProvider<FilterEvent>
 {
-	isCellSelected( qn: QuantumNumbers ): boolean;
-	isContainerSelected( qn: QuantumNumbers ): boolean;
-	isShipSelected( qn: QuantumNumbers ): boolean;
-
-	getValue( key: StoreKey ): string;
+	getValue( key: StoreKey ): number | undefined;
+	getValueAsString( key: StoreKey ): string;
 	setValue( key: StoreKey, value?: string ): void;
+
+	minValid( key: StoreKey ): number;
+	maxValid( key: StoreKey ): number;
 	
 	isDisable( key: StoreKey ): boolean; // TOTHINK: Может переименовать на isOn() и switch()?
 	setDisable( key: StoreKey, newState: boolean ): void;

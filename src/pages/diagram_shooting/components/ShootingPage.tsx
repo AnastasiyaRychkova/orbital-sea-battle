@@ -27,39 +27,50 @@ const ShootingPage = observer(() => {
 	return (
 		<div className={styles.page}>
 			<Provider controller={controller}>
-				<div className={styles.rightPageCorner}>
+				<div className={styles.interface}>
+					<div className={styles.rightPageCorner}>
+						<Routes>
+							<Route path=":state/t/*" element={
+								<>
+								{ process.variant === 1 &&
+										<GameProgress withLevel withScore
+											className={styles.progressBar} />}
+								</>
+							} />
+						</Routes>
+						<IconButton
+							state={browser.fullScreen.isOn}
+							glyphOff='full_screen'
+							glyphOn='accuracy'
+							toggleFunc={browser.fullScreen.toggle}
+							theme='backing'
+							className={styles.fullScreenBtn }/>
+					</div>
 					<Routes>
 						<Route path=":state/t/*" element={
-							<>
-							{ process.variant === 1 &&
-									<GameProgress withLevel withScore
-										className={styles.progressBar} />}
-							</>
-						} />
+						<>
+							<div className={styles.leftPageCorner}>
+								<DropSidedInfo
+									message={page.task?.message || '...'}
+									comment={page.task?.comment || '...'}
+								/>
+								<TaskInfoBlock provider={page.task} />
+							</div>
+							{page.currentTaskCompleted &&
+								<Navigate to={page.task!.resultsLocation || '#'} replace={true} />}
+						</>
+						}/>
+						
+
 					</Routes>
-					<IconButton
-						state={browser.fullScreen.isOn}
-						glyphOff='full_screen'
-						glyphOn='accuracy'
-						toggleFunc={browser.fullScreen.toggle}
-						theme='backing'
-						className={styles.fullScreenBtn }/>
+
+					<div className={styles.spacer}></div>
+
+					<FilterPanel className={styles.filter} />
 				</div>
+
 				<Routes>
-					<Route path=":state/t/*" element={
-					<>
-						<div className={styles.leftPageCorner}>
-							<DropSidedInfo
-								message={page.task?.message || '...'}
-								comment={page.task?.comment || '...'}
-							/>
-							<TaskInfoBlock provider={page.task} />
-						</div>
-						{page.currentTaskCompleted &&
-							<Navigate to={page.task!.resultsLocation || '#'} replace={true} />}
-					</>
-					}/>
-					
+					<Route path=":state/t/*" element={null} />
 					<Route path=":state/:type/*" element={
 						<ModalWindowBuilder
 							provider={page}
@@ -74,7 +85,7 @@ const ShootingPage = observer(() => {
 						className={styles.diagram}
 						zooming />
 				</Suspense>
-				<FilterPanel className={styles.filter} />
+				
 			</Provider>
 		</div>
 	);

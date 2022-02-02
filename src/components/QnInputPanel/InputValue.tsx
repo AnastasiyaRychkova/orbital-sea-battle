@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
 
+import IQuantumNumber from '../../lib/game/ChemicalElement/QuantumNumberInterface';
 import ToggleButton from './ToggleButton';
 import styles from './InputValue.module.css';
 
@@ -26,7 +27,7 @@ interface IProps {
 	storeKey: StoreKey,
 
 	/** Массив, содержащий строки названий кнопок */
-	values: string[],
+	values: IQuantumNumber[],
 
 	/** Стиль кнопок */
 	theme: ToggleTheme,
@@ -41,6 +42,8 @@ const InputValue = inject( "controller" )(observer(( props: IProps ) => {
 	!props.controller && console.error( 'Filter(desktop).InputValue: controller is undefined' );
 	const filter = props.controller!.filter;
 	const isFilterDisabled = filter.isDisable( props.storeKey );
+	const min = filter.minValid( props.storeKey );
+	const max = filter.maxValid( props.storeKey );
 	return (
 		<div
 			className={styles.inputValue}
@@ -57,7 +60,7 @@ const InputValue = inject( "controller" )(observer(( props: IProps ) => {
 			</span>
 
 			<ul className={styles.row}>
-				{ make( props, isFilterDisabled ) }
+				{ make( props, isFilterDisabled, min, max ) }
 			</ul>
 		</div>
 	)
@@ -71,20 +74,24 @@ function make({
 	theme,
 	values,
 }: IProps,
-	isFilterDisabled: boolean ): JSX.Element[]
+	isFilterDisabled: boolean,
+	min: number,
+	max: number ): JSX.Element[]
 {
 	const filter = controller!.filter;
 	let checkedValue = filter.getValue( key );
+	
 
-	return values.map( ( value ) =>
+	return values.map( ( btnValue ) =>
 
-		<li key={value}>
+		<li key={btnValue.value}>
 			<ToggleButton
-				value={value}
+				value={btnValue.toString()}
 				toggleName={key}
 				theme={theme}
-				checked={value === checkedValue}
+				checked={btnValue.value === checkedValue}
 				disabled={isFilterDisabled}
+				invalid={btnValue.value < min || btnValue.value > max}
 				onChange={
 					(e: React.ChangeEvent<HTMLInputElement>) => {
 						filter.setValue( key, e.target.value );

@@ -17,5 +17,4 @@ interface INote
 	reset(): void;
 }
 
-
 export default INote;

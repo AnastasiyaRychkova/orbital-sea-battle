@@ -34,6 +34,7 @@ export type ExpectedTaskScheme = [string, string, string, string];
 
 export type TaskScheme = {
 	type: 'task',
+	key: string,
 	target: 'diagram'|'filter',
 	event: string,
 	expected: ExpectedTaskScheme[],

@@ -14,7 +14,6 @@ import Start from './StartPage';
 import ShootingPage from './ShootingPage';
 import FeedbackPage from './FeedbackPage';
 import EndPage from './EndPage';
-import Analytics from '../../../components/Analytics/Analytics';
 import PageManager from './PageManager';
 
 
@@ -38,7 +37,6 @@ const ExperimentPage = observer(() => {
 					<Route path="/feedback/*" element={<FeedbackPage/>} />
 					<Route path="/end" element={<EndPage/>} />
 				</Routes>
-				<Analytics />
 			</Router>
 		</Provider>
 	);

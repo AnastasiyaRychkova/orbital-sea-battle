@@ -4,10 +4,10 @@ type Timestamp = number;
 class TimeOnPage
 {
 	/** Время на странице */
-	timeOnPage: ms = 0;
+	#timeOnPage: ms = 0;
 
 	/** Время за пределами страницы, пока она открыта */
-	timeOutOfPage: ms = 0;
+	#timeOutOfPage: ms = 0;
 
 	/** Время начала сессии */
 	readonly sessionStartTime: Date = new Date();
@@ -29,8 +29,7 @@ class TimeOnPage
 			() => {
 				this.absences++;
 				this.#absenceStartTime = Date.now();
-				this.timeOnPage += this.#absenceStartTime - this.#subsessionStartTime;
-				console.log( 'Blur', this.absences, new Date(this.timeOnPage).getSeconds() );
+				this.#timeOnPage += this.#absenceStartTime - this.#subsessionStartTime;
 			}
 		);
 
@@ -38,10 +37,19 @@ class TimeOnPage
 			'focus',
 			() => {
 				this.#subsessionStartTime = Date.now();
-				this.timeOutOfPage += this.#subsessionStartTime - this.#absenceStartTime;
-				console.log( 'Focus', this.absences, new Date(this.timeOutOfPage).getSeconds() );
+				this.#timeOutOfPage += this.#subsessionStartTime - this.#absenceStartTime;
 			}
 		);
+	}
+
+	get timeOnPage(): number
+	{
+		return this.#timeOnPage + ( Date.now() - this.#subsessionStartTime );
+	}
+
+	get timeOutOfPage(): number
+	{
+		return this.#timeOutOfPage + ( Date.now() - this.#absenceStartTime );
 	}
 }
 

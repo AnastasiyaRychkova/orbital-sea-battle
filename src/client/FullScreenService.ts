@@ -3,6 +3,8 @@ import { action, makeObservable, observable } from "mobx";
 export type FullScreenServiceType = {
 	isOn: boolean,
 	toggle: () => void,
+	on: () => void,
+	off: () => void,
 }
 
 
@@ -48,23 +50,26 @@ class FullScreenService
 				|| (doc as any).msExitFullscreen;
 	};
 	
-	toggle()
+	toggle(): void
 	{
 		if( this.isOn )
 		{
-			this.#cancelFullScreen?.call( window.document )
-				.catch( ( error: Error ) => {
-					console.warn( error.message );
-				} );
+			this._off();
 		}
 		else
 		{
-			this.#requestFullScreen?.call( document.documentElement )
+			this._on();
+		}
+	}
+
+	private _on(): void
+	{
+		this.#requestFullScreen?.call( document.documentElement )
 				.then(() => {
 					if( window.screen.orientation.lock )
 						window.screen.orientation.lock( 'landscape' )
 							.catch( ( error: Error ) => {
-								console.log( error.message );
+								console.error( error.message );
 							} );
 					else
 						(window.screen as any).lockOrientation( 'landscape' );
@@ -73,12 +78,31 @@ class FullScreenService
 				.catch( ( error: Error ) => {
 					console.warn( error.message );
 				} );
-		}
+	}
+
+	private _off(): void
+	{
+		this.#cancelFullScreen?.call( window.document )
+				.catch( ( error: Error ) => {
+					console.warn( error.message );
+				} );
 	}
 
 	_changeHandler()
 	{
 		this.isOn = document.fullscreenElement != null;
+	}
+
+	on(): void
+	{
+		if( !this.isOn )
+			this._on();
+	}
+
+	off(): void
+	{
+		if( this.isOn )
+			this._off();
 	}
 
 }

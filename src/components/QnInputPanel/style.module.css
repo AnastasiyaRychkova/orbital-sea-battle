@@ -10,8 +10,8 @@
 
 .panel {
 	display: flex;
-	justify-content: flex-end;
 	align-items: stretch;
+	justify-content: flex-end;
 	column-gap: 1em;
 	padding: 0;
 	padding-right: 1em;
@@ -21,16 +21,17 @@
 	display: flex;
 	flex-wrap: wrap;
 	column-gap: 1em;
-	box-shadow: shadow__input;
-	background-color: disable-800;
 	column-gap: 1em;
 	padding: .5em;
+	box-shadow: shadow__input;
+	background-color: disable-800;
+	pointer-events: auto;
 }
 
 .inputPair {
 	display: flex;
-	column-gap: 1em;
 	flex-basis: 0;
+	column-gap: 1em;
 }
 
 @media (max-width: 940px) {

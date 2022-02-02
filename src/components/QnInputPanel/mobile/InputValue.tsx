@@ -7,6 +7,7 @@ import ToggleButton from '../ToggleButton';
 import styles from './InputValue.module.css';
 
 import FilterType from "../../../lib/game/Diagram/Filter/FilterInterface";
+import IQuantumNumber from '../../../lib/game/ChemicalElement/QuantumNumberInterface';
 
 
 type StoreKey = 'n'|'l'|'m'|'s';
@@ -28,7 +29,7 @@ interface IProps {
 	storeKey: StoreKey,
 
 	/** Массив, содержащий строки названий кнопок */
-	values: string[],
+	values: IQuantumNumber[],
 
 	/** Открыта ли вкладка */
 	open: boolean,
@@ -49,7 +50,9 @@ const InputValue: FC<IProps> = inject( "controller" )(observer( ({
 	controller,
 }) => {
 	const filter = controller!.filter;
-	const currentValue = filter.getValue( key );
+	const currentValueStr = filter.getValueAsString( key );
+	const min = filter.minValid( key );
+	const max = filter.maxValid( key );
 	return (
 		<div className={styles.tab}>
 			<input
@@ -62,7 +65,7 @@ const InputValue: FC<IProps> = inject( "controller" )(observer( ({
 			/>
 			<label
 				htmlFor={"filter-"+key}
-				className={cn( styles, ['titleBlock', currentValue ? '' : 'undefined'] )}
+				className={cn( styles, ['titleBlock', currentValueStr ? '' : 'undefined'] )}
 			>
 				<div className={styles.title}>
 					<span className={styles.titleText}>
@@ -77,13 +80,13 @@ const InputValue: FC<IProps> = inject( "controller" )(observer( ({
 				</div>
 				<div className={styles.value}>
 					<span className={styles.valueText}>
-						{currentValue || '..'}
+						{currentValueStr || '..'}
 					</span>
 				</div>
 			</label>
 
 			<ul className={styles.body}>
-				{ make( values, filter, key ) }
+				{ make( values, filter, key, min, max ) }
 			</ul>
 		</div>
 	);
@@ -92,24 +95,27 @@ const InputValue: FC<IProps> = inject( "controller" )(observer( ({
 
 
 function make(
-	values: string[],
+	values: IQuantumNumber[],
 	filter: FilterType,
-	key: StoreKey
+	key: StoreKey,
+	min: number,
+	max: number
 ): JSX.Element[]
 {
 	const checkedValue = filter.getValue( key );
 
-	return values.map( ( value ) =>
+	return values.map( ( btnValue ) =>
 
-		<li className={styles.toggleBtn} key={value}>
+		<li className={styles.toggleBtn} key={btnValue.value}>
 			<ToggleButton
-				value={value}
+				value={btnValue.toString()}
 				toggleName={key}
 				theme={ToggleTheme.squareL}
-				checked={value === checkedValue}
+				checked={btnValue.value === checkedValue}
+				invalid={btnValue.value < min || btnValue.value > max}
 				onChange={
-					() => {
-						filter.setValue( key, value );
+					(e: React.ChangeEvent<HTMLInputElement>) => {
+						filter.setValue( key, e.target.value );
 					}
 				}
 			/>

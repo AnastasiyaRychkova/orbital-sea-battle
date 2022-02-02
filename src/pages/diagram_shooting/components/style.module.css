@@ -17,6 +17,23 @@
 	background-size: 3em 3em;
 }
 
+.interface {
+	box-sizing: border-box;
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	min-height: 200px;
+	padding-bottom: var(--page-padding-y);
+	pointer-events: none;
+}
+
+.spacer {
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+
 
 .diagram {
 	width: 100%;
@@ -28,10 +45,11 @@
 }
 
 .filter {
-	position: absolute;
-	right: calc( 50% - 546px );
-	bottom: var(--page-padding-y);
+	position: sticky;
+	width: 100%;
+	overflow-x: auto;
 	justify-content: center;
+	bottom: 1em;
 }
 
 .leftPageCorner {
@@ -42,18 +60,18 @@
 	flex-direction: column;
 	max-width: 45%;
 	user-select: none;
-	row-gap: .75em;
 	pointer-events: none;
+	row-gap: .75em;
 }
 
 .rightPageCorner {
 	display: flex;
 	position: absolute;
-	align-items: flex-start;
 	top: 0;
 	right: 0;
-	user-select: none;
+	align-items: flex-start;
 	column-gap: 0em;
+	user-select: none;
 }
 
 .progressBar {
@@ -61,7 +79,9 @@
 }
 
 .fullScreenBtn {
+	z-index: 140;
 	width: 2.8em;
+	pointer-events: auto;
 }
 
 @media (max-width: 1400px) {
@@ -77,17 +97,12 @@
 	}
 
 	.leftPageCorner {
-		row-gap: .5em;
 		max-width: 50%;
+		row-gap: .5em;
 	}
 
 	.progressBar {
 		width: 25em;
-	}
-
-	.filter {
-		right: calc( 50% - 452px );
-		bottom: 1em;
 	}
 }
 
@@ -97,9 +112,9 @@
 	}
 
 	.filter {
-		right: 0;
-		bottom: 1em;
 		justify-content: flex-end;
+		margin-right: var(--page-padding-x);
+		width: calc(100% - var(--page-padding-x));
 	}
 
 }
@@ -111,8 +126,8 @@
 	}
 	
 	.leftPageCorner {
+		max-width: min( 80%, 29.4em );
 		row-gap: .5em;
-		max-width: 80%;
 	}
 
 	.progressBar {
@@ -121,5 +136,9 @@
 	
 	.fullScreenBtn {
 		width: 2em;
+	}
+
+	.filter {
+		justify-content: flex-start;
 	}
 }

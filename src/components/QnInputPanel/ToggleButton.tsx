@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import cn from 'classnames';
 import styles from './ToggleButton.module.css';
 import { ToggleTheme } from "./types";
 
@@ -20,6 +21,9 @@ interface IProps {
 
 	/** Есть ли возможность на нее нажать */
 	disabled?: boolean,
+
+
+	invalid?: boolean,
 }
 
 const ToggleButton: FC<IProps> = ( {
@@ -29,6 +33,7 @@ const ToggleButton: FC<IProps> = ( {
 	theme = ToggleTheme.default,
 	checked = false,
 	disabled = false,
+	invalid = false,
 } ) => {
 	const id = toggleName + '-' + value;
 	return (
@@ -43,8 +48,12 @@ const ToggleButton: FC<IProps> = ( {
 				checked={checked}
 				disabled={disabled} />
 			<label
-				className={styles.button +' '+ getThemeClass( theme )}
-				htmlFor={id} 
+				className={cn(
+					styles.button,
+					{[styles.invalid]: invalid},
+					getThemeClass( theme )
+				)}
+				htmlFor={id}
 				role='button'>
 				
 				<span className={styles.text}>

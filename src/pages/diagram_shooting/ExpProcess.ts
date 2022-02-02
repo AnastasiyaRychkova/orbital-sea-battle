@@ -1,7 +1,7 @@
 import { makeAutoObservable, observable } from "mobx";
 import { storage, achievements, browser } from "../../client/core";
 import TimeOnPage from "./TimeOnPage";
-import type { TaskResult } from "./Tasker/types.d";
+import type { TaskerEventData, TaskResult } from "./Tasker/types.d";
 import type { TaskKey } from "./ExpProcess.d";
 
 class UserAssessments
@@ -18,6 +18,7 @@ class UserAssessments
 			difficulty: 0,
 		});
 
+		this.set = this.set.bind( this );
 		this.set = this.set.bind( this );
 	}
 
@@ -59,13 +60,15 @@ class ExpProcess
 	/** Пользователь перешел на этап игры */
 	#wishToPlay: boolean;
 
+	/** Пользователь перешел на этап игры */
+	#hasFinished: boolean;
+
 	/** Результаты выполненных заданий */
 	#tasks: {[key in TaskKey]: TaskResult[]};
-
 	#gameTasks: TaskResult[][];
 
 	/** Объект, отслеживающий время проведенное на странице и за ее пределами */
-	#timeOnPage: TimeOnPage = new TimeOnPage();
+	#timer: TimeOnPage = new TimeOnPage();
 
 
 	constructor()
@@ -77,16 +80,23 @@ class ExpProcess
 		this.#checkPoint = this._loadCheckpointURL();
 		this.#hasPlayed = this._loadPlayStatus();
 		this.#wishToPlay = this._loadWishToPlay();
+		this.#hasFinished = this._loadFinishStatus();
 		
 		this.#tasks = this._createTaskStore();
 		this.#gameTasks = [];
 
-		this._send = this._send.bind( this );
+		this.send = this.send.bind( this );
 		this.toURL = this.toURL.bind( this );
+		this.finish = this.finish.bind( this );
 
 		achievements.initialize( this._loadAchievements() );
 
-		browser.onTabClose( this._send );
+		browser.onTabClose( this.send );
+
+		this._sendToMetrics( {
+			'event': 'session_start',
+			'variant': this.variant + 1
+		});
 	}
 
 	/** Загрузить ID сессии. */
@@ -201,6 +211,11 @@ class ExpProcess
 		return storage.getAsBoolean( 'hasPlayed' );
 	}
 
+	private _loadFinishStatus(): boolean
+	{
+		return storage.getAsBoolean( 'hasFinished' );
+	}
+
 	private _createTaskStore()
 	{
 		return {
@@ -214,10 +229,20 @@ class ExpProcess
 	}
 
 
-	private _send(): void
+	send(): void
 	{
 		this._save();
-		browser.sendInBackground( '', this._prepareDataForRequest() );
+		this._sendOnServer();
+	}
+
+	private _sendOnServer(): void
+	{
+		browser.sendInBackground( window.location.protocol + '//battleship.itmo.ru/results.php', this._prepareDataForRequest() );
+	}
+
+	private _sendToMetrics( data: object ): void
+	{
+		(window as any).dataLayer.push( data );
 	}
 
 	/** Создать объект для отправки на сервер */
@@ -233,19 +258,19 @@ class ExpProcess
 		request.append( 'a2', this.assessments.get( 'difficulty' ).toString() );
 		request.append( 'bWish', this.#wishToPlay ? '1' : '0' );
 		request.append( 'bGame', this.#hasPlayed ? '1' : '0' );
-		request.append( 'timeOn', this.#timeOnPage.timeOnPage.toString() );
-		request.append( 'timeOut', this.#timeOnPage.timeOutOfPage.toString() );
-		request.append( 'startT', this.#timeOnPage.sessionStartTime.toString() );
+		request.append( 'onPage', this.#timer.timeOnPage.toString() );
+		request.append( 'outPage', this.#timer.timeOutOfPage.toString() );
+		request.append( 'startT', this.#timer.sessionStartTime.getTime().toString() );
 		request.append( 'endT', Date.now().toString() );
-		request.append( 'away', this.#timeOnPage.absences.toString() );
+		request.append( 'away', this.#timer.absences.toString() );
 
 		const tasks = this._taskResultsToArrays();
 		request.append( 'res', tasks.results.join( ';' ) );
 		request.append( 'dur', tasks.duration.join( ';' ) );
 		request.append( 'atmp', tasks.attempts.join( ';' ) );
 		
-		request.append( 'game', this._gameResultsToArray().join( ';' ) );
-		
+		if( this.#gameTasks.length > 0 )
+			request.append( 'game', this._gameResultsToArray().join( ';' ) );
 		return request;
 	}
 
@@ -289,7 +314,7 @@ class ExpProcess
 		const res: string[] = [];
 		this.#gameTasks.forEach( ( sequence ) => {
 			sequence.forEach( ( task ) => {
-				res.push( `${task.result};${task.duration};${task.attempts}` );
+				res.push( `${task.result?1:0};${task.duration}` );
 			});
 		} );
 
@@ -320,17 +345,27 @@ class ExpProcess
 		return this.#checkPoint;
 	}
 	
-	addTaskResults( key: TaskKey, results: TaskResult[] ): void
+	addTaskResults( key: TaskKey|'game', results: TaskerEventData ): void
 	{
+		this._sendToMetrics( {
+			event: 'task_results',
+			correct: results.right,
+			duration: results.duration / 1000,
+		} );
+
+		if( key === 'game' )
+		{
+			this.#gameTasks.push( results.results );
+			return;
+		}
+
 		const task: TaskResult[] | undefined = this.#tasks[ key ];
 		if( task && task.length === 0 )
-			this.#tasks[ key ] = results;
+			this.#tasks[ key ] = results.results;
 	}
 
 	newSession(): void
 	{
-		this._send();
-
 		this.variant = ( this.variant + 1 ) % 2;
 		this.assessments = new UserAssessments();
 
@@ -338,6 +373,7 @@ class ExpProcess
 		this.#checkPoint = '/';
 		this.#hasPlayed = false;
 		this.#wishToPlay = false;
+		this.#hasFinished = false;
 		
 		this.#tasks = this._createTaskStore();
 		this.#gameTasks = [];
@@ -345,18 +381,54 @@ class ExpProcess
 		achievements.initialize({ level: 1, score: 0 });
 
 		storage.setPrimitive( 'id', this.#id );
-		storage.setPrimitive( 'variant', this.variant );
+		storage.setPrimitive( 'variant', this.variant + 1 );
+		storage.setObject( 'assessments', {satisfaction: 0, difficulty: 0} );
+		storage.setPrimitive( 'level', 1 );
+		storage.setPrimitive( 'score', 0 );
+		storage.setPrimitive( 'wishToPlay', false );
+		storage.setPrimitive( 'hasPlayed', false );
+		storage.setPrimitive( 'hasFinished', false );
+
+		this._sendToMetrics( {
+			'event': 'new_session',
+			'variant': this.variant + 1
+		});
 	}
 
+	/**
+	 * Учет перехода на следующую страницу
+	 * 
+	 * Вызывается ExpPage только для окон
+	 * @param url Куда произошел переход
+	 * @param nextURL Следующая страница перехода по нажатию главную кнопку окна
+	 */
 	toURL( url: string, nextURL: string ): void
 	{
 		const isResultWindow = url.match( /.+\/r(\/.+)*/ ) !== null;
 		this.#checkPoint = isResultWindow ? nextURL : url;
-		storage.setPrimitive( 'url', this.#checkPoint );
 
 		const isGame = url.includes( 'game' );
 		this.#wishToPlay = this.#wishToPlay || isGame;
 		this.#hasPlayed = this.#hasPlayed || (isGame && isResultWindow);
+		console.log('toURL');
+
+		this._save();
+	}
+
+	finish()
+	{
+		if( !this.#hasFinished )
+		{
+			this._sendToMetrics( {
+				event: 'end_'+( this.variant+1 )+'_variant',
+				satisfaction: this.assessments.get( 'satisfaction' ),
+				difficulty: this.assessments.get( 'difficulty' ),
+				on_page: this.#timer.timeOnPage / 1000,
+			} );
+			this.#hasFinished = true;
+		}
+		this._save();
+		this._sendOnServer();
 	}
 }
 

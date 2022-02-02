@@ -2,7 +2,7 @@
 @value mobile, laptop from sizes;
 
 @value colors: '../../../style/colors.css';
-@value primary-200, secondary-100, secondary-800 from colors;
+@value primary-100, primary-200, secondary-100, secondary-800 from colors;
 
 .header {
 	margin: 0;
@@ -18,6 +18,11 @@
 .paragraph {
 	margin-bottom: .75em;
 	padding: 0;
+}
+
+.paragraph.strong > .paragraphText {
+	font-weight: 700;
+	color: primary-100;
 }
 
 .paragraphText {
@@ -37,6 +42,10 @@
 
 .mWindow.modal {
 	width: min( 52em, 100%);
+}
+
+.mWindow.modal p {
+	text-align: center;
 }
 
 .mwHeader {
@@ -63,7 +72,7 @@
 	flex-direction: row-reverse;
 	flex-wrap: wrap;
 	gap: 1em;
-	margin-top: 3em;
+	margin-top: 2.4em;
 }
 
 .mwActions.instruction {
@@ -90,6 +99,12 @@
 
 .mwMiniInfo {
 	background-color: secondary-800;
+}
+
+.mwImage {
+	max-width: 350px;
+	max-height: 200px;
+	align-self: center;
 }
 
 
@@ -120,5 +135,13 @@
 	
 	.mwButton {
 		min-width: 12.5em;
+	}
+
+	.mwImage {
+		max-height: 150px;
+	}
+
+	.mwActions {
+		margin-top: 1.5em;
 	}
 }

@@ -103,7 +103,10 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 	}
 
 	getValue = ( key: StoreKey ) =>
-		this._get( key ).getAsString();
+		this._get( key ).get()?.value;
+
+	getValueAsString = (key: StoreKey) =>
+		this._get( key ).get()?.toString() || '';
 
 	setValue = ( key: StoreKey, value: string ) => {
 		if( this._disabled )
@@ -152,64 +155,71 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		this._updateMode();
 	};
 
-	
 
-	isShipSelected( qn: QuantumNumbers ): boolean
+	minValid( key: StoreKey ): number
 	{
-		return this.mode === 'block'
-			&& this._checkFilters( qn, ['n', 'l'], true );
-	}
-
-	isContainerSelected( qn: QuantumNumbers ): boolean
-	{
-		return this.mode === 'box'
-			&& this._isEqualQN( qn, 'm' )
-			&& this._checkFilters( qn, ['n', 'l'] );
-	}
-
-	isCellSelected( qn: QuantumNumbers ): boolean
-	{
-		return this._isEqualQN( qn, 's' )
-			&& this._checkFilters( qn, ['n', 'l', 'm'] );
-	}
-
-	/**
-	 * Проверить, проходит ли проверку образец по фильтру.
-	 * 
-	 * Фильтр может содержать деактивированные или неустановленные значения. Они не мешают поверке.
-	 * @param qn Образец
-	 * @param keys Проверяемые квантовые числа
-	 * @returns Соответствует ли образец фильтру
-	 */
-	private _checkFilters( qn: QuantumNumbers, keys: StoreKey[], strict: boolean = false ): boolean
-	{
-		let equalFilters = 0;
-
-		for( const key of keys ) {
-			const note = this._get( key )!;
-
-			if( note.isSat() )
-			{
-				if( note.isEqual( qn[ key ] ) )
-					equalFilters++;
-				else
-					return false;
-			}
+		switch( key )
+		{
+			case 'n':
+				return Math.max(
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value + 1 : MainQN.MIN,
+					this._isSat( 'm' )
+							? Math.abs( this._get( 'm' ).get()!.value ) + 1 : MainQN.MIN,
+				); // max( l+1, |m|+1 )
+			
+			case 'l':
+				return this._isSat( 'm' )
+							? Math.abs( this._get( 'm' ).get()!.value )
+							: OrbitalQN.MIN;
+			case 'm':
+				return Math.max(
+					this._isSat( 'n' )
+							? Math.abs( this._get( 'n' ).get()!.value - 4.5 ) - 3.5
+							: MagneticQN.MIN,
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value * -1
+							: MagneticQN.MIN,
+				);
+			case 's':
+				return SpinQN.MIN;
 		}
-		return strict ? equalFilters > 0 : true;
 	}
 
-	/**
-	 * Проверка на эквивалентность с учетом статуса активации фильтра
-	 * @param qn Образец
-	 * @param keys Проверяемые квантовые числа
-	 * @returns Есть ли точное совпадение
-	 */
-	private _isEqualQN( qn: QuantumNumbers, key: StoreKey ): boolean
+	maxValid( key: StoreKey ): number
 	{
-		const note = this._get( key )!;
-		return !note.isDisabled() && note.isEqual( qn[ key ] );
+		switch( key )
+		{
+			case 'n':
+				return Math.min(
+					this._isSat( 'l' )
+							? 8 - this._get( 'l' ).get()!.value : MainQN.MAX,
+					this._isSat( 'm' )
+							? 8 - Math.abs( this._get( 'm' ).get()!.value ) : MainQN.MAX,
+				);
+			case 'l':
+				return this._isSat( 'n' )
+							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
+							: OrbitalQN.MAX;
+			case 'm':
+				return Math.min(
+					this._isSat( 'n' )
+							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
+							: MagneticQN.MAX,
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value
+							: MagneticQN.MAX,
+				);
+			case 's':
+				return SpinQN.MAX;
+		}
 	}
+
+	private _isSat( key: StoreKey ): boolean
+	{
+		return this._get( key ).isSat();
+	}
+
 
 	get state(): QuantumNumbers
 	{
