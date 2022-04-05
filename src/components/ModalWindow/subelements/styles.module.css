@@ -1,0 +1,147 @@
+@value sizes: '../../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../../style/colors.css';
+@value primary-100, primary-200, secondary-100, secondary-800 from colors;
+
+.header {
+	margin: 0;
+	padding: 0;
+}
+
+.headerText {
+	composes: header from '../../../style/typography.css';
+	composes: header-4 from '../../../style/typography.css';
+	color: primary-200;
+}
+
+.paragraph {
+	margin-bottom: .75em;
+	padding: 0;
+}
+
+.paragraph.strong > .paragraphText {
+	font-weight: 700;
+	color: primary-100;
+}
+
+.paragraphText {
+	composes: long-text from '../../../style/typography.css';
+	composes: long-text-m-normal from '../../../style/typography.css';
+	color: secondary-100;
+}
+
+
+
+
+/*----------  Modal Window  ----------*/
+
+.mWindow {
+	width: min( 52em, 100%);
+}
+
+.mWindow.modal {
+	width: min( 52em, 100%);
+}
+
+.mWindow.modal p {
+	text-align: center;
+}
+
+.mwHeader {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 1em;
+	padding: 0;
+}
+
+.mwHeader.modal {
+	justify-content: center;
+	text-align: center;
+}
+
+.mwContent {
+	display: flex;
+	flex-direction: column;
+}
+
+.mwActions {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	gap: 1em;
+	margin-top: 2.4em;
+}
+
+.mwActions.instruction {
+	justify-content: right;
+}
+
+.mwActions.modal {
+	justify-content: center;
+}
+
+.mwButton {
+	min-width: 18em;
+}
+
+.mwResults {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	justify-content: center;
+	flex-wrap: wrap;
+	column-gap: 1em;
+	margin-top: 1em;
+}
+
+.mwMiniInfo {
+	background-color: secondary-800;
+}
+
+.mwImage {
+	max-width: 350px;
+	max-height: 200px;
+	align-self: center;
+}
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+
+@media (max-width: laptop) and (min-width: mobile) {
+	.mWindow {
+		width: min( 50em, 100%);
+	}
+	
+	.mWindow.modal {
+		width: min( 46em, 100%);
+	}
+}
+
+/* Smartphone */
+@media (max-height: mobile), (max-width: mobile) {
+	.mWindow {
+		width: min( 40em, 100%);
+	}
+	
+	.mWindow.modal {
+		width: min( 37em, 100%);
+	}
+	
+	.mwButton {
+		min-width: 12.5em;
+	}
+
+	.mwImage {
+		max-height: 150px;
+	}
+
+	.mwActions {
+		margin-top: 1.5em;
+	}
+}

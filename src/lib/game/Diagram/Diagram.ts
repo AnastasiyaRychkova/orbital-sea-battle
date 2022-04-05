@@ -1,14 +1,14 @@
 import { makeObservable, observable, action, computed } from "mobx";
 
-import IEventEmitter from "../../util/EventEmitter/EventEmitterInterface";
-import EventEmitterAdapter from "../../util/EventEmitter/EventEmitter";
-import { EDiagramCellState, SpinIndex } from "../ChemicalElement/DiagramCell";
-import ElemConfig from "../ChemicalElement/ElemConfig";
-import PeriodicTableInterface from "../ChemicalElement/PeriodicTableInterface";
+import { stringSchemeToQuantumNumbers } from "../ChemicalElement/QuantumNumbers";
+import { SpinIndex } from "../ChemicalElement/DiagramCell";
+import State from "./ObjectState";
 
-import type { CellQN, ShipQN } from "../ChemicalElement/QuantumNumbers";
+import type { CellQN, ShipQN, QNStringScheme } from "../ChemicalElement/QuantumNumbers";
 import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
-import EventEmitterInterface from "../../util/EventEmitter/EventEmitterInterface";
+import EventProvider from "../../util/EventEmitter/EventProvider";
+import { StateType } from "./ObjectState.d";
+import IFilter from "./Filter/FilterInterface";
 
 
 
@@ -22,27 +22,29 @@ import EventEmitterInterface from "../../util/EventEmitter/EventEmitterInterface
  * * Параметр `disabled` блокирует выполнение игровых команд (🎲)
  * * Оповещает о совершении событий
  */
-class Diagram implements IDiagram {
-	readonly periodicTable: PeriodicTableInterface;
-	_state!: ElemConfig;
-	_shots!: ElemConfig;
+class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements IDiagram {
+	_state!: State;
+	_shots!: State;
 	_lastShotIndex?: SpinIndex;
 	_disabled: boolean; // TODO: rename diagram.disabled => .editable
-
-	private emitter: IEventEmitter = new EventEmitterAdapter();
+	_filter?: IFilter;
+	_highlight?: IFilter;
 
 
 	// private static readonly SIZE: number = 118;
 
 
-	constructor(periodicTable: PeriodicTableInterface) {
+	constructor( filter?: IFilter, highlight?: IFilter ) {
+		super();
 		makeObservable(this, {
 
 			_state: observable,
-			_shots: observable,
 			_disabled: observable,
+			_filter: observable,
+			_highlight: observable,
 
 			disabled: computed,
+			observableState: computed,
 			setElementByNumber: action,
 			setCellState: action,
 			toggleCell: action,
@@ -51,57 +53,31 @@ class Diagram implements IDiagram {
 			reset: action,
 		});
 
-		this.periodicTable = periodicTable;
-		this.reset();
+		this._filter = filter;
+		this._highlight = highlight;
+
+		this.reset(); // Initialization of _state
 		this._disabled = false;
 	}
 
-	getCellState( quantumNumbers: CellQN ): EDiagramCellState
+	get observableState(): StateType
 	{
-		const index = this._getCellIndex( quantumNumbers );
-		return index
-				? ElemConfig.getCellState( index,
-										this._state,
-										this._shots )
-				: EDiagramCellState.off;
+		return this._state;
 	}
-
-	private _getCellIndex( quantumNumbers: CellQN ): SpinIndex | undefined
-	{
-		return this.periodicTable.converter.getCellIndex( quantumNumbers );
-	}
-
 
 	setCellState( quantumNumbers: CellQN, state: boolean ): void
 	{
-		const index = this._getCellIndex( quantumNumbers );
-		if( !index )
-			return;
-
-		if( this._state.hasSpin( index ) !== state )
-		{
-			this._state.write( index, state );
-			this._emit( 'changed', {
-				type: 'cell',
-				index: index.value,
-				qn: quantumNumbers,
-			});
-		}
-		
+		throw new Error("Method not implemented.");
 	}
 
 	isLastShot( quantumNumbers: CellQN ): boolean
 	{
-		const index = this._getCellIndex( quantumNumbers );
-		return this._lastShotIndex !== undefined
-				&& index !== undefined
-				&& this._lastShotIndex.value === index.value;
+		throw new Error("Method not implemented.");
 	}
 
 	setElementByNumber( number: number ): void
 	{
-		const element = this.periodicTable.getByNumber( number );
-		this._state = element.config.clone();
+		throw new Error("Method not implemented.");
 	}
 
 	get disabled(): boolean
@@ -117,91 +93,28 @@ class Diagram implements IDiagram {
 
 	toggleCell( quantumNumbers: CellQN ): void
 	{
-		if( this._disabled )
-			return;
-
-		const index = this._getCellIndex( quantumNumbers );
-		if( !index )
-			return;
-
-		this._state.write( index, !this._state.hasSpin( index ) );
-		this._emit( 'changed', {
-			type: 'cell',
-			index: index.value,
-			qn: quantumNumbers,
-		} )
+		throw new Error("Method not implemented.");
 	}
 
 	toggleShip( quantumNumbers: ShipQN ): void
 	{
-		if( this._disabled )
-			return;
-
-		const ship = this.periodicTable.converter.getBlockIndexes( quantumNumbers );
-		if( !ship )
-			return;
-
-		if( this._isShipFilled( ship ) )
-			this._clearShip( ship );
-		else
-			this._fillShip( ship );
-
-		this._emit( 'changed', {
-			type: 'ship',
-			qn: quantumNumbers,
-		} )
+		throw new Error("Method not implemented.");
 	}
 
-	private _isShipFilled( ship: SpinIndex[] ): boolean
-	{
-		for (let i = 0; i < ship.length; i++) {
-			if( !this._state.hasSpin( ship[i] ) )
-				return false;
-		}
-		return true;
-	}
-	
-	private _clearShip( ship: SpinIndex[] ): void
-	{
-		for( const index of ship ) {
-			this._state.writeWithoutUpdate( index, false );
-		}
-		this._state.update();
-	}
-	
-	private _fillShip( ship: SpinIndex[] ): void
-	{
-		for( const index of ship ) {
-			this._state.writeWithoutUpdate( index, true );
-		}
-		this._state.update();
-	}
-
-	aim( quantumNumbers: CellQN ): void
+	aim( qn: CellQN ): void
 	{
 		if( this._disabled )
 			return;
 
-		const index = this._getCellIndex( quantumNumbers );
-		if( !index )
+		const cell = this._state.getCell( qn );
+		if( !cell )
 			return;
 
-		if( this._shots.hasSpin( index ) )
-		{
-			this._emit( 'shot', {
-				index: index.value,
-				qn: quantumNumbers,
-				isReShot: true,
-			});
-		}
-		else {
-			this._shots.write( index, true );
-			this._emit( 'shot', {
-				index: index.value,
-				qn: quantumNumbers,
-				isReShot: false,
-			});
-		}
+		this._emit( 'shot', {
+			qn,
+			isReShot: cell.damage,
+		});
+		cell.doDamage();
 	}
 
 	setState(): void {
@@ -210,31 +123,18 @@ class Diagram implements IDiagram {
 
 	reset(): void
 	{
-		this._state = new ElemConfig();
-		this._shots = new ElemConfig();
+		this._filter?.reset();
+		this._highlight?.reset();
+		this._state = new State( this._filter, this._highlight );
 		this._lastShotIndex = undefined;
 	}
 
-	on( event: DiagramEvent, func: Function ): EventEmitterInterface
+	highlight( qnScheme: QNStringScheme ): void
 	{
-		return this.emitter.on( event, func );
+		if( !this._highlight )
+			return;
+		this._highlight.setState( stringSchemeToQuantumNumbers( qnScheme ) );
 	}
-
-	once( event: DiagramEvent, func: Function ): EventEmitterInterface
-	{
-		return this.emitter.once( event, func );
-	}
-
-	remove( event: DiagramEvent, func: Function ): EventEmitterInterface
-	{
-		return this.emitter.remove( event, func );
-	}
-
-	private _emit( event: DiagramEvent, data?: DiagramEventData ): EventEmitterInterface
-	{
-		return this.emitter.emit( event, data );
-	}
-
 }
 
 

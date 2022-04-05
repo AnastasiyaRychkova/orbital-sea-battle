@@ -1,0 +1,60 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value primary-100, primary-200, primary-400, secondary-700, secondary-800 from colors;
+
+@value effects: '../../style/effects.css';
+@value glow__button--light--m from effects;
+
+.scale {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	column-gap: .5em;
+}
+
+.input {
+	display: none;
+}
+
+
+.input:checked ~ .value > .star {
+	stroke: primary-100;
+	fill: primary-100;
+	filter: drop-shadow( glow__button--light--m );
+}
+
+.star {
+	stroke: primary-400;
+	fill: secondary-800;
+	cursor: pointer;
+}
+
+@media screen and (hover: hover) {
+	.star:hover {
+		stroke: primary-200;
+		fill: secondary-700;
+	}
+
+	.input:checked ~ .value > .star:hover {
+		stroke: primary-200;
+		fill: primary-200;
+	}
+}
+
+@media (max-width: laptop) and (min-width: mobile) {
+	.star {
+		width: 2.5em;
+		height: 2.5em;
+	}
+}
+
+@media (max-height: mobile), (max-width: mobile) {
+	.star {
+		width: 100%;
+		height: 2em;
+	}
+}

@@ -1,0 +1,182 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value primary-300, primary-500, secondary-100, secondary-900 from colors;
+
+@value effects: '../../style/effects.css';
+@value shadow__input from effects;
+
+
+.task {
+	box-sizing: border-box;
+	display: flex;
+	align-items: flex-start;
+	column-gap: 1em;
+
+	max-width: 38em;
+	padding: 1em;
+	padding-right: 0;
+
+	box-shadow: shadow__input;
+	background-color: secondary-900;
+	cursor: pointer;
+	transition: width 1.5s ease;
+	color: secondary-100;
+	pointer-events: auto;
+}
+
+.infoIcon {
+	width: 2.5em;
+	color: secondary-100;
+}
+
+.content {
+	display: flex;
+	align-items: flex-start;
+	flex-grow: 1;
+	column-gap: 1.5em;
+	animation: open-task 1s ease forwards;
+}
+
+.description {
+	display: flex;
+	flex-direction: column;
+	row-gap: .5em;
+}
+
+.closeBtn {
+	flex-shrink: 0;
+	margin-right: 1.5em;
+	width: 1.8em;
+	cursor: pointer;
+	color: primary-500;
+}
+
+.closeBtn:active {
+	color: primary-500;
+}
+
+.checkbox {
+	display: none;
+}
+
+.checkbox:checked ~ .content {
+	animation: close-task 1s ease forwards;
+}
+
+.checkbox:checked ~ .infoIcon {
+	color: primary-300;
+}
+
+
+@media screen and (hover: hover) {
+	.closeBtn:hover {
+		color: primary-200;
+	}
+}
+
+.messageText {
+	composes: button from '../../style/typography.css';
+	composes: button-medium from '../../style/typography.css';
+}
+
+.commentText {
+	composes: long-text from '../../style/typography.css';
+	composes: long-text-m-normal from '../../style/typography.css';
+}
+
+
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+/* Tablet or Small Notebook */
+@media (min-width: mobile) and (max-width: laptop) {
+
+	.task {
+		column-gap: .75em;
+		padding: .75em;
+		padding-right: 0;
+	}
+	
+	.content {
+		column-gap: .75em;
+	}
+	
+	.infoIcon {
+		width: 2em;
+	}
+	
+	.description {
+		row-gap: .15em;
+	}
+	
+	.closeBtn {
+		margin-right: 1em;
+		width: 1.5em;
+	}
+}
+
+/* Smartphone */
+@media (max-width: mobile), (max-height: mobile) {
+
+	.task {
+		column-gap: .5em;
+		padding: .5em;
+		padding-right: 0;
+	}
+	
+	.content {
+		column-gap: .5em;
+	}
+	
+	.infoIcon {
+		width: 1.75em;
+	}
+	
+	.description {
+		row-gap: .1em;
+	}
+	
+	.closeBtn {
+		margin-right: .75em;
+		width: 1.2em;
+	}
+}
+
+
+
+@keyframes open-task {
+	from {
+		opacity: 0;
+		font-size: 0;
+	}
+
+	50% {
+		opacity: 0;
+		font-size: inherit;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes close-task {
+	from {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+		font-size: inherit;
+	}
+
+	to {
+		opacity: 0;
+		font-size: 0;
+	}
+}

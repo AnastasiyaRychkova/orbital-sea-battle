@@ -1,28 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Prompt:wght@500&display=swap');
 
 html {
-	background: no-repeat linear-gradient(to bottom, #00200A, #003C19);
-	color: #51CF15;
+	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255, 255, 255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
+	background-color: #1E2C26;
+	background-size: 3em 3em;
+	color: #96C2AF;
 	font-family:'Montserrat', sans-serif;
-	font-weight: 300;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/*убрать видимость прокрутки*/
-	scrollbar-width: none; /* Firefox */
+	/*убрать видимость прокрутки (Firefox)*/
+	/* scrollbar-width: none;  */
 }
 
-/*убрать видимость прокрутки*/
-::-webkit-scrollbar { /* Сhrome*/
+/*убрать видимость прокрутки (Chrome)*/
+/* ::-webkit-scrollbar {
 	width: 0px;
-}
+} */
 
 html, body {
 	margin: 0;
 	height: 100%;
 	padding: 0;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
-body {
-	background: repeat url(./img/main/bg-lines.png);
+@media (pointer: fine) {
+
+	::-webkit-scrollbar {
+		width: .88em;
+		background-color: #15211C;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: #2C463A;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: #456356;
+	}
+
+	::-webkit-scrollbar-thumb:active {
+		background-color: #2D5E2A;
+	}
+
 }

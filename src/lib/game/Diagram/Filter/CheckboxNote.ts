@@ -5,45 +5,62 @@ import INote from "./NoteInterface";
 
 class Note implements INote
 {
-	qNumber: IQuantumNumber | undefined;
+	_qNumber: IQuantumNumber | undefined;
+	_disabled: boolean;
 
 	constructor()
 	{
 		makeObservable( this, {
-			qNumber: observable,
+			_qNumber: observable,
+			_disabled: observable,
 
 			set: action,
 			reset: action,
+			setDisabled: action,
 		});
+
+		this._disabled = false;
+	}
+
+	isDisabled(): boolean
+	{
+		return this._disabled;
+	}
+
+	setDisabled( disabled: boolean ): void
+	{
+		this._disabled = disabled;
 	}
 
 	isEqual( qn: IQuantumNumber | undefined ): boolean
 	{
-		return this.qNumber !== undefined && this.qNumber.value === qn?.value;
+		return this._qNumber !== undefined && this._qNumber.value === qn?.value;
 	}
 
-	set( qn: IQuantumNumber ): void
+	set( qn?: IQuantumNumber ): void
 	{
-		this.qNumber = this.qNumber?.value === qn.value
-						? undefined
-						: qn;
+		this._qNumber = qn
+						? (this._qNumber?.value === qn.value
+							? undefined
+							: qn)
+						: undefined;
 	}
 
-	getValueAsString(): string
+	getAsString(): string
 	{
-		return this.qNumber
-					? this.qNumber.toString()
+		return this._qNumber
+					? this._qNumber.toString()
 					: '';
 	}
 
-	getValue(): IQuantumNumber | undefined
+	get(): IQuantumNumber | undefined
 	{
-		return this.qNumber;
+		return this._qNumber;
 	}
 
 	isSat(): boolean
 	{
-		return this.qNumber !== undefined;
+		return !this._disabled && this._qNumber !== undefined;
 	}
 
 	activate(): void
@@ -53,10 +70,8 @@ class Note implements INote
 
 	reset(): void
 	{
-		this.qNumber = undefined;
+		this._qNumber = undefined;
 	}
-
-	
 
 }
 

@@ -1,0 +1,115 @@
+@value sizes: '../../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../../style/colors.css';
+@value primary-200, primary-400, primary-600, primary-900, secondary-800, secondary-900, disable-400, disable-800, disable-900 from colors;
+
+@value effects: '../../../style/effects.css';
+@value glow__button--light--l, glow__button--primary--l, shadow__button-text from effects;
+
+
+
+
+.button {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	padding: 0.625em 1em;
+}
+
+.disabled {
+	pointer-events: none;
+}
+
+
+/*----------  Primary  ----------*/
+
+.primary {
+	composes: button;
+	border: none;
+	background-color: primary-400;
+	border: 2px solid primary-400;
+	color: primary-900;
+}
+
+.primary:active {
+	background-color: primary-600;
+	border-color: primary-600;
+}
+
+.primary.disabled {
+	background-color: disable-800;
+	border-color: disable-800;
+	color: disable-400;
+}
+
+
+/*----------  Secondary  ----------*/
+
+.secondary {
+	composes: button;
+	border: 2px solid currentColor;
+	background-color: secondary-800;
+	color: primary-400;
+}
+
+.secondary:active {
+	border-color: currentColor;
+	box-shadow: none;
+	background-color: secondary-800;
+	color: primary-600;
+}
+
+.secondary.disabled {
+	border: none;
+	background-color: primary-800;
+	color: disable-400;
+}
+
+.secondary .text {
+	text-shadow: shadow__button-text;
+}
+
+.secondary:disabled .text {
+	text-shadow: none;
+}
+
+
+
+/*----------  Hover  ----------*/
+
+@media screen and (hover: hover) {
+	.primary:hover {
+		box-shadow: glow__button--light--l;
+		background-color: primary-200;
+		border-color: primary-200;
+	}
+	
+	.primary.disabled:hover {
+		box-shadow: none;
+	}
+
+	.secondary:hover {
+		border-color: primary-200;
+		box-shadow: glow__button--primary--l;
+		background-color: secondary-900;
+	}
+	
+	.secondary.disabled:hover {
+		box-shadow: none;
+	}
+}
+
+
+
+/*=============================================
+=                    Text                    =
+=============================================*/
+
+.text {
+	composes: button from '../../../style/typography.css';
+	composes: button-medium from '../../../style/typography.css';
+}
+

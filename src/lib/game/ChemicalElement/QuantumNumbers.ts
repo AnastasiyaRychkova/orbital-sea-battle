@@ -3,6 +3,18 @@ import OrbitalQN from "./OrbitalQN";
 import MagneticQN from "./MagneticQN";
 import SpinQN from "./SpinQN";
 
+export type QNStringScheme = [string, string, string, string];
+
+export function stringSchemeToQuantumNumbers( scheme: QNStringScheme ): QuantumNumbers
+{
+	return {
+		n: scheme[0] ? new MainQN( parseInt( scheme[0] ) ) : undefined,
+		l: scheme[1] ? new OrbitalQN( scheme[1] ) : undefined,
+		m: scheme[2] ? new MagneticQN( parseInt( scheme[2] ) ) : undefined,
+		s: scheme[3] ? new SpinQN( scheme[3] ) : undefined,
+	}
+}
+
 
 export type OrbitalStr = 's' | 'p' | 'd' | 'f';
 

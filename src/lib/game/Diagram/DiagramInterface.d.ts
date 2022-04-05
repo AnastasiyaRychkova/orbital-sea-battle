@@ -1,6 +1,8 @@
+import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
-import type { CellQN, ShipQN,
+import type { CellQN, ShipQN, QNStringScheme
 } from "../ChemicalElement/QuantumNumbers";
+import { StateType } from "./ObjectState.d";
 
 
 /** События, которые генерирует диаграмма */
@@ -16,22 +18,12 @@ export type DiagramEventData = {
 	qn: CellQN | ShipQN,
 }
 
-export default interface IDiagram
+
+export default interface IDiagram extends IEventProvider<DiagramEvent>
 {
-	/**
-	 * Получить enum состояние ячейки диаграммы
-	 * @param quantumNumbers 4 квантовых числа
-	 */
-	getCellState( quantumNumbers: CellQN ): EDiagramCellState
 	
-	// FIXME: Может устанавливать `EDiagramCellState` состояние?
-	/**
-	 * Установить состояние состояние ячейки без затрагивания выстрелов
-	 * @param quantumNumbers 4 квантовых числа
-	 * @param state Устанавливаемое значение ячейки в состоянии диаграммы
-	 */
-	setCellState( quantumNumbers: CellQN, state: boolean ): void;
-	
+	observableState: StateType;
+
 	/**
 	 * Был ли последний выстрел произведен в данную ячейку
 	 * @param quantumNumbers 4 квантовых числа
@@ -83,10 +75,6 @@ export default interface IDiagram
 	/** Отчистить диаграмму и выстрелы */
 	reset(): void;
 
-
-	on( event: DiagramEvent, func: Function ): EventEmitterInterface;
-
-	once( event: DiagramEvent, func: Function ): EventEmitterInterface;
-
-	remove( event: DiagramEvent, func: Function ): EventEmitterInterface;
+	/** Отметить элементы диаграммы */
+	highlight( quantumNumbers: QNStringScheme ): void;
 }

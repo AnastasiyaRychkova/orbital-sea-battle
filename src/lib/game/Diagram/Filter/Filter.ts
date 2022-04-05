@@ -5,22 +5,18 @@ import {
 	MagneticQN,
 	SpinQN,
 	QuantumNumbers,
-	CellQN,
 } from "../../ChemicalElement/QuantumNumbers";
-import IFilter from "./FilterInterface";
-import type { StoreKey, FilterType } from "./FilterInterface";
+
+import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface.d";
 import INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
-import RadioNote from "./RadioNote";
-import IQNConverter from "../../ChemicalElement/QNConverterInterface";
+import EventProvider from "../../../util/EventEmitter/EventProvider";
 
 
 
-type FilterOptions = {
-	type: FilterType,
-}
-
-type StoreType = Map<StoreKey, INote>;
+type StoreType = {
+	[key in StoreKey]: INote;
+};
 
 
 /**
@@ -28,31 +24,35 @@ type StoreType = Map<StoreKey, INote>;
  * 
  * Вычисляет, какие элементы диаграммы соответствуют заданным квантовым числам
  */
-class Filter implements IFilter
+class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFilter
 {
 	store: StoreType;
-	type: FilterType;
+	mode: ''|'block'|'box'|'cell';
 	_disabled: boolean;
-	private _converter: IQNConverter;
 
-	constructor( qnConverter: IQNConverter, options?: FilterOptions )
+
+	constructor()
 	{
+		super();
 		makeObservable( this, {
 			store: observable,
-			type: observable,
 			_disabled: observable,
+			mode: observable,
 
 			disabled: computed,
+			state: computed,
+			_stateAsString: computed,
+
 			setValue: action,
 			setDisable: action,
+			setState: action,
 			reset: action,
-			setType: action,
+			_updateMode: action,
 		});
 
-		this.type = options?.type || 'checkbox';
 		this.store = this._createDefaultStore();
-		this._disabled = true;
-		this._converter = qnConverter;
+		this.mode = '';
+		this._disabled = false;
 	}
 
 	
@@ -69,42 +69,64 @@ class Filter implements IFilter
 
 	private _createDefaultStore(): StoreType
 	{
-		switch( this.type )
+		return {
+			n: new CheckboxNote(),
+			l: new CheckboxNote(),
+			m: new CheckboxNote(),
+			s: new CheckboxNote(),
+		};
+	}
+
+	_updateMode()
+	{
+		if( this.store.s.isSat() )
 		{
-			case 'checkbox':
-				return new Map<StoreKey, INote>([
-					['n', new CheckboxNote() ],
-					['l', new CheckboxNote() ],
-					['m', new CheckboxNote() ],
-					['s', new CheckboxNote() ],
-				]);
-		
-			default:
-				return new Map<StoreKey, INote>([
-					['n', new RadioNote( new MainQN( 1 ) ) ],
-					['l', new RadioNote( new OrbitalQN( 's' ) ) ],
-					['m', new RadioNote( new MagneticQN( 0 ) ) ],
-					['s', new RadioNote( new SpinQN( 1 ) ) ],
-				]);
+			this.mode = 'cell';
+			return;
 		}
-		
+		if( this.store.m.isSat() )
+		{
+			this.mode = 'box';
+			return;
+		}
+		if( this.store.l.isSat() || this.store.n.isSat() )
+		{
+			this.mode = 'block';
+			return;
+		}
+		this.mode = '';
+	}
+
+	get isBoxMode(): boolean
+	{
+		return this.mode === 'box';
 	}
 
 	getValue = ( key: StoreKey ) =>
-		this.store.get( key )?.getValueAsString();
+		this._get( key ).get()?.value;
+
+	getValueAsString = (key: StoreKey) =>
+		this._get( key ).get()?.toString() || '';
 
 	setValue = ( key: StoreKey, value: string ) => {
 		if( this._disabled )
 			return;
 
-		const note = this._get( key );
-		note.set( this._makeQN( key, value ) );
+		this._get( key ).set( this._makeQN( key, value ) );
+		this._updateMode();
+
+		this._emit(
+			'change',
+			{
+				state: this._stateAsString,
+			}
+		);
 		return this;
 	};
 
-	private _get( key: StoreKey ): INote
+	_get( key: StoreKey ): INote
 	{
-		return this.store.get( key )!;
+		return this.store[ key ];
 	}
 
 	private _makeQN( key: StoreKey, value: string )
@@ -125,113 +147,109 @@ class Filter implements IFilter
 
 
 	isDisable = ( key: StoreKey ) => {
-		return this._disabled || !this._get( key ).isSat();
+		return this._disabled || this._get( key ).isDisabled();
 	}
 
 	setDisable = ( key: StoreKey, value: boolean ) => {
-		if( this._disabled )
-			return;
-
-		if( value )
-			this._get( key ).reset();
-		else
-			this._get( key ).activate();
+		this._get( key ).setDisabled( value );
+		this._updateMode();
 	};
 
-	
 
-	isShipSelected( qn: QuantumNumbers ): boolean
+	minValid( key: StoreKey ): number
 	{
-		/* const fsS = this._isFilterSetted( 's' );
-		const fsM = this._isFilterSetted( 'm' );
-		const cF = this._checkFilters( qn, ['n', 'l'], true );
-		console.log( 'isSelected', qn, this.store );
-		return !fsS && !fsM && cF; */
-		return !this._isFilterSetted( 's' )
-			&& !this._isFilterSetted( 'm' )
-			&& this._checkFilters( qn, ['n', 'l'], true );
-	}
-
-	isContainerSelected( qn: QuantumNumbers ): boolean
-	{
-		return !this._isFilterSetted( 's' )
-			&& this._isEqualQN( qn, 'm' )
-			&& this._checkFilters( qn, ['n', 'l'] );
-	}
-
-	isCellSelected( qn: QuantumNumbers ): boolean
-	{
-		return this._isEqualQN( qn, 's' )
-			&& this._checkFilters( qn, ['n', 'l', 'm'] );
-	}
-
-	
-	private _checkFilters( checkedQN: QuantumNumbers,
-							keys: StoreKey[],
-							strict: boolean = false ): boolean
-	{
-		let equalFilters: number = 0;
-
-		for( const key of keys ) {
-			const note = this._get( key )!;
-			if( note.isSat() ) {
-				if( note.isEqual( checkedQN[ key ] ) )
-					equalFilters++;
-				else
-					return false;
-			}
+		switch( key )
+		{
+			case 'n':
+				return Math.max(
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value + 1 : MainQN.MIN,
+					this._isSat( 'm' )
+							? Math.abs( this._get( 'm' ).get()!.value ) + 1 : MainQN.MIN,
+				); // max( l+1, |m|+1 )
+			
+			case 'l':
+				return this._isSat( 'm' )
+							? Math.abs( this._get( 'm' ).get()!.value )
+							: OrbitalQN.MIN;
+			case 'm':
+				return Math.max(
+					this._isSat( 'n' )
+							? Math.abs( this._get( 'n' ).get()!.value - 4.5 ) - 3.5
+							: MagneticQN.MIN,
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value * -1
+							: MagneticQN.MIN,
+				);
+			case 's':
+				return SpinQN.MIN;
 		}
-		return strict ? equalFilters > 0 : true;
 	}
 
-
-	private _isEqualQN( checkedQN: QuantumNumbers, key: StoreKey ): boolean
+	maxValid( key: StoreKey ): number
 	{
-		return this._get( key ).isEqual( checkedQN[ key ] );
+		switch( key )
+		{
+			case 'n':
+				return Math.min(
+					this._isSat( 'l' )
+							? 8 - this._get( 'l' ).get()!.value : MainQN.MAX,
+					this._isSat( 'm' )
+							? 8 - Math.abs( this._get( 'm' ).get()!.value ) : MainQN.MAX,
+				);
+			case 'l':
+				return this._isSat( 'n' )
+							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
+							: OrbitalQN.MAX;
+			case 'm':
+				return Math.min(
+					this._isSat( 'n' )
+							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
+							: MagneticQN.MAX,
+					this._isSat( 'l' )
+							? this._get( 'l' ).get()!.value
+							: MagneticQN.MAX,
+				);
+			case 's':
+				return SpinQN.MAX;
+		}
 	}
 
-	private _isFilterSetted( key: StoreKey ): boolean
+	private _isSat( key: StoreKey ): boolean
 	{
 		return this._get( key ).isSat();
 	}
 
-	doesSpecifyCell(): boolean
-	{
-		if( this._disabled )
-			return false;
 
-		for( const qNumber of this.store.values() ) {
-			if( !qNumber.isSat() ) {
-				return false;
-			}
-		}
-
-		const state = this.getState();
-		return this._converter.getCellIndex( state as CellQN ) !== undefined;
-	}
-
-	getState(): QuantumNumbers
+	get state(): QuantumNumbers
 	{
 		return {
-			n: this._get( 'n' )!.getValue() as MainQN | undefined,
-			l: this._get( 'l' )!.getValue() as OrbitalQN | undefined,
-			m: this._get( 'm' )!.getValue() as MagneticQN | undefined,
-			s: this._get( 's' )!.getValue() as SpinQN | undefined,
+			n: this._get( 'n' ).get() as MainQN | undefined,
+			l: this._get( 'l' ).get() as OrbitalQN | undefined,
+			m: this._get( 'm' ).get() as MagneticQN | undefined,
+			s: this._get( 's' ).get() as SpinQN | undefined,
 		}
+	}
+
+	setState( qn: QuantumNumbers ): void
+	{
+		this.store.n.set( qn.n );
+		this.store.l.set( qn.l );
+		this.store.m.set( qn.m );
+		this.store.s.set( qn.s );
+
+		this._updateMode();
+	}
+
+	get _stateAsString(): StringState
+	{
+		return Object.values(this.store)
+					 .map((value) => value.getAsString()) as StringState;
 	}
 
 	reset(): void
 	{
 		this.store = this._createDefaultStore();
-	}
-
-	setType( type: FilterType ): void
-	{
-		if( this.type === type )
-			return;
-
-		this.type = type;
-		this.reset();
 	}
 }
 

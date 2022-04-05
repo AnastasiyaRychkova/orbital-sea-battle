@@ -1,3 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@500;700&display=swap');
+
+
+html {
+	--primary-font: "Montserrat", sans-serif;
+	--secondary-font: "Roboto", sans-serif;
+}
+
+
+
+/*----------  Headers  ----------*/
+
+.header {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+
+	--large: 3.75em;
+	--big: 3em;
+	--medium: 1.5em;
+	--normal: 1.12em;
+}
+
+.header-1 {
+	letter-spacing: 0.02em;
+	font-size: var(--large);
+}
+
+.header-2 {
+	letter-spacing: 0.02em;
+	font-size: var(--big);
+}
+
+.header-3 {
+	letter-spacing: 0.05em;
+	font-size: var(--medium);
+}
+
+.header-4 {
+	letter-spacing: 0.05em;
+	font-size: var(--normal);
+}
+
+
+/* --- Large Headers --- */
+
+.large-header {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: normal;
+	font-style: normal;
+
+	--large: 3.75em;
+	--big: 3em;
+}
+
+.large-header-1 {
+	letter-spacing: 0.04em;
+	font-size: var(--large);
+}
+
+.large-header-2 {
+	letter-spacing: 0.05em;
+	font-size: var(--big);
+}
+
+
+
+/*----------  Text  ----------*/
+
+.text {
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+
+	--large: 3em;
+	--big: 1.5em;
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
+	--tiny: 0.62em;
+}
+
+.text-r-large {
+	line-height: 100%;
+	letter-spacing: 0.1em;
+	font-size: var(--large);
+	font-weight: normal;
+}
+
+.text-b-big {
+	letter-spacing: 0em;
+	font-size: var(--big);
+}
+
+.text-b-medium {
+	letter-spacing: 0.02em;
+	font-size: var(--medium);
+}
+
+.text-b-normal {
+	letter-spacing: 0.05em;
+	font-size: var(--normal);
+}
+
+.text-m-normal {
+	letter-spacing: 0.05em;
+	font-size: var(--normal);
+	font-weight: 500;
+}
+
+.text-b-small {
+	letter-spacing: 0.05em;
+	font-size: var(--small);
+}
+
+.text-m-small {
+	letter-spacing: 0.05em;
+	font-size: var(--small);
+	font-weight: 500;
+}
+
+.text-b-tiny {
+	letter-spacing: 0.08em;
+	font-size: var(--tiny);
+}
+
+.text-m-tiny {
+	letter-spacing: 0.08em;
+	font-size: var(--tiny);
+	font-weight: 500;
+}
+
+
+
+/*----------  Long Text  ----------*/
+
+.long-text {
+	line-height: 140%;
+	font-family: var(--secondary-font);
+	font-weight: 500;
+	font-style: normal;
+
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
+}
+
+.long-text-m-medium {
+	font-size: var(--medium);
+}
+
+.long-text-m-normal {
+	letter-spacing: 0.05em;
+	font-size: var(--normal);
+}
+
+.long-text-m-small {
+	letter-spacing: 0.05em;
+	font-size: var(--small);
+}
+
+
+
+/*----------  Buttons  ----------*/
+
+.button {
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: bold;
+	font-style: normal;
+
+	--large: 1.88em;
+	--big: 1.5em;
+	--medium: 1.25em;
+	--normal: 1em;
+	--small: 0.88em;
+	--tiny: 0.62em;
+}
+
+.button-large {
+	letter-spacing: 0.05em;
+	font-size: var(--large);
+}
+
+.button-big {
+	letter-spacing: 0.05em;
+	font-size: var(--big);
+}
+
+.button-medium {
+	letter-spacing: 0.05em;
+	font-size: var(--medium);
+}
+
+.button-normal {
+	letter-spacing: 0.08em;
+	font-size: var(--normal);
+}
+
+.button-small {
+	letter-spacing: 0.08em;
+	font-size: var(--small);
+}
+
+.button-tiny {
+	letter-spacing: 0.08em;
+	font-size: var(--tiny);
+}
+
+
+
+/*----------  Diagram  ----------*/
+
+.chemical-element {
+	line-height: 100%;
+	font-family: var(--primary-font);
+	font-size: 1.75em;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.element-weight {
+	line-height: 120%;
+	letter-spacing: 0.08em;
+	font-family: var(--primary-font);
+	font-size: 0.5em;
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+@media (min-width: 540px) and (max-width: 1300px) {
+	.header {
+		--large: 3em;
+		--big: 1.5em;
+		--medium: 1.12em;
+		--normal: 1.12em;
+	}
+
+	.large-header {
+		--large: 3em;
+		--big: 2em;
+	}
+
+	.text {
+		--large: 2em;
+		--big: 1.25em;
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+		--tiny: 0.62em;
+	}
+
+	.long-text {
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+	}
+	
+	.button {
+		--large: 1.5em;
+		--big: 1.25em;
+		--medium: 1em;
+		--normal: 0.88em;
+		--small: 0.62em;
+		--tiny: 0.62em;
+	}
+
+}
+
+@media (max-width: 540px), (max-height: 540px) {
+	.header {
+		--large: 1.5em;
+		--big: 1.12em;
+		--medium: 1.12em;
+		--normal: 1.12em;
+	}
+	
+	.large-header {
+		--large: 2em;
+		--big: 1.5em;
+	}
+	
+	.text {
+		--large: 1.5em;
+		--big: 1em;
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
+		--tiny: 0.62em;
+	}
+
+	.long-text {
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
+	}
+	
+	.button {
+		--large: 1.25em;
+		--big: 1em;
+		--medium: 0.88em;
+		--normal: 0.8em;
+		--small: 0.72em;
+		--tiny: 0.62em;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @value lineHeight_M: 1.5;
 @value wordSpacing_M: 0.2em;
 @value letterSpacing_M: 0.2em;
@@ -8,19 +340,19 @@
 
 
 .regularBold {
-	font-family: Montserrat;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 1em;
 	line-height: 120%;
 	letter-spacing: 0.135em;
+	font-family: Montserrat;
+	font-size: 1em;
+	font-weight: bold;
+	font-style: normal;
 }
 
 .h3 {
-	font-weight: bold;
-	font-size: 1.125em;
 	line-height: 120%;
 	letter-spacing: 0.135em;
+	font-size: 1.125em;
+	font-weight: bold;
 }
 
 
@@ -28,8 +360,8 @@
 
 
 .extraLargeText {
-	font-size: 48px;
 	letter-spacing: 0.2em;
+	font-size: 48px;
 }
 
 .largeText {

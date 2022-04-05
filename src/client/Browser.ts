@@ -1,8 +1,34 @@
 import IBrowser from "./BrowserInterface";
+import fullScreenService, { FullScreenServiceType } from "./FullScreenService";
+
+
+
+
 
 class Browser implements IBrowser
 {
-	constructor() {}
+	device!: "desktop" | "tablet" | "mobile";
+	fullScreen: FullScreenServiceType;
+
+	constructor()
+	{
+		this.defineDevice();
+		this.fullScreen = fullScreenService;
+	}
+
+	defineDevice()
+	{
+		if( navigator.userAgent.match(/Tablet|iPad/i ) )
+		{
+			this.device = 'tablet';
+		}
+		else if( navigator.userAgent.match(/Mobile|Windows Phone|Lumia|Android|webOS|iPhone|iPod|Blackberry|PlayBook|BB10|Opera Mini|\bCrMo\/|Opera Mobi/i) )
+		{
+			this.device = 'mobile';
+		} else {
+			this.device = 'desktop';
+		}
+	}
 
 	/**
 	 * Добавить на закрывание вкладки модальное окно с подтверждением
@@ -22,6 +48,17 @@ class Browser implements IBrowser
 		window.onbeforeprint = function() {
 			return true;
 		}
+	}
+
+
+	onTabClose( callback: () => void ): void
+	{
+		window.addEventListener( 'unload', callback );
+	}
+
+	sendInBackground( to: string, data: FormData ): void
+	{
+		navigator.sendBeacon( to, data );
 	}
 }
 

@@ -7,6 +7,7 @@ function CellSymbol() {
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
+				strokeWidth={2}
 				d="M4.22649 14L10 4L15.7735 14L11 14L11 28L8.99999 28L9 14L4.22649 14Z" />
 			<rect
 				fill="green"
@@ -15,7 +16,7 @@ function CellSymbol() {
 				height="40"
 				stroke="none"
 				x="-2"
-				y="-8"
+				y="-4"
 			/>
 		</symbol>
 	);

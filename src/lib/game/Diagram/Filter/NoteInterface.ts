@@ -6,14 +6,15 @@ import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
 interface INote
 {
 	isEqual( qn: IQuantumNumber | undefined ): boolean;
-	set( qn: IQuantumNumber ): void;
-	getValueAsString(): string;
-	getValue(): IQuantumNumber | undefined;
+	set( qn?: IQuantumNumber ): void;
+	getAsString(): string;
+	get(): IQuantumNumber | undefined;
 
+	/** Установлено ли значение. Если фильтр деактивирован, то метод возвращает `false`. */
 	isSat(): boolean;
-	activate(): void;
+	isDisabled(): boolean;
+	setDisabled( disabled: boolean ): void;
 	reset(): void;
 }
-
 
 export default INote;

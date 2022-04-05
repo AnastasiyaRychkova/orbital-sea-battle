@@ -1,0 +1,98 @@
+@value devices: '../../style/display.css';
+@value laptop from devices;
+
+@value colors: '../../style/colors.css';
+@value  secondary-50, secondary-100, disable-500, disable-600 from colors;
+
+.gameProgress {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	column-gap: .75em;
+	padding: .5em;
+	padding-right: 1em;
+	color: secondary-100;
+}
+
+.progress {
+	display: flex;
+	align-items: flex-end;
+	flex-grow: 1;
+	column-gap: 1.5em;
+}
+
+.scheme {
+	display: flex;
+	flex-basis: 30px;
+	flex-direction: column;
+	flex-grow: 1;
+	row-gap: .5em;
+}
+
+.progressBar {
+	height: .5em;
+}
+
+.levelNumber {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	justify-content: center;
+	width: 2em;
+	height: 2em;
+	border-radius: 1em;
+	background-color: disable-600;
+	color: secondary-50;
+}
+
+.score {
+	height: 1em;
+}
+
+
+
+/*=============================================
+=                    Text                    =
+=============================================*/
+
+.nameText {
+	composes: text from '../../style/typography.css';
+	composes: text-b-normal from '../../style/typography.css';
+}
+
+.levelText {
+	composes: text from '../../style/typography.css';
+	composes: text-b-normal from '../../style/typography.css';
+}
+
+.scoreText {
+	composes: text from '../../style/typography.css';
+	composes: text-m-normal from '../../style/typography.css';
+}
+
+
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+@media (max-width: laptop) {
+	.levelNumber {
+		width: 1.75em;
+		height: 1.75em;
+	}
+
+	.progress {
+		column-gap: 1em;
+	}
+
+	.scheme {
+		row-gap: .375em;
+	}
+
+	.progressBar {
+		height: .375em;
+	}
+}

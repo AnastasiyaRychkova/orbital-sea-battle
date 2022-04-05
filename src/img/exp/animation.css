@@ -1,0 +1,129 @@
+/*
+The CSS export should solely be used as a reference.
+For a more detailed animation export the JSON file should be used.
+*/
+#Line_95_(Stroke) {
+    transform: translateX(-50%) translateY(-50%);
+    animation: Line_95_(Stroke)__fillColor__1 1000ms 0ms linear forwards, Line_95_(Stroke)__fillColor__2 50ms 1000ms linear forwards, Line_95_(Stroke)__fillColor__3 1000ms 1050ms linear forwards, Line_95_(Stroke)__fillColor__4 50ms 2050ms linear forwards;
+}
+
+@keyframes Line_95_(Stroke)__fillColor__1 {
+    from {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+
+    to {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+}
+@keyframes Line_95_(Stroke)__fillColor__2 {
+    from {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+
+    to {
+        background-color: rgba(150,194,175,1);
+    }
+}
+@keyframes Line_95_(Stroke)__fillColor__3 {
+    from {
+        background-color: rgba(150,194,175,1);
+    }
+
+    to {
+        background-color: rgba(150,194,175,1);
+    }
+}
+@keyframes Line_95_(Stroke)__fillColor__4 {
+    from {
+        background-color: rgba(150,194,175,1);
+    }
+
+    to {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+}
+
+#plus {
+    transform: translateX(-50%) translateY(-50%);
+    animation: plus__fillColor__1 1000ms 0ms linear forwards, plus__fillColor__2 50ms 1000ms linear forwards, plus__fillColor__3 1000ms 1050ms linear forwards, plus__fillColor__4 50ms 2050ms linear forwards;
+}
+
+@keyframes plus__fillColor__1 {
+    from {
+        background-color: rgba(233.55460435152054,247.56250709295273,233.12136679887772,1);
+    }
+
+    to {
+        background-color: rgba(233.55460435152054,247.56250709295273,233.12136679887772,1);
+    }
+}
+@keyframes plus__fillColor__2 {
+    from {
+        background-color: rgba(233.55460435152054,247.56250709295273,233.12136679887772,1);
+    }
+
+    to {
+        background-color: rgba(81,116,101,1);
+    }
+}
+@keyframes plus__fillColor__3 {
+    from {
+        background-color: rgba(81,116,101,1);
+    }
+
+    to {
+        background-color: rgba(81,116,101,1);
+    }
+}
+@keyframes plus__fillColor__4 {
+    from {
+        background-color: rgba(81,116,101,1);
+    }
+
+    to {
+        background-color: rgba(233.55460435152054,247.56250709295273,233.12136679887772,1);
+    }
+}
+
+#minus {
+    transform: translateX(-50%) translateY(-50%);
+    animation: minus__fillColor__1 1000ms 0ms linear forwards, minus__fillColor__2 50ms 1000ms linear forwards, minus__fillColor__3 1000ms 1050ms linear forwards, minus__fillColor__4 50ms 2050ms linear forwards;
+}
+
+@keyframes minus__fillColor__1 {
+    from {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+
+    to {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+}
+@keyframes minus__fillColor__2 {
+    from {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+
+    to {
+        background-color: rgba(234,248,233,1);
+    }
+}
+@keyframes minus__fillColor__3 {
+    from {
+        background-color: rgba(234,248,233,1);
+    }
+
+    to {
+        background-color: rgba(234,248,233,1);
+    }
+}
+@keyframes minus__fillColor__4 {
+    from {
+        background-color: rgba(234,248,233,1);
+    }
+
+    to {
+        background-color: rgba(81.26178592443466,115.81250354647636,101.00506290793419,1);
+    }
+}

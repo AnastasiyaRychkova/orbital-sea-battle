@@ -1,24 +1,75 @@
-import React from 'react';
+import React, {FC} from 'react';
+import cn from 'classnames';
 import styles from './ToggleButton.module.css';
-import { ToggleTheme, ToggleType } from "./types";
-import classNames from "classnames";
+import { ToggleTheme } from "./types";
 
 interface IProps {
+	/** Надпись на кнопке */
 	value: string,
+
+	/** Идентификатор для группы кнопок */
 	toggleName: string,
-	type: ToggleType,
-	theme: ToggleTheme,
-	checked: boolean,
+
+	/** Действие по нажатию на кнопку */
 	onChange: ( e: React.ChangeEvent<HTMLInputElement> ) => void,
 
+	/** Визуальный стиль кнопки */
+	theme: ToggleTheme,
+
+	/** Выбрана ли она */
+	checked?: boolean,
+
+	/** Есть ли возможность на нее нажать */
+	disabled?: boolean,
+
+
+	invalid?: boolean,
 }
+
+const ToggleButton: FC<IProps> = ( {
+	value,
+	toggleName,
+	onChange,
+	theme = ToggleTheme.default,
+	checked = false,
+	disabled = false,
+	invalid = false,
+} ) => {
+	const id = toggleName + '-' + value;
+	return (
+		<React.Fragment>
+			<input
+				className={styles.input}
+				id={id}
+				name={toggleName}
+				value={value}
+				type="checkbox"
+				onChange={onChange}
+				checked={checked}
+				disabled={disabled} />
+			<label
+				className={cn(
+					styles.button,
+					{[styles.invalid]: invalid},
+					getThemeClass( theme )
+				)}
+				htmlFor={id}
+				role='button'>
+				
+				<span className={styles.text}>
+					{value}
+				</span>
+
+			</label>
+		</React.Fragment>
+	);
+}
+
+
 
 function getThemeClass( theme: ToggleTheme ): string
 {
 	switch( theme ) {
-		case ToggleTheme.volume:
-			return styles.volume;
-
 		case ToggleTheme.default:
 			return styles.thin;
 
@@ -30,32 +81,7 @@ function getThemeClass( theme: ToggleTheme ): string
 	}
 }
 
-function ToggleButton( props: IProps ) {
-	const id = props.toggleName + '-' + props.value;
-	return (
-		<React.Fragment>
-			<input
-				className={styles.toggle}
-				id={id}
-				name={props.toggleName}
-				value={props.value}
-				type="checkbox"
-				onChange={props.onChange}
-				checked={props.checked} />
-			<label
-				className={classNames( styles.toggleBtn, getThemeClass( props.theme ) )}
-				htmlFor={id} >
 
-				{props.value}
-
-			</label>
-		</React.Fragment>
-	);
-}
-
-ToggleButton.defaultProps = {
-	checked: false,
-}
 
 
 export default ToggleButton;

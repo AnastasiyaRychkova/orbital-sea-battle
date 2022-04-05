@@ -24,6 +24,6 @@ export default class MagneticQN extends IntInRange implements IQuantumNumber
 
 	toString(): string
 	{
-		return this._number.toString();
+		return (this._number > 0 ? '+' : '') + this._number.toString();
 	}
 }

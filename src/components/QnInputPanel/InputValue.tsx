@@ -1,66 +1,106 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
-import styles from './style.module.css';
-import Switcher from './Switcher';
-import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInterface';
 
-interface IProps {
-	name: string,
-	sub?: string,
-	withSwitcher: boolean,
-	storeKey: 'n'|'l'|'m'|'s',
-	children: React.ReactNode,
-	controller?: IGameFieldController,
+import IQuantumNumber from '../../lib/game/ChemicalElement/QuantumNumberInterface';
+import ToggleButton from './ToggleButton';
+import styles from './InputValue.module.css';
+
+import { ToggleTheme } from './types';
+import FilterType from "../../lib/game/Diagram/Filter/FilterInterface";
+
+type StoreKey = 'n'|'l'|'m'|'s';
+
+type ControllerType = {
+
+	filter: FilterType;
 }
 
 
-function injectProps( children: React.ReactNode, props: Object )
-{
-	return React.Children.map( children, child => {
-		if( React.isValidElement( child ) )
-			return React.cloneElement(child, { ...props } );
+interface IProps {
+	/** Название, которе будет вынесено в подпись */
+	name: string,
+
+	/** Добавка к названию */
+	sub?: string,
+
+	/** Идентификатор */
+	storeKey: StoreKey,
+
+	/** Массив, содержащий строки названий кнопок */
+	values: IQuantumNumber[],
+
+	/** Стиль кнопок */
+	theme: ToggleTheme,
+
+	/** Пробрасываемый через провайдер контроллер */
+	controller?: ControllerType,
+}
+
+
+
+const InputValue = inject( "controller" )(observer(( props: IProps ) => {
+	!props.controller && console.error( 'Filter(desktop).InputValue: controller is undefined' );
+	const filter = props.controller!.filter;
+	const isFilterDisabled = filter.isDisable( props.storeKey );
+	const min = filter.minValid( props.storeKey );
+	const max = filter.maxValid( props.storeKey );
+	return (
+		<div
+			className={styles.inputValue}
+			data-switch-off={isFilterDisabled}
+		>
+			<span className={styles.titleText}>
+				{props.name}
+				{props.sub
+					&&
+					<sub className={styles.titleSubText}>
+						{props.sub}
+					</sub>
+				}
+			</span>
+
+			<ul className={styles.row}>
+				{ make( props, isFilterDisabled, min, max ) }
+			</ul>
+		</div>
+	)
 	}
+));
+
+
+function make({
+	controller,
+	storeKey: key,
+	theme,
+	values,
+}: IProps,
+	isFilterDisabled: boolean,
+	min: number,
+	max: number ): JSX.Element[]
+{
+	const filter = controller!.filter;
+	let checkedValue = filter.getValue( key );
+	
+
+	return values.map( ( btnValue ) =>
+
+		<li key={btnValue.value}>
+			<ToggleButton
+				value={btnValue.toString()}
+				toggleName={key}
+				theme={theme}
+				checked={btnValue.value === checkedValue}
+				disabled={isFilterDisabled}
+				invalid={btnValue.value < min || btnValue.value > max}
+				onChange={
+					(e: React.ChangeEvent<HTMLInputElement>) => {
+						filter.setValue( key, e.target.value );
+					}
+				} />
+		</li>
 	);
 }
 
 
-const InputValue = inject( "controller" )(observer(( props: IProps ) => {
-	const filter = props.controller!.filter;
-	const isFilterEnabled = !filter.isDisable( props.storeKey );
-	return (
-		<fieldset
-			className={styles.inputValue}
-			data-switch-on={isFilterEnabled}
-		>
-			<span className={styles.name}>
-				{props.name}
-				{props.sub
-					?
-					<sub className={styles.sub}>
-						{props.sub}
-					</sub>
-					:
-					''
-				}
-			</span>
-			<div className={styles.row}>
-				{props.withSwitcher
-					? <Switcher
-						id={'qn-switcher-' + props.storeKey}
-						switchOn={isFilterEnabled}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-							filter.setDisable( props.storeKey, !e.target.checked ); // isFilterEnabled
-						}} />
-					: ''
-				}
-				{injectProps( props.children, {
-					name: props.name + (props.sub ? props.sub : ''),
-					storeKey: props.storeKey,
-				})}
-			</div>
-		</fieldset>
-	)
-	}
-));
 
 export default InputValue;

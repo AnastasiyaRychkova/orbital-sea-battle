@@ -1,0 +1,53 @@
+@value colors: '../../../style/colors.css';
+@value primary-200, secondary-800, secondary-900 from colors;
+
+@value effects: '../../../style/effects.css';
+@value shadow__input from effects;
+
+
+.filter {
+	display: flex;
+	align-items: flex-end;
+	flex-direction: row-reverse;
+	column-gap: .5em;
+	margin: 0;
+	max-width: 100%;
+	padding: 0;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.inputsRow {
+	position: relative;
+	pointer-events: auto;
+}
+
+.tabs {
+	display: flex;
+	column-gap: .125em;
+	box-shadow: shadow__input;
+	background-color: secondary-900;
+	color: primary-200;
+}
+
+.spacer {
+	height: 0;
+	transition: height .5s ease;
+}
+
+
+.filter[data-open="true"] .spacer {
+	height: 4.5em;
+}
+
+@media (pointer: fine) {
+	.filter::-webkit-scrollbar {
+		height: .5em;
+		border-top: 2px solid secondary-800;
+	}
+
+	.filter::-webkit-scrollbar-thumb {
+		height: .5em;
+		border-top: 2px solid secondary-800;
+	}
+}

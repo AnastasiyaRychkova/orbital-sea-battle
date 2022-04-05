@@ -1,40 +1,71 @@
-import React from 'react';
+import React, {FC} from 'react';
 import InputValue from './InputValue';
-import styles from './style.module.css';
-import Toggle from './Toggle';
-import { ToggleTheme, ToggleType } from './types';
 import ConfirmButton from './ConfirmButton';
+import styles from './style.module.css';
+import { ToggleTheme } from './types';
+import cn from '../className';
+import { MainQN, OrbitalQN, MagneticQN, SpinQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
 
-function Panel() {
+interface IProps {
+	className?: string,
+}
+
+const Panel: FC<IProps> = ({className}) => {
 	return (
-		<form className={styles.panel}>
-			<InputValue name="n" storeKey="n" withSwitcher={false}>
-				<Toggle
-					values={['1','2','3','4','5','6','7']}
-					width="13.5em"
-					type={ToggleType.checkbox}
-					theme={ToggleTheme.default} />
-			</InputValue>
-			<InputValue name="l" storeKey="l" withSwitcher={false}>
-				<Toggle
-					values={['s', 'p', 'd', 'f']}
-					type={ToggleType.checkbox}
-					theme={ToggleTheme.squareL} />
-			</InputValue>
-			<InputValue name="m" sub="L" storeKey="m" withSwitcher={false}>
-				<Toggle
-					values={['-3','-2','-1','0','1','2','3']}
-					width="14em"
-					type={ToggleType.checkbox}
-					theme={ToggleTheme.default} />
-			</InputValue>
-			<InputValue name="m" sub="S" storeKey="s" withSwitcher={false}>
-				<Toggle
-					values={['+1/2','-1/2']}
-					type={ToggleType.checkbox}
-					theme={ToggleTheme.squareM} />
-			</InputValue>
-			<ConfirmButton></ConfirmButton>
+		<form className={cn(styles, ['panel'], className)}>
+			<div className={styles.inputsRow}>
+				<div className={styles.inputPair}>
+					<InputValue
+						name="n"
+						storeKey="n"
+						values={[
+							new MainQN(1),
+							new MainQN(2),
+							new MainQN(3),
+							new MainQN(4),
+							new MainQN(5),
+							new MainQN(6),
+							new MainQN(7)
+						]}
+						theme={ToggleTheme.default} />
+					<InputValue
+						name="l"
+						storeKey="l"
+						values={[
+							new OrbitalQN('s'),
+							new OrbitalQN('p'),
+							new OrbitalQN('d'),
+							new OrbitalQN('f')
+						]}
+						theme={ToggleTheme.squareL} />
+				</div>
+				<div className={styles.inputPair}>
+					<InputValue
+						name="m"
+						sub="L"
+						storeKey="m"
+						values={[
+							new MagneticQN(3),
+							new MagneticQN(2),
+							new MagneticQN(1),
+							new MagneticQN(0),
+							new MagneticQN(-1),
+							new MagneticQN(-2),
+							new MagneticQN(-3)
+						]}
+						theme={ToggleTheme.default} />
+					<InputValue
+						name="m"
+						sub="S"
+						storeKey="s"
+						values={[
+							new SpinQN(1),
+							new SpinQN(-1)
+						]}
+						theme={ToggleTheme.squareM} />
+				</div>
+			</div>
+			<ConfirmButton/>
 		</form>
 	);
 }

@@ -1,6 +1,11 @@
-import React from 'react';
-import { observer, inject } from 'mobx-react';
-import classNames from 'classnames';
+import React, {FC} from 'react';
+import { observer } from 'mobx-react';
+import { MainQN, OrbitalQN, ShipQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
+import Container from './Container';
+import ShipName from './ShipName';
+import ShipSelection from './ShipSelection';
+import type { Coordinates } from './types';
+import type{ BlockType } from '../../lib/game/Diagram/ObjectState.d';
 
 import {
 	CONTAINER_HEIGHT,
@@ -11,109 +16,58 @@ import {
 	NAME_Y_OFFSET,
 } from './properties';
 
-import Container from './Container';
-import ShipName from './ShipName';
-
-import { MainQN, OrbitalQN, MagneticQN, ShipQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
-import type { Coordinates } from './types';
-import IGameFieldController from '../../lib/game/Diagram/GameFieldControllerInterface';
-
-import styles from './diagram.module.css';
-
-
 const COL_WIDTH: readonly number[] = [ 1, 3, 5, 7, 7, 5, 3 ];
 const COL_WIDTH_INTEGRAL: readonly number[] = [ 0, 1, 4, 9, 16, 23, 28 ];
 
+
+
 interface IProps {
-	qn: ShipQN,
-	controller?: IGameFieldController,
-}
-
-type ShipProps = {
-	name: string,
-	length: number,
-	coordinates: Coordinates,
+	block: BlockType,
 }
 
 
-const Ship = inject( "controller" )(observer(( props: IProps ) =>
-{
-	const { n = new MainQN( 1 ),
-		l = new OrbitalQN( 's' ) } = props.qn;
-
-	const shipProps: ShipProps = {
-			name: makeName( n, l ),
-			length: calcLength( l ),
-			coordinates: calcCoordinates( n, l ),
-		}
+const Ship: FC<IProps> = observer(( {
+	block,
+} ) => {
+	const location = calcCoordinates( block.qn );
+	const name = makeName( block.qn );
+	const maxM = block.qn.l.value;
 
 	return (
 		<g>
-			{ buildShip( n, l, shipProps ) }
-
+			<ShipSelection
+				location={location}
+				block={block} >
+				{
+					Object.entries( block.children )
+						.map( ([ key, box ] ) => (
+						<Container
+							key={name + key}
+							x={location.x + (maxM - box.qn.m.value) * CONTAINER_WIDTH}
+							y={location.y}
+							box={box}
+							/>
+					) )
+				}
+			</ShipSelection>
 			<ShipName
-				x={shipProps.coordinates.x + NAME_X_OFFSET}
-				y={shipProps.coordinates.y + NAME_Y_OFFSET}
-				name={shipProps.name}
-			/>
-			<rect
-				className={makeShipClass( props )}
-				x={shipProps.coordinates.x}
-				y={shipProps.coordinates.y}
-				width={CONTAINER_WIDTH * shipProps.length}
-				height={CONTAINER_HEIGHT}
-				fill="none"
+				x={location.x + NAME_X_OFFSET}
+				y={location.y + NAME_Y_OFFSET}
+				name={name}
 			/>
 		</g>
+
 	);
-}));
+});
 
 export default Ship;
 
 
 
 
-function makeName( n: MainQN, l: OrbitalQN ): string
+function makeName( qn: ShipQN ): string
 {
-	return n.toString() + l.toString();
-}
-
-function makeShipClass( props: IProps ): string
-{
-	return classNames({
-		[styles.ship]: true,
-		[styles.shipSelected]: props.controller!.filter.isShipSelected( props.qn ),
-	});
-}
-
-function buildShip( n: MainQN,
-					l: OrbitalQN,
-					{	length,
-						coordinates,
-						name
-					}: ShipProps ): Array<JSX.Element>
-{
-	let m = calcSmallestMagneticNumber( length );
-	const ship = [];
-	let { x, y } = coordinates;
-
-	for (let i = 0; i < length; i++) {
-		ship.push(
-			<Container
-				key={name + m}
-				x={x}
-				y={y}
-				qn={{n: n,
-					l: l,
-					m: new MagneticQN( m ),}}
-			/>
-		);
-
-		m++;
-		x += CONTAINER_WIDTH;
-	}
-
-	return ship;
+	return qn.n.toString() + qn.l.toString();
 }
 
 /**
@@ -121,7 +75,7 @@ function buildShip( n: MainQN,
  * @param l Орбитальное число корабля
  * @returns Длина корабля
  */
-function calcLength( l: OrbitalQN ): number {
+ function calcLength( l: OrbitalQN ): number {
 	/* 
 	Определение члена арифметической последовательности
 	с a1 = 1 и шагом d = 2 (1, 3, 5, 7)
@@ -137,11 +91,11 @@ function calcLength( l: OrbitalQN ): number {
  * @param l Орбитальное число корабля
  * @returns Координаты верхнего левого угла корабля
  */
-function calcCoordinates( n: MainQN, l: OrbitalQN ): Coordinates
+function calcCoordinates( qn: ShipQN ): Coordinates
 {
 	return {
-		x: getX( n, l ),
-		y: getY( n, l ),
+		x: getX( qn.n, qn.l ),
+		y: getY( qn.n, qn.l ),
 	};
 }
 
@@ -166,21 +120,4 @@ function getX( n: MainQN, l: OrbitalQN ): number
 function getY( n: MainQN, l: OrbitalQN ): number
 {
 	return ( 8 - n.value - l.value ) * ( CONTAINER_HEIGHT + LINE_SPACING );
-}
-
-/**
- * Вычисляет наименьшее магнитное число для корабля
- * @param length Длина корабля
- * @returns Магнитное число самого левого контейнера в корабле
- */
-function calcSmallestMagneticNumber( length: number ): number
-{
-	/* 
-	len	m
-	1	0
-	3	-1
-	5	-2
-	7	-3
-	*/
-	return Math.floor( length / 2 ) * (-1);
 }

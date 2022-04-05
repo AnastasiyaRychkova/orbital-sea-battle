@@ -1,10 +1,10 @@
 import type { ChemicalElement } from "./ChemicalElement";
-import QNConverterInterface from "./QNConverterInterface";
+import QNSchemeInterface from "./QNSchemeInterface";
 
 interface PeriodicTableInterface
 {
 	getByNumber( number: number ): ChemicalElement;
-	readonly converter: QNConverterInterface;
+	readonly converter: QNSchemeInterface;
 }
 
 

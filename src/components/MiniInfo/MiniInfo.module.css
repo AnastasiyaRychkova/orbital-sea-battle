@@ -1,0 +1,80 @@
+@value sizes: '../../style/display.css';
+@value mobile, laptop from sizes;
+
+@value colors: '../../style/colors.css';
+@value secondary-100, secondary-900 from colors;
+
+@value effects: '../../style/effects.css';
+@value shadow__input from effects;
+
+
+.miniInfo {
+	display: flex;
+	align-items: center;
+	column-gap: .75em;
+	
+	width: fit-content;
+	padding: 1em;
+	padding-left: .75em;
+
+	box-shadow: shadow__input;
+	background-color: secondary-900;
+	color: secondary-100;
+}
+
+.icon {
+	width: 1.8em;
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	row-gap: .125em;
+}
+
+.captionText {
+	composes: button from '../../style/typography.css';
+	composes: button-tiny from '../../style/typography.css';
+}
+
+.valueText {
+	composes: button from '../../style/typography.css';
+	composes: button-medium from '../../style/typography.css';
+}
+
+
+/*=============================================
+=               Media Requests               =
+=============================================*/
+
+/* Tablet or Small Notebook */
+@media (min-width: mobile) and (max-width: laptop) {
+
+	.miniInfo {
+		column-gap: .5em;
+		padding: .75em;
+		padding-right: 1em;
+	}
+	
+	.icon {
+		width: 1.5em;
+	}
+}
+
+
+/* Smartphone */
+@media (max-width: mobile), (max-height: mobile) {
+
+	.miniInfo {
+		column-gap: .4em;
+		padding: .5em .75em;
+	}
+	
+	.icon {
+		width: 1.5em;
+	}
+	
+	.message {
+		row-gap: 0;
+	}
+}
