@@ -1,30 +1,26 @@
 import React from 'react';
 import {
-	MemoryRouter as Router,
-	Switch,
+	BrowserRouter as Router,
+	Routes,
 	Route,
 } from "react-router-dom";
 
+import Landing from './pages/landing/Landing';
 import TheoryPage from './pages/theory/TheoryPage';
-import MainPage from './pages/main/MainPage';
 import Page404 from './pages/404/Page404';
 import Stub from './pages/404/Stub';
-import DiagramInfoPage from './pages/diagram_info/DiagramInfoPage';
 
 function App() {
 	return (
 		<Router>
-			<Switch>
-				<Route exact path="/" component={MainPage} />
-				<Route path="/theory" component={TheoryPage} />
-				<Route path="/training" component={Stub} />
-				<Route path="/privacy" component={Stub} />
-				<Route path="/diagram" component={DiagramInfoPage} />
-				<Route component={Page404} />
-			</Switch>
+			<Routes>
+				<Route path="/" element={ <Landing/> } />
+				<Route path="play" element={ <Stub/> } />
+				{/* <Route path="theory" element={ <TheoryPage/> } /> */}
+				<Route path="*" element={ <Page404/> } />
+			</Routes>
 		</Router>
 	);
 }
-// 
 
 export default App;

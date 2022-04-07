@@ -2,11 +2,10 @@ import React from 'react';
 import styles from './TheoryPage.module.css';
 import Accordion from '../../components/Accordion/Accordion'
 import ReturnToMain from '../../components/ReturnToMain/ReturnToMain'
-import GeneralBackground from '../../components/Background/GeneralBackground';
 
 export default function TheoryPage() {
 	return (
-		<GeneralBackground>
+		<>
 			<div className={ styles.content }>
 				<h1 className={ styles.pageTitle }>Theory</h1>
 				<span className={ styles.introduction }>
@@ -44,7 +43,7 @@ export default function TheoryPage() {
 
 				<ReturnToMain />
 			</div>
-		</GeneralBackground>
+		</>
 
 	);
 }
