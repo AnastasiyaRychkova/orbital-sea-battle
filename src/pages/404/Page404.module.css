@@ -14,7 +14,7 @@
 }
 
 .subtitle {
-	margin-bottom: 50px;
+	margin-top: 2em;
 	max-width: 50%;
 	text-align: center;
 	word-spacing: wordSpacing_M;
@@ -27,15 +27,4 @@
 	justify-content: center;
 	height: 100%;
 	min-height: 100vh;
-}
-
-/*круг загрузки*/
-.loading {
-	transform-origin: center center;
-	animation: circle 5s 1 ease;
-}
-
-@keyframes circle {
-	0% { transform: rotate(0); }
-	100% { transform: rotate(360deg); }
 }

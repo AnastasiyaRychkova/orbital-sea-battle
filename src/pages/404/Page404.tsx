@@ -1,26 +1,22 @@
 import React from 'react';
 import styles from './Page404.module.css';
+import { useTranslation } from 'react-i18next';
+
+// import LoadingError from '../../components/Loading/LoadingError'
 // import ReturnToMain from '../../components/ReturnToMain/ReturnToMain'
-import circle from '../../img/stub/loading.svg'
 
-function LoadingCircle() {
-	return (
-		<div className={ styles.loading }>
-			<img src={ circle } height="250" width="250" alt="Загрузка" />
-		</div>
-	)
-}
+export default function Page404() {
+	const { t } = useTranslation();
 
-interface IProps {
-	title?: string;
-}
-
-export default function Page404( { title = "Error 404" } : IProps ) {
 	return (
 		<div className={ styles.container }>
-			<h1 className={ styles.title }>{ title }</h1>
-			<p className={ styles.subtitle }>Page Not Found</p>
-			<LoadingCircle />
+			<h1 className={ styles.title }>
+				{ t("pages.404.title") }
+			</h1>
+			<p className={ styles.subtitle }>
+				{ t("pages.404.text") }
+			</p>
+			{/* <LoadingError /> */}
 			{/* <ReturnToMain /> */}
 		</div>
 	);

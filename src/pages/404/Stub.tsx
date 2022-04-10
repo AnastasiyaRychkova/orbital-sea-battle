@@ -1,8 +1,18 @@
 import React from 'react';
-import Page404 from './Page404'
+import styles from './Page404.module.css';
+import { useTranslation } from 'react-i18next';
 
-export default function Stub() {
+export default function Page404() {
+	const { t } = useTranslation();
+
 	return (
-		<Page404 title="Under construction" />
+		<div className={ styles.container }>
+			<h1 className={ styles.title }>
+				{ t("pages.404.constuction") }
+			</h1>
+			<p className={ styles.subtitle }>
+				{ t("pages.404.text") }
+			</p>
+		</div>
 	);
 }

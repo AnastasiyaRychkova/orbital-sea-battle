@@ -1,0 +1,21 @@
+{
+
+	"title": "Orbital Battleship",
+
+	"components": {
+
+		"loading" : "Loading"
+
+	},
+
+	"pages": {
+
+		"404": {
+			"title": "Error 404",
+			"text": "Page not found",
+			"construction": "Under construction"
+		}
+
+	}
+
+}
