@@ -1,23 +1,21 @@
 @value colors: '../../style/colors.css';
-@value primary from colors;
-
+@value secondary-100 from colors;
 @value typography: '../../style/typography.css';
-@value letterSpacing_M, wordSpacing_M, extraLargeText from typography;
 
 .title {
-	composes: extraLargeText;
+	composes: large-header from typography;
+	composes: large-header-1 from typography;
 	max-width: 50%;
 	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: letterSpacing_M;
-	color: primary;
+	color: secondary-100;
 }
 
 .subtitle {
-	margin-top: 2em;
+	composes: text from typography;
 	max-width: 50%;
 	text-align: center;
-	word-spacing: wordSpacing_M;
+	color: secondary-100;
+	margin: 2em 0 4em;
 }
 
 .container {

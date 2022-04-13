@@ -8,7 +8,18 @@
 
 	},
 
+	"actions": {
+		
+		"play" : "Play",
+		"main" : "Back to main"
+
+	},
+
 	"pages": {
+
+		"landing": {
+			"educational": "Educational Chemistry game"
+		},
 
 		"404": {
 			"title": "Error 404",
