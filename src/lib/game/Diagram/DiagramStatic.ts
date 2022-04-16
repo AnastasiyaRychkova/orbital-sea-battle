@@ -2,9 +2,9 @@ import { makeObservable, observable, action } from "mobx"
 
 import {
 	EDiagramCellState as CellState,
-	SpinIndex,
+	CellIndex,
 } from '../ChemicalElement/DiagramCell';
-import { CellQN, ShipQN } from "../ChemicalElement/QuantumNumbers";
+import { CellQN, BlockQN } from "../ChemicalElement/QuantumNumbers";
 import PeriodicTable from '../ChemicalElement/PeriodicTable';
 // import DiagramStateType from './DiagramInterface';
 import ElemConfig from "../ChemicalElement/ElemConfig";
@@ -24,7 +24,7 @@ export default class DiagramStatic
 			
 			setElementByNumber: action,
 		});
-		this.element = PeriodicTable.getByNumber( elemNumber ).config;
+		this.element = PeriodicTable.element( elemNumber ).config;
 	}
 	setCellState(quantumNumbers: CellQN, state: boolean): void {
 		throw new Error("Method not implemented.");
@@ -38,7 +38,7 @@ export default class DiagramStatic
 	toggleCell(quantumNumbers: CellQN): void {
 		throw new Error("Method not implemented.");
 	}
-	toggleShip(quantumNumbers: ShipQN): void {
+	toggleShip(quantumNumbers: BlockQN): void {
 		throw new Error("Method not implemented.");
 	}
 	aim(quantumNumbers: CellQN): void {
@@ -53,7 +53,7 @@ export default class DiagramStatic
 	
 	getCellState( quantumNumbers: CellQN ): CellState
 	{
-		const index = PeriodicTable.converter.getCellIndex( quantumNumbers );
+		const index = PeriodicTable.converterDeprecated.getCellIndex( quantumNumbers );
 
 		return index 
 				? this.element.hasSpin( index )
@@ -69,6 +69,6 @@ export default class DiagramStatic
 
 	setElementByNumber( elemNumber: number ): void
 	{
-		this.element = PeriodicTable.getByNumber( elemNumber ).config;
+		this.element = PeriodicTable.element( elemNumber ).config;
 	}
 }

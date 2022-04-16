@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
-import { MainQN, OrbitalQN, ShipQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
+import { MainQN, OrbitalQN, BlockQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
 import Container from './Container';
 import ShipName from './ShipName';
 import ShipSelection from './ShipSelection';
 import type { Coordinates } from './types';
-import type{ BlockType } from '../../lib/game/Diagram/ObjectState.d';
+import type{ BlockType } from '../../lib/game/Diagram/DObjectState.d';
 
 import {
 	CONTAINER_HEIGHT,
@@ -65,7 +65,7 @@ export default Ship;
 
 
 
-function makeName( qn: ShipQN ): string
+function makeName( qn: BlockQN ): string
 {
 	return qn.n.toString() + qn.l.toString();
 }
@@ -91,7 +91,7 @@ function makeName( qn: ShipQN ): string
  * @param l Орбитальное число корабля
  * @returns Координаты верхнего левого угла корабля
  */
-function calcCoordinates( qn: ShipQN ): Coordinates
+function calcCoordinates( qn: BlockQN ): Coordinates
 {
 	return {
 		x: getX( qn.n, qn.l ),

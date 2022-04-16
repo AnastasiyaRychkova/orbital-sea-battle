@@ -1,14 +1,15 @@
 import { makeObservable, observable, action, computed } from "mobx";
-import {
+import {QN} from '../../Services/Chemistry';
+
+import type {
 	MainQN,
 	OrbitalQN,
 	MagneticQN,
 	SpinQN,
 	QuantumNumbers,
-} from "../../ChemicalElement/QuantumNumbers";
-
+} from "../../Services/Chemistry";
 import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface.d";
-import INote from "./NoteInterface";
+import type INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
 import EventProvider from "../../../util/EventEmitter/EventProvider";
 
@@ -134,14 +135,14 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		switch( key )
 		{
 			case 'n':
-				return new MainQN( parseInt( value ) );
+				return QN.n( parseInt( value ) );
 			case 'l':
-				return new OrbitalQN( value );
+				return QN.l( value );
 			case 'm':
-				return new MagneticQN( parseInt( value ) );
+				return QN.m( parseInt( value ) );
 		
 			default:
-				return new SpinQN( value === '+1/2' ? 1 : -1 );
+				return QN.s( value === '+1/2' ? 1 : -1 );
 		}
 	}
 
@@ -163,26 +164,26 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 			case 'n':
 				return Math.max(
 					this._isSat( 'l' )
-							? this._get( 'l' ).get()!.value + 1 : MainQN.MIN,
+							? this._get( 'l' ).get()!.value + 1 : QN.qClass.n.MIN,
 					this._isSat( 'm' )
-							? Math.abs( this._get( 'm' ).get()!.value ) + 1 : MainQN.MIN,
+							? Math.abs( this._get( 'm' ).get()!.value ) + 1 : QN.qClass.n.MIN,
 				); // max( l+1, |m|+1 )
 			
 			case 'l':
 				return this._isSat( 'm' )
 							? Math.abs( this._get( 'm' ).get()!.value )
-							: OrbitalQN.MIN;
+							: QN.qClass.l.MIN;
 			case 'm':
 				return Math.max(
 					this._isSat( 'n' )
 							? Math.abs( this._get( 'n' ).get()!.value - 4.5 ) - 3.5
-							: MagneticQN.MIN,
+							: QN.qClass.m.MIN,
 					this._isSat( 'l' )
 							? this._get( 'l' ).get()!.value * -1
-							: MagneticQN.MIN,
+							: QN.qClass.m.MIN,
 				);
 			case 's':
-				return SpinQN.MIN;
+				return QN.qClass.s.MIN;
 		}
 	}
 
@@ -193,25 +194,25 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 			case 'n':
 				return Math.min(
 					this._isSat( 'l' )
-							? 8 - this._get( 'l' ).get()!.value : MainQN.MAX,
+							? 8 - this._get( 'l' ).get()!.value : QN.qClass.n.MAX,
 					this._isSat( 'm' )
-							? 8 - Math.abs( this._get( 'm' ).get()!.value ) : MainQN.MAX,
+							? 8 - Math.abs( this._get( 'm' ).get()!.value ) : QN.qClass.n.MAX,
 				);
 			case 'l':
 				return this._isSat( 'n' )
 							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
-							: OrbitalQN.MAX;
+							: QN.qClass.l.MAX;
 			case 'm':
 				return Math.min(
 					this._isSat( 'n' )
 							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
-							: MagneticQN.MAX,
+							: QN.qClass.m.MAX,
 					this._isSat( 'l' )
 							? this._get( 'l' ).get()!.value
-							: MagneticQN.MAX,
+							: QN.qClass.m.MAX,
 				);
 			case 's':
-				return SpinQN.MAX;
+				return QN.qClass.s.MAX;
 		}
 	}
 
@@ -244,7 +245,7 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 	get _stateAsString(): StringState
 	{
 		return Object.values(this.store)
-					 .map((value) => value.getAsString()) as StringState;
+					.map((value) => value.getAsString()) as StringState;
 	}
 
 	reset(): void
@@ -254,3 +255,11 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 }
 
 export default Filter;
+
+export type {
+	IFilter,
+	StoreKey,
+	FilterEvent,
+	FilterEventData,
+	StringState,
+}

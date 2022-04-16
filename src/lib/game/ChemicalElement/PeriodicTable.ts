@@ -8,6 +8,7 @@ import {
 import type {
 	ChemicalElement,
 } from './ChemicalElement';
+import QNtoIndexConverter from './QNtoIndexConverter';
 
 
 type PeriodicTableStructure = Array<ChemicalElement>;
@@ -17,7 +18,7 @@ type PeriodicTableStructure = Array<ChemicalElement>;
  * 
  * *\* Внутри корабля индексы расставлены лева направо*
  */
-const periodicTable: PeriodicTableStructure = [
+const periodicTableElements: PeriodicTableStructure = [
 	{
 		number: 1,
 		name: 	'hydrogen',
@@ -730,33 +731,50 @@ const periodicTable: PeriodicTableStructure = [
 
 
 type PeriodicTableType = {
-	getByNumber( number: number ): ChemicalElement
+	elemByNumber( number: number ): ChemicalElement
 }
 
 /** 
  * Периодическая таблица химических элементов
  */
-class PeriodicTable
-{
-	#table = periodicTable;
-	#converter: QNSchemeInterface = converter;
-
-	getByNumber( number: number ): ChemicalElement
+const periodicTable = {
+	element( number: number ): ChemicalElement
 	{
-		return this.#table[ number - 1 ];
-	}
+		return periodicTableElements[ number - 1 ];
+	},
 
-	get converter(): QNSchemeInterface
+	/**
+	 * @deprecated Используется в `DiagramStatic`, который также нужно удалить
+	 */
+	get converterDeprecated(): QNSchemeInterface
 	{
-		return this.#converter;
+		return converter;
+	},
+
+	get converter()
+	{
+		return QNtoIndexConverter;
+	},
+
+	get MAX_ELEM_NUMBER(): number
+	{
+		return periodicTableElements.length;
+	},
+
+	/**
+	 * Получить массив всех элементов
+	 */
+	asArray(): ChemicalElement[]
+	{
+		return [...periodicTableElements];
 	}
 }
 
 
 
-const periodicTableInstance = new PeriodicTable();
 
-export default periodicTableInstance;
+
+export default periodicTable;
 
 export type {
 	ChemicalElement,

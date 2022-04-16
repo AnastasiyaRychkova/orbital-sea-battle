@@ -1,5 +1,5 @@
 import IntInRange from '../../util/IntInRange';
-import IQuantumNumber from './QuantumNumberInterface';
+import IQuantumNumber, { QNStrType } from './QuantumNumberInterface';
 
 /**
  * **Главное квантовое число (n)**
@@ -27,6 +27,18 @@ export default class MainQN extends IntInRange implements IQuantumNumber
 	toString(): string
 	{
 		return this._number.toString();
+	}
+
+	assign( value: IQuantumNumber ): MainQN
+	{
+		if( value.constructor === this.constructor )
+			this._number = ( value as MainQN )._number;
+		return this;
+	}
+
+	get type(): QNStrType
+	{
+		return 'n';
 	}
 }
 

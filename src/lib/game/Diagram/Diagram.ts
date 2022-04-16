@@ -1,13 +1,12 @@
 import { makeObservable, observable, action, computed } from "mobx";
 
 import { stringSchemeToQuantumNumbers } from "../ChemicalElement/QuantumNumbers";
-import { SpinIndex } from "../ChemicalElement/DiagramCell";
-import State from "./ObjectState";
+import State from "./DObjectState";
 
-import type { CellQN, ShipQN, QNStringScheme } from "../ChemicalElement/QuantumNumbers";
+import { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
 import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
 import EventProvider from "../../util/EventEmitter/EventProvider";
-import { StateType } from "./ObjectState.d";
+import { StateType } from "./DObjectState.d";
 import IFilter from "./Filter/FilterInterface";
 
 
@@ -22,10 +21,9 @@ import IFilter from "./Filter/FilterInterface";
  * * Параметр `disabled` блокирует выполнение игровых команд (🎲)
  * * Оповещает о совершении событий
  */
-class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements IDiagram {
+class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements IDiagram
+{
 	_state!: State;
-	_shots!: State;
-	_lastShotIndex?: SpinIndex;
 	_disabled: boolean; // TODO: rename diagram.disabled => .editable
 	_filter?: IFilter;
 	_highlight?: IFilter;
@@ -46,10 +44,9 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 			disabled: computed,
 			observableState: computed,
 			setElementByNumber: action,
-			setCellState: action,
 			toggleCell: action,
-			toggleShip: action,
-			aim: action,
+			toggleBlock: action,
+			fire: action,
 			reset: action,
 		});
 
@@ -63,16 +60,6 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 	get observableState(): StateType
 	{
 		return this._state;
-	}
-
-	setCellState( quantumNumbers: CellQN, state: boolean ): void
-	{
-		throw new Error("Method not implemented.");
-	}
-
-	isLastShot( quantumNumbers: CellQN ): boolean
-	{
-		throw new Error("Method not implemented.");
 	}
 
 	setElementByNumber( number: number ): void
@@ -91,34 +78,50 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		this._emit( disable ? 'disabled' : 'enabled' );
 	}
 
-	toggleCell( quantumNumbers: CellQN ): void
-	{
-		throw new Error("Method not implemented.");
-	}
-
-	toggleShip( quantumNumbers: ShipQN ): void
-	{
-		throw new Error("Method not implemented.");
-	}
-
-	aim( qn: CellQN ): void
+	toggleCell( qn: CellQN ): boolean
 	{
 		if( this._disabled )
-			return;
-
-		const cell = this._state.getCell( qn );
-		if( !cell )
-			return;
-
-		this._emit( 'shot', {
-			qn,
-			isReShot: cell.damage,
-		});
-		cell.doDamage();
+			return false;
+		return this._state.toggleCell( qn );
 	}
 
-	setState(): void {
-		throw new Error("Method not implemented.");
+	toggleBlock( qn: BlockQN ): boolean
+	{
+		if( this._disabled )
+			return false;
+		return this._state.toggleBlock( qn );
+	}
+
+	setSpin( qn: CellQN, state: boolean ): void
+	{
+		this._state.write( qn, state );
+	}
+
+	isEqual( config: ElemConfig ): boolean
+	{
+		return this._state.asConfig().isEqual( config );
+	}
+
+	fire( qn: CellQN ): boolean
+	{
+		if( this._disabled || this._state.isDamaged( qn ) )
+			return false;
+
+		const fireResult = this._state.doDamage( qn );
+		if( fireResult )
+			this._emit( 'shot', {
+				qn,
+			});
+		return fireResult;
+	}
+
+	hasSpin( qn: CellQN ): boolean
+	{
+		return this._state.hasSpin( qn );
+	}
+
+	setState( config: ElemConfig ): void {
+		this._state.setState( config );
 	}
 
 	reset(): void
@@ -126,7 +129,6 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		this._filter?.reset();
 		this._highlight?.reset();
 		this._state = new State( this._filter, this._highlight );
-		this._lastShotIndex = undefined;
 	}
 
 	highlight( qnScheme: QNStringScheme ): void
@@ -140,3 +142,9 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 
 
 export default Diagram;
+
+export type {
+	IDiagram,
+	DiagramEvent,
+	DiagramEventData
+};

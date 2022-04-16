@@ -1,9 +1,12 @@
 import IEventProvider from "../../../util/EventEmitter/EventProviderInterface";
-import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
-import { QuantumNumbers } from "../../ChemicalElement/QuantumNumbers";
+import type {
+	IQuantumNumber,
+	QuantumNumbers,
+	QNStrType,
+} from '../../Services/Chemistry';
 import INote from "./NoteInterface";
 
-export type StoreKey = 'n'|'l'|'m'|'s';
+export type StoreKey = QNStrType;
 
 export type StringState = [string, string, string, string];
 

@@ -1,5 +1,5 @@
 import IntInRange from '../../util/IntInRange';
-import IQuantumNumber from './QuantumNumberInterface';
+import IQuantumNumber, { QNStrType } from './QuantumNumberInterface';
 
 /**
  * **Магнитное квантовое число (m)**
@@ -25,5 +25,17 @@ export default class MagneticQN extends IntInRange implements IQuantumNumber
 	toString(): string
 	{
 		return (this._number > 0 ? '+' : '') + this._number.toString();
+	}
+
+	assign( value: IQuantumNumber ): MagneticQN
+	{
+		if( value.constructor === this.constructor )
+			this._number = ( value as MagneticQN )._number;
+		return this;
+	}
+
+	get type(): QNStrType
+	{
+		return 'm';
 	}
 }

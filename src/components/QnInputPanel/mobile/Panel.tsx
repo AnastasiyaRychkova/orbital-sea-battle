@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, {FC, useEffect} from 'react';
 import cn from '../../className';
-import { MainQN, OrbitalQN, MagneticQN, SpinQN } from '../../../lib/game/ChemicalElement/QuantumNumbers';
+import {QN} from '../../../lib/game/Services/Chemistry';
 import ConfirmButton from '../ConfirmButton';
 import InputValue from './InputValue';
 import styles from './Panel.module.css';
@@ -39,13 +39,13 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						name='n'
 						storeKey='n'
 						values={[
-							new MainQN(1),
-							new MainQN(2),
-							new MainQN(3),
-							new MainQN(4),
-							new MainQN(5),
-							new MainQN(6),
-							new MainQN(7)
+							QN.n(1),
+							QN.n(2),
+							QN.n(3),
+							QN.n(4),
+							QN.n(5),
+							QN.n(6),
+							QN.n(7)
 						]}
 						open={store.openTab === 'n'}
 						openTabHandle={store.openTabHandle} />
@@ -53,10 +53,10 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						name='l'
 						storeKey='l'
 						values={[
-							new OrbitalQN('s'),
-							new OrbitalQN('p'),
-							new OrbitalQN('d'),
-							new OrbitalQN('f')
+							QN.l('s'),
+							QN.l('p'),
+							QN.l('d'),
+							QN.l('f')
 						]}
 						open={store.openTab === 'l'}
 						openTabHandle={store.openTabHandle} />
@@ -65,13 +65,13 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						sub='L'
 						storeKey='m'
 						values={[
-							new MagneticQN(3),
-							new MagneticQN(2),
-							new MagneticQN(1),
-							new MagneticQN(0),
-							new MagneticQN(-1),
-							new MagneticQN(-2),
-							new MagneticQN(-3)
+							QN.m(3),
+							QN.m(2),
+							QN.m(1),
+							QN.m(0),
+							QN.m(-1),
+							QN.m(-2),
+							QN.m(-3)
 						]}
 						open={store.openTab === 'm'}
 						openTabHandle={store.openTabHandle} />
@@ -80,8 +80,8 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						sub='S'
 						storeKey='s'
 						values={[
-							new SpinQN(1),
-							new SpinQN(-1)
+							QN.s(1),
+							QN.s(-1)
 						]}
 						open={store.openTab === 's'}
 						openTabHandle={store.openTabHandle} />

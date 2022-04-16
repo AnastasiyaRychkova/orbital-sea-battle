@@ -1,6 +1,5 @@
-import { makeObservable, observable, action } from "mobx";
 import {
-	SpinIndex as SpinIndex,
+	CellIndex,
 	calcCellState,
 	EDiagramCellState as CellState,
 } from './DiagramCell';
@@ -13,7 +12,7 @@ import type { SpinMark, SpinState } from './DiagramCell';
  * 118 состояний спинов разделены на 4 группы:
  * 3 группы по 32 спина и 1 на 22.
  */
-class ElemConfig implements ElemConfig
+class ElemConfig
 {
 	/** Конфигурация элемента в бинарном виде */
 	config: Int32Array;
@@ -22,14 +21,6 @@ class ElemConfig implements ElemConfig
 
 	constructor( buf?: Int32Array | number[] )
 	{
-		makeObservable( this, {
-			
-			config: observable,
-			
-			write: action,
-			update: action,
-		});
-
 		if( buf === undefined )
 		{
 			this.config = ElemConfig._createZeroArray();
@@ -83,13 +74,12 @@ class ElemConfig implements ElemConfig
 	 * Сравнивает два элемента и возвращает истину только в том случае,
 	 * если они правильные и эквивалентные
 	 * 
-	 * @param elem1 Конфигурация первого элемента
-	 * @param elem2 Конфигурация второго элемента
+	 * @param elem Конфигурация второго элемента
 	 */
-	static isEqual( elem1: ElemConfig, elem2: ElemConfig ): boolean
+	isEqual( elem: ElemConfig ): boolean
 	{
 		for( let i = 0; i < ElemConfig.MAX_LENGTH; i++ )
-			if( elem1.config[ i ] !== elem2.config[ i ] )
+			if( this.config[ i ] !== (elem).config[ i ] )
 				return false;
 
 		return true;
@@ -103,31 +93,31 @@ class ElemConfig implements ElemConfig
 	 * 
 	 * @param spin Индекс спина
 	 */
-	hasSpin( spin: SpinIndex ): boolean
+	hasSpin( spin: CellIndex ): boolean
 	{
 		return this._isMarked( spin.value ) !== 0;
 	}
 
 	private _isMarked( spinIndex: number ): SpinState
 	{
-		const chunk = ElemConfig._chunkIndexBySpinIndex( spinIndex );
-		const index = ElemConfig._indexInChunkBySpinIndex( spinIndex );
+		const chunk = this._chunkIndexBySpinIndex( spinIndex );
+		const index = this._indexInChunkBySpinIndex( spinIndex );
 		return (( this.config[ chunk ] >> index ) & 1 ) as SpinState;
 	}
 
-	private static _makeMaskForSingular( spinIndex: number ): number
+	private _makeMaskForSingular( spinIndex: number ): number
 	{
 		let mask = ElemConfig.NUM__0_001;
-		mask <<= ElemConfig._indexInChunkBySpinIndex( spinIndex );
+		mask <<= this._indexInChunkBySpinIndex( spinIndex );
 		return mask;
 	}
 
-	private static _indexInChunkBySpinIndex( spinIndex: number ): number
+	private _indexInChunkBySpinIndex( spinIndex: number ): number
 	{
 		return spinIndex % ElemConfig.CHUNK_SIZE;
 	}
 
-	private static _chunkIndexBySpinIndex( spinIndex: number ): number
+	private _chunkIndexBySpinIndex( spinIndex: number ): number
 	{
 		return ( spinIndex / ElemConfig.CHUNK_SIZE ) | 0;
 	}
@@ -138,23 +128,11 @@ class ElemConfig implements ElemConfig
 	 * @param spin Индекс спина
 	 * @param state Отмечен ли спин
 	 */
-	write( spin: SpinIndex, state: SpinMark | SpinState ): ElemConfig
-	{
-		this.writeWithoutUpdate( spin, state );
-		this.update();
-		return this;
-	}
-
-	writeWithoutUpdate( spin: SpinIndex, state: SpinMark | SpinState ): ElemConfig
+	write( spin: CellIndex, state: SpinMark | SpinState ): ElemConfig
 	{
 		state ? this._mark( spin.value )
 				:	this._remove( spin.value );
 		return this;
-	}
-
-	update()
-	{
-		this.config = new Int32Array( this.config );
 	}
 
 	/**
@@ -164,8 +142,8 @@ class ElemConfig implements ElemConfig
 	 */
 	private _mark( index: number ): void
 	{
-		const mask = ElemConfig._makeMaskForSingular( index );
-		this.config[ ElemConfig._chunkIndexBySpinIndex( index ) ] |= mask;
+		const mask = this._makeMaskForSingular( index );
+		this.config[ this._chunkIndexBySpinIndex( index ) ] |= mask;
 	}
 
 	/**
@@ -175,8 +153,8 @@ class ElemConfig implements ElemConfig
 	 */
 	private _remove( index: number ): void
 	{
-		const mask = ElemConfig._makeMaskForSingular( index );
-		this.config[ ElemConfig._chunkIndexBySpinIndex( index ) ] &= ~mask;
+		const mask = this._makeMaskForSingular( index );
+		this.config[ this._chunkIndexBySpinIndex( index ) ] &= ~mask;
 	}
 
 	/**
@@ -186,7 +164,7 @@ class ElemConfig implements ElemConfig
 	{
 		const result: SpinState[] = [];
 
-		for( let spinIndex = 0; spinIndex <= SpinIndex.MAX; spinIndex++ )
+		for( let spinIndex = 0; spinIndex <= CellIndex.MAX; spinIndex++ )
 			result.push( this._isMarked( spinIndex ) );
 
 		return result;
@@ -212,6 +190,61 @@ class ElemConfig implements ElemConfig
 		return new ElemConfig( this.config );
 	}
 
+	asIndexes(): number[]
+	{
+		const indexes: number[] = [];
+
+		for( let index = 0; index <= CellIndex.MAX; index++ )
+			if( this._isMarked( index ) )
+				indexes.push( index );
+
+		return indexes;
+	}
+
+	static OR( config1: ElemConfig, config2: ElemConfig ): ElemConfig
+	{
+		const result: ElemConfig = new ElemConfig();
+		result.config[0] = config1.config[0] | config2.config[0];
+		result.config[1] = config1.config[1] | config2.config[1];
+		result.config[2] = config1.config[2] | config2.config[2];
+		result.config[3] = config1.config[3] | config2.config[3];
+
+		return result;
+	}
+
+	static AND( config1: ElemConfig, config2: ElemConfig ): ElemConfig
+	{
+		const result: ElemConfig = new ElemConfig();
+		result.config[0] = Number(config1.config[0]) & Number(config2.config[0]);
+		result.config[1] = config1.config[1] & config2.config[1];
+		result.config[2] = config1.config[2] & config2.config[2];
+		result.config[3] = config1.config[3] & config2.config[3];
+
+		return result;
+	}
+
+	static XOR( config1: ElemConfig, config2: ElemConfig ): ElemConfig
+	{
+		const result: ElemConfig = new ElemConfig();
+		result.config[0] = config1.config[0] ^ config2.config[0];
+		result.config[1] = config1.config[1] ^ config2.config[1];
+		result.config[2] = config1.config[2] ^ config2.config[2];
+		result.config[3] = config1.config[3] ^ config2.config[3];
+
+		return result;
+	}
+
+	static NOT( config: ElemConfig ): ElemConfig
+	{
+		const result: ElemConfig = new ElemConfig();
+		result.config[0] = ~config.config[0];
+		result.config[1] = ~config.config[1];
+		result.config[2] = ~config.config[2];
+		result.config[3] = ~config.config[3];
+
+		return result;
+	}
+
 	/**
 	 * Вычислить состояние (enum) спина по указанному индексу 
 	 * @param spinIndex Индекс спина, у которого запрашивается состояние
@@ -219,7 +252,7 @@ class ElemConfig implements ElemConfig
 	 * @param shots Схема выстрелов
 	 * @returns Перечислительный тип состояния спина элемента
 	 */
-	static getCellState( spinIndex: SpinIndex,
+	static getCellState( spinIndex: CellIndex,
 						 element: ElemConfig,
 						 shots: ElemConfig
 						): CellState
@@ -238,7 +271,7 @@ class ElemConfig implements ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= SpinIndex.MAX; i++ )
+		for( let i = 0; i <= CellIndex.MAX; i++ )
 			result.push( calcCellState( diagram._isMarked( i ), shots._isMarked( i ) ) );
 		
 		return result;
@@ -254,7 +287,7 @@ class ElemConfig implements ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= SpinIndex.MAX; i++ )
+		for( let i = 0; i <= CellIndex.MAX; i++ )
 		{
 			const state: CellState = calcCellState( diagram._isMarked( i ), shots._isMarked( i ) );
 			result.push( state === CellState.on ? CellState.off : state );
@@ -272,7 +305,7 @@ class ElemConfig implements ElemConfig
 
 	private _writeSpinArrayInConfig( spinArray: SpinState[] ): void
 	{
-		const iterator = SpinIndex.iterator();
+		const iterator = CellIndex.iterator();
 		for (const spin of iterator)
 		{
 			const spinState = spinArray[ spin.value ] || 0;

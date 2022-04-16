@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import cn from 'classnames';
 import { OrbitalQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
-import type { BlockType } from '../../lib/game/Diagram/ObjectState.d';
+import type { BlockType } from '../../lib/game/Diagram/DObjectState.d';
 import type { Coordinates } from './types';
 import styles from './diagram.module.css';
 

@@ -45,18 +45,4 @@ export default class IntInRange
 	{
 		this._number = IntInRange.normalize( newValue, this.constructor as any );
 	}
-
-	/**
-	 * Присваивает значение только в том случае,
-	 * если они имеют один тип
-	 * @param value Число
-	 */
-	assign( value: IntInRange ): typeof value
-	{
-		if( this.constructor === value.constructor )
-			this._number = value._number;
-		else
-			this.value = value.value;
-		return this;
-	}
 }

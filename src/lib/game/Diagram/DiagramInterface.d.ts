@@ -1,8 +1,9 @@
 import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
-import type { CellQN, ShipQN, QNStringScheme
+import type { CellQN, BlockQN, QNStringScheme
 } from "../ChemicalElement/QuantumNumbers";
-import { StateType } from "./ObjectState.d";
+import { StateType } from "./DObjectState";
+import { ElemConfig } from '../Services/Chemistry';
 
 
 /** События, которые генерирует диаграмма */
@@ -15,20 +16,14 @@ export type DiagramEventData = {
 	type?: 'cell' | 'ship',
 	index?: number,
 	isReShot?: boolean,
-	qn: CellQN | ShipQN,
+	qn: CellQN | BlockQN,
 }
 
 
-export default interface IDiagram extends IEventProvider<DiagramEvent>
+export default interface IDiagram extends IEventProvider<DiagramEvent, DiagramEventData>
 {
 	
 	observableState: StateType;
-
-	/**
-	 * Был ли последний выстрел произведен в данную ячейку
-	 * @param quantumNumbers 4 квантовых числа
-	 */
-	isLastShot( quantumNumbers: CellQN ): boolean
 	
 	/**
 	 * Установить состояние диаграммы, соответствующее химическому элементу с указанным порядковым номером
@@ -45,8 +40,9 @@ export default interface IDiagram extends IEventProvider<DiagramEvent>
 	/**
 	 * 🎲 Переключить состояние ячейки на противоположное
 	 * @param quantumNumbers 4 квантовых числа
+	 * @returns Состояние ячейки, в которое она перешла
 	 */
-	toggleCell( quantumNumbers: CellQN ): void;
+	toggleCell( quantumNumbers: CellQN ): boolean;
 
 	/**
 	 * 🎲 Переключить состояние всех ячеек блока (корабля) на противоположное
@@ -57,20 +53,40 @@ export default interface IDiagram extends IEventProvider<DiagramEvent>
 	 * 
 	 * ▮▮ ▮▮ ▮▮ --> ▯▯ ▯▯ ▯▯
 	 * @param quantumNumbers 2 квантовых числа (n, l)
+	 * @returns Состояние заполненности блока, в которое он перешел
 	 */
-	toggleShip( quantumNumbers: ShipQN ): void;
+	toggleBlock( quantumNumbers: BlockQN ): boolean;
+
+	/**
+	 * Установить состояние ячейки (выбрана или нет)
+	 * @param qn Квантовые числа ячейки
+	 * @param state Состояние, в которое ее нужно переключить
+	 */
+	setSpin( qn: CellQN, state: boolean ): void;
+
+	/**
+	 * Сравнить на эквивалентность состояние диаграммы и переданную конфигурацию
+	 * @param config Состояние диаграммы в битовом представлении
+	 */
+	isEqual( config: ElemConfig ): boolean;
 
 	/**
 	 * 🎲 Совершить выстрел по ячейке
 	 * @param quantumNumbers 4 квантовых числа
+	 * @returns Результат выстрела: попал или нет. Если диаграмма не установлена или в данную ячейку уже был произведен выстрел, то функция возвращает `false` и не инициирует событие выстрела.
 	 */
-	aim( quantumNumbers: CellQN ): void;
+	fire( quantumNumbers: CellQN ): boolean;
 
-	// TODO: Определиться: нужен ли метод? входные параметры?
+	/**
+	 * Отмечена ли ячейка диаграммы
+	 * @param qn Проверяемая ячейка диаграммы
+	 */
+	hasSpin( qn: CellQN ): boolean;
+
 	/**
 	 * Установить состояние диаграммы
 	 */
-	setState( /* Config */ ): void;
+	setState( config: ElemConfig ): void;
 
 	/** Отчистить диаграмму и выстрелы */
 	reset(): void;

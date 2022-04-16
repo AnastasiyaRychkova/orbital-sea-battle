@@ -1,4 +1,5 @@
 import IEventEmitter from "./EventEmitterInterface";
+import { ListenerFunc } from "./EventProviderInterface";
 // FIXME: Браузерный emitter возвращает CustomEvent, а не переданные значения
 class BrowserEventEmitter<T extends string, D> extends EventTarget implements IEventEmitter<T, D>
 {
@@ -7,20 +8,20 @@ class BrowserEventEmitter<T extends string, D> extends EventTarget implements IE
 		super();
 	}
 
-	on( event: T, callback: Function): IEventEmitter<T,D>
+	on( event: T, callback: ListenerFunc<D>): IEventEmitter<T,D>
 	{
 		this.addEventListener(
 			event,
-			callback as EventListener,
+			callback as unknown as EventListener,
 		);
 		return this;
 	}
 
-	once( event: T, callback: Function): IEventEmitter<T,D>
+	once( event: T, callback: ListenerFunc<D>): IEventEmitter<T,D>
 	{
 		this.addEventListener(
 			event,
-			callback as EventListener,
+			callback as unknown as EventListener,
 			{
 			once: true,
 			}
@@ -36,9 +37,9 @@ class BrowserEventEmitter<T extends string, D> extends EventTarget implements IE
 		return this;
 	}
 
-	remove(event: T, callback: Function): IEventEmitter<T,D>
+	remove( event: T, callback: ListenerFunc<D> ): IEventEmitter<T,D>
 	{
-		this.removeEventListener( event, callback as EventListener );
+		this.removeEventListener( event, callback as unknown as EventListener );
 		return this;
 	}
 }

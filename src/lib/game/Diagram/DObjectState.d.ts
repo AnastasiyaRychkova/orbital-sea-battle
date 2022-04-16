@@ -1,10 +1,10 @@
 import {
-	ShipQN,
-	ContainerQN,
+	BlockQN,
+	BoxQN,
 	CellQN,
 	MagneticQN,
 	SpinQN,
-} from "../ChemicalElement/QuantumNumbers";
+} from "../Services/Chemistry";
 import IFilter from "./Filter/FilterInterface";
 
 
@@ -31,23 +31,26 @@ export type CellType = {
 	/** Был ли совершен в него выстрел */
 	damage: boolean,
 
+	/** Был ли последний выстрел произведен в эту ячейку */
+	isLastDamaged: boolean,
+
 	readonly qn: CellQN,
 } & DUnit;
 
 export type BoxType = {
-	readonly qn: ContainerQN,
+	readonly qn: BoxQN,
 	children: {[key in SpinQNString]: CellType};
 	getCell( s: string ): CellType | undefined,
 } & DUnit;
 
 export type BlockType = {
-	readonly qn: ShipQN;
+	readonly qn: BlockQN;
 	children: {[key: string]: BoxType};
 	getBox( m: string ): BoxType | undefined,
 } & DUnit;
 
 export type StateType = {
-	getBlock( n: string, l: string ): BlockType | undefined,
+	getBlock( qn: BlockQN ): BlockType | undefined,
 	getCell( qn: CellQN ): Cell | undefined,
 	doesSpecifyCell: boolean,
 }

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import { observer } from 'mobx-react';
 import Cell from './Cell';
 import ContainerSelection from './ContainerSelection';
-import type { BoxType } from '../../lib/game/Diagram/ObjectState.d';
+import type { BoxType } from '../../lib/game/Diagram/DObjectState.d';
 import { CELL_WIDTH } from './properties';
 
 

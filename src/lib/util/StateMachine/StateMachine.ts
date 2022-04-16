@@ -1,59 +1,75 @@
-import Timer from "../Timer/Timer";
+import StateNode from "./StateNode";
+
 import {
 	MachineConfig,
 	StateListConfig,
 	StateNodeConfig,
-	StateNode,
-	EventListConfig,
 	Transition,
 	ActionFunction,
-	TerminalStr,
-	TERMINAL,
+	IStateMachine,
+	IMachineNodeTesting,
+	IStateNodeTesting,
+	Context,
+	SMEvent,
+	SMEventData,
+	MachineActionType,
+	OnDoneFunction,
 } from "./StateMachineTypes";
+import EventProvider, { EventData as EventDataEmitter } from "../EventEmitter/EventProvider";
+
+type EventData<StateName> = EventDataEmitter<SMEventData<StateName>>;
 
 /** **Конечный автомат**
  * — это система с конечным, известным количеством состояний,
  * условия переходов между которыми фиксированы и известны,
  * а текущим всегда является ровно одно состояние.
- * SM_State = State | TerminalStr
+ * 
+ * Можно повесить *синхронные* функции на вход и выход конечного автомата
+ * и отдельных его состояний, а также на переходы между состояниями.
  */
-class StateMachine<State extends string, Event extends string>
+class StateMachine<SState extends string, SEvent extends string> extends EventProvider<SMEvent, SMEventData<SState>> implements IStateMachine<SState , SEvent >, IMachineNodeTesting
 {
 	/** Хэш-таблица состояний автомата */
-	#states: Map<State, StateNode<State, Event>>;
+	#states: Map<string, StateNode<SState, SEvent>>;
 
 	/** Объект текущего состояния */
-	#current!: StateNode<State, Event>;
+	#current!: StateNode<SState, SEvent>;
+
+	/** Работает ли машина или она уже завершила свое выполнение */
+	#complete: boolean;
 
 	/** Название начального состояния */
-	#initial: State;
-
-	/** Родительский автомат */
-	#parent?: StateMachine<State, Event>;
+	#initial: SState;
 
 	/** Название состояния родительского автомата, в которое нужно его перевести после окончания работы текущего */
-	#onDone?: State | TerminalStr;
+	#onDone?: SEvent | OnDoneFunction<SState, SEvent>;
 
 	/** Функция, вызываемая при запуске автомата */
-	#entry?: ActionFunction<State>;
+	#entry?: ActionFunction<SState>;
 
 	/** Функция, вызываемая по окончании работы автомата */
-	#exit?: ActionFunction<State>;
+	#exit?: ActionFunction<SState>;
 
-	/** Контекстный-объект передаваемый в во все  */
-	#context?: object;
+	/** Контекстный-объект передаваемый в во все состояния */
+	#context: Context;
+
+	/** Является ли конечной автомат вложенным */
+	#isRoot: boolean;
 
 
-	constructor( config: MachineConfig<State, Event>, parent?: StateMachine<State, Event> )
+	constructor( config: MachineConfig<SState, SEvent>, parent?: StateMachine<SState, SEvent> )
 	{
+		super();
+		this.#complete = false;
 		this.#initial = config.initial;
 		this.#onDone = config.onDone;
 		this.#entry = config.entry;
 		this.#exit = config.exit;
-		this.#context = config.context;
-		this.#parent = parent;
-
-		this._goToState = this._goToState.bind( this );
+		this.#isRoot = parent === undefined;
+		
+		this.#context = this._createContext( config.context || {}, parent );
+		this.runDelayedTransition = this.runDelayedTransition.bind( this );
+		this.complete = this.complete.bind( this );
 		this.#states = this._createStateMap( config.states );
 		this._start();
 	}
@@ -63,10 +79,10 @@ class StateMachine<State extends string, Event extends string>
 	 * @param stateName Название состояния
 	 * @returns Объект состояния
 	 */
-	private _getStateNode( stateName: State ): StateNode<State, Event>
+	private _getStateNode( stateName: SState ): StateNode<SState, SEvent>
 	{
 		const state = this.#states.get( stateName );
-		if (state === undefined)
+		if( state === undefined )
 			throw new Error("Invalid state value");
 		return state;
 	}
@@ -76,16 +92,16 @@ class StateMachine<State extends string, Event extends string>
 	 * @param listConfig Объект, описывающий состояния автомата
 	 * @returns Хэш-таблица состояний автомата
 	 */
-	private _createStateMap( listConfig: StateListConfig<State, Event> ): Map<State, StateNode<State, Event>>
+	private _createStateMap( listConfig: StateListConfig<SState, SEvent> ): Map<SState, StateNode<SState, SEvent>>
 	{
-		const stateMap = new Map<State, StateNode<State, Event>>();
+		const stateMap = new Map<SState, StateNode<SState, SEvent>>();
 
-		for (const [ name, config ] of Object.entries( listConfig ))
+		for( const [ name, config ] of Object.entries( listConfig ) )
 			stateMap.set(
-				name as State,
+				name as SState,
 				this._createStateNode(
-					name as State,
-					config as StateNodeConfig<State, Event>,
+					name as SState,
+					config as StateNodeConfig<SState, SEvent>,
 				)
 			);
 		
@@ -99,250 +115,238 @@ class StateMachine<State extends string, Event extends string>
 	 * @returns Новый объект состояния
 	 */
 	private _createStateNode(
-		stateName: State,
-		config: StateNodeConfig<State, Event>,
-	): StateNode<State, Event>
+		stateName: SState,
+		config: StateNodeConfig<SState, SEvent>,
+	): StateNode<SState, SEvent>
 	{
-		const state: StateNode<State, Event> = {
-			value: stateName,
+		return new StateNode( stateName, config, this );
+	}
+
+	private _createContext( context: object, parentMachine?: StateMachine<SState, SEvent> ): Context
+	{
+		return {
+			...context,
+			parent: parentMachine?.context
 		};
-
-		if( config.on )
-			state.events = this._createEventMap( config.on );
-		
-		if( config.invoke )
-			state.invoke = new StateMachine( config.invoke );
-
-		if( config.delay )
-			state.delay = {
-				timeout: new Timer(),
-				...config.delay,
-			}
-		state.entry = config.entry;
-		state.exit = config.exit;
-		
-		return state;
-	}
-
-	/**
-	 * Создает хэш-таблицу переходов по событиям из объектов описаний событий
-	 * @param listConfig Объект, описывающий события и вызываемые ими переходы между состояниями
-	 * @returns Хэш-таблица событий состояния
-	 */
-	private _createEventMap( listConfig: EventListConfig<State, Event> ): Map<Event, Transition<State|TerminalStr>>
-	{
-		const eventMap = new Map<Event, Transition<State|TerminalStr>>();
-
-		for (const [ eventName, eventConfig] of Object.entries( listConfig ) )
-		{
-			this._addEventTransition(
-				eventMap,
-				eventName as Event,
-				eventConfig as Transition<State|TerminalStr>|TerminalStr|State
-			);
-		}
-
-		return eventMap;
-	}
-
-	/**
-	 * Создает и добавляет в хэш-таблицу событие (ключ)
-	 * и вызванный им переход (значение).
-	 * 
-	 * *Свойства объекта `transition` копируются в добавляемый объект*
-	 * @param map Хэш-таблица событий состояния
-	 * @param name Название события
-	 * @param transition Переход, вызванный событием
-	 */
-	private _addEventTransition(
-		map: Map<Event, Transition<State|TerminalStr>>,
-		name: Event,
-		transition: Transition<State|TerminalStr>|TerminalStr|State
-	): void
-	{
-		map.set(
-			name,
-			typeof transition === 'string' ?
-				{ to: transition }
-				: { ...transition }
-		);
 	}
 
 
 	/**
 	 * Перевести автомат в следующее состояние
 	 * @param eventTransition Объект-описание перехода
-	 * @returns Название состояние, в которое перейдет данный автомат
 	 */
-	private _goToState( eventTransition: Transition<State|TerminalStr> ): State|TerminalStr
+	private _goToState( eventTransition: Transition<SState> ): void
 	{
 		const {to: nextState, do: action} = eventTransition;
-		this._stopTimer();
 
-		if( this._isFinishing( nextState ) )
-			return this._end( eventTransition );
-
-		this._callActionFunction( this.#current.exit );
-		
-		this._changeCurrentState( nextState as State );
-
-		this._callActionFunction( this.#current.entry );
+		this.#current.complete();
+		this._changeCurrentState( nextState );
 		this._callActionFunction( action );
-		
-		this._startTimer();
-
-		if( this._hasNestedStateMachine() )
-			return ( this.#current.invoke as StateMachine<State, Event> )._start();
-		
-		return this.value;
+		this.#current.start();
 	}
 
-	/**
-	 * Имеет ли текущее состояние вложенный автомат?
-	 */
-	private _hasNestedStateMachine(): boolean
-	{
-		return this.#current.invoke !== undefined;
-	}
 
-	/**
-	 * Должен ли автомат завершить свою работу?
-	 * @param nextState Состояние, в которое должен перейти автомат
-	 */
-	private _isFinishing( nextState: State|TerminalStr ): boolean
-	{
-		return nextState === TERMINAL;
-	}
- 
 	/**
 	 * Изменить значение текущего состояния
 	 * @param state Название нового состояния
 	 */
-	private _changeCurrentState( state: State ): void
+	private _changeCurrentState( state: SState ): void
 	{
 		this.#current = this._getStateNode( state );
 	}
 
 	/**
 	 * Инициировать работу конечного автомата
-	 * @returns Название инициированного состояния
+	 * 1. Machine[entry]
+	 * 2. Node[entry]
+	 * 3. __N.Machine[entry]
+	 * 4. __N.Node[entry]
 	 */
-	private _start(): State
+	private _start(): void
 	{
 		this._changeCurrentState( this.#initial );
-		this._callActionFunction( this.#current.entry );
+
 		this._callActionFunction( this.#entry );
-		this._startTimer();
+		this.#current.start();
 
-		if( this._hasNestedStateMachine() )
-			return ( this.#current.invoke as StateMachine<State, Event> )._start();
-		return this.value;
-	}
-
-	/**
-	 * Завершить работу конечного автомата
-	 * @param eventTransition Завершающий переход
-	 * @returns Название состояния родительского автомата, в которое он перейдет после завершения работы текущего
-	 */
-	private _end( eventTransition: Transition<State|TerminalStr> ): State | TerminalStr
-	{
-		this._callActionFunction( this.#current.exit );
-		this._callActionFunction( eventTransition.do );
-		this._callActionFunction( this.#exit );
-
-		return this.#parent ? (this.#parent as StateMachine<State, Event>)._goToState({ to: this.#onDone || TERMINAL }) : TERMINAL;
+		// if( this._hasNestedStateMachine() )
+		// 	return ( this.#current!.invoke as StateMachine<SState, SEvent> )._start();
 	}
 
 	/**
 	 * Вызвать side-effect функцию
 	 * @param action Side-effect function
 	 */
-	private async _callActionFunction( action: ActionFunction<State>|undefined ): Promise<void>
+	private _callActionFunction( action?: ActionFunction<SState> ): void
 	{
-		if( action )
-		{
-			const promise = async () => {
-				return action( this.value, this.#context);
-			}
+		if( !action )
+			return;
 
-			try {
-				await promise();
-			}
-			catch( error ) {
-				
-			}
+		try {
+			action( {
+				state: this.state, 
+				context: this.#context, 
+				complete: this.complete,
+			} );
+		}
+		catch( error ) {
+			// FIXME: Обработка ошибок из передаваемых в State Machine функций
 		}
 	}
 
-	/**
-	 * Запустить таймер отложенного перехода
-	 */
-	private _startTimer(): void
-	{
-		if( this.#current.delay
-			&& this.#current.delay.after > 0
-		)
-			this.#current.delay.timeout.start(
-				this._goToState,
-				this.#current.delay.after,
-				{
-					to: this.#current.delay.to,
-					do: this.#current.delay.do
-				}
-			);
-	}
-
-	/**
-	 * Остановить таймер отложенного перехода
-	 */
-	private _stopTimer(): void
-	{
-		if( this.#current.delay )
-		{
-			this.#current.delay.timeout.stop();
-		}
-
-		if( this._hasNestedStateMachine() )
-			(this.#current.invoke as StateMachine<State, Event>)._stopTimer();
-	}
 
 	/**
 	 * Вызвать событие в данном конечном автомате
+	 * 
+	 * NodeA[exit] -> Transition[do] -> NodeB[entry]
 	 * @param event Инициируемое событие
-	 * @returns Состояние, в которое перейдет конечный автомат
+	 * @returns Произошел ли переход. False возвращается, если переданное событие не было описано для текущего состояния конечного автомата.
 	 */
-	send( event: Event ): State|TerminalStr
+	send( event: SEvent ): boolean
 	{
-		if( this._hasNestedStateMachine() )
-			return (this.#current.invoke as StateMachine<State, Event> ).send( event );
-		// если такого события нет
-		const eventTransition = this._getEventTransition( event );
-		if( eventTransition === undefined )
-			return this.value;
+		if( this.#complete )
+			return false;
+		
+		const wasTransitionInNestedMachine: boolean = this.#current.send( event );
+		if( wasTransitionInNestedMachine )
+		{
+			this.#isRoot && this._emit( 'changed', { state: this.statesChain } );
+			return true;
+		}
 
-		return this._goToState( eventTransition );
+		const eventTransition = this.#current.transition( event );
+		if( !eventTransition ) // если такого события нет
+			return false;
+
+		this._goToState( eventTransition );
+
+		this.#isRoot && this._emit( 'changed', { state: this.statesChain } );
+		return true;
 	}
 
-	/**
-	 * Получить объект перехода по названию события
-	 * @param event Название события
-	 * @returns Объект перехода
+	/** 
+	 * Запустить отложенный переход, даже если время еще не истекло
+	 * @returns Был ли переход
 	 */
-	private _getEventTransition( event: Event ): Transition<State|TerminalStr> | undefined
+	runDelayedTransition(): boolean
 	{
-		return this.#current.events?.get(event);
+		if( this.#complete )
+			return false;
+
+		return this._runMachineDelayedTransition();
+	}
+
+	private _runMachineDelayedTransition(): boolean
+	{
+		const transition = this.#current.delayedTransition;
+		if( !transition )
+			return false;
+
+		this._goToState( transition );
+		return true;
+	}
+
+	/** Запустить отложенный переход на всех уровнях вложенности */
+	runAllDelayedTransitions(): boolean
+	{
+		if( this.#complete )
+			return false;
+
+		const wasDelay = this._runMachineDelayedTransition();
+		return wasDelay || this.#current.runNestedDelayedTransitions()
+	}
+
+	/** Завершить работу конечного автомата
+	 * 
+	 * Если автомат является вложенным, то для его родителя он удаляется.
+	 * Состояние остается последним на момент вызова функции.
+	 * 
+	 * По завершении работы вызывается
+	 * `StateNode[exit] `--> `Machine[exit]`
+	 */
+	complete(): void
+	{
+		if( this.#complete )
+			return;
+
+		this.#current.complete();
+		this._callActionFunction( this.#exit );
+
+		this._emit( 'completed', { state: this.statesChain } );
+		this.#complete = true;
+	}
+
+	/** 
+	 * Создать вложенную машину с теми же типами состояний и событий
+	 */
+	create(config: MachineConfig<SState, SEvent>): IStateMachine<SState, SEvent>
+	{
+		return new StateMachine<SState, SEvent>( config, this );
 	}
 
 	/**
 	 * Название текущего состояния
 	 */
-	get value(): State
+	get state(): SState
 	{
-		return this.#current.value;
+		return this.#current.name;
 	}
-	
+
+	/** Завершена ли работа конечного автомата */
+	get isComplete(): boolean
+	{
+		return this.#complete;
+	}
+
+	/** Объект, передаваемый во все функции */
+	get context(): Object
+	{
+		return this.#context;
+	}
+
+	/** Глубина вложенности */
+	get depth(): number
+	{
+		return this.#current.depth + 1;
+	}
+
+	/** Название события текущего состояния родительского автомата, 
+	 * которое будет инициировано, когда текущий вложенный автомат 
+	 * закончит свою работу */
+	get onDone(): SEvent | undefined
+	{
+		return typeof this.#onDone === 'function'
+					? this.#onDone( {
+						state: this.state,
+						context: this.#context,
+					} )
+					: this.#onDone;
+	}
+
+	/** Цепочка текущих состояний вложенных автоматов */
+	get statesChain(): SState[]
+	{
+		return this.#complete
+				? []
+				: this.#current.statesChain;
+	}
+
+	get _width(): number
+	{
+		let statesCount: number = 0;
+		this.#states.forEach( ( state ) => {
+			statesCount += (state as unknown as IStateNodeTesting)._width;
+		} );
+
+		return statesCount;
+	}
 }
 
-export {
-	StateMachine,
+export default StateMachine;
+
+export type {
+	IStateMachine,
+	MachineActionType,
+	Context,
+	EventData,
 }

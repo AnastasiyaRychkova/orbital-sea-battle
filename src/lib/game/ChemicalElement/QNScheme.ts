@@ -1,10 +1,9 @@
-import { SpinIndex } from "./DiagramCell";
+import { CellIndex } from "./DiagramCell";
 import QNSchemeInterface from "./QNSchemeInterface";
-import { CellQN, ShipQN } from "./QuantumNumbers";
-import SpinQN from "./SpinQN";
+import { CellQN, BlockQN } from "./QuantumNumbers";
 
 
-type BoxType = [SpinIndex, SpinIndex];
+type BoxType = [CellIndex, CellIndex];
 type BlockType = { [key: string]: BoxType };
 type ColumnType = { [key: string]: BlockType };
 
@@ -24,142 +23,142 @@ class QNScheme implements QNSchemeInterface
 		this.correspondenceTable = {
 			1: {
 				's': {
-					'0': [ new SpinIndex( 0 ), new SpinIndex( 1 ) ]
+					'0': [ new CellIndex( 0 ), new CellIndex( 1 ) ]
 				}
 			},
 	
 			2: {
 				's': {
-					'0': [ new SpinIndex( 2 ), new SpinIndex( 3 ) ]
+					'0': [ new CellIndex( 2 ), new CellIndex( 3 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 4 ), new SpinIndex( 5 ) ],
-					'0': [ new SpinIndex( 6 ), new SpinIndex( 7 ) ],
-					'+1': [ new SpinIndex( 8 ), new SpinIndex( 9 ) ],
+					'-1': [ new CellIndex( 4 ), new CellIndex( 5 ) ],
+					'0': [ new CellIndex( 6 ), new CellIndex( 7 ) ],
+					'+1': [ new CellIndex( 8 ), new CellIndex( 9 ) ],
 				}
 			},
 	
 			3: {
 				's': {
-					'0': [ new SpinIndex( 10 ), new SpinIndex( 11 ) ]
+					'0': [ new CellIndex( 10 ), new CellIndex( 11 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 12 ), new SpinIndex( 13 ) ],
-					'0': [ new SpinIndex( 14 ), new SpinIndex( 15 ) ],
-					'+1': [ new SpinIndex( 16 ), new SpinIndex( 17 ) ],
+					'-1': [ new CellIndex( 12 ), new CellIndex( 13 ) ],
+					'0': [ new CellIndex( 14 ), new CellIndex( 15 ) ],
+					'+1': [ new CellIndex( 16 ), new CellIndex( 17 ) ],
 				},
 	
 				'd': {
-					'-2': [ new SpinIndex( 20 ), new SpinIndex( 21 ) ],
-					'-1': [ new SpinIndex( 22 ), new SpinIndex( 23 ) ],
-					'0': [ new SpinIndex( 24 ), new SpinIndex( 25 ) ],
-					'+1': [ new SpinIndex( 26 ), new SpinIndex( 27 ) ],
-					'+2': [ new SpinIndex( 28 ), new SpinIndex( 29 ) ],
+					'-2': [ new CellIndex( 20 ), new CellIndex( 21 ) ],
+					'-1': [ new CellIndex( 22 ), new CellIndex( 23 ) ],
+					'0': [ new CellIndex( 24 ), new CellIndex( 25 ) ],
+					'+1': [ new CellIndex( 26 ), new CellIndex( 27 ) ],
+					'+2': [ new CellIndex( 28 ), new CellIndex( 29 ) ],
 				}
 			},
 	
 			4: {
 				's': {
-					'0': [ new SpinIndex( 18 ), new SpinIndex( 19 ) ]
+					'0': [ new CellIndex( 18 ), new CellIndex( 19 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 30 ), new SpinIndex( 31 ) ],
-					'0': [ new SpinIndex( 32 ), new SpinIndex( 33 ) ],
-					'+1': [ new SpinIndex( 34 ), new SpinIndex( 35 ) ],
+					'-1': [ new CellIndex( 30 ), new CellIndex( 31 ) ],
+					'0': [ new CellIndex( 32 ), new CellIndex( 33 ) ],
+					'+1': [ new CellIndex( 34 ), new CellIndex( 35 ) ],
 				},
 	
 				'd': {
-					'-2': [ new SpinIndex( 38 ), new SpinIndex( 39 ) ],
-					'-1': [ new SpinIndex( 40 ), new SpinIndex( 41 ) ],
-					'0': [ new SpinIndex( 42 ), new SpinIndex( 43 ) ],
-					'+1': [ new SpinIndex( 44 ), new SpinIndex( 45 ) ],
-					'+2': [ new SpinIndex( 46 ), new SpinIndex( 47 ) ],
+					'-2': [ new CellIndex( 38 ), new CellIndex( 39 ) ],
+					'-1': [ new CellIndex( 40 ), new CellIndex( 41 ) ],
+					'0': [ new CellIndex( 42 ), new CellIndex( 43 ) ],
+					'+1': [ new CellIndex( 44 ), new CellIndex( 45 ) ],
+					'+2': [ new CellIndex( 46 ), new CellIndex( 47 ) ],
 				},
 	
 				'f': {
-					'-3': [ new SpinIndex( 56 ), new SpinIndex( 57 ) ],
-					'-2': [ new SpinIndex( 58 ), new SpinIndex( 59 ) ],
-					'-1': [ new SpinIndex( 60 ), new SpinIndex( 61 ) ],
-					'0': [ new SpinIndex( 62 ), new SpinIndex( 63 ) ],
-					'+1': [ new SpinIndex( 64 ), new SpinIndex( 65 ) ],
-					'+2': [ new SpinIndex( 66 ), new SpinIndex( 67 ) ],
-					'+3': [ new SpinIndex( 68 ), new SpinIndex( 69 ) ],
+					'-3': [ new CellIndex( 56 ), new CellIndex( 57 ) ],
+					'-2': [ new CellIndex( 58 ), new CellIndex( 59 ) ],
+					'-1': [ new CellIndex( 60 ), new CellIndex( 61 ) ],
+					'0': [ new CellIndex( 62 ), new CellIndex( 63 ) ],
+					'+1': [ new CellIndex( 64 ), new CellIndex( 65 ) ],
+					'+2': [ new CellIndex( 66 ), new CellIndex( 67 ) ],
+					'+3': [ new CellIndex( 68 ), new CellIndex( 69 ) ],
 				}
 			},
 	
 			5: {
 				's': {
-					'0': [ new SpinIndex( 36 ), new SpinIndex( 37 ) ]
+					'0': [ new CellIndex( 36 ), new CellIndex( 37 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 48 ), new SpinIndex( 49 ) ],
-					'0': [ new SpinIndex( 50 ), new SpinIndex( 51 ) ],
-					'+1': [ new SpinIndex( 52 ), new SpinIndex( 53 ) ],
+					'-1': [ new CellIndex( 48 ), new CellIndex( 49 ) ],
+					'0': [ new CellIndex( 50 ), new CellIndex( 51 ) ],
+					'+1': [ new CellIndex( 52 ), new CellIndex( 53 ) ],
 				},
 	
 				'd': {
-					'-2': [ new SpinIndex( 70 ), new SpinIndex( 71 ) ],
-					'-1': [ new SpinIndex( 72 ), new SpinIndex( 73 ) ],
-					'0': [ new SpinIndex( 74 ), new SpinIndex( 75 ) ],
-					'+1': [ new SpinIndex( 76 ), new SpinIndex( 77 ) ],
-					'+2': [ new SpinIndex( 78 ), new SpinIndex( 79 ) ],
+					'-2': [ new CellIndex( 70 ), new CellIndex( 71 ) ],
+					'-1': [ new CellIndex( 72 ), new CellIndex( 73 ) ],
+					'0': [ new CellIndex( 74 ), new CellIndex( 75 ) ],
+					'+1': [ new CellIndex( 76 ), new CellIndex( 77 ) ],
+					'+2': [ new CellIndex( 78 ), new CellIndex( 79 ) ],
 				},
 	
 				'f': {
-					'-3': [ new SpinIndex( 88 ), new SpinIndex( 89 ) ],
-					'-2': [ new SpinIndex( 90 ), new SpinIndex( 91 ) ],
-					'-1': [ new SpinIndex( 92 ), new SpinIndex( 93 ) ],
-					'0': [ new SpinIndex( 94 ), new SpinIndex( 95 ) ],
-					'+1': [ new SpinIndex( 96 ), new SpinIndex( 97 ) ],
-					'+2': [ new SpinIndex( 98 ), new SpinIndex( 99 ) ],
-					'+3': [ new SpinIndex( 100 ), new SpinIndex( 101 ) ],
+					'-3': [ new CellIndex( 88 ), new CellIndex( 89 ) ],
+					'-2': [ new CellIndex( 90 ), new CellIndex( 91 ) ],
+					'-1': [ new CellIndex( 92 ), new CellIndex( 93 ) ],
+					'0': [ new CellIndex( 94 ), new CellIndex( 95 ) ],
+					'+1': [ new CellIndex( 96 ), new CellIndex( 97 ) ],
+					'+2': [ new CellIndex( 98 ), new CellIndex( 99 ) ],
+					'+3': [ new CellIndex( 100 ), new CellIndex( 101 ) ],
 				}
 			},
 			
 			6: {
 				's': {
-					'0': [ new SpinIndex( 54 ), new SpinIndex( 55 ) ]
+					'0': [ new CellIndex( 54 ), new CellIndex( 55 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 80 ), new SpinIndex( 81 ) ],
-					'0': [ new SpinIndex( 82 ), new SpinIndex( 83 ) ],
-					'+1': [ new SpinIndex( 84 ), new SpinIndex( 85 ) ],
+					'-1': [ new CellIndex( 80 ), new CellIndex( 81 ) ],
+					'0': [ new CellIndex( 82 ), new CellIndex( 83 ) ],
+					'+1': [ new CellIndex( 84 ), new CellIndex( 85 ) ],
 				},
 	
 				'd': {
-					'-2': [ new SpinIndex( 102 ), new SpinIndex( 103 ) ],
-					'-1': [ new SpinIndex( 104 ), new SpinIndex( 105 ) ],
-					'0': [ new SpinIndex( 106 ), new SpinIndex( 107 ) ],
-					'+1': [ new SpinIndex( 108 ), new SpinIndex( 109 ) ],
-					'+2': [ new SpinIndex( 110 ), new SpinIndex( 111 ) ],
+					'-2': [ new CellIndex( 102 ), new CellIndex( 103 ) ],
+					'-1': [ new CellIndex( 104 ), new CellIndex( 105 ) ],
+					'0': [ new CellIndex( 106 ), new CellIndex( 107 ) ],
+					'+1': [ new CellIndex( 108 ), new CellIndex( 109 ) ],
+					'+2': [ new CellIndex( 110 ), new CellIndex( 111 ) ],
 				}
 			},
 	
 			7: {
 				's': {
-					'0': [ new SpinIndex( 86 ), new SpinIndex( 87 ) ]
+					'0': [ new CellIndex( 86 ), new CellIndex( 87 ) ]
 				},
 	
 				'p': {
-					'-1': [ new SpinIndex( 112 ), new SpinIndex( 113 ) ],
-					'0': [ new SpinIndex( 114 ), new SpinIndex( 115 ) ],
-					'+1': [ new SpinIndex( 116 ), new SpinIndex( 117 ) ],
+					'-1': [ new CellIndex( 112 ), new CellIndex( 113 ) ],
+					'0': [ new CellIndex( 114 ), new CellIndex( 115 ) ],
+					'+1': [ new CellIndex( 116 ), new CellIndex( 117 ) ],
 				}
 			}
 		}
 	}
 
-	getCellIndex( qn: CellQN ): SpinIndex | undefined
+	getCellIndex( qn: CellQN ): CellIndex | undefined
 	{
 		return this._getCell( qn );
 	}
 
-	private _getCell( qn: CellQN ): SpinIndex | undefined
+	private _getCell( qn: CellQN ): CellIndex | undefined
 	{
 		const n = this.correspondenceTable[qn.n.value];
 		const l = n && n[qn.l.toString()];
@@ -174,9 +173,9 @@ class QNScheme implements QNSchemeInterface
 	 * @param qn 2 квантовых числа (n, l)
 	 * @returns Массив индексов ячеек блока
 	 */
-	getBlockIndexes( qn: ShipQN ): SpinIndex[] | undefined
+	getBlockIndexes( qn: BlockQN ): CellIndex[] | undefined
 	{
-		const indexes: SpinIndex[] = [];
+		const indexes: CellIndex[] = [];
 		const block = this._getBlock( qn );
 		if( !block )
 			return undefined;
@@ -187,7 +186,7 @@ class QNScheme implements QNSchemeInterface
 		return indexes;
 	}
 
-	private _getBlock( qn: ShipQN ): BlockType | undefined
+	private _getBlock( qn: BlockQN ): BlockType | undefined
 	{
 		return this.correspondenceTable[ qn.n.value ][ qn.l.toString() ];
 	}
@@ -218,7 +217,7 @@ class QNScheme implements QNSchemeInterface
 	}
 }
 
- 
+
 const qnScheme = new QNScheme();
 
 

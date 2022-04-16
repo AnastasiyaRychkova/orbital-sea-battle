@@ -1,8 +1,10 @@
 import MainQN from "../MainQN";
 import OrbitalQN from "../OrbitalQN";
 import MagneticQN from "../MagneticQN";
+import SpinQN from "../SpinQN";
+import QN from "../QNModule";
 
-let QNClass: typeof MainQN | typeof OrbitalQN | typeof MagneticQN;
+let QNClass: typeof MainQN | typeof OrbitalQN | typeof MagneticQN | typeof SpinQN;
 
 const classTestFunction = () => {
 	test( 'check value in range', () => {
@@ -18,12 +20,6 @@ const classTestFunction = () => {
 	test( 'check value out of range (-)', () => {
 		const testedNumber: number = QNClass.MIN - 10;
 		expect( new QNClass( testedNumber ).value ).toEqual( QNClass.MIN );
-	});
-
-	test( 'check not integer value', () => {
-		const testedNumber: number = 1.6;
-		const expectedNumber: number = 2;
-		expect( new QNClass( testedNumber ).value ).toEqual( expectedNumber );
 	});
 
 	test( 'check number assignment', () => {
@@ -47,3 +43,32 @@ describe( 'OrbitalQN', classTestFunction );
 
 QNClass = MagneticQN;
 describe( 'MagneticQN', classTestFunction );
+
+QNClass = SpinQN;
+describe( 'SpinQN', classTestFunction );
+
+describe( 'QN rounding', () => {
+	test( 'MainQN check not integer value', () => {
+		const testedNumber: number = 1.6;
+		const expectedNumber: number = 2;
+		expect( QN.n( testedNumber ).value ).toEqual( expectedNumber );
+	} );
+
+	test( 'OrbitalQN check not integer value', () => {
+		const testedNumber: number = 3.6;
+		const expectedNumber: number = 3;
+		expect( QN.l( testedNumber ).value ).toEqual( expectedNumber );
+	} );
+
+	test( 'MagneticQN check not integer value', () => {
+		const testedNumber: number = -1.6;
+		const expectedNumber: number = -2;
+		expect( QN.m( testedNumber ).value ).toEqual( expectedNumber );
+	} );
+
+	test( 'SpinQN check not integer value', () => {
+		const testedNumber: number = 0;
+		const expectedNumber: number = 1;
+		expect( QN.s( testedNumber ).value ).toEqual( expectedNumber );
+	} );
+} )

@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
+import { QN } from "../../lib/game/Services/Chemistry";
 import InputValue from './InputValue';
 import ConfirmButton from './ConfirmButton';
 import styles from './style.module.css';
 import { ToggleTheme } from './types';
 import cn from '../className';
-import { MainQN, OrbitalQN, MagneticQN, SpinQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
 
 interface IProps {
 	className?: string,
@@ -19,23 +19,23 @@ const Panel: FC<IProps> = ({className}) => {
 						name="n"
 						storeKey="n"
 						values={[
-							new MainQN(1),
-							new MainQN(2),
-							new MainQN(3),
-							new MainQN(4),
-							new MainQN(5),
-							new MainQN(6),
-							new MainQN(7)
+							QN.n(1),
+							QN.n(2),
+							QN.n(3),
+							QN.n(4),
+							QN.n(5),
+							QN.n(6),
+							QN.n(7)
 						]}
 						theme={ToggleTheme.default} />
 					<InputValue
 						name="l"
 						storeKey="l"
 						values={[
-							new OrbitalQN('s'),
-							new OrbitalQN('p'),
-							new OrbitalQN('d'),
-							new OrbitalQN('f')
+							QN.l('s'),
+							QN.l('p'),
+							QN.l('d'),
+							QN.l('f')
 						]}
 						theme={ToggleTheme.squareL} />
 				</div>
@@ -45,13 +45,13 @@ const Panel: FC<IProps> = ({className}) => {
 						sub="L"
 						storeKey="m"
 						values={[
-							new MagneticQN(3),
-							new MagneticQN(2),
-							new MagneticQN(1),
-							new MagneticQN(0),
-							new MagneticQN(-1),
-							new MagneticQN(-2),
-							new MagneticQN(-3)
+							QN.m(3),
+							QN.m(2),
+							QN.m(1),
+							QN.m(0),
+							QN.m(-1),
+							QN.m(-2),
+							QN.m(-3)
 						]}
 						theme={ToggleTheme.default} />
 					<InputValue
@@ -59,8 +59,8 @@ const Panel: FC<IProps> = ({className}) => {
 						sub="S"
 						storeKey="s"
 						values={[
-							new SpinQN(1),
-							new SpinQN(-1)
+							QN.s(1),
+							QN.s(-1)
 						]}
 						theme={ToggleTheme.squareM} />
 				</div>

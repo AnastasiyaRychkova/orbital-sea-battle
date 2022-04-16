@@ -46,7 +46,7 @@ class ElemPreviewState
 
 	get currentElement(): ChemicalElement
 	{
-		const elem = periodicTable.getByNumber( this.element );
+		const elem = periodicTable.element( this.element );
 		return {
 			name: elem.name,
 			symbol: elem.symbol,
@@ -57,7 +57,7 @@ class ElemPreviewState
 	get nextElement(): ChemicalElement
 	{
 		return this.element <= ElemPreviewState.MAX
-				? periodicTable.getByNumber( this.element + 1 )
+				? periodicTable.element( this.element + 1 )
 				: {
 					name: '',
 					symbol: '',
@@ -68,7 +68,7 @@ class ElemPreviewState
 	get prevElement(): ChemicalElement
 	{
 		return this.element >= ElemPreviewState.MIN
-				? periodicTable.getByNumber( this.element - 1 )
+				? periodicTable.element( this.element - 1 )
 				: {
 					name: '',
 					symbol: '',

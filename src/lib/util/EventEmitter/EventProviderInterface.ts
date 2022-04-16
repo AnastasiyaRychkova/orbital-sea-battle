@@ -1,10 +1,16 @@
-interface IEventProvider<T extends string>
+export type EventData<D> = {
+	detail: D,
+};
+
+export type ListenerFunc<D> = ( data: EventData<D> ) => void;
+
+interface IEventProvider<T extends string, D>
 {
-	on( event: T, func: Function ): IEventProvider<T>;
+	on( event: T, func: ListenerFunc<D> ): IEventProvider<T, D>;
 
-	once( event: T, func: Function ): IEventProvider<T>;
+	once( event: T, func: ListenerFunc<D> ): IEventProvider<T, D>;
 
-	remove( event: T, func: Function ): IEventProvider<T>;
+	remove( event: T, func: ListenerFunc<D> ): IEventProvider<T, D>;
 }
 
 

@@ -1,27 +1,27 @@
-import QN from "../OrbitalQN";
+import QN from "../QNModule";
 import type { OrbitalStr } from "../QuantumNumbers";
 
 describe( 'Orbital QN', () => {
 	test( 'check string conversion', () => {
-		for( let num = QN.MIN; num < QN.MAX; num++ )
-			expect( QN.strToNum( QN.LETTERS[ num ] ) ).toEqual( num );
+		for( let num = QN.qClass.l.MIN; num < QN.qClass.l.MIN; num++ )
+			expect( QN.qClass.l.strToNum( QN.qClass.l.LETTERS[ num ] ) ).toEqual( num );
 	});
 
 	test( 'check number conversion', () => {
-		for( let num = QN.MIN; num < QN.MAX; num++ )
-			expect( QN.numToStr( num ) ).toEqual( QN.LETTERS[ num ] );
+		for( let num = QN.qClass.l.MIN; num < QN.qClass.l.MAX; num++ )
+			expect( QN.qClass.l.numToStr( num ) ).toEqual( QN.qClass.l.LETTERS[ num ] );
 	});
 
 	test( 'check getter', () => {
 		const testedString: OrbitalStr = 'f';
-		const testedObject = new QN( testedString );
-		expect( testedObject.string ).toEqual( testedString );
+		const testedObject = QN.l( testedString );
+		expect( testedObject.toString() ).toEqual( testedString );
 	});
 
-	test( 'check setter', () => {
+	test( 'check assign function', () => {
 		const testedString: OrbitalStr = 'f';
-		const testedObject = new QN();
-		testedObject.string = testedString;
-		expect( testedObject.string ).toEqual( testedString );
+		const testedObject = QN.l();
+		testedObject.assign( QN.l( testedString ) );
+		expect( testedObject.toString() ).toEqual( testedString );
 	});
 });

@@ -1,4 +1,4 @@
-import IQuantumNumber from "./QuantumNumberInterface";
+import IQuantumNumber, { QNStrType } from "./QuantumNumberInterface";
 
 export type SpinType = -1 | 1;
 
@@ -25,7 +25,7 @@ class SpinQN implements IQuantumNumber
 
 	protected static normalize( newValue: number )
 	{
-		return newValue > 0 ? 1 : -1;
+		return newValue >= 0 ? 1 : -1;
 	}
 
 	get value(): number
@@ -41,6 +41,18 @@ class SpinQN implements IQuantumNumber
 	toString(): string
 	{
 		return this._number > 0 ? '+1/2' : '−1/2';
+	}
+
+	assign( value: IQuantumNumber ): SpinQN
+	{
+		if( value.constructor === this.constructor )
+			this._number = ( value as SpinQN )._number;
+		return this;
+	}
+
+	get type(): QNStrType
+	{
+		return 's';
 	}
 }
 

@@ -8,10 +8,22 @@ export type FullScreenServiceType = {
 }
 
 
+/**
+ * Сервис отвечает за раскрытие окна во весь экран
+ */
 class FullScreenService
 {
+	/** Включен ли режим полного экрана */
 	isOn: boolean = false;
+
+	/** Метод запроса у браузера раскрытия элемента во весь экран
+	 * (В разных браузерах отличаются названия)
+	 */
 	#requestFullScreen?: (options?: FullscreenOptions | undefined) => Promise<void>;
+
+	/** Метод выхода из полноэкранного режима
+	 * (В разных браузерах могут отличаться названия)
+	 */
 	#cancelFullScreen?: () => Promise<void>;
 
 	constructor()

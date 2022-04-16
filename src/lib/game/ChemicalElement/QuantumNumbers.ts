@@ -38,13 +38,13 @@ export type CellQN = {
 	s: SpinQN,
 };
 
-export type ContainerQN = {
+export type BoxQN = {
 	n: MainQN,
 	l: OrbitalQN,
 	m: MagneticQN,
 };
 
-export type ShipQN = {
+export type BlockQN = {
 	n: MainQN,
 	l: OrbitalQN,
 };

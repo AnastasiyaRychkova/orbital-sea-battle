@@ -38,7 +38,7 @@ class Controller
 
 	fire(): void
 	{
-		this.diagram.aim( this.filter.state as CellQN );
+		this.diagram.fire( this.filter.state as CellQN );
 	}
 }
 

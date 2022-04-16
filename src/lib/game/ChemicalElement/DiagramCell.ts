@@ -5,26 +5,26 @@ import IntInRange from '../../util/IntInRange';
  * 
  * Хранит индекс ячейки: [0;117]
  */
-export class SpinIndex extends IntInRange
+export class CellIndex extends IntInRange
 {
 	static readonly MIN: number = 0;
 	static readonly MAX: number = 117;
 
-	constructor( number: number = SpinIndex.MIN )
+	constructor( number: number = CellIndex.MIN )
 	{
 		super( number );
 	}
 
 	protected static range( number: number = 0 ): number
 	{
-		return super.normalize( number, SpinIndex );
+		return super.normalize( number, CellIndex );
 	}
 
 	static *iterator()
 	{
-		const cell = new SpinIndex( SpinIndex.MIN );
+		const cell = new CellIndex( CellIndex.MIN );
 
-		for(; cell._number <= SpinIndex.MAX; cell._number++)
+		for(; cell._number <= CellIndex.MAX; cell._number++)
 			yield cell;
 	}
 }

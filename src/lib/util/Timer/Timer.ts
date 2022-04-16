@@ -2,23 +2,28 @@ import ITimer from "./TimerInterface";
 
 type Seconds = number;
 
-class Timer implements ITimer
+class Timeout implements ITimer
 {
-	#timerID: any;
+	#id: any;
 	
 	constructor()
 	{
-		this.#timerID = 0;
+		this.#id = 0;
 	}
 
-	start( callback: Function, delay: Seconds = 0, ...args: any[] ): void
+	start(
+		callback: Function,
+		delay: Seconds = 0,
+		...args: any[]
+	): void
 	{
-		if( this.#timerID )
+		if( this.#id )
 			this._clearTimer();
-		this.#timerID = setTimeout(
+
+		this.#id = setTimeout(
 			( ...args: any[] ) => {
 				callback( ...args );
-				this.#timerID = 0;
+				this.#id = 0;
 			},
 			delay * 1000,
 			...args
@@ -27,22 +32,30 @@ class Timer implements ITimer
 
 	private _clearTimer(): void
 	{
-		clearTimeout( this.#timerID );
-		this.#timerID = 0;
+		clearTimeout( this.#id );
+		this.#id = 0;
 	}
 
 	stop(): void
 	{
-		if( this.#timerID )
+		if( this.#id )
 			this._clearTimer();
 	}
 
 	isRunning(): boolean
 	{
-		return this.#timerID !== 0;
+		return this.#id !== 0;
 	}
 }
 
+const Timer = {
+	create(): ITimer
+	{
+		return new Timeout();
+	}
+};
 
 
 export default Timer;
+
+export type { ITimer };
