@@ -6,7 +6,7 @@ import {
 	CONTAINER_WIDTH
 } from './properties';
 import styles from './cell.module.css';
-import type { CellType } from '../../lib/game/Diagram/DObjectState.d';
+import type { CellType } from '../../core/game/Diagram/DObjectState';
 
 
 

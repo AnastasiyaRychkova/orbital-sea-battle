@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { QN } from "../../lib/game/Services/Chemistry";
+import { QN } from "../../core/game/Services/Chemistry";
 import InputValue from './InputValue';
 import ConfirmButton from './ConfirmButton';
 import styles from './style.module.css';

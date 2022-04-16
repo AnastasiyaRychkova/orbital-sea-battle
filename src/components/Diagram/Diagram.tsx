@@ -3,7 +3,7 @@ import CellSymbol from './CellSymbol';
 import DiagramField from './DiagramField';
 import panzoom from 'panzoom';
 import type {PanZoom} from 'panzoom';
-import IDiagram from '../../lib/game/Diagram/DiagramInterface';
+import IDiagram from '../../core/game/Diagram/DiagramInterface';
 
 interface IProps {
 	diagram: IDiagram,

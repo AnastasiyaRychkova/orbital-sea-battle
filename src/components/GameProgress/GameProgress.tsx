@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
-import {achievements} from "../../client/core";
+import {achievements} from "../../core/core";
 import cn from '../className';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import styles from './GameProgress.module.css';

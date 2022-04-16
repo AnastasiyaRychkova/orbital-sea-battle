@@ -6,8 +6,8 @@ import { ToggleTheme } from '../types';
 import ToggleButton from '../ToggleButton';
 import styles from './InputValue.module.css';
 
-import FilterType from "../../../lib/game/Diagram/Filter/FilterInterface";
-import IQuantumNumber from '../../../lib/game/ChemicalElement/QuantumNumberInterface';
+import FilterType from "../../../core/game/Diagram/Filter/FilterInterface";
+import IQuantumNumber from '../../../core/game/ChemicalElement/QuantumNumberInterface';
 
 
 type StoreKey = 'n'|'l'|'m'|'s';

@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /.vscode
-/src/lib/third-party
+/src/core/third-party
 /.VSCodeCounter

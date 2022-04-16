@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { browser } from '../../client/core';
+import { browser } from '../../core/core';
 
 import scheme from './scheme.json';
 import progress from './ExpProcess';

@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import { Provider, observer } from 'mobx-react';
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { browser } from "../../../client/core";
+import { browser } from "../../../core/core";
 import page from '../ExpPage';
 import process from '../ExpProcess';
 import Controller from '../Controller';

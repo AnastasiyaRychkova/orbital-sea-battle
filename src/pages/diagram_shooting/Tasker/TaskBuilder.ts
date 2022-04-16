@@ -1,6 +1,6 @@
-import IDiagram, {DiagramEventData} from "../../../lib/game/Diagram/DiagramInterface";
-import IFilter, {FilterEventData, StoreKey} from "../../../lib/game/Diagram/Filter/FilterInterface";
-import qnScheme from "../../../lib/game/ChemicalElement/QNScheme";
+import IDiagram, {DiagramEventData} from "../../../core/game/Diagram/DiagramInterface";
+import IFilter, {FilterEventData, StoreKey} from "../../../core/game/Diagram/Filter/FilterInterface";
+import qnScheme from "../../../core/game/ChemicalElement/QNScheme";
 import type {TaskConfig} from './types'
 import Tasker from "./Tasker";
 

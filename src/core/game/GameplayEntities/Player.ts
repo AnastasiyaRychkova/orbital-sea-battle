@@ -1,5 +1,5 @@
 import { Alias } from "../Aliases";
-import User from "../GameplayEntities/User";
+import User from "./User";
 
 class Player
 {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
 
-import IQuantumNumber from '../../lib/game/ChemicalElement/QuantumNumberInterface';
+import IQuantumNumber from '../../core/game/ChemicalElement/QuantumNumberInterface';
 import ToggleButton from './ToggleButton';
 import styles from './InputValue.module.css';
 
 import { ToggleTheme } from './types';
-import FilterType from "../../lib/game/Diagram/Filter/FilterInterface";
+import FilterType from "../../core/game/Diagram/Filter/FilterInterface";
 
 type StoreKey = 'n'|'l'|'m'|'s';
 

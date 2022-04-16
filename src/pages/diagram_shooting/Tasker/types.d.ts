@@ -1,4 +1,4 @@
-import IEventProvider from "../../../lib/util/EventEmitter/EventProviderInterface";
+import IEventProvider from "../../../core/util/EventEmitter/EventProviderInterface";
 
 export type EventType<EventData> = {
 	detail: EventData,

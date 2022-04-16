@@ -7,7 +7,7 @@ import {
 	Navigate,
 } from "react-router-dom";
 
-import uiStore from '../../../client/UIStore';
+import uiStore from '../../../core/browser/UIStore';
 import process from '../ExpProcess';
 
 import Start from './StartPage';

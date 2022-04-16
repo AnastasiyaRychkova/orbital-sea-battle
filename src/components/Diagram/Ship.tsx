@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
-import { MainQN, OrbitalQN, BlockQN } from '../../lib/game/ChemicalElement/QuantumNumbers';
+import { MainQN, OrbitalQN, BlockQN } from '../../core/game/ChemicalElement/QuantumNumbers';
 import Container from './Container';
 import ShipName from './ShipName';
 import ShipSelection from './ShipSelection';
 import type { Coordinates } from './types';
-import type{ BlockType } from '../../lib/game/Diagram/DObjectState.d';
+import type{ BlockType } from '../../core/game/Diagram/DObjectState';
 
 import {
 	CONTAINER_HEIGHT,

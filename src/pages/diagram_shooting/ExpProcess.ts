@@ -1,5 +1,5 @@
 import { makeAutoObservable, observable } from "mobx";
-import { storage, achievements, browser } from "../../client/core";
+import { storage, achievements, browser } from "../../core/core";
 import TimeOnPage from "./TimeOnPage";
 import type { TaskerEventData, TaskResult } from "./Tasker/types.d";
 import type { TaskKey } from "./ExpProcess.d";

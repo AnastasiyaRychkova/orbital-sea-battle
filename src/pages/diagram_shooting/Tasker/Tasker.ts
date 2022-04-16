@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import {achievements} from '../../../client/core';
-import EventProvider from "../../../lib/util/EventEmitter/EventProvider";
+import {achievements} from '../../../core/core';
+import EventProvider from "../../../core/util/EventEmitter/EventProvider";
 import { TaskConfig, EventType, TaskResult, TaskerEvent, TaskerEventData, Digest, Timestamp } from "./types";
 
 type DigestStore = {

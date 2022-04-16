@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
 import Ship from './Ship';
-import IDiagram from '../../lib/game/Diagram/DiagramInterface';
+import IDiagram from '../../core/game/Diagram/DiagramInterface';
 
 
 interface IProps {

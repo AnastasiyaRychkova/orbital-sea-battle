@@ -1,11 +1,11 @@
 import { makeObservable, observable } from "mobx";
 
-import IDiagram from "../../lib/game/Diagram/DiagramInterface";
-import Diagram from "../../lib/game/Diagram/Diagram";
-import IFilter from "../../lib/game/Diagram/Filter/FilterInterface";
-import Filter from "../../lib/game/Diagram/Filter/Filter";
+import IDiagram from "../../core/game/Diagram/DiagramInterface";
+import Diagram from "../../core/game/Diagram/Diagram";
+import IFilter from "../../core/game/Diagram/Filter/FilterInterface";
+import Filter from "../../core/game/Diagram/Filter/Filter";
 import TaskBuilder from "./Tasker/TaskBuilder";
-import type { CellQN } from "../../lib/game/ChemicalElement/QuantumNumbers";
+import type { CellQN } from "../../core/game/ChemicalElement/QuantumNumbers";
 
 
 

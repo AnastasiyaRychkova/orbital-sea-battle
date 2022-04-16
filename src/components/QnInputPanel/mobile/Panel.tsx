@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, {FC, useEffect} from 'react';
 import cn from '../../className';
-import {QN} from '../../../lib/game/Services/Chemistry';
+import {QN} from '../../../core/game/Services/Chemistry';
 import ConfirmButton from '../ConfirmButton';
 import InputValue from './InputValue';
 import styles from './Panel.module.css';

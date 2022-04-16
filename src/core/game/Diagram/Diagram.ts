@@ -6,7 +6,7 @@ import State from "./DObjectState";
 import { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
 import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
 import EventProvider from "../../util/EventEmitter/EventProvider";
-import { StateType } from "./DObjectState.d";
+import { StateType } from "./DObjectState";
 import IFilter from "./Filter/FilterInterface";
 
 

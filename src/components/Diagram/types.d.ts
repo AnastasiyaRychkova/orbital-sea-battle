@@ -1,4 +1,4 @@
-import type IDiagram from '../../lib/game/Diagram/DiagramInterface'
+import type IDiagram from '../../core/game/Diagram/DiagramInterface'
 
 // ---- CELL ------
 

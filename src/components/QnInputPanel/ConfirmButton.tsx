@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer, inject } from "mobx-react";
 import styles from './ConfirmButton.module.css';
-import IDiagram from '../../lib/game/Diagram/DiagramInterface';
+import IDiagram from '../../core/game/Diagram/DiagramInterface';
 
 type ControllerType = {
 	fire: () => void,

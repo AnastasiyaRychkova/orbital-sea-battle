@@ -10,7 +10,7 @@ import './components.css';
 import '../../style/colors.css';
 import '../../style/reset.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import achievements from '../../client/AchievementSystem';
+import achievements from '../../core/browser/AchievementSystem';
 
 achievements.receive( 60 );
 

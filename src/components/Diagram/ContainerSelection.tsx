@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import cn from 'classnames';
-import type { BoxType } from '../../lib/game/Diagram/DObjectState.d';
+import type { BoxType } from '../../core/game/Diagram/DObjectState';
 import styles from './diagram.module.css';
 
 import {

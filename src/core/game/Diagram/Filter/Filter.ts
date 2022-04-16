@@ -8,7 +8,7 @@ import type {
 	SpinQN,
 	QuantumNumbers,
 } from "../../Services/Chemistry";
-import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface.d";
+import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface";
 import type INote from "./NoteInterface";
 import CheckboxNote from "./CheckboxNote";
 import EventProvider from "../../../util/EventEmitter/EventProvider";
