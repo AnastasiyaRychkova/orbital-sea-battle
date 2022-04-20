@@ -1,9 +1,9 @@
 import Diagram, { IDiagram } from "../Diagram/Diagram";
 import Filter, { IFilter } from "../Diagram/Filter/Filter";
 import User, { IUserInitObj } from "../GameplayEntities/User";
-import AIPLayer, {InitializeObject as AIInitObj} from "./OB_AIPLayer";
+import OB_AIPLayer, {InitializeObject as AIInitObj} from "./OB_AIPLayer";
+import OB_AIPLayerBehaviour, {InitializeObject as AIBehaviourInitObj} from "./OB_AIPlayerBehaviour";
 import OB_IEnemy from "./OB_EnemyInterface";
-import OB_IGameState from "./OB_GameStateInterface";
 import OB_LocalPlayer, { OB_ILocalPlayer } from "./OB_LocalPlayer";
 import ShotsAnalyzer from "./OB_ShotsAnalyzer";
 
@@ -20,7 +20,12 @@ const entitiesFabric = {
 
 	aiPlayer( init: AIInitObj ): OB_IEnemy
 	{
-		return new AIPLayer( init );
+		return new OB_AIPLayer( init );
+	},
+
+	aiPlayerBehaviour( init: AIBehaviourInitObj ): OB_AIPLayerBehaviour
+	{
+		return new OB_AIPLayerBehaviour( init );
 	},
 
 	diagram( filter?: IFilter, highlight?: IFilter ): IDiagram
