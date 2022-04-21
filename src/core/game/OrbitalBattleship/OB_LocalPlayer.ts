@@ -127,6 +127,16 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 		return this.#diagram.fire( cell );
 	}
 
+		/**
+	 * Отметить выстрел, который совершил противник, по полю локального игрока
+	 * @param cell Координаты ячейки диаграммы противника, по которой игрок сделал выстрел
+	 * @param result Результат выстрела: попадание (true) или промах (false)
+	 */
+	markShotResult( cell: CellQN, result: boolean ): void
+	{
+		// TODO: ShotAnalyzer.markShot( cell, result );
+	}
+
 	/**
 	 * Этот элемент загадал?
 	 * @param elemNumber Периодический номер предполагаемого элемента

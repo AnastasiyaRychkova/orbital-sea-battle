@@ -308,6 +308,11 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 		return this.#context;
 	}
 
+	get deepestContext(): Context
+	{
+		return this.#current.context || this.#context[ this.#context.length - 1 ];
+	}
+
 	/** Глубина вложенности */
 	get depth(): number
 	{

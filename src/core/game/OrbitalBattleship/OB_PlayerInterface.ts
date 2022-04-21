@@ -1,3 +1,4 @@
+import type { CellQN } from '../Services/Chemistry';
 import type IDiagram from "../Diagram/DiagramInterface";
 
 interface OB_IPlayer
@@ -11,7 +12,12 @@ interface OB_IPlayer
 
 	setDiagram( diagram: IDiagram): void
 
-	// fireShot( cell: CellQN ): void
+		/**
+	 * Отметить выстрел, который совершил противник, по полю локального игрока
+	 * @param cell Координаты ячейки диаграммы противника, по которой игрок сделал выстрел
+	 * @param result Результат выстрела: попадание (true) или промах (false)
+	 */
+	markShotResult( cell: CellQN, result: boolean ): void;
 
 	isThisElementSelected( elemNumber: number ): boolean
 }

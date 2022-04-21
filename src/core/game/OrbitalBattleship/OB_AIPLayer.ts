@@ -83,6 +83,11 @@ class OB_AIPLayer implements OB_IEnemy
 		return shotResult;
 	}
 
+	markShotResult( cell: CellQN, result: boolean ): void
+	{
+		this.#shotsAnalyzer.markShot( cell, result );
+	}
+
 	markElementSelection(): void
 	{
 		if( this.#element )

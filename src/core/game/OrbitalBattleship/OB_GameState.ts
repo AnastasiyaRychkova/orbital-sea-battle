@@ -1,22 +1,41 @@
 import { IEventProvider } from "../../util/EventEmitter/EventProvider";
 import { ListenerFunc } from "../../util/EventEmitter/EventProviderInterface";
 import StateMachine, { IStateMachine, MachineActionType } from "../../util/StateMachine/StateMachine";
-import { OnDoneDataType, OnDoneFunction } from "../../util/StateMachine/StateMachineTypes";
-import OB_IGameState, {GSEvent, GSEventData} from "./OB_GameStateInterface";
-import { SState } from "./types";
+import { ActionFunction, OnDoneDataType, OnDoneFunction } from "../../util/StateMachine/StateMachineTypes";
+import { OB_IEnemy, OB_ILocalPlayer } from "./OB_EntitiesFabric";
+import OB_IGameState, {GSEvent,  GSEventData} from "./OB_GameStateInterface";
+import { ShootingContext, SState } from "./types";
 
 
 class GameState implements OB_IGameState
 {
-	#machine: IStateMachine<SState, string>
-	constructor()
+	#machine: IStateMachine<SState, string>;
+
+	#player: OB_ILocalPlayer;
+	#enemy: OB_IEnemy;
+
+
+	constructor( player: OB_ILocalPlayer, enemy: OB_IEnemy )
 	{
+		this.#player = player;
+		this.#enemy = enemy;
 		this.#machine = this._initStateMachine();
 	}
 
-	send( event: string ): void
+	send( event: string, context?: object ): void
 	{
+		if( context )
+			this._setEventContext( context );
 		this.#machine.send( event );
+	}
+
+	private _setEventContext( context: object ): void
+	{
+		const deepestContext = this.#machine.deepestContext as any;
+		for( const [key, value] of Object.entries( context ) )
+		{
+			deepestContext[ key ] = value;
+		}
 	}
 
 	get state(): SState
@@ -43,6 +62,18 @@ class GameState implements OB_IGameState
 			this.#machine.remove( 'changed', listener );
 		return this;
 	}
+
+	private _enemyShotHandler: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
+		const cell = (this.#machine.deepestContext as ShootingContext).enemyShot
+		if( !cell )
+			throw new Error("Enemy shot cell is not defined");
+
+		const result = this.#player.markEnemyShot( cell );
+		this.#enemy.markShotResult( cell, result );
+		(this.#machine.deepestContext as ShootingContext).enemyShot = undefined;
+	}
+
+
 
 	private _initStateMachine(): IStateMachine<SState, string>
 	{
@@ -172,7 +203,7 @@ class GameState implements OB_IGameState
 							},
 							enemy_waiting: {
 								on: {
-									shot: 'moving',
+									shot: { to: 'moving', do: this._enemyShotHandler },
 									name: 'end',
 								}
 							},

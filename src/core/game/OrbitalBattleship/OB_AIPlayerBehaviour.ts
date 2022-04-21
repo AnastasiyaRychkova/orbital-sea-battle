@@ -38,8 +38,11 @@ class OB_AIPLayerBehaviour
 
 	#gameState: SGameState;
 
+	/** Анализатор выстрелов, которые выполняет текущий игрок, 
+	 * исходя из результатов собственных выстрелов */
 	#shotsAnalyzer: ShotsAnalyzer;
 
+	/** Анализатор выстрелов по диаграмме текущего игрока. */
 	#enemyAnalyzer: {candidates: number};
 
 	#game: OB_IGameState;
@@ -180,8 +183,8 @@ class OB_AIPLayerBehaviour
 	}
 
 	private _makeShot(): void
-	{ // TODO: AI_Player -> _makeShot
-		throw new Error("Method not implemented.");
+	{
+		this.#game.send( 'shot', { enemyShot: this.#shotsAnalyzer.pickOutCell() } );
 	}
 
 

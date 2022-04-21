@@ -49,6 +49,7 @@ interface OB_ILocalPlayer extends IEventProvider<string, object>
 	 * Отметить выстрел соперника на диаграмме игрока.
 	 * Диаграмма инициирует событие `shot`.
 	 * @param cell Ячейка диаграммы, в которую стреляют
+	 * @returns Результат выстрела: попадание (true) или промах (false)
 	 */
 	markEnemyShot( cell: CellQN ): boolean
 

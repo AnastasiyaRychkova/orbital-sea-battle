@@ -8,7 +8,7 @@ import type {
 	QuantumNumbers,
 	MainQN,
 } from '../Services/Chemistry';
-import type { DEnvironment, SpinQNString } from "./DObjectState";
+import type { DEnvironment, SpinQNString } from "./DObjectState.d";
 import IFilter, { StoreKey } from "./Filter/FilterInterface";
 
 

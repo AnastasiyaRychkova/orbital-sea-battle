@@ -73,6 +73,9 @@ export interface IStateMachine<StateName extends string, EventName extends strin
 	 * где контекст корневого автомата находится в нулевой позиции массива */
 	context: Context[];
 
+	/** Объект контекста самого глубоко вложенного конечного автомата */
+	deepestContext: Context;
+
 	/** Глубина вложенности */
 	depth: number;
 

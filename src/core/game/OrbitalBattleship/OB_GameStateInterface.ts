@@ -8,7 +8,7 @@ export type GSEventData = {
 
 interface OB_IGameState extends IEventProvider<GSEvent, GSEventData>
 {
-	
+	send( event: string, context?: object ): void;
 }
 
 

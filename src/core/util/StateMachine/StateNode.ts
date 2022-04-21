@@ -10,6 +10,7 @@ import {
 	StateNodeConfig,
 	Transition,
 	IMachineNodeTesting,
+	Context,
 } from "./StateMachineTypes";
 
 class StateNode<SState extends string, SEvent extends string> implements IStateNode<SState, SEvent>, IStateNodeTesting
@@ -205,6 +206,11 @@ class StateNode<SState extends string, SEvent extends string> implements IStateN
 		return this.#invoke !== undefined
 				? ( this.#invoke as unknown as IMachineNodeTesting )._width + 1
 				: 1;
+	}
+
+	get context(): Context | undefined
+	{
+		return this.#invoke && this.#invoke.deepestContext;
 	}
 
 	/**

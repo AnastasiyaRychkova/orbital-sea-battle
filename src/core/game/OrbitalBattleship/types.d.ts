@@ -1,3 +1,4 @@
+import type { CellQN } from '../Services/Chemistry';
 
 export type SCompleteState = 'end';
 
@@ -40,3 +41,9 @@ export type SState = SPreparingState
 					| SGameState
 					| SGivingIn
 					| SCompleteState;
+
+
+export type ShootingContext = {
+	playerShot?: CellQN,
+	enemyShot?: CellQN,
+};

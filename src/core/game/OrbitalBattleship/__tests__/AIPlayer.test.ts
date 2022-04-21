@@ -7,28 +7,32 @@ describe( 'AI Player', () => {
 	const user = entities.user( {
 		name: 'John',
 	} );
-	const game = new GameState();
-	const diagram = entities.diagram();
+	const playerDiagram = entities.diagram();
+	const enemyDiagram = entities.diagram();
 	const analyzer = entities.shotsAnalyzer();
 	const enemyAnalyzer = entities.shotsAnalyzer();
-	const player = entities.aiPlayer( {user, analyzer} ) as OB_AIPLayer;
-	const ai = entities.aiPlayerBehaviour( {player, game, analyzer, enemyAnalyzer} );
+	const player = entities.localPlayer( user );
+	const enemy = entities.aiPlayer( {user, analyzer} ) as OB_AIPLayer;
+	const game = new GameState( player, enemy );
+	const ai = entities.aiPlayerBehaviour( {player: enemy, game, analyzer, enemyAnalyzer} );
 
 	const randomFunc = Math.random;
 
+
+	player.setDiagram( playerDiagram );
 
 
 	test( 'element selection when game state become Choice', () => {
 		jest.useFakeTimers();
 		game.send( 'start' );
 		expect( ai.hasSelectedElement ).toBeFalsy();
-		expect( player.hasSelectedElement ).toBeFalsy();
+		expect( enemy.hasSelectedElement ).toBeFalsy();
 		expect( ai._state ).toBe( 'selecting' );
 
 		jest.runAllTimers();
 		expect( ai._state ).toBe( 'waiting' );
 		expect( ai.hasSelectedElement ).toBeTruthy();
-		expect( player.hasSelectedElement ).toBeTruthy();
+		expect( enemy.hasSelectedElement ).toBeTruthy();
 	} );
 
 	test( 'filling out the diagram', () => {
@@ -37,33 +41,42 @@ describe( 'AI Player', () => {
 		game.send( 'start' );
 
 		expect( game.state ).toBe( 'diagram' );
-		expect( player.hasFilled ).toBeFalsy();
+		expect( enemy.hasFilled ).toBeFalsy();
 		expect( ai._state ).toBe( 'filling' );
 
 		jest.runAllTimers();
 
 		expect( ai._state ).toBe( 'waiting' );
-		expect( player.hasFilled ).toBeTruthy();
+		expect( enemy.hasFilled ).toBeTruthy();
 	} );
 
 	test( 'mark player shot', () => {
 		game.send( 'ready' );
-		ai.setDiagram( diagram );
+		ai.setDiagram( enemyDiagram );
 		game.send( 'ready' );
 
 		const cellQN = Chemistry.cell( {n: 5, l: 'd', m: 2, s: 1} );
-		player.markEnemyShot( cellQN ).then( (result: boolean ) => {
-			expect( diagram.hasSpin( cellQN ) ).toBe( result );
-			expect( diagram.observableState.isDamaged( cellQN ) ).toBeTruthy();
+		enemy.markEnemyShot( cellQN ).then( (result: boolean ) => {
+			expect( enemyDiagram.hasSpin( cellQN ) ).toBe( result );
+			expect( enemyDiagram.observableState.isDamaged( cellQN ) ).toBeTruthy();
 		} );
 	} );
 
-/* 	test( 'making a shot', () => {
+	test( 'making a shot', () => {
 		jest.useFakeTimers();
 		Math.random = () => 1;
-		game.send( 'enemy_turn' );
-		jest.runAllTimers();
+		const diagramFire = jest.fn( () => {} );
+		playerDiagram.once( 'shot', diagramFire );
 
-	} ); */
+		game.send( 'enemy_turn' );
+
+		expect( game.state ).toBe( 'enemy_waiting' );
+		jest.runAllTimers();
+		
+		expect( game.state ).toBe( 'moving' );
+		expect( diagramFire.mock.calls.length ).toBe( 1 );
+
+		Math.random = randomFunc;
+	} );
 
 } );

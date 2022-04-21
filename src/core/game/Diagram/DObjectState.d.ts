@@ -53,4 +53,6 @@ export type StateType = {
 	getBlock( qn: BlockQN ): BlockType | undefined,
 	getCell( qn: CellQN ): Cell | undefined,
 	doesSpecifyCell: boolean,
+	hasSpin( cell: CellQN ): boolean,
+	isDamaged( qn: CellQN ): boolean,
 }
