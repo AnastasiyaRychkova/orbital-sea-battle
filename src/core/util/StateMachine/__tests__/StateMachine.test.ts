@@ -27,7 +27,7 @@ describe( 'Simple State Machine', () => {
 						machine: MachineActionType<string>
 					) => {
 						testedStr += 'sAo_';
-						machine.context.str += machine.state;
+						(machine.context[0] as any).str += machine.state;
 					},
 			},
 			'B': {
@@ -79,7 +79,7 @@ describe( 'Simple State Machine', () => {
 	} );
 
 	test( 'context object in state machine is available', () => {
-		expect( machine.context.hasOwnProperty( 'str' ) ).toBeTruthy();
+		expect( machine.context[0].hasOwnProperty( 'str' ) ).toBeTruthy();
 	} );
 
 	test( 'transitions between states', () => {
@@ -92,7 +92,7 @@ describe( 'Simple State Machine', () => {
 	} );
 
 	test( 'context object and state name is available inside transition function', () => {
-		expect( (machine.context as Context).str ).toBe( '_A' );
+		expect( (machine.context[0] as any).str ).toBe( '_A' );
 	} );
 
 	test( 'delayed transition', () => {
@@ -229,12 +229,12 @@ describe( 'Nested State Machine', () => {
 											12: 'CGK',
 										},
 										entry: ( machine: MachineActionType<string> ) => {
-											testedStr = machine.context.name;
-											const m2 = machine.context.parent;
+											testedStr = (machine.context[2] as any).name;
+											const m2 = machine.context[1] as any;
 											if( m2 )
 											{
 												testedStr += m2.name;
-												const m1 = m2.parent;
+												const m1 = machine.context[0] as any;
 												if( m1 )
 													testedStr += m1.name;
 											}

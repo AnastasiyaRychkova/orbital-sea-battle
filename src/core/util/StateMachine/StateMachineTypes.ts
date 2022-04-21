@@ -18,13 +18,11 @@ export const TERMINAL = '__END__'
 =             State Machine Types             =
 =============================================*/
 
-export type Context = {
-	parent?: Context,
-} & any;
+export type Context = object;
 
 export type OnDoneDataType<StateName extends string> = {
 	state: StateName,
-	context: Context,
+	context: Context[],
 };
 
 export type MachineActionType<StateName extends string> = {
@@ -71,8 +69,9 @@ export interface IStateMachine<StateName extends string, EventName extends strin
 	/** Цепочка текущих состояний вложенных автоматов */
 	statesChain: StateName[];
 
-	/** Объект контекста */
-	context: Context;
+	/** Массив из объектов контекстов в порядке вложенности,
+	 * где контекст корневого автомата находится в нулевой позиции массива */
+	context: Context[];
 
 	/** Глубина вложенности */
 	depth: number;

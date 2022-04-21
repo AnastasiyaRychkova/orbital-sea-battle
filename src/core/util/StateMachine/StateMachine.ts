@@ -51,7 +51,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	#exit?: ActionFunction<SState>;
 
 	/** Контекстный-объект передаваемый в во все состояния */
-	#context: Context;
+	#context: Context[];
 
 	/** Является ли конечной автомат вложенным */
 	#isRoot: boolean;
@@ -122,12 +122,16 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 		return new StateNode( stateName, config, this );
 	}
 
-	private _createContext( context: object, parentMachine?: StateMachine<SState, SEvent> ): Context
+
+	private _createContext( context: object, parentMachine?: StateMachine<SState, SEvent> ): Context[]
 	{
-		return {
-			...context,
-			parent: parentMachine?.context
-		};
+		const machineContext: Context[] = [];
+		if( parentMachine )
+		{
+			machineContext.push( ...parentMachine.context );
+		}
+		machineContext.push( context );
+		return machineContext;
 	}
 
 
@@ -185,7 +189,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 		try {
 			action( {
 				state: this.state, 
-				context: this.#context, 
+				context: this.#context,
 				complete: this.complete,
 			} );
 		}
@@ -299,7 +303,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	}
 
 	/** Объект, передаваемый во все функции */
-	get context(): Object
+	get context(): Context[]
 	{
 		return this.#context;
 	}
