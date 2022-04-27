@@ -36,7 +36,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	#current!: StateNode<SState, SEvent>;
 
 	/** Работает ли машина или она уже завершила свое выполнение */
-	#complete: boolean;
+	#completed: boolean;
 
 	/** Название начального состояния */
 	#initial: SState;
@@ -60,7 +60,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	constructor( config: MachineConfig<SState, SEvent>, parent?: StateMachine<SState, SEvent> )
 	{
 		super();
-		this.#complete = false;
+		this.#completed = false;
 		this.#initial = config.initial;
 		this.#onDone = config.onDone;
 		this.#entry = config.entry;
@@ -208,7 +208,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	 */
 	send( event: SEvent ): boolean
 	{
-		if( this.#complete )
+		if( this.#completed )
 			return false;
 		
 		const wasTransitionInNestedMachine: boolean = this.#current.send( event );
@@ -228,13 +228,19 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 		return true;
 	}
 
+	/** Есть ли переход по передаваемому событию для текущего состояния */
+	hasEvent( event: SEvent ): boolean
+	{
+		return this.#current.hasEvent( event );
+	}
+
 	/** 
 	 * Запустить отложенный переход, даже если время еще не истекло
 	 * @returns Был ли переход
 	 */
 	runDelayedTransition(): boolean
 	{
-		if( this.#complete )
+		if( this.#completed )
 			return false;
 
 		return this._runMachineDelayedTransition();
@@ -253,7 +259,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	/** Запустить отложенный переход на всех уровнях вложенности */
 	runAllDelayedTransitions(): boolean
 	{
-		if( this.#complete )
+		if( this.#completed )
 			return false;
 
 		const wasDelay = this._runMachineDelayedTransition();
@@ -270,14 +276,14 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	 */
 	complete(): void
 	{
-		if( this.#complete )
+		if( this.#completed )
 			return;
 
 		this.#current.complete();
 		this._callActionFunction( this.#exit );
 
 		this._emit( 'completed', { state: this.statesChain } );
-		this.#complete = true;
+		this.#completed = true;
 	}
 
 	/** 
@@ -297,9 +303,9 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	}
 
 	/** Завершена ли работа конечного автомата */
-	get isComplete(): boolean
+	get isCompleted(): boolean
 	{
-		return this.#complete;
+		return this.#completed;
 	}
 
 	/** Объект, передаваемый во все функции */
@@ -335,7 +341,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 	/** Цепочка текущих состояний вложенных автоматов */
 	get statesChain(): SState[]
 	{
-		return this.#complete
+		return this.#completed
 				? []
 				: this.#current.statesChain;
 	}

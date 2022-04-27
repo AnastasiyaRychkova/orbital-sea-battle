@@ -51,6 +51,9 @@ export interface IStateMachine<StateName extends string, EventName extends strin
 	/** Инициировать событие в данном конечном автомате */
 	send: ( event: EventName ) => boolean;
 
+	/** Есть ли переход по передаваемому событию для текущего состояния */
+	hasEvent( event: EventName ): boolean;
+
 	/** Завершить работу конечного автомата */
 	complete: () => void;
 
@@ -61,7 +64,7 @@ export interface IStateMachine<StateName extends string, EventName extends strin
 	runAllDelayedTransitions(): boolean;
 
 	/** Завершена ли работа конечного автомата */
-	isComplete: boolean;
+	isCompleted: boolean;
 
 	/** Текущее состояние */
 	state: StateName;
@@ -133,6 +136,9 @@ export interface IStateNode<StateName extends string, EventName extends string>
 	 * @param event Название события описанного непосредственно внутри состояния
 	 */
 	transition( event: EventName ): Transition<StateName> | undefined;
+
+	/** Есть ли переход для самого состояния или во вложенном автомате */
+	hasEvent( event: EventName ): boolean;
 
 	/** Описание отложенного перехода */
 	delayedTransition: Transition<StateName> | undefined;

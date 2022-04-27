@@ -105,7 +105,7 @@ describe( 'Simple State Machine', () => {
 
 	test( 'completing state machine work', () => {
 		machine.send( 'complete' );
-		expect( machine.isComplete ).toBeTruthy();
+		expect( machine.isCompleted ).toBeTruthy();
 	} );
 
 	test( 'state machine call exit function', () => {
@@ -132,7 +132,7 @@ describe( 'Nested State Machine', () => {
 		states: {
 			'A': {
 				on: {
-					1: {
+					'1': {
 						to: 'B',
 						do: () => { testedStr += 'tA1_' }
 					},
@@ -144,7 +144,7 @@ describe( 'Nested State Machine', () => {
 					states: {
 						AC: {
 							on: {
-								3: {
+								'AC.3': {
 									to: 'AD',
 									do: () => { testedStr += 'tAC3_' }
 								},
@@ -154,12 +154,12 @@ describe( 'Nested State Machine', () => {
 						},
 						AD: {
 							on: {
-								1: {
+								'1': {
 									to: 'AD',
 									do: () => { testedStr += 'tAD1_' }
 								},
-								4: 'AC',
-								8: {
+								'AD.4': 'AC',
+								'AD.8': {
 									to: 'AD',
 									do: ( machine: MachineActionType<string> ) => { machine.complete() }
 								}
@@ -174,7 +174,7 @@ describe( 'Nested State Machine', () => {
 			},
 			'B': {
 				on: {
-					2: 'C',
+					'B.2': 'C',
 				},
 				invoke: () => ({
 					initial: 'BE',
@@ -183,8 +183,8 @@ describe( 'Nested State Machine', () => {
 					states: {
 						BE: {
 							on: {
-								5: 'BF',
-								6: {
+								'BE.5': 'BF',
+								'BE.6': {
 									to: 'BF',
 									do: ( machine: MachineActionType<string> ) => { machine.complete() },
 								}
@@ -194,14 +194,18 @@ describe( 'Nested State Machine', () => {
 						},
 						BF: {}
 					},
-					onDone: '2',
+					onDone: 'B.2',
 				}),
 				entry: () => { testedStr += 'sBi_' },
 				exit: () => { testedStr += 'sBo_' },
 			},
 			'C': {
 				on: {
-					7: 'D',
+					'C.7': { to: 'D', do: () => { 
+						testedStr += machine.hasEvent( 'CG.9' ) ? '1' : '0'; 
+						testedStr += machine.hasEvent( 'C.7' ) ? '1' : '0'; 
+						testedStr += machine.hasEvent( 'D.14' ) ? '1' : '0'; 
+					} },
 				},
 				invoke: {
 					initial: 'CG',
@@ -211,7 +215,7 @@ describe( 'Nested State Machine', () => {
 					states: {
 						CG: {
 							on: {
-								9: 'CH',
+								"CG.9": 'CH',
 							},
 							delay: {
 								to: 'CH',
@@ -225,8 +229,8 @@ describe( 'Nested State Machine', () => {
 								states: {
 									CGI: {
 										on: {
-											11: 'CGJ',
-											12: 'CGK',
+											'CGI.11': 'CGJ',
+											'CGI.12': 'CGK',
 										},
 										entry: ( machine: MachineActionType<string> ) => {
 											testedStr = (machine.context[2] as any).name;
@@ -252,7 +256,7 @@ describe( 'Nested State Machine', () => {
 						},
 						CH: {
 							on: {
-								10: 'CG'
+								'CH.10': 'CG'
 							}
 						}
 					}
@@ -260,30 +264,35 @@ describe( 'Nested State Machine', () => {
 			},
 			'D': {
 				on: {
-					13: 'A',
-					14: 'C',
-					15: 'D',
+					'D.13': 'A',
+					'D.14': 'C',
+					'D.15': 'D',
 				}
 			}
 		}
 	} );
 
+	// * --> AC
 	test( 'Nested machine creation', () => {
 		expect( machine.state ).toBe( 'AC' );
 		expect( testedStr ).toBe( 'mi_sAi_mAi_sACi_' );
 	} );
 
+	// AC --(AC.3)--> AD
 	test( 'transition inside nested machine', () => {
-		machine.send( '3' );
+		machine.send( 'AC.3' );
 		expect( machine.state ).toBe( 'AD' );
 		expect( testedStr ).toBe( 'sACo_tAC3_sADi_' );
 	} );
 
+	// AD
 	test( 'not valid event', () => {
+		expect( machine.hasEvent( 'error' ) ).toBeFalsy();
 		expect( machine.send( 'error' ) ).toBeFalsy();
 		expect( machine.state ).toBe( 'AD' );
 	} );
 
+	// AD --(AD.1)--> AD
 	test( 'repeated event names at different nesting levels', () => {
 		expect( machine.send( '1' ) ).toBeTruthy();
 		expect( machine.state ).toBe( 'AD' );
@@ -294,49 +303,65 @@ describe( 'Nested State Machine', () => {
 		expect( machine.depth ).toBe( 2 );
 	} );
 
+	// AD --(AD.8)-->>A[x]
 	test( 'complete nested machine without auto transition', () => {
-		expect( machine.send( '8' ) ).toBeTruthy();
+		expect( machine.send( 'AD.8' ) ).toBeTruthy();
 		expect( machine.state ).toBe( 'A' );
 		expect( machine.depth ).toBe( 1 );
 	} );
 
+	// A --(A.1)--> B>>-> BE
+	// BE --(BE.6)-->>B[x]>>->(B.2)--> C>>->CG>>->CGI
 	test( 'complete nested machine with auto transition', () => {
 		machine.send( '1' );
 		expect( machine.state ).toBe( 'BE' );
 		expect( ( machine as unknown as IMachineNodeTesting )._width ).toBe( 6 );
 
-		machine.send( '6' );
+		machine.send( 'BE.6' );
 		expect( machine.state ).toBe( 'CGI' );
 		expect( ( machine as unknown as IMachineNodeTesting )._width ).toBe( 9 );
 	} );
 
 	test( 'nested context objects', () => {
 		expect( testedStr ).toBe( 'M3cg_M2c_M1_' )
+	} );
+
+	test( 'checking available transitions', () => {
+		expect( machine.hasEvent( 'CGI.12' ) ).toBeTruthy();
+		expect( machine.hasEvent( 'CG.9' ) ).toBeTruthy();
+		expect( machine.hasEvent( 'C.7' ) ).toBeTruthy();
+		expect( machine.hasEvent( 'CH.10' ) ).toBeFalsy();
 	} )
 
+	// CGI --(CGI.11)--> CGJ
 	test( 'empty state', () => {
-		machine.send( '11' );
+		machine.send( 'CGI.11' );
 		expect( machine.state ).toBe( 'CGJ' );
 	} );
 
+	// CGJ --(C.7)-->>CG[x]>>->>C[x]>>-> D
 	test( 'deleting nested machines with transition', () => {
-		machine.send( '7' );
+		testedStr = '';
+		machine.send( 'C.7' );
 		expect( machine.state ).toBe( 'D' );
 		expect( ( machine as unknown as IMachineNodeTesting )._width ).toBe( 4 );
+		expect( testedStr ).toBe( '001' );
 	} );
 
 	test( 'states chain consists only one state', () => {
 		expect( machine.statesChain ).toHaveLength( 1 );
-	} )
+	} );
 
+	// D --(D.14)--> C>>->CG>>->CGI
+	// CGI --(CGI.12)--> CGK
 	test( 'state changing event listening', () => {
-		machine.send( '14' );
+		machine.send( 'D.14' );
 		testedStr = '';
 		const listener = ( data: EventData<string> ) => {
 			testedStr += data.detail.state.join( '_' );
 		};
 		machine.once( 'changed', listener );
-		machine.send( '12' );
+		machine.send( 'CGI.12' );
 
 		expect( testedStr ).toBe( 'C_CG_CGK' );
 

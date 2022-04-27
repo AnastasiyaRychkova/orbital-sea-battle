@@ -181,7 +181,7 @@ class StateNode<SState extends string, SEvent extends string> implements IStateN
 			return false;
 
 		const wasTransition: boolean = this.#invoke.send( event );
-		if( wasTransition && this.#invoke.isComplete )
+		if( wasTransition && this.#invoke.isCompleted )
 		{
 			const onDoneEvent = this.#invoke.onDone;
 			if( onDoneEvent )
@@ -190,6 +190,17 @@ class StateNode<SState extends string, SEvent extends string> implements IStateN
 		}
 
 		return wasTransition;
+	}
+
+	/** Есть ли переход для самого состояния или во вложенном автомате */
+	hasEvent( event: SEvent ): boolean
+	{
+		return this.transition( event ) !== undefined ||
+				(this.#invoke !== undefined
+				&& !this.#invoke.isCompleted
+				&& this.#invoke.hasEvent( event )
+				);
+		
 	}
 
 	/** Глубина вложенности */
@@ -255,9 +266,9 @@ class StateNode<SState extends string, SEvent extends string> implements IStateN
 	{
 		if( !this.#invoke )
 			return;
-		if( this.#invoke.isComplete )
+		if( this.#invoke.isCompleted )
 		{
-			if( !this.#parent.isComplete )
+			if( !this.#parent.isCompleted )
 			{
 				const onDoneEvent = this.#invoke.onDone;
 				if( onDoneEvent )
