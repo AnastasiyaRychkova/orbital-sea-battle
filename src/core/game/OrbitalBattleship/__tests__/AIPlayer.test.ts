@@ -11,8 +11,8 @@ describe( 'AI Player', () => {
 	const enemyDiagram = entities.diagram();
 	const analyzer = entities.shotsAnalyzer();
 	const enemyAnalyzer = entities.shotsAnalyzer();
-	const player = entities.localPlayer( user );
-	const enemy = entities.aiPlayer( {user, analyzer} ) as OB_AIPLayer;
+	const player = entities.localPlayer( { user, analyzer } );
+	const enemy = entities.aiPlayer( { user, analyzer: enemyAnalyzer } ) as OB_AIPLayer;
 	const game = new GameState( player, enemy );
 	const ai = entities.aiPlayerBehaviour( {player: enemy, game, analyzer, enemyAnalyzer} );
 
@@ -78,5 +78,41 @@ describe( 'AI Player', () => {
 
 		Math.random = randomFunc;
 	} );
+
+	test( 'during the game player results are not available', () => {
+		expect( enemy.getResults() ).toBeUndefined();
+	} );
+
+	test( 'local player shot (game state machine testing)', () => {
+		jest.useFakeTimers();
+		const diagramFireFn = jest.fn( () => {} );
+		enemyDiagram.once( 'shot', diagramFireFn );
+
+		game.send( 'shot', {shot: Chemistry.cell( {n: 1, l: 's', m: 0, s: 1} )} );
+		expect( diagramFireFn.mock.calls.length ).toBe( 1 );
+
+	} );
+
+	test( "naming element", () => {
+		jest.useFakeTimers();
+		Math.random = () => 0;
+		expect( game.isOver ).toBeFalsy();
+		expect( game.state ).toBe( 'result_waiting' );
+		jest.runAllTimers();
+		/* 
+		Переход из results_waiting в enemy_waiting происходит внутри отдельной макрозадачи. После этого запускается таймер. По истечении времени решается: стрелять или называть элемент. Вычисляется вероятность и если Math.random() меньше полученной вероятности, то называется элемент (при random = 0 всегда называется элемент). 
+		 */
+		expect( game.state ).toBe( 'final' );
+		expect( game.isOver ).toBeTruthy();
+
+		Math.random = randomFunc;
+	} );
+
+	test( 'getting player game results', () => {
+		const results = enemy.getResults();
+		expect( results ).not.toBeUndefined();
+		expect( results!.steps ).toBe( 1 );
+		expect( player.getResults() ).not.toBeUndefined();
+	} )
 
 } );

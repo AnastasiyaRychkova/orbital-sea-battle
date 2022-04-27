@@ -743,6 +743,11 @@ const periodicTable = {
 		return periodicTableElements[ number - 1 ];
 	},
 
+	random(): ChemicalElement
+	{
+		return periodicTableElements[ Math.round( this.MAX_ELEM_NUMBER * Math.random() ) ];
+	},
+
 	/**
 	 * @deprecated Используется в `DiagramStatic`, который также нужно удалить
 	 */

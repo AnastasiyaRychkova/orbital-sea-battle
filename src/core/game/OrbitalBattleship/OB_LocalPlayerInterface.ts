@@ -1,13 +1,15 @@
-import type { BlockQN, CellQN } from '../Services/Chemistry';
+import type { BlockQN, CellQN, ChemicalElement } from '../Services/Chemistry';
 import type IEventProvider from "../../util/EventEmitter/EventProvider";
-import IDiagram from "../Diagram/DiagramInterface";
+import type IDiagram from "../Diagram/DiagramInterface";
+import type { PlayerResults } from './OB_Player'
+
 
 interface OB_ILocalPlayer extends IEventProvider<string, object>
 {
 	/** Порядковый номер химического элемента. 
 	 * Пока не выбран, равен `0`.
 	*/
-	selectedElement: number;
+	selectedElement: ChemicalElement | null;
 
 	/**
 	 * Загадать элемент для игры
@@ -54,11 +56,33 @@ interface OB_ILocalPlayer extends IEventProvider<string, object>
 	markEnemyShot( cell: CellQN ): boolean
 
 	/**
+	 * Отметить выстрел, который совершил противник, по полю локального игрока
+	 * @param cell Координаты ячейки диаграммы противника, по которой игрок сделал выстрел
+	 * @param result Результат выстрела: попадание (true) или промах (false)
+	 */
+	markShotResult( cell: CellQN, result: boolean ): void;
+
+	/**
 	 * Этот элемент загадал?
 	 * @param elemNumber Периодический номер предполагаемого элемента
 	 * @returns Этот ли элемент загадал игрок
 	 */
-	isThisElementSelected( elemNumber: number ): boolean
+	isThisElementSelected( elemNumber: number ): boolean;
+
+	/**
+	 * Завершить играть. После этого метод получения загаданного элемента вместо undefined
+	 * возвращает само значение, а остальные игровые методы перестают работать.
+	 * Можно вызвать только 1 раз за всю жизнь объекта.
+	 */
+	finishGame(): void;
+
+
+	/**
+	  * Результаты игры.
+	  * 
+	  * Возвращает объект только после вызова `finishGame`
+	  */
+	getResults(): PlayerResults | undefined;
 }
 
 

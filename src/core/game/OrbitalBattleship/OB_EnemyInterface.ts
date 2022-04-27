@@ -1,6 +1,12 @@
 import { CellQN } from "../Services/Chemistry";
 import IDiagram from "../Diagram/DiagramInterface";
 
+export type PlayerResults = {
+	elemNumber: number,
+	steps: number,
+	certainty: number,
+};
+
 interface OB_IEnemy
 {
 	/**
@@ -42,7 +48,20 @@ interface OB_IEnemy
 	 */
 	setDiagram( diagram: IDiagram): void;
 
+	/**
+	 * Завершить играть. После этого метод получения загаданного элемента вместо undefined
+	 * возвращает само значение, а остальные игровые методы перестают работать.
+	 * Можно вызвать только 1 раз за всю жизнь объекта.
+	 */
+	finishGame(): void;
 
+
+	/**
+	 * Результаты игры.
+	 * 
+	 * Возвращает объект только после вызова `finishGame`
+	 */
+	getResults(): PlayerResults | undefined;
 }
 
 

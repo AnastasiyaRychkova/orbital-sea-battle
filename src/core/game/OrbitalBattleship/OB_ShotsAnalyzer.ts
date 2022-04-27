@@ -19,12 +19,15 @@ class ShotsAnalyzer
 	/** Индексы элемента, которые точно не определены по карте выстрелов */
 	#indefiniteIndexes: number[];
 
+	#shotsCounter: number;
+
 
 
 	constructor()
 	{
 		this.#candidates = periodicTable.asArray();
 		this.#indefiniteIndexes = this._initIndefiniteIndexes();
+		this.#shotsCounter = 0;
 	}
 
 	private _initIndefiniteIndexes(): number[]
@@ -41,6 +44,7 @@ class ShotsAnalyzer
 		if( !index )
 			return;
 		this._update( index, result );
+		this.#shotsCounter++;
 	}
 
 	private _getIndex( qn: CellQN ): CellIndex | undefined
@@ -90,6 +94,18 @@ class ShotsAnalyzer
 	get undefinedCells(): number
 	{
 		return this.#indefiniteIndexes.length;
+	}
+
+	/** Вероятность отгадать элемент */
+	get certainty(): number
+	{
+		return 1 / this.#candidates.length;
+	}
+
+	/** Количество учтенных выстрелов */
+	get shots(): number
+	{
+		return this.#shotsCounter;
 	}
 
 	/**

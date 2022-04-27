@@ -1,57 +1,37 @@
-import { CellQN, ChemicalElement, periodicTable } from '../Services/Chemistry';
-import type {User, ShotsAnalyzer, IDiagram, OB_IEnemy} from "./OB_EntitiesFabric";
-
-export type InitializeObject = {
-	user: User,
-	analyzer: ShotsAnalyzer,
-};
+import { CellQN, periodicTable } from '../Services/Chemistry';
+import OB_IEnemy from "./OB_EnemyInterface";
+import OB_Player, { InitializeObject } from './OB_Player';
 
 
-class OB_AIPLayer implements OB_IEnemy
+class OB_AIPLayer extends OB_Player implements OB_IEnemy
 {
-	#user: User;
-
-	/**
-	 * Химический элемент. 
-	 * Пока не выбран, равен `null`.
-	*/
-	#element: ChemicalElement | null;
-
 	#hasFilled: boolean;
 
-	#diagram?: IDiagram;
-
-	#shotsAnalyzer: ShotsAnalyzer;
+	#steps: number;
 	
 	constructor( init: InitializeObject )
 	{
-		this.#user = init.user;
-		this.#element = null;
+		super( init );
 		this.#hasFilled = false;
-		this.#shotsAnalyzer = init.analyzer;
+		this.#steps = 0;
 	}
 
-	
-	isThisElementSelected(elemNumber: number): Promise<boolean> {
-		throw new Error("Method not implemented.");
+	/**
+	 * Спросить, переданный ли элемент загадал игрок
+	 * @param elemNumber Номер предполагаемого элемента
+	 */
+	isThisElementSelected( elemNumber: number ): Promise<boolean>
+	{
+		if( !this.element )
+			return new Promise( resolve => resolve(false) );
+
+		return new Promise( resolve => resolve( this.element!.number === elemNumber ) );
 	}
 
 	/** Выбран ли какой-то элемент */
 	get hasSelectedElement(): boolean
 	{
-		return this.#element !== null;
-	}
-
-	/**
-	 * Установка объекта состояния диаграммы снаружи класса.
-	 * Позволяет установить тот экземпляр класса,
-	 * который подходит для пользовательского интерфейса,
-	 * что делает LocalPlayer независимым от интерфейса.
-	 * @param diagram Диаграмма
-	 */
-	setDiagram( diagram: IDiagram ): void
-	{
-		this.#diagram = diagram;
+		return this.element !== null;
 	}
 
 	/** Заполнена ли правильно диаграмма */
@@ -66,7 +46,7 @@ class OB_AIPLayer implements OB_IEnemy
 	 */
 	async markEnemyShot( cell: CellQN ): Promise<boolean>
 	{
-		if( !this.#element )
+		if( !this.element )
 			return false;
 
 		const index = periodicTable.converter.toIndex( cell );
@@ -74,39 +54,29 @@ class OB_AIPLayer implements OB_IEnemy
 			return false;
 
 
-		const shotResult = this.#element.config.hasSpin( index );
+		const shotResult = this.element.config.hasSpin( index );
 		if( shotResult )
-			this.#diagram?.setSpin( cell, true );
-		this.#diagram?.fire( cell );
-		this.#shotsAnalyzer.markShot( cell, shotResult );
+			this.diagram?.setSpin( cell, true );
+		this.diagram?.fire( cell );
 
 		return shotResult;
 	}
 
-	markShotResult( cell: CellQN, result: boolean ): void
-	{
-		this.#shotsAnalyzer.markShot( cell, result );
-	}
-
 	markElementSelection(): void
 	{
-		if( this.#element )
+		if( this.element )
 			return;
 
-		this.#element = periodicTable.element( Math.round( randomInRange( 1, periodicTable.MAX_ELEM_NUMBER ) ) );
+		this.element = periodicTable.random();
 	}
 
 	markDiagramFilling(): void
 	{
 		this.#hasFilled = true;
 	}
+
 }
 
-
-function randomInRange( from: number, to: number ): number
-{
-	return (to - from) * Math.random() + from;
-}
 
 
 

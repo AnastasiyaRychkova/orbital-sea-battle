@@ -1,7 +1,7 @@
 import StateMachine, { IStateMachine } from "../../util/StateMachine/StateMachine";
-import OB_IGameState, { GSEventData } from "./OB_GameStateInterface";
+import OB_IGameState, { GSEventData, GSStateChanging } from "./OB_GameStateInterface";
 import type {ShotsAnalyzer, IDiagram, OB_IEnemy} from "./OB_EntitiesFabric";
-import type { SGameState } from "./types";
+import type { NamingContext, SGameState, ShootingContext } from "./types";
 
 export type InitializeObject = {
 	player: OB_IEnemy,
@@ -82,11 +82,11 @@ class OB_AIPLayerBehaviour
 	/** Слушатель изменений состояния игры */
 	private _gameStateChangeHandler( data: {detail: GSEventData} ): void
 	{
-		const statesChain = data.detail.state;
+		const statesChain = (data.detail as GSStateChanging).state;
 		this.#gameState = statesChain[0] as SGameState;
 
-		if( statesChain[2] === 'choice' && !this.#elementSelected ) // выбор элемента
-		{
+		if( statesChain[2] === 'choice' && !this.#elementSelected ) { // Выбор элемента
+
 			this.#behaviour.send( 'select' );
 		}
 		else if( statesChain[2] === 'diagram' && !this.#hasFilled ) // Заполнение диаграммы
@@ -152,7 +152,7 @@ class OB_AIPLayerBehaviour
 	private _fillOutDiagram(): void
 	{
 		if( this.#gameState === 'preparing' )
-		{
+		{	``
 			this.#hasFilled = true;
 			this.#player.markDiagramFilling();
 		}
@@ -178,13 +178,24 @@ class OB_AIPLayerBehaviour
 	}
 
 	private _nameElement(): void
-	{ // TODO: AI_Player -> _nameElement
-		throw new Error("Method not implemented.");
+	{
+		this.#game.send(
+			'name',
+			{
+				namedElemNumber: this.#shotsAnalyzer.pickOutElement()?.number,
+				target: this.#player,
+			} as NamingContext
+		);
 	}
 
 	private _makeShot(): void
 	{
-		this.#game.send( 'shot', { enemyShot: this.#shotsAnalyzer.pickOutCell() } );
+		this.#game.send(
+			'shot',
+			{
+				shot: this.#shotsAnalyzer.pickOutCell()
+			} as ShootingContext
+		);
 	}
 
 

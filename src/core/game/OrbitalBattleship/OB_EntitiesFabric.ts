@@ -1,11 +1,12 @@
 import Diagram, { IDiagram } from "../Diagram/Diagram";
 import Filter, { IFilter } from "../Diagram/Filter/Filter";
 import User, { IUserInitObj } from "../GameplayEntities/User";
-import OB_AIPLayer, {InitializeObject as AIInitObj} from "./OB_AIPLayer";
+import OB_AIPLayer from "./OB_AIPLayer";
 import OB_AIPLayerBehaviour, {InitializeObject as AIBehaviourInitObj} from "./OB_AIPlayerBehaviour";
 import OB_IEnemy from "./OB_EnemyInterface";
 import OB_LocalPlayer, { OB_ILocalPlayer } from "./OB_LocalPlayer";
 import ShotsAnalyzer from "./OB_ShotsAnalyzer";
+import type { InitializeObject as PlayerInitObj } from "./OB_Player";
 
 const entitiesFabric = {
 	user( initObject: IUserInitObj ): User
@@ -13,12 +14,12 @@ const entitiesFabric = {
 		return new User( initObject );
 	},
 
-	localPlayer( user: User ): OB_ILocalPlayer
+	localPlayer( init: PlayerInitObj ): OB_ILocalPlayer
 	{
-		return new OB_LocalPlayer( user );
+		return new OB_LocalPlayer( init );
 	},
 
-	aiPlayer( init: AIInitObj ): OB_IEnemy
+	aiPlayer( init: PlayerInitObj ): OB_IEnemy
 	{
 		return new OB_AIPLayer( init );
 	},

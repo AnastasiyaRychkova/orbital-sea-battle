@@ -1,4 +1,6 @@
 import type { CellQN } from '../Services/Chemistry';
+import OB_IEnemy from './OB_EnemyInterface';
+import OB_ILocalPlayer from './OB_LocalPlayerInterface';
 
 export type SCompleteState = 'end';
 
@@ -44,6 +46,10 @@ export type SState = SPreparingState
 
 
 export type ShootingContext = {
-	playerShot?: CellQN,
-	enemyShot?: CellQN,
+	shot?: CellQN,
+};
+
+export type NamingContext = {
+	namedElemNumber: number,
+	target: OB_ILocalPlayer | OB_IEnemy,
 };

@@ -22,7 +22,7 @@ describe( 'LocalPlayer', () => {
 
 		player.selectElement( 14 );
 
-		expect( player.selectedElement ).toBe( 14 );
+		expect( player.selectedElement?.number ).toBe( 14 );
 		expect( receivedElementNumber ).toBe( 14 );
 	} );
 

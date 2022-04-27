@@ -68,4 +68,8 @@ describe( 'Shots Analyzer', () => {
 		expect( analyzer.candidates ).toBe( 0 );
 		expect( analyzer.undefinedCells ).toBe( 0 );
 	} );
+
+	test( 'shots counting', () => {
+		expect( analyzer.shots ).toBe( 4 );
+	} )
 } );

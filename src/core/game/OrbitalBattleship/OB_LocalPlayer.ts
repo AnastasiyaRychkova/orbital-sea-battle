@@ -1,47 +1,24 @@
-import EventProvider from "../../util/EventEmitter/EventProvider";
-import User from "../GameplayEntities/User";
-import Chemistry, { CellQN, BlockQN, periodicTable } from "../Services/Chemistry";
+import Chemistry, { CellQN, BlockQN, periodicTable, ChemicalElement } from "../Services/Chemistry";
 import OB_ILocalPlayer from "./OB_LocalPlayerInterface";
-import type IDiagram from "../Diagram/DiagramInterface";
+import OB_Player, { PlayerResults, InitializeObject } from "./OB_Player";
 
 
 
-class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalPlayer
+class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 {
-	#user: User;
 
-	/**
-	 * Порядковый номер химического элемента. 
-	 * Пока не выбран, равен `0`.
-	*/
-	#elementNumber: number;
-
-	/**
-	 * Диаграмма игрока.
-	 * Изначально равна `null`.
-	 * Чтобы начать заполнение диаграммы, необходимо её инициализировать.
-	 * Диаграмма сразу не инициализируется, чтобы иметь возможность её создать снаружи,
-	 * предоставив доступ к ней UI-компонентам.
-	*/
-	#diagram: IDiagram | null;
-
-
-	constructor( user: User )
+	constructor( init: InitializeObject )
 	{
-		super();
-		this.#user = user;
-
-		this.#elementNumber = 0;
-		this.#diagram = null;
+		super( init );
 	}
 
 
 	/** Порядковый номер химического элемента. 
 	 * Пока не выбран, равен `0`.
 	*/
-	get selectedElement(): number
+	get selectedElement(): ChemicalElement | null
 	{
-		return this.#elementNumber;
+		return this.element;
 	}
 
 	/**
@@ -53,23 +30,12 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 		if( !Chemistry.isElemNumberValid( elemNumber ) )
 			throw new Error( `Selected element number is not valid: (${elemNumber})` );
 
-		this.#elementNumber = elemNumber;
+		this.element = periodicTable.element( elemNumber );
 		this._emit( 'selection', {
-			elementNumber: this.#elementNumber,
+			elementNumber: this.element.number,
 		} );
 	}
 
-	/**
-	 * Установка объекта состояния диаграммы снаружи класса.
-	 * Позволяет установить тот экземпляр класса,
-	 * который подходит для пользовательского интерфейса,
-	 * что делает LocalPlayer независимым от интерфейса.
-	 * @param diagram Диаграмма
-	 */
-	setDiagram( diagram: IDiagram ): void
-	{
-		this.#diagram = diagram;
-	}
 
 	/**
 	 * Переключить состояние блока целиком на противоположное.
@@ -78,10 +44,10 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 	 */
 	toggleBlock( block: BlockQN ): void
 	{
-		if( !this.#diagram )
+		if( !this.diagram )
 			throw new Error( "Diagram was not initialized" );
 		
-		this.#diagram.toggleBlock( block );
+		this.diagram.toggleBlock( block );
 	}
 
 	/**
@@ -90,10 +56,10 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 	 */
 	toggleCell( cell: CellQN ): void
 	{
-		if( !this.#diagram )
+		if( !this.diagram )
 			throw new Error( "Diagram was not initialized" );
 
-		this.#diagram.toggleCell( cell );
+		this.diagram.toggleCell( cell );
 	}
 
 	/**
@@ -102,15 +68,15 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 	 */
 	diagramFilledOutCorrectly(): boolean
 	{
-		if( this.#elementNumber < 1 || !this.#diagram )
+		if( !this.element || !this.diagram )
 			throw new Error( "Unable to check diagram filling: " + (
-					this.#elementNumber < 1
+					!this.element
 						? "Element is not selected"
 						: "Diagram is not setted"
 				)
 			);
 
-		return this.#diagram.isEqual( periodicTable.element( this.#elementNumber ).config );
+		return this.diagram.isEqual( this.element.config );
 	}
 
 	/**
@@ -121,21 +87,12 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 	 */
 	markEnemyShot( cell: CellQN ): boolean
 	{
-		if( !this.#diagram )
+		if( !this.diagram )
 			throw new Error( "Diagram was not initialized" );
 
-		return this.#diagram.fire( cell );
+		return this.diagram.fire( cell );
 	}
 
-		/**
-	 * Отметить выстрел, который совершил противник, по полю локального игрока
-	 * @param cell Координаты ячейки диаграммы противника, по которой игрок сделал выстрел
-	 * @param result Результат выстрела: попадание (true) или промах (false)
-	 */
-	markShotResult( cell: CellQN, result: boolean ): void
-	{
-		// TODO: ShotAnalyzer.markShot( cell, result );
-	}
 
 	/**
 	 * Этот элемент загадал?
@@ -144,7 +101,7 @@ class OB_LocalPlayer extends EventProvider<string, object> implements OB_ILocalP
 	 */
 	isThisElementSelected( elemNumber: number ): boolean
 	{
-		return this.#elementNumber === elemNumber;
+		return this.element?.number === elemNumber;
 	}
 }
 
