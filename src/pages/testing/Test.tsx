@@ -10,9 +10,9 @@ import './components.css';
 import '../../style/colors.css';
 import '../../style/reset.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import achievements from '../../core/browser/AchievementSystem';
+// import achievements from '../../core/browser/AchievementSystem';
 
-achievements.receive( 60 );
+// achievements.receive( 60 );
 
 const Test = () => {
 	return (

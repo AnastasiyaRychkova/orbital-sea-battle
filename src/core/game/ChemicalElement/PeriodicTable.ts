@@ -1,6 +1,3 @@
-import converter from './QNScheme';
-import QNSchemeInterface from './QNSchemeInterface';
-
 import {
 	default as ElemConfig,
 } from './ElemConfig';
@@ -748,13 +745,6 @@ const periodicTable = {
 		return periodicTableElements[ Math.round( this.MAX_ELEM_NUMBER * Math.random() ) ];
 	},
 
-	/**
-	 * @deprecated Используется в `DiagramStatic`, который также нужно удалить
-	 */
-	get converterDeprecated(): QNSchemeInterface
-	{
-		return converter;
-	},
 
 	get converter()
 	{
