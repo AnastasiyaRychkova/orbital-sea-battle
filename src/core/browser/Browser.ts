@@ -1,7 +1,6 @@
 import IBrowser from "./BrowserInterface";
+import browserStorage from "./BrowserStorage";
 import fullScreenService, { FullScreenServiceType } from "./FullScreenService";
-
-
 
 
 
@@ -59,6 +58,11 @@ class Browser implements IBrowser
 	sendInBackground( to: string, data: FormData ): void
 	{
 		navigator.sendBeacon( to, data );
+	}
+
+	get storage()
+	{
+		return browserStorage;
 	}
 }
 

@@ -1,24 +1,24 @@
-import Chemistry, { CellQN, BlockQN, periodicTable, ChemicalElement } from "../Services/Chemistry";
-import OB_ILocalPlayer from "./OB_LocalPlayerInterface";
-import OB_Player, { PlayerResults, InitializeObject } from "./OB_Player";
+import Chemistry, { CellQN, BlockQN, periodicTable, ChemicalElement } from "../../Services/Chemistry";
+import OB_ILocalPlayer from "../interfaces/OB_LocalPlayerInterface";
+import { PlayerEvent, PlayerEventData } from "../types";
+import OB_Player from "./OB_Player";
 
 
-
-class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
+/**
+ * __Локальный игрок__
+ * 
+ * Создает события:
+ * - `selection` — Выбор элемента: _{elementNumber: number}_
+ */
+class OB_LocalPlayer extends OB_Player<PlayerEvent, PlayerEventData> implements OB_ILocalPlayer
 {
-
-	constructor( init: InitializeObject )
-	{
-		super( init );
-	}
-
 
 	/** Порядковый номер химического элемента. 
 	 * Пока не выбран, равен `0`.
 	*/
 	get selectedElement(): ChemicalElement | null
 	{
-		return this.element;
+		return this._element;
 	}
 
 	/**
@@ -30,9 +30,9 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 		if( !Chemistry.isElemNumberValid( elemNumber ) )
 			throw new Error( `Selected element number is not valid: (${elemNumber})` );
 
-		this.element = periodicTable.element( elemNumber );
+		this._element = periodicTable.element( elemNumber );
 		this._emit( 'selection', {
-			elementNumber: this.element.number,
+			elementNumber: this._element.number,
 		} );
 	}
 
@@ -44,10 +44,10 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 	 */
 	toggleBlock( block: BlockQN ): void
 	{
-		if( !this.diagram )
+		if( !this._diagram )
 			throw new Error( "Diagram was not initialized" );
 		
-		this.diagram.toggleBlock( block );
+		this._diagram.toggleBlock( block );
 	}
 
 	/**
@@ -56,10 +56,10 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 	 */
 	toggleCell( cell: CellQN ): void
 	{
-		if( !this.diagram )
+		if( !this._diagram )
 			throw new Error( "Diagram was not initialized" );
 
-		this.diagram.toggleCell( cell );
+		this._diagram.toggleCell( cell );
 	}
 
 	/**
@@ -68,15 +68,15 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 	 */
 	diagramFilledOutCorrectly(): boolean
 	{
-		if( !this.element || !this.diagram )
+		if( !this._element || !this._diagram )
 			throw new Error( "Unable to check diagram filling: " + (
-					!this.element
+					!this._element
 						? "Element is not selected"
 						: "Diagram is not setted"
 				)
 			);
 
-		return this.diagram.isEqual( this.element.config );
+		return this._diagram.isEqual( this._element.config );
 	}
 
 	/**
@@ -87,10 +87,10 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 	 */
 	markEnemyShot( cell: CellQN ): boolean
 	{
-		if( !this.diagram )
+		if( !this._diagram )
 			throw new Error( "Diagram was not initialized" );
 
-		return this.diagram.fire( cell );
+		return this._diagram.fire( cell );
 	}
 
 
@@ -101,7 +101,7 @@ class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 	 */
 	isThisElementSelected( elemNumber: number ): boolean
 	{
-		return this.element?.number === elemNumber;
+		return this._element?.number === elemNumber;
 	}
 }
 

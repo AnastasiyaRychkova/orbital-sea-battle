@@ -1,6 +1,6 @@
 import type { CellQN } from '../Services/Chemistry';
-import OB_IEnemy from './OB_EnemyInterface';
-import OB_ILocalPlayer from './OB_LocalPlayerInterface';
+import OB_IEnemy from './interfaces/OB_EnemyInterface';
+import OB_ILocalPlayer from './interfaces/OB_LocalPlayerInterface';
 
 export type SCompleteState = 'end';
 
@@ -21,7 +21,8 @@ export type SSelectingState = 'instruction' // Выдача задания. Де
 
 export type SFillingState = 'instruction' // Выдача задания. Действия пользователя ограничены.
 						| 'diagram' // Заполнение диаграммы.
-						| 'checking'; // Проверка заполнения диаграммы локально или удаленно.
+						| 'correct' // Правильное заполнение диаграммы.
+						| 'fail'; // Неправильное заполнение диаграммы.
 
 export type SShootingState = 'instruction' // Выдача задания. Действия пользователя ограничены.
 						| 'moving' // Выполнение хода игроком.
@@ -45,6 +46,25 @@ export type SState = SPreparingState
 					| SCompleteState;
 
 
+/*----------  Machine Context  ----------*/
+
+export type RootContext = {
+	detail: EventContext,
+	selectionInstruction: boolean,
+	diagramInstruction: boolean,
+};
+
+
+
+/*----------  Game State: Event Context  ----------*/
+
+
+
+export type SelectingContext = {
+	elemNumber: number,
+};
+
+
 export type ShootingContext = {
 	shot?: CellQN,
 };
@@ -52,4 +72,25 @@ export type ShootingContext = {
 export type NamingContext = {
 	namedElemNumber: number,
 	target: OB_ILocalPlayer | OB_IEnemy,
+};
+
+export type EventContext = SelectingContext
+						| ShootingContext
+						| NamingContext;
+
+
+
+/*----------  Player  ----------*/
+
+export type PlayerResults = {
+	elemNumber: number,
+	steps: number,
+	certainty: number,
+};
+
+
+export type PlayerEvent = 'selection';
+
+export type PlayerEventData = {
+	elementNumber: number,
 };

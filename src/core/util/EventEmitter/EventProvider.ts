@@ -38,4 +38,5 @@ export default EventProvider;
 export type {
 	EventData,
 	IEventProvider,
+	ListenerFunc,
 }

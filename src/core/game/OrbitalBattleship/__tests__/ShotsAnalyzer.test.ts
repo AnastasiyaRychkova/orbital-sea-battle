@@ -1,6 +1,6 @@
 import converter from "../../ChemicalElement/QNtoIndexConverter";
 import Chemistry from "../../Services/Chemistry";
-import ShotsAnalyzer from "../OB_ShotsAnalyzer";
+import ShotsAnalyzer from "../entities/OB_ShotsAnalyzer";
 
 
 describe( 'Shots Analyzer', () => {

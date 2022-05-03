@@ -1,27 +1,29 @@
 import Chemistry from "../../Services/Chemistry";
-import OB_AIPLayer from "../OB_AIPLayer";
+import OB_AIPLayer from "../entities/OB_AIPLayer";
 import entities from "../OB_EntitiesFabric"
-import GameState from "../OB_GameState";
+import GameState from "../entities/OB_GameState";
 
 describe( 'AI Player', () => {
 	const user = entities.user( {
 		name: 'John',
 	} );
+	const player = entities.localPlayer( user );
+	const analyzer = player.shotsAnalyzer;
 	const playerDiagram = entities.diagram();
+
+	const enemy = entities.aiPlayer( user ) as OB_AIPLayer;
+	const enemyAnalyzer = enemy.shotsAnalyzer;
 	const enemyDiagram = entities.diagram();
-	const analyzer = entities.shotsAnalyzer();
-	const enemyAnalyzer = entities.shotsAnalyzer();
-	const player = entities.localPlayer( { user, analyzer } );
-	const enemy = entities.aiPlayer( { user, analyzer: enemyAnalyzer } ) as OB_AIPLayer;
+
 	const game = new GameState( player, enemy );
-	const ai = entities.aiPlayerBehaviour( {player: enemy, game, analyzer, enemyAnalyzer} );
+	const ai = entities.aiPlayerBehaviour( game );
 
 	const randomFunc = Math.random;
 
 
 	player.setDiagram( playerDiagram );
 
-
+	// preparing.selecting.instruction --(instruction.start)--> 
 	test( 'element selection when game state become Choice', () => {
 		jest.useFakeTimers();
 		game.send( 'start' );
@@ -35,9 +37,11 @@ describe( 'AI Player', () => {
 		expect( enemy.hasSelectedElement ).toBeTruthy();
 	} );
 
+	// preparing.selecting.choice --(selecting.select)--> preparing.filling.instruction
+	// preparing.filling.instruction --(instruction.start)--> preparing.filling.diagram
 	test( 'filling out the diagram', () => {
 		jest.useFakeTimers();
-		game.send( 'selected' );
+		game.send( 'select' );
 		game.send( 'start' );
 
 		expect( game.state ).toBe( 'diagram' );
@@ -50,10 +54,12 @@ describe( 'AI Player', () => {
 		expect( enemy.hasFilled ).toBeTruthy();
 	} );
 
+	// preparing.filling.diagram --(preparing.ready)--> waiting
+	// waiting --(waiting.ready)--> shooting.instruction
 	test( 'mark player shot', () => {
 		game.send( 'ready' );
 		ai.setDiagram( enemyDiagram );
-		game.send( 'ready' );
+		game.send( 'play' );
 
 		const cellQN = Chemistry.cell( {n: 5, l: 'd', m: 2, s: 1} );
 		enemy.markEnemyShot( cellQN ).then( (result: boolean ) => {
@@ -62,6 +68,8 @@ describe( 'AI Player', () => {
 		} );
 	} );
 
+	// shooting.instruction --(instruction.enemy_turn)--> shooting.enemy_waiting
+	// shooting.enemy_waiting >--(t)>-->(enemy_waiting.shot)--> shooting.moving
 	test( 'making a shot', () => {
 		jest.useFakeTimers();
 		Math.random = () => 1;
@@ -83,6 +91,7 @@ describe( 'AI Player', () => {
 		expect( enemy.getResults() ).toBeUndefined();
 	} );
 
+	// shooting.moving --(moving.shot)--> shooting.result_waiting
 	test( 'local player shot (game state machine testing)', () => {
 		jest.useFakeTimers();
 		const diagramFireFn = jest.fn( () => {} );
@@ -93,6 +102,8 @@ describe( 'AI Player', () => {
 
 	} );
 
+	// shooting.result_waiting >--(t)>-->(result_waiting.shot)--> shooting.enemy_waiting
+	// shooting.enemy_waiting >--(t)>-->(enemy_waiting.name)--> shooting.end >-->[x]>-->(shooting.complete)-->results.final
 	test( "naming element", () => {
 		jest.useFakeTimers();
 		Math.random = () => 0;

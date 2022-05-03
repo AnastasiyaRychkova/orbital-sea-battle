@@ -1,32 +1,40 @@
+import User, { IUserInitObj } from "../GameplayEntities/User";
+import OB_LocalPlayer, { OB_ILocalPlayer } from "./entities/OB_LocalPlayer";
+import OB_LocalPlayerController, { OB_ILocalPlayerController } from "./entities/OB_LocalPlayerController";
+import OB_AIPLayer from "./entities/OB_AIPLayer";
+import OB_AIEnemyBehaviour from "./entities/OB_AIEnemyBehaviour";
 import Diagram, { IDiagram } from "../Diagram/Diagram";
 import Filter, { IFilter } from "../Diagram/Filter/Filter";
-import User, { IUserInitObj } from "../GameplayEntities/User";
-import OB_AIPLayer from "./OB_AIPLayer";
-import OB_AIPLayerBehaviour, {InitializeObject as AIBehaviourInitObj} from "./OB_AIPlayerBehaviour";
-import OB_IEnemy from "./OB_EnemyInterface";
-import OB_LocalPlayer, { OB_ILocalPlayer } from "./OB_LocalPlayer";
-import ShotsAnalyzer from "./OB_ShotsAnalyzer";
-import type { InitializeObject as PlayerInitObj } from "./OB_Player";
+
+import type { OB_IEnemy, OB_IGameState } from './OB_Entities.d';
+
+
 
 const entitiesFabric = {
+
 	user( initObject: IUserInitObj ): User
 	{
 		return new User( initObject );
 	},
 
-	localPlayer( init: PlayerInitObj ): OB_ILocalPlayer
+	localPlayer( user: User ): OB_ILocalPlayer
 	{
-		return new OB_LocalPlayer( init );
+		return new OB_LocalPlayer( user );
 	},
 
-	aiPlayer( init: PlayerInitObj ): OB_IEnemy
+	localPlayerController( game: OB_IGameState ): OB_ILocalPlayerController
 	{
-		return new OB_AIPLayer( init );
+		return new OB_LocalPlayerController( game );
 	},
 
-	aiPlayerBehaviour( init: AIBehaviourInitObj ): OB_AIPLayerBehaviour
+	aiPlayer( user: User ): OB_IEnemy
 	{
-		return new OB_AIPLayerBehaviour( init );
+		return new OB_AIPLayer( user );
+	},
+
+	aiPlayerBehaviour( game: OB_IGameState ): OB_AIEnemyBehaviour
+	{
+		return new OB_AIEnemyBehaviour( game );
 	},
 
 	diagram( filter?: IFilter, highlight?: IFilter ): IDiagram
@@ -38,20 +46,6 @@ const entitiesFabric = {
 	{
 		return new Filter();
 	},
-
-	shotsAnalyzer(): ShotsAnalyzer
-	{
-		return new ShotsAnalyzer();
-	}
 }
 
 export default entitiesFabric;
-
-export type {
-	IDiagram,
-	IFilter,
-	ShotsAnalyzer,
-	User,
-	OB_ILocalPlayer,
-	OB_IEnemy,
-}

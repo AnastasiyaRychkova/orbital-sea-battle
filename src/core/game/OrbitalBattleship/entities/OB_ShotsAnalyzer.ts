@@ -1,17 +1,18 @@
+import OB_IShotsAnalyzer from "../interfaces/OB_ShotsAnalyzerInterface";
 import Chemistry, {
 	ElemConfig,
 	ChemicalElement,
 	periodicTable,
 	CellQN,
 	CellIndex,
-} from "../Services/Chemistry";
+} from "../../Services/Chemistry";
 
 
 /**
  * Класс, анализирующий выстрелы по диаграмме и вычисляющий,
  * какие элементы периодической таблицы подходят под результаты выстрелов.
  */
-class ShotsAnalyzer
+class ShotsAnalyzer implements OB_IShotsAnalyzer
 {
 	/** Элементы, которые могут подходить под заданную карту выстрелов */
 	#candidates: ChemicalElement[];
@@ -91,6 +92,7 @@ class ShotsAnalyzer
 		return this.#candidates.length;
 	}
 
+	/** Количество ячеек, состояние которых не определено */
 	get undefinedCells(): number
 	{
 		return this.#indefiniteIndexes.length;

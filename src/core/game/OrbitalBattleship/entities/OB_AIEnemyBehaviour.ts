@@ -1,13 +1,13 @@
-import StateMachine, { IStateMachine } from "../../util/StateMachine/StateMachine";
-import OB_IGameState, { GSEventData, GSStateChanging } from "./OB_GameStateInterface";
-import type {ShotsAnalyzer, IDiagram, OB_IEnemy} from "./OB_EntitiesFabric";
-import type { NamingContext, SGameState, ShootingContext } from "./types";
+import StateMachine, { IStateMachine } from "../../../util/StateMachine/StateMachine";
+import OB_IGameState, { GSEventData, GSStateChanging } from "../interfaces/OB_GameStateInterface";
+import type {IShotsAnalyzer, IDiagram, OB_IEnemy} from "../OB_Entities";
+import type { NamingContext, SGameState, ShootingContext } from "../types";
 
 export type InitializeObject = {
 	player: OB_IEnemy,
 	game: OB_IGameState,
-	analyzer: ShotsAnalyzer,
-	enemyAnalyzer: {candidates: number},
+	analyzer: IShotsAnalyzer,
+	enemyAnalyzer: IShotsAnalyzer,
 };
 
 type BehaviourState = 'waiting'
@@ -22,7 +22,7 @@ type BehaviourEvent = 'select'
 
 type BehaviouralStateMachine = IStateMachine<BehaviourState, BehaviourEvent>;
 
-class OB_AIPLayerBehaviour
+class OB_AIEnemyBehaviour
 {
 	#player: OB_IEnemy;
 	/**
@@ -40,24 +40,24 @@ class OB_AIPLayerBehaviour
 
 	/** Анализатор выстрелов, которые выполняет текущий игрок, 
 	 * исходя из результатов собственных выстрелов */
-	#shotsAnalyzer: ShotsAnalyzer;
+	#shotsAnalyzer: IShotsAnalyzer;
 
 	/** Анализатор выстрелов по диаграмме текущего игрока. */
 	#enemyAnalyzer: {candidates: number};
 
 	#game: OB_IGameState;
 	
-	constructor( init: InitializeObject )
+	constructor( game: OB_IGameState )
 	{
-		this.#player = init.player;
-		this.#game = init.game;
+		this.#player = game.enemy;
+		this.#game = game;
 		this.#elementSelected = false;
 		this.#hasFilled = false;
 		this.#gameState = 'preparing';
 		this._bindFunctions();
 		this.#behaviour = this._initBehaviouralStateMachine();
-		this.#shotsAnalyzer = init.analyzer;
-		this.#enemyAnalyzer = init.enemyAnalyzer;
+		this.#shotsAnalyzer = game.enemy.shotsAnalyzer;
+		this.#enemyAnalyzer = game.player.shotsAnalyzer;
 
 		this._listenGame();
 	}
@@ -257,4 +257,4 @@ function randomInRange( from: number, to: number ): number
 
 
 
-export default OB_AIPLayerBehaviour;
+export default OB_AIEnemyBehaviour;

@@ -1,10 +1,7 @@
 import IEventProvider from "../EventEmitter/EventProviderInterface";
-import ITimer from "../Timer/TimerInterface";
 
 type Seconds = number;
 
-export type TerminalStr = '__END__';
-export const TERMINAL = '__END__'
 
 /** Название состояния */
 // export type StateName = string;

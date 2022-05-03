@@ -1,14 +1,14 @@
-import { CellQN } from "../Services/Chemistry";
-import IDiagram from "../Diagram/DiagramInterface";
+import type { CellQN } from "../../Services/Chemistry";
+import type { IDiagram, OB_IPlayer } from '../OB_Entities';
+import type { PlayerResults } from '../types';
 
-export type PlayerResults = {
-	elemNumber: number,
-	steps: number,
-	certainty: number,
-};
 
-interface OB_IEnemy
+interface OB_IEnemy extends OB_IPlayer
 {
+	hasSelectedElement: boolean;
+
+	hasFilled: boolean;
+
 	/**
 	 * Отметить, что элемент игроком был выбран
 	 */

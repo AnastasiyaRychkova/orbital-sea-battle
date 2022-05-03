@@ -1,10 +1,16 @@
-import type { BlockQN, CellQN, ChemicalElement } from '../Services/Chemistry';
-import type IEventProvider from "../../util/EventEmitter/EventProvider";
-import type IDiagram from "../Diagram/DiagramInterface";
-import type { PlayerResults } from './OB_Player'
+import type { BlockQN, CellQN, ChemicalElement } from '../../Services/Chemistry';
+import type IEventProvider from "../../../util/EventEmitter/EventProvider";
+import type { IDiagram, OB_IPlayer } from '../OB_Entities';
+import type { PlayerEvent, PlayerEventData, PlayerResults } from '../types';
 
 
-interface OB_ILocalPlayer extends IEventProvider<string, object>
+/**
+ * __Локальный игрок__
+ * 
+ * Создает события:
+ * - `selection` — Выбор элемента: _{elementNumber: number}_
+ */
+interface OB_ILocalPlayer extends IEventProvider<PlayerEvent, PlayerEventData>, OB_IPlayer
 {
 	/** Порядковый номер химического элемента. 
 	 * Пока не выбран, равен `0`.
@@ -78,10 +84,10 @@ interface OB_ILocalPlayer extends IEventProvider<string, object>
 
 
 	/**
-	  * Результаты игры.
-	  * 
-	  * Возвращает объект только после вызова `finishGame`
-	  */
+	 * Результаты игры.
+	 * 
+	 * Возвращает объект только после вызова `finishGame`
+	 */
 	getResults(): PlayerResults | undefined;
 }
 
