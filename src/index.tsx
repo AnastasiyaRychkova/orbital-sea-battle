@@ -1,14 +1,20 @@
 import React from 'react';
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import TestPage from './pages//testing/Test';
 import './style/reset.css';
-// import Test from './pages/testing/Test';
-// import App from './App';
+import App from './App';
+import LoadingIcon from './components/Loading/LoadingIcon';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<TestPage />
+		<Suspense fallback={ <LoadingIcon /> }>
+			<I18nextProvider i18n={ i18n }>
+				<App />
+			</I18nextProvider>
+		</Suspense>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

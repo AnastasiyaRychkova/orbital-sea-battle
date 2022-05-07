@@ -1,0 +1,15 @@
+.fixed {
+	position: fixed;
+	top: calc(50% - 25px);
+	left: calc(50% - 25px);
+}
+
+.loading {
+	transform-origin: center center;
+	animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
+}

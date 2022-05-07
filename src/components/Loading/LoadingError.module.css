@@ -1,0 +1,9 @@
+.loading {
+	transform-origin: center center;
+	animation: rotation 5s 1 ease;
+}
+
+@keyframes rotation {
+	0% { transform: rotate(0); }
+	100% { transform: rotate(360deg); }
+}

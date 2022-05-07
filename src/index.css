@@ -1,27 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Prompt:wght@500&display=swap');
 
 html {
-	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255, 255, 255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
-	background-color: #1E2C26;
-	background-size: 3em 3em;
-	color: #96C2AF;
 	font-family:'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/*убрать видимость прокрутки (Firefox)*/
-	/* scrollbar-width: none;  */
 }
-
-/*убрать видимость прокрутки (Chrome)*/
-/* ::-webkit-scrollbar {
-	width: 0px;
-} */
 
 html, body {
 	margin: 0;
 	height: 100%;
 	padding: 0;
 	overflow-x: hidden;
+}
+
+body {
+	background: linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0, linear-gradient( 90deg, rgba(255, 255, 255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
+	background-color: #1E2C26;
+	background-size: 3em 3em;
+	color: #96C2AF;
 }
 
 @media (pointer: fine) {

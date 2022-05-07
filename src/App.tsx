@@ -1,21 +1,24 @@
 import React from 'react';
-/* import {
-	MemoryRouter as Router,
-	// Switch,
+import {
+	BrowserRouter as Router,
+	Routes,
 	Route,
-} from */ "react-router-dom";
+} from "react-router-dom";
 
-// import TheoryPage from './pages/theory/TheoryPage';
-// import MainPage from './pages/main/MainPage';
-// import Page404 from './pages/404/Page404';
-// import Stub from './pages/404/Stub';
-// import DiagramInfoPage from './pages/diagram_info/DiagramInfoPage';
+import Landing from './pages/landing/Landing';
+import Page404 from './pages/404/Page404';
+import Stub from './pages/404/Stub';
 
 function App() {
 	return (
-		<h1>Test</h1>
+		<Router>
+			<Routes>
+				<Route path="/" element={ <Landing/> } />
+				<Route path="play" element={ <Stub/> } />
+				<Route path="*" element={ <Page404/> } />
+			</Routes>
+		</Router>
 	);
 }
-// 
 
 export default App;

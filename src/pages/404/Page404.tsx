@@ -1,19 +1,24 @@
 import React from 'react';
 import styles from './Page404.module.css';
-import LoadingCircle from './LoadingCircle'
-import ReturnToMain from '../../components/ReturnToMain/ReturnToMain'
+import { useTranslation } from 'react-i18next';
+import Button from '../../components/Button/Default/Button';
 
-interface IProps {
-	title?: string;
-}
+export default function Page404() {
+	const { t } = useTranslation();
 
-export default function Page404( {title = "Ошибка 404"}: IProps) {
 	return (
 		<div className={ styles.container }>
-			<h1 className={styles.title}>{title}</h1>
-			<p className={styles.subtitle}>Page Not Found</p>
-			<LoadingCircle />
-			<ReturnToMain />
+			<h1 className={ styles.title }>
+				{ t("pages.404.title") }
+			</h1>
+			<p className={ styles.subtitle }>
+				{ t("pages.404.text") }
+			</p>
+			<Button
+				to="/"
+				value={ t("actions.main") }
+				priority="primary"
+			/>
 		</div>
 	);
 }

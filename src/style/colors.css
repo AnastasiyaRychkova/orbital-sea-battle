@@ -3,17 +3,18 @@
 @value light: #a2ffb6;
 @value dark: #00200A;
 
-@value background: #1E2C26;
-@value main: #61C35A;
-@value subtitle: #40843C;
-@value text: #96C2AF;
-@value nonClickableElement: #627661;
-@value clickableElement: #9CDF9A;
+@value background: #1E2C26; --secondary-800
+@value main: #61C35A; --primary-400
+@value subtitle: #40843C; --primary-600
+@value text: #96C2AF; --secondary-100
+@value nonClickableElement: #627661; --disable-500
+@value clickableElement: #9CDF9A; --primary-200
+@value darkBacking: #15211C; --secondary-900
+@value lightBacking: #2E3D36; --disable-800
+@value subElement: #517465; --secondary-400
+@value error: #C03F37; --error-500
+
 @value menu: #2C4135;
-@value darkBacking: #15211C;
-@value lightBacking: #2E3D36;
-@value subElement: #517465;
-@value error: #C03F37;
 @value inactiveArrow: #446249;
 @value missing: #6F362E;
 */

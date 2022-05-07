@@ -1,3 +1,23 @@
+@value colors: '../../style/colors.css';
+@value secondary-100 from colors;
+@value typography: '../../style/typography.css';
+
+.title {
+	composes: large-header from typography;
+	composes: large-header-1 from typography;
+	max-width: 50%;
+	text-align: center;
+	color: secondary-100;
+}
+
+.subtitle {
+	composes: text from typography;
+	max-width: 50%;
+	text-align: center;
+	color: secondary-100;
+	margin: 2em 0 4em;
+}
+
 .container {
 	display: flex;
 	align-items: center;
@@ -5,27 +25,4 @@
 	justify-content: center;
 	height: 100%;
 	min-height: 100vh;
-	background: repeat url(../../img/main/bg-cell3.png);
-}
-
-@value colors: '../../style/colors.css';
-@value primary from colors;
-
-@value typography: '../../style/typography.css';
-@value letterSpacing_M, wordSpacing_M, extraLargeText from typography;
-
-.title {
-	composes: extraLargeText;
-	max-width: 50%;
-	text-align: center;
-	text-transform: uppercase;
-	letter-spacing: letterSpacing_M;
-	color: primary;
-}
-
-.subtitle {
-	margin-bottom: 50px;
-	max-width: 50%;
-	text-align: center;
-	word-spacing: wordSpacing_M;
 }
