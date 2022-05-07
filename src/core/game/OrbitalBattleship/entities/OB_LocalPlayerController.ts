@@ -69,6 +69,22 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 	{
 		this.#game.send( 'change' );
 	}
+
+	fire( cell: CellQN ): void
+	{
+		if( Chemistry.isCellValid( cell ) && !this.#game.enemy.hasShot( cell ) )
+			this.#game.send( 'player_shot', { shot: cell } );
+	}
+
+	nameElement( elemNumber: number ): void
+	{
+		this.#game.send( 'player_name', { elemNumber } );
+	}
+
+	requestRematch(): void
+	{
+		this.#game.send( 'send_request' );
+	}
 }
 
 

@@ -54,5 +54,6 @@ export type StateType = {
 	getCell( qn: CellQN ): Cell | undefined,
 	doesSpecifyCell: boolean,
 	hasSpin( cell: CellQN ): boolean,
+	hasCell( cell: CellQN ): boolean,
 	isDamaged( qn: CellQN ): boolean,
 }

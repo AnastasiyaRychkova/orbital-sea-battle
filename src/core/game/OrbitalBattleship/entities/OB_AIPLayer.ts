@@ -1,21 +1,17 @@
 import { CellQN, periodicTable } from '../../Services/Chemistry';
 import OB_Player from './OB_Player';
-import OB_IEnemy from "../interfaces/OB_EnemyInterface";
+import type OB_IEnemy from "../interfaces/OB_EnemyInterface";
 import type { User } from '../OB_Entities';
-import { PlayerEvent, PlayerEventData } from '../types';
 
 
-class OB_AIPLayer extends OB_Player<PlayerEvent, PlayerEventData> implements OB_IEnemy
+class OB_AIPLayer extends OB_Player implements OB_IEnemy
 {
 	#hasFilled: boolean;
-
-	#steps: number;
 	
 	constructor( user: User )
 	{
 		super( user );
 		this.#hasFilled = false;
-		this.#steps = 0;
 	}
 
 	/**
@@ -70,11 +66,18 @@ class OB_AIPLayer extends OB_Player<PlayerEvent, PlayerEventData> implements OB_
 			return;
 
 		this._element = periodicTable.random();
+		this._emit( 'selection' );
 	}
 
 	markDiagramFilling(): void
 	{
 		this.#hasFilled = true;
+		this._emit( 'filling' );
+	}
+
+	requestRematch(): Promise<boolean>
+	{
+		return new Promise( resolve => resolve(true) );
 	}
 
 }

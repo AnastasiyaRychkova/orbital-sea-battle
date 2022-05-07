@@ -2,12 +2,12 @@ import EventProvider from "../../../util/EventEmitter/EventProvider";
 import ShotsAnalyzer from "./OB_ShotsAnalyzer";
 import type { CellQN, ChemicalElement } from "../../Services/Chemistry";
 import type { IDiagram, User, IShotsAnalyzer, OB_IPlayer } from "../OB_Entities";
-import type { PlayerResults } from '../types';
+import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 
 
 
 
-abstract class OB_Player<SEventType extends string, DataType extends object> extends EventProvider<SEventType, DataType> implements OB_IPlayer
+abstract class OB_Player extends EventProvider<PlayerEvent, PlayerEventData> implements OB_IPlayer
 {
 	protected _user: User;
 
@@ -61,6 +61,21 @@ abstract class OB_Player<SEventType extends string, DataType extends object> ext
 		return this._diagram;
 	}
 
+	get user(): User
+	{
+		return this._user;
+	}
+
+	/**
+	 * Был ли совершен выстрел по ячейке диаграммы игрока
+	 * @param cell Координаты ячейки диаграммы игрока
+	 * @returns Наличие выстрела в ячейку диаграммы игрока
+	 */
+	hasShot( cell: CellQN ): boolean
+	{
+		return this._diagram?.observableState.isDamaged( cell ) || false;
+	}
+
 	/**
 	 * Установка объекта состояния диаграммы снаружи класса.
 	 * Позволяет установить тот экземпляр класса,
@@ -76,6 +91,7 @@ abstract class OB_Player<SEventType extends string, DataType extends object> ext
 	markShotResult( cell: CellQN, result: boolean ): void
 	{
 		this._shotsAnalyzer.markShot( cell, result );
+		this._emit( 'shot', { cell, result } );
 	}
 
 	finishGame(): void

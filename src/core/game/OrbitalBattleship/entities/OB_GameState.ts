@@ -1,9 +1,10 @@
+import { randomBool } from '../../../util/util';
 import EventProvider, { IEventProvider, ListenerFunc } from "../../../util/EventEmitter/EventProvider";
 import StateMachine, { IStateMachine, MachineActionType } from "../../../util/StateMachine/StateMachine";
-import OB_IGameState, {GSEvent, GSEventData, GSResults} from "../interfaces/OB_GameStateInterface";
+import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
 
 import type { ActionFunction, Context, OnDoneDataType } from "../../../util/StateMachine/StateMachineTypes";
-import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer } from "../OB_Entities";
+import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, User } from "../OB_Entities";
 import type {
 	EventContext,
 	NamingContext,
@@ -11,6 +12,8 @@ import type {
 	ShootingContext,
 	SState,
 	RootContext,
+	GameScore,
+	PlayersFabric,
 } from "../types";
 
 type SEvent = string;
@@ -34,22 +37,29 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 {
 	#machine: IStateMachine<SState, string>;
 
+	#entitiesFabric: PlayersFabric;
+
 	#player: OB_ILocalPlayer;
 	#enemy: OB_IEnemy;
 	#winner?: OB_IPlayer;
+
+	#history: GSResults[];
 
 
 	#DIAGRAM_CHECKING_TIMEOUT = 1000;
 
 
-	constructor( player: OB_ILocalPlayer, enemy: OB_IEnemy )
+	constructor( player: User, enemy: User, fabric: PlayersFabric )
 	{
 		super();
-		this.#player = player;
-		this.#enemy = enemy;
+		this.#entitiesFabric = fabric;
+		this.#player = fabric.player( player );
+		this.#enemy = fabric.enemy( enemy );
 		this.#machine = this._initStateMachine();
+		this.#history = [];
 
 		this.send = this.send.bind( this );
+		this._emit( 'new' );
 	}
 
 	get player(): OB_ILocalPlayer
@@ -60,6 +70,35 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	get enemy(): OB_IEnemy
 	{
 		return this.#enemy;
+	}
+
+	get winner(): OB_IPlayer | undefined
+	{
+		return this.#winner;
+	}
+
+	get result(): GSResults | undefined
+	{
+		return this.#machine.statesChain[0] === 'results' && this.#history.length > 0
+				? this.#history[ this.#history.length - 1 ]
+				: undefined;
+	}
+
+	get score(): GameScore
+	{
+		const score = {
+			player: 0,
+			enemy: 0,
+		};
+
+		this.#history.forEach( ( match ) => {
+			if( match.isLocalPlayerWinner )
+				score.player++;
+			else
+				score.enemy++;
+		} );
+
+		return score;
 	}
 
 	/**
@@ -146,6 +185,17 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		// return contexts[ contexts.length - 1 ];
 	}
 
+	private _sendInNextTick( event: SEvent )
+	{
+		setTimeout( this.#machine.send, 0, event );
+	}
+
+	/**
+	 * Функция-замыкание, которая вызовет событие на автомате через заданное время
+	 * @param event Передаваемое в конечный автомат событие
+	 * @param delay Задержка в миллисекундах
+	 * @returns Функцию-замыкание с сохраненными параметрами
+	 */
 	private _delaySendingEvent( event: SEvent, delay: Milliseconds ): () => void
 	{
 		return () => {
@@ -153,6 +203,11 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		}
 	}
 
+	/**
+	 * Отметить, что onboarding был пройден
+	 * @param prop Свойство объекта контекста, отвечающее за отметку о прохождении onboarding
+	 * @returns Функция-замыкание, которая изменит переданное свойство контекста на `true`
+	 */
 	private _markOnboardingComplete( prop: keyof RootContext ): ActionFunction<SState>
 	{
 		return ( machine: MachineActionType<SState> ) => {
@@ -160,11 +215,16 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		};
 	}
 
+	/**
+	 * Функция-замыкание, которая переходит к следующему после onboarding состоянию
+	 * @param prop Свойство объекта контекста, отвечающее за отметку о прохождении onboarding
+	 * @returns Функция-замыкание, которая отправляет в систему событие `start`, которое должно быть определено во всех состояниях `instruction`
+	 */
 	private _skipOnboarding( prop: keyof RootContext ): ActionFunction<SState>
 	{
 		return ( machine: MachineActionType<SState> ) => {
 			if( (machine.context[0] as RootContext)[ prop ] )
-				setTimeout( () => {this.#machine.send( 'start' )} );
+				this._sendInNextTick( 'start' );
 		};
 	}
 
@@ -194,7 +254,30 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	}
 
 	/**
-	 * moving --(shot)--> result_waiting
+	 * Ожидание соперника, пока тот заполнит диаграмму
+	 */
+	private _waitingForEnemyDiagramFillingHander: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
+		if( !this.#enemy.hasFilled )
+			this.#enemy.once( 'filling', this._startShooting );
+		else
+			setTimeout( this._startShooting );
+	}
+
+	private _startShooting = () => {
+		this.#machine.send( 'play' );
+	}
+
+	/**
+	 * Определение того, кто ходит первым и начло игры
+	 * shooting.match_start --(match_start.player_turn)-->shooting.moving
+	 * shooting.match_start --( match_start.enemy_turn)-->shooting.enemy_waiting
+	 */
+	private _matchStartHandler: ActionFunction<SState> = () => {
+		this.#machine.send( randomBool() ? 'player_turn' : 'enemy_turn' );
+	}
+
+	/**
+	 * moving --(player_shot)--> result_waiting
 	 */
 	private _playerShotHandler: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
 		const context = this._eventContext( machine.context ) as ShootingContext;
@@ -205,13 +288,25 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#enemy.markEnemyShot( cell )
 			.then( ( result: boolean ) => {
 				this.#player.markShotResult( cell, result );
-				context.shot = undefined;
-				setTimeout( this.send, 0, 'shot' );
+				setTimeout( this.send, 0, 'player_shot' );
+			} );
+	}
+
+	private _playerNamingHandler: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
+		const context = this._eventContext( machine.context ) as SelectingContext;
+		const elemNumber = context.elemNumber;
+		if( !elemNumber )
+			throw new Error("Selected element is not defined");
+
+		this.#enemy.isThisElementSelected( elemNumber )
+			.then( ( result: boolean ) => {
+				this._finishGameWithWinner( result ? this.#player : this.#enemy );
+				this.#machine.send( 'player_name' );
 			} );
 	}
 
 	/**
-	 * enemy_waiting --(shot)--> moving
+	 * enemy_waiting --(enemy_shot)--> moving
 	 */
 	private _enemyShotHandler: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
 		const context = this._eventContext( machine.context ) as ShootingContext;
@@ -221,11 +316,10 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 
 		const result = this.#player.markEnemyShot( cell );
 		this.#enemy.markShotResult( cell, result );
-		context.shot = undefined;
 	}
 
 	/**
-	 * enemy_waiting --(name)--> end
+	 * enemy_waiting --(enemy_name)--> end
 	 */
 	private _enemyNamingHandler: ActionFunction<SState> = ( machine: MachineActionType<SState> ) => {
 		const context = this._eventContext( machine.context ) as NamingContext;
@@ -237,21 +331,34 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	}
 
 	/**
-	 * ->* finish
+	 * ->* final
 	 */
 	private _emitGameResults: ActionFunction<SState> = () => {
 		if( !this.isOver )
 			this._finishGameWithWinner( this.#enemy );
+		
+		const result: GSResults = {
+			isLocalPlayerWinner: this.#winner === this.#player,
+			player: this.#player.getResults()!,
+			enemy: this.#enemy.getResults()!,
+			duration: 0, // FIXME: Match duration
+		};
 
-		this._emit(
-			'finish',
-			{
-				isLocalPlayerWinner: this.#winner === this.#player,
-				player: this.#player.getResults()!,
-				enemy: this.#enemy.getResults()!,
-				duration: 0, // FIXME: Match duration
-			}
-		);
+		this.#history.push( result );
+		this._emit( 'finish', result );
+	}
+
+	private _requestingRematch: ActionFunction<SState> = () => {
+		this.#enemy.requestRematch().then( ( answer: boolean ) => {
+			this.#machine.send( answer ? 'rematch' : 'reject' );
+		} )
+	}
+
+	private _rematchHandler: ActionFunction<SState> = () => {
+		this.#player = this.#entitiesFabric.player( this.#player.user );
+		this.#enemy = this.#entitiesFabric.enemy( this.#enemy.user );
+		this.#winner = undefined;
+		this._emit( 'new' );
 	}
 
 
@@ -382,6 +489,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 					},
 				},
 				waiting: {
+					entry: this._waitingForEnemyDiagramFillingHander,
 					on: {
 						play: 'shooting',
 						leave: 'surrender',
@@ -396,27 +504,49 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 						initial: 'instruction',
 						states: {
 							instruction: {
+								entry: this._skipOnboarding( 'shootingInstruction' ),
 								on: {
-									my_turn: 'moving',
-									enemy_turn: 'enemy_waiting',
+									start: {
+										to: 'match_start',
+										do: this._markOnboardingComplete( 'shootingInstruction' ),
+									},
 								},
+							},
+							match_start: {
+								entry: this._matchStartHandler,
+								on: {
+									player_turn: 'moving',
+									enemy_turn: 'enemy_waiting',
+								}
 							},
 							moving: {
 								on: {
-									shot: { to: 'result_waiting', do: this._playerShotHandler },
-									name: 'result_waiting',
+									player_shot: {
+										to: 'result_waiting',
+										do: this._playerShotHandler
+									},
+									player_name: {
+										to: 'result_waiting',
+										do: this._playerNamingHandler,
+									},
 								},
 							},
 							enemy_waiting: {
 								on: {
-									shot: { to: 'moving', do: this._enemyShotHandler },
-									name: { to: 'end', do: this._enemyNamingHandler },
+									enemy_shot: {
+										to: 'moving',
+										do: this._enemyShotHandler
+									},
+									enemy_name: {
+										to: 'end',
+										do: this._enemyNamingHandler
+									},
 								}
 							},
 							result_waiting: {
 								on: {
-									shot: 'enemy_waiting',
-									game_results: 'end',
+									player_shot: 'enemy_waiting',
+									player_name: 'end',
 								},
 							},
 							end: {
@@ -429,7 +559,10 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 				results: {
 					on: {
 						complete: 'end',
-						rematch: 'preparing',
+						rematch: {
+							to: 'preparing',
+							do: this._rematchHandler,
+						},
 					},
 					invoke: {
 						initial: 'final',
@@ -443,14 +576,13 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 								},
 							},
 							request: {
+								entry: this._requestingRematch,
 								on: {
-									confirm: 'rematch_confirmed',
 									reject: 'rematch_unavailable',
 								},
 							},
 							response: {
 								on: {
-									confirm: 'rematch_confirmed',
 									reject: 'rematch_unavailable'
 								},
 							},
@@ -459,18 +591,11 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 									exit: 'end',
 								},
 							},
-							rematch_confirmed: {
-								entry: completeFunc,
-							},
 							end: {
 								entry: completeFunc,
 							}
 						},
-						onDone: ( machine: OnDoneDataType<SState> ) => {
-							return machine.state === 'rematch_confirmed'
-								? 'rematch'
-								: 'complete' ;
-						},
+						onDone: 'complete',
 					},
 				},
 				end: {

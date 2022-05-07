@@ -1,4 +1,5 @@
 import OB_IShotsAnalyzer from "../interfaces/OB_ShotsAnalyzerInterface";
+import { randomIndex } from "../../../util/util";
 import Chemistry, {
 	ElemConfig,
 	ChemicalElement,
@@ -142,11 +143,6 @@ class ShotsAnalyzer implements OB_IShotsAnalyzer
 		return this.#candidates[ randomIndex( this.#candidates.length - 1 ) ];
 	}
 
-}
-
-function randomIndex( maxIndex: number ): number
-{
-	return Math.round( Math.random() * maxIndex );
 }
 
 

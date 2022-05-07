@@ -1,6 +1,6 @@
 import type { IEventProvider } from '../../../util/EventEmitter/types';
 import type { OB_ILocalPlayer, OB_IEnemy } from '../OB_Entities';
-import type { SState, PlayerResults } from "../types";
+import type { SState, PlayerResults, GameScore } from "../types";
 
 export type GSResults = {
 	isLocalPlayerWinner: boolean,
@@ -25,6 +25,11 @@ interface OB_IGameState extends IEventProvider<GSEvent, GSEventData>
 
 	player: OB_ILocalPlayer,
 	enemy: OB_IEnemy,
+	winner?: OB_IPlayer,
+
+	result: GSResults | undefined;
+
+	score: GameScore;
 
 	isOver: boolean;
 

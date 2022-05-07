@@ -108,9 +108,10 @@ class Cell extends DStateUnit
 		return this.selected;
 	}
 
-	doDamage(): void
+	doDamage(): boolean
 	{
 		this.damage = true;
+		return this.selected;
 	}
 
 	get filtered(): boolean
@@ -421,6 +422,11 @@ class DiagramState
 		return this.getCell( cell )?.selected === true;
 	}
 
+	hasCell( cell: CellQN ): boolean
+	{
+		return this.getCell( cell ) !== undefined;
+	}
+
 	/**
 	 * Установить значение выделения ячейки в диаграмме
 	 * 
@@ -435,15 +441,20 @@ class DiagramState
 		return this;
 	}
 
+	/**
+	 * "Выстрелить" по ячейке
+	 * @param qn Координаты ячейки
+	 * @returns Произошел ли выстрел
+	 */
 	doDamage( qn: CellQN ): boolean
 	{
 		const cell = this.getCell( qn );
 		if( !cell )
 			return false;
 		
-		cell.doDamage();
+		const result = cell.doDamage();
 		this._markLastShot( cell );
-		return true;
+		return result;
 	}
 
 	private _markLastShot( cell: Cell ): void

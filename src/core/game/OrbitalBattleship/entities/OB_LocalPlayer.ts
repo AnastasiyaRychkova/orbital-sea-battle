@@ -1,7 +1,6 @@
 import Chemistry, { CellQN, BlockQN, periodicTable, ChemicalElement } from "../../Services/Chemistry";
-import OB_ILocalPlayer from "../interfaces/OB_LocalPlayerInterface";
-import { PlayerEvent, PlayerEventData } from "../types";
 import OB_Player from "./OB_Player";
+import type OB_ILocalPlayer from "../interfaces/OB_LocalPlayerInterface";
 
 
 /**
@@ -10,7 +9,7 @@ import OB_Player from "./OB_Player";
  * Создает события:
  * - `selection` — Выбор элемента: _{elementNumber: number}_
  */
-class OB_LocalPlayer extends OB_Player<PlayerEvent, PlayerEventData> implements OB_ILocalPlayer
+class OB_LocalPlayer extends OB_Player implements OB_ILocalPlayer
 {
 
 	/** Порядковый номер химического элемента. 

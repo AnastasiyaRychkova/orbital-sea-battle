@@ -41,6 +41,25 @@ export default {
 	{
 		return new CellIndex( index );
 	},
+
+	toIndex( cell: CellQN ): number
+	{
+		return periodicTable.converter.toIndex( cell )?.value || 0;
+	},
+
+	toCell( index: number | CellIndex ): CellQN | undefined
+	{
+		return periodicTable.converter.toQN(
+			index instanceof CellIndex
+				? index.value
+				: new CellIndex( index ).value
+		);
+	},
+
+	isCellValid( cell: CellQN ): boolean
+	{
+		return periodicTable.converter.toIndex( cell ) !== undefined;
+	}
 }
 
 export {

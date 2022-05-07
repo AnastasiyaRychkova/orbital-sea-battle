@@ -1,7 +1,8 @@
+import { randomInRange } from "../../../util/util";
 import StateMachine, { IStateMachine } from "../../../util/StateMachine/StateMachine";
 import OB_IGameState, { GSEventData, GSStateChanging } from "../interfaces/OB_GameStateInterface";
 import type {IShotsAnalyzer, IDiagram, OB_IEnemy} from "../OB_Entities";
-import type { NamingContext, SGameState, ShootingContext } from "../types";
+import type { NamingContext, ShootingContext } from "../types";
 
 export type InitializeObject = {
 	player: OB_IEnemy,
@@ -36,8 +37,6 @@ class OB_AIEnemyBehaviour
 	/** Конечный автомат, задающий поведение игрока */
 	#behaviour: BehaviouralStateMachine;
 
-	#gameState: SGameState;
-
 	/** Анализатор выстрелов, которые выполняет текущий игрок, 
 	 * исходя из результатов собственных выстрелов */
 	#shotsAnalyzer: IShotsAnalyzer;
@@ -53,7 +52,6 @@ class OB_AIEnemyBehaviour
 		this.#game = game;
 		this.#elementSelected = false;
 		this.#hasFilled = false;
-		this.#gameState = 'preparing';
 		this._bindFunctions();
 		this.#behaviour = this._initBehaviouralStateMachine();
 		this.#shotsAnalyzer = game.enemy.shotsAnalyzer;
@@ -83,21 +81,32 @@ class OB_AIEnemyBehaviour
 	private _gameStateChangeHandler( data: {detail: GSEventData} ): void
 	{
 		const statesChain = (data.detail as GSStateChanging).state;
-		this.#gameState = statesChain[0] as SGameState;
 
-		if( statesChain[2] === 'choice' && !this.#elementSelected ) { // Выбор элемента
-
-			this.#behaviour.send( 'select' );
-		}
-		else if( statesChain[2] === 'diagram' && !this.#hasFilled ) // Заполнение диаграммы
-		{
-			if( !this.#elementSelected )
-				this.#behaviour.runAllDelayedTransitions();
-			this.#behaviour.send( 'fill' );
-		}
-		else if( statesChain[1] === 'enemy_waiting' ) // Ход противника
+		if( statesChain[1] === 'enemy_waiting' ) // Ход противника
 		{
 			this.#behaviour.send( 'move' );
+			return;
+		}
+
+		if( statesChain.length < 2 )
+			return;
+
+		switch( statesChain[2] )
+		{
+			case 'choice':
+				this.#behaviour.send( 'select' );
+				break;
+
+			case 'diagram':
+				if( !this.#elementSelected )
+					this.#behaviour.runAllDelayedTransitions();
+				this.#behaviour.send( 'fill' );
+				break;
+
+			case 'correct':
+				if( !this.#hasFilled )
+					this.#behaviour.runAllDelayedTransitions();
+				break;
 		}
 	}
 
@@ -111,11 +120,9 @@ class OB_AIEnemyBehaviour
 	/** Выбрать элемент (selecting) */
 	private _selectElement(): void
 	{
-		if( this.#gameState === 'preparing'
-			&& !this.#elementSelected
+		if( !this.#elementSelected
 			&& !this.#hasFilled
-		)
-		{
+		) {
 			this.#elementSelected = true;
 			this.#player.markElementSelection();
 		}
@@ -151,8 +158,9 @@ class OB_AIEnemyBehaviour
 	/** Обозначить, что диаграмма заполнена (filling) */
 	private _fillOutDiagram(): void
 	{
-		if( this.#gameState === 'preparing' )
-		{	``
+		if( this.#elementSelected
+			&& !this.#hasFilled
+		) {
 			this.#hasFilled = true;
 			this.#player.markDiagramFilling();
 		}
@@ -180,7 +188,7 @@ class OB_AIEnemyBehaviour
 	private _nameElement(): void
 	{
 		this.#game.send(
-			'name',
+			'enemy_name',
 			{
 				namedElemNumber: this.#shotsAnalyzer.pickOutElement()?.number,
 				target: this.#player,
@@ -191,7 +199,7 @@ class OB_AIEnemyBehaviour
 	private _makeShot(): void
 	{
 		this.#game.send(
-			'shot',
+			'enemy_shot',
 			{
 				shot: this.#shotsAnalyzer.pickOutCell()
 			} as ShootingContext
@@ -247,12 +255,6 @@ class OB_AIEnemyBehaviour
 			}
 		} )
 	}
-}
-
-
-function randomInRange( from: number, to: number ): number
-{
-	return (to - from) * Math.random() + from;
 }
 
 

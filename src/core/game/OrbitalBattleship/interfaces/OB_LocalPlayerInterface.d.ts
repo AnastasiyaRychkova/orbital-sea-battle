@@ -1,7 +1,7 @@
 import type { BlockQN, CellQN, ChemicalElement } from '../../Services/Chemistry';
 import type IEventProvider from "../../../util/EventEmitter/EventProvider";
 import type { IDiagram, OB_IPlayer } from '../OB_Entities';
-import type { PlayerEvent, PlayerEventData, PlayerResults } from '../types';
+import type { PlayerEvent, PlayerResults } from '../types';
 
 
 /**
@@ -10,7 +10,7 @@ import type { PlayerEvent, PlayerEventData, PlayerResults } from '../types';
  * Создает события:
  * - `selection` — Выбор элемента: _{elementNumber: number}_
  */
-interface OB_ILocalPlayer extends IEventProvider<PlayerEvent, PlayerEventData>, OB_IPlayer
+interface OB_ILocalPlayer extends OB_IPlayer
 {
 	/** Порядковый номер химического элемента. 
 	 * Пока не выбран, равен `0`.

@@ -17,6 +17,7 @@ export type DiagramEventData = {
 	index?: number,
 	isReShot?: boolean,
 	qn: CellQN | BlockQN,
+	result?: boolean,
 }
 
 

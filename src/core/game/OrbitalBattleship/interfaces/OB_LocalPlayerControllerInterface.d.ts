@@ -11,6 +11,12 @@ interface OB_ILocalPlayerController
 	checkDiagram(): void;
 
 	cancelElementSelection(): void;
+
+	fire( cell: CellQN ): void;
+
+	nameElement( elemNumber: number ): void;
+
+	requestRematch(): void;
 }
 
 

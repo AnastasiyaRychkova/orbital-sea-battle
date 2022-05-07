@@ -2,6 +2,11 @@ import type { CellQN } from '../Services/Chemistry';
 import OB_IEnemy from './interfaces/OB_EnemyInterface';
 import OB_ILocalPlayer from './interfaces/OB_LocalPlayerInterface';
 
+export type PlayersFabric = {
+	player: ( user: User ) => OB_ILocalPlayer,
+	enemy: ( user: User ) => OB_IEnemy,
+};
+
 export type SCompleteState = 'end';
 
 export type SGivingIn = 'giving_in' // Подтверждение намерения сдаться.
@@ -25,6 +30,7 @@ export type SFillingState = 'instruction' // Выдача задания. Дей
 						| 'fail'; // Неправильное заполнение диаграммы.
 
 export type SShootingState = 'instruction' // Выдача задания. Действия пользователя ограничены.
+						| 'match_start' // Начало перестрелки, когда определяется очередность ходов игроков.
 						| 'moving' // Выполнение хода игроком.
 						| 'enemy_waiting' // Выполнение хода противником.
 						| 'result_waiting'; // Ожидание результатов хода игрока. Выполнение запроса.
@@ -52,6 +58,7 @@ export type RootContext = {
 	detail: EventContext,
 	selectionInstruction: boolean,
 	diagramInstruction: boolean,
+	shootingInstruction: boolean,
 };
 
 
@@ -89,8 +96,27 @@ export type PlayerResults = {
 };
 
 
-export type PlayerEvent = 'selection';
+export type PlayerEvent = 'selection'
+						| 'filling'
+						| 'shot';
 
-export type PlayerEventData = {
+export type PlayerSelectionEventData = {
 	elementNumber: number,
+};
+
+export type PlayerShotEventData = {
+	cell: CellQN,
+	result: boolean,
+};
+
+export type PlayerEventData = PlayerSelectionEventData
+							| PlayerShotEventData;
+
+
+
+/*----------  Other  ----------*/
+
+export type GameScore = {
+	player: number,
+	enemy: number,
 };

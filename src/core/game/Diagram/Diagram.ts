@@ -2,12 +2,12 @@ import { makeObservable, observable, action, computed } from "mobx";
 
 import { stringSchemeToQuantumNumbers } from "../ChemicalElement/QuantumNumbers";
 import State from "./DObjectState";
-
-import { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
-import IDiagram, { DiagramEvent, DiagramEventData } from "./DiagramInterface";
 import EventProvider from "../../util/EventEmitter/EventProvider";
-import { StateType } from "./DObjectState";
-import IFilter from "./Filter/FilterInterface";
+
+import type { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
+import type { default as IDiagram, DiagramEvent, DiagramEventData } from "./DiagramInterface";
+import type { StateType } from "./DObjectState.d";
+import type IFilter from "./Filter/FilterInterface";
 
 
 
@@ -104,15 +104,18 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 
 	fire( qn: CellQN ): boolean
 	{
-		if( this._disabled || this._state.isDamaged( qn ) )
+		if( this._disabled
+			|| this._state.isDamaged( qn )
+			|| !this._state.hasCell( qn )
+		)
 			return false;
 
-		const fireResult = this._state.doDamage( qn );
-		if( fireResult )
-			this._emit( 'shot', {
-				qn,
-			});
-		return fireResult;
+		const shotResult = this._state.doDamage( qn );
+		this._emit( 'shot', {
+			qn,
+			result: shotResult,
+		});
+		return shotResult;
 	}
 
 	hasSpin( qn: CellQN ): boolean

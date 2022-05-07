@@ -70,6 +70,7 @@ class StateMachine<SState extends string, SEvent extends string> extends EventPr
 		this.#context = this._createContext( config.context || {}, parent );
 		this.runDelayedTransition = this.runDelayedTransition.bind( this );
 		this.complete = this.complete.bind( this );
+		this.send = this.send.bind( this );
 		this.#states = this._createStateMap( config.states );
 		this._start();
 	}

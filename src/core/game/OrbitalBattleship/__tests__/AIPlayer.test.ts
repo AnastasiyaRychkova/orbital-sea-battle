@@ -2,20 +2,22 @@ import Chemistry from "../../Services/Chemistry";
 import OB_AIPLayer from "../entities/OB_AIPLayer";
 import entities from "../OB_EntitiesFabric"
 import GameState from "../entities/OB_GameState";
+import GameStateMock from '../__mocks__/GameStateMock';
 
 describe( 'AI Player', () => {
 	const user = entities.user( {
 		name: 'John',
 	} );
-	const player = entities.localPlayer( user );
-	const analyzer = player.shotsAnalyzer;
+	const game = new GameStateMock( user, user, {
+		player: entities.localPlayer,
+		enemy: entities.aiPlayer,
+	} );
+	const player = game.player;
 	const playerDiagram = entities.diagram();
 
-	const enemy = entities.aiPlayer( user ) as OB_AIPLayer;
-	const enemyAnalyzer = enemy.shotsAnalyzer;
+	const enemy = game.enemy as OB_AIPLayer;
 	const enemyDiagram = entities.diagram();
 
-	const game = new GameState( player, enemy );
 	const ai = entities.aiPlayerBehaviour( game );
 
 	const randomFunc = Math.random;
@@ -26,7 +28,8 @@ describe( 'AI Player', () => {
 	// preparing.selecting.instruction --(instruction.start)--> 
 	test( 'element selection when game state become Choice', () => {
 		jest.useFakeTimers();
-		game.send( 'start' );
+		// game.send( 'start' );
+		game._setStateChain( ['preparing', 'selecting', 'choice'] );
 		expect( ai.hasSelectedElement ).toBeFalsy();
 		expect( enemy.hasSelectedElement ).toBeFalsy();
 		expect( ai._state ).toBe( 'selecting' );
@@ -41,8 +44,9 @@ describe( 'AI Player', () => {
 	// preparing.filling.instruction --(instruction.start)--> preparing.filling.diagram
 	test( 'filling out the diagram', () => {
 		jest.useFakeTimers();
-		game.send( 'select' );
-		game.send( 'start' );
+		// game.send( 'select' );
+		// game.send( 'start' );
+		game._setStateChain( ['preparing', 'filling', 'diagram'] );
 
 		expect( game.state ).toBe( 'diagram' );
 		expect( enemy.hasFilled ).toBeFalsy();
@@ -57,9 +61,10 @@ describe( 'AI Player', () => {
 	// preparing.filling.diagram --(preparing.ready)--> waiting
 	// waiting --(waiting.ready)--> shooting.instruction
 	test( 'mark player shot', () => {
-		game.send( 'ready' );
+		// game.send( 'ready' );
 		ai.setDiagram( enemyDiagram );
-		game.send( 'play' );
+		// game.send( 'play' );
+		game._setStateChain( ['shooting', 'moving'] );
 
 		const cellQN = Chemistry.cell( {n: 5, l: 'd', m: 2, s: 1} );
 		enemy.markEnemyShot( cellQN ).then( (result: boolean ) => {
@@ -76,11 +81,14 @@ describe( 'AI Player', () => {
 		const diagramFire = jest.fn( () => {} );
 		playerDiagram.once( 'shot', diagramFire );
 
-		game.send( 'enemy_turn' );
+		// game.send( 'enemy_turn' );
+		game._setStateChain( ['shooting', 'enemy_waiting'] );
 
+		expect( ai._state ).toBe( 'moving' );
 		expect( game.state ).toBe( 'enemy_waiting' );
 		jest.runAllTimers();
 		
+		expect( ai._state ).toBe( 'waiting' );
 		expect( game.state ).toBe( 'moving' );
 		expect( diagramFire.mock.calls.length ).toBe( 1 );
 
@@ -91,26 +99,15 @@ describe( 'AI Player', () => {
 		expect( enemy.getResults() ).toBeUndefined();
 	} );
 
-	// shooting.moving --(moving.shot)--> shooting.result_waiting
-	test( 'local player shot (game state machine testing)', () => {
-		jest.useFakeTimers();
-		const diagramFireFn = jest.fn( () => {} );
-		enemyDiagram.once( 'shot', diagramFireFn );
-
-		game.send( 'shot', {shot: Chemistry.cell( {n: 1, l: 's', m: 0, s: 1} )} );
-		expect( diagramFireFn.mock.calls.length ).toBe( 1 );
-
-	} );
-
 	// shooting.result_waiting >--(t)>-->(result_waiting.shot)--> shooting.enemy_waiting
 	// shooting.enemy_waiting >--(t)>-->(enemy_waiting.name)--> shooting.end >-->[x]>-->(shooting.complete)-->results.final
 	test( "naming element", () => {
 		jest.useFakeTimers();
 		Math.random = () => 0;
+		game._setStateChain( ['shooting', 'enemy_waiting'] );
 		expect( game.isOver ).toBeFalsy();
-		expect( game.state ).toBe( 'result_waiting' );
 		jest.runAllTimers();
-		/* 
+		/*
 		Переход из results_waiting в enemy_waiting происходит внутри отдельной макрозадачи. После этого запускается таймер. По истечении времени решается: стрелять или называть элемент. Вычисляется вероятность и если Math.random() меньше полученной вероятности, то называется элемент (при random = 0 всегда называется элемент). 
 		 */
 		expect( game.state ).toBe( 'final' );
@@ -124,6 +121,6 @@ describe( 'AI Player', () => {
 		expect( results ).not.toBeUndefined();
 		expect( results!.steps ).toBe( 1 );
 		expect( player.getResults() ).not.toBeUndefined();
-	} )
+	} );
 
 } );

@@ -1,6 +1,6 @@
 import type { CellQN } from "../../Services/Chemistry";
 import type { IDiagram, OB_IPlayer } from '../OB_Entities';
-import type { PlayerResults } from '../types';
+import type { PlayerEvent, PlayerResults } from '../types';
 
 
 interface OB_IEnemy extends OB_IPlayer
@@ -62,6 +62,8 @@ interface OB_IEnemy extends OB_IPlayer
 	 * Возвращает объект только после вызова `finishGame`
 	 */
 	getResults(): PlayerResults | undefined;
+
+	requestRematch(): Promise<boolean>; 
 }
 
 

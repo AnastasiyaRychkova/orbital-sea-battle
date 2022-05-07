@@ -1,13 +1,23 @@
+import IEventProvider from '../../../util/EventEmitter/EventProviderInterface';
 import type { CellQN } from '../../Services/Chemistry';
-import type { IDiagram, IShotsAnalyzer } from "../OB_Entities";
-import type { PlayerResults } from '../types';
+import type { IDiagram, IShotsAnalyzer, User } from "../OB_Entities";
+import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 
 
-interface OB_IPlayer
+interface OB_IPlayer extends IEventProvider<PlayerEvent, PlayerEventData>
 {
+	user: User;
+	
 	shotsAnalyzer: IShotsAnalyzer;
 
 	diagram: IDiagram | null,
+
+	/**
+	 * Был ли совершен выстрел по ячейке диаграммы игрока
+	 * @param cell Координаты ячейки диаграммы игрока
+	 * @returns Наличие выстрела в ячейку диаграммы игрока
+	 */
+	hasShot( cell: CellQN ): boolean;
 
 	/**
 	 * Установка объекта состояния диаграммы снаружи класса.
