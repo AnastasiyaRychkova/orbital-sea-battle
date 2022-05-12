@@ -3,7 +3,7 @@ import EventProvider, { IEventProvider, ListenerFunc } from "../../../util/Event
 import StateMachine, { IStateMachine, MachineActionType } from "../../../util/StateMachine/StateMachine";
 import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
 
-import type { ActionFunction, Context, OnDoneDataType } from "../../../util/StateMachine/StateMachineTypes";
+import type { ActionFunction, Context } from "../../../util/StateMachine/StateMachineTypes";
 import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, User } from "../OB_Entities";
 import type {
 	EventContext,
@@ -58,8 +58,10 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#machine = this._initStateMachine();
 		this.#history = [];
 
+		this.#player.setDiagram( fabric.diagram() );
+		this.#enemy.setDiagram( fabric.diagram() );
+
 		this.send = this.send.bind( this );
-		this._emit( 'new' );
 	}
 
 	get player(): OB_ILocalPlayer
@@ -288,7 +290,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#enemy.markEnemyShot( cell )
 			.then( ( result: boolean ) => {
 				this.#player.markShotResult( cell, result );
-				setTimeout( this.send, 0, 'player_shot' );
+				this._sendInNextTick( 'player_shot' );
 			} );
 	}
 
@@ -333,7 +335,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	/**
 	 * ->* final
 	 */
-	private _emitGameResults: ActionFunction<SState> = () => {
+	private _sumUpGameResults: ActionFunction<SState> = () => {
 		if( !this.isOver )
 			this._finishGameWithWinner( this.#enemy );
 		
@@ -356,7 +358,9 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 
 	private _rematchHandler: ActionFunction<SState> = () => {
 		this.#player = this.#entitiesFabric.player( this.#player.user );
+		this.#player.setDiagram( this.#entitiesFabric.diagram() );
 		this.#enemy = this.#entitiesFabric.enemy( this.#enemy.user );
+		this.#enemy.setDiagram( this.#entitiesFabric.diagram() );
 		this.#winner = undefined;
 		this._emit( 'new' );
 	}
@@ -371,6 +375,8 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#winner = winner;
 		this.#enemy.finishGame();
 		this.#player.finishGame();
+
+		this.#enemy.remove( 'filling', this._startShooting );
 	}
 
 
@@ -390,6 +396,10 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 			},
 			states: {
 				preparing: {
+					on: {
+						ready: 'waiting',
+						give_in: 'results',
+					},
 					invoke: {
 						initial: 'selecting',
 						states: {
@@ -414,22 +424,14 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 										choice: {
 											on: {
 												invalid: 'choice',
-												give_in: 'giving_in',
 											}
 										},
-										giving_in: {
-											on: {
-												cancel: 'choice',
-											},
-										},
 									},
-									onDone: 'select',
 								},
 							},
 							filling: {
 								on: {
 									change: 'selecting',
-									ready: 'end',
 								},
 								invoke: {
 									initial: 'instruction',
@@ -447,7 +449,6 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 											on: {
 												correct: 'correct',
 												fail: 'fail',
-												give_in: 'giving_in',
 											},
 										},
 										correct: {
@@ -459,46 +460,23 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 												to: 'diagram',
 											},
 										},
-										giving_in: {
-											on: {
-												cancel: 'diagram',
-											}
-										},
-										end: {
-											entry: completeFunc,
-										},
 									},
-									onDone: 'ready',
 								},
 							},
-							end: {
-								entry: completeFunc,
-							},
 						},
-						onDone: 'ready',
-					},
-					on: {
-						giving_in_confirm: 'surrender',
-						ready: 'waiting',
-					},
-				},
-				surrender: { // TODO: По нажатию по экрану пропустить ожидание
-					delay: {
-						to: 'end',
-						after: 3,
 					},
 				},
 				waiting: {
 					entry: this._waitingForEnemyDiagramFillingHander,
 					on: {
 						play: 'shooting',
-						leave: 'surrender',
+						give_in: 'results',
 					}
 				},
 				shooting: {
 					on: {
 						complete: 'results',
-						giving_in_confirm: 'results',
+						give_in: 'results',
 					},
 					invoke: {
 						initial: 'instruction',
@@ -558,7 +536,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 				},
 				results: {
 					on: {
-						complete: 'end',
+						exit: 'game_over',
 						rematch: {
 							to: 'preparing',
 							do: this._rematchHandler,
@@ -566,39 +544,29 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 					},
 					invoke: {
 						initial: 'final',
-						entry: this._emitGameResults,
+						entry: this._sumUpGameResults,
 						states: {
 							final: {
 								on: {
 									send_request: 'request',
 									get_request: 'response',
-									offline: 'rematch_unavailable',
 								},
 							},
 							request: {
 								entry: this._requestingRematch,
 								on: {
-									reject: 'rematch_unavailable',
+									reject: 'final',
 								},
 							},
 							response: {
 								on: {
-									reject: 'rematch_unavailable'
+									reject: 'final',
 								},
 							},
-							rematch_unavailable: {
-								on: {
-									exit: 'end',
-								},
-							},
-							end: {
-								entry: completeFunc,
-							}
 						},
-						onDone: 'complete',
 					},
 				},
-				end: {
+				game_over: {
 					entry: completeFunc,
 				}
 			}
@@ -609,3 +577,9 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 
 
 export default GameState;
+
+export type {
+	OB_IGameState,
+	GSEvent,
+	GSEventData,
+}

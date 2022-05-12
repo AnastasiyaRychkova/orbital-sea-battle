@@ -16,6 +16,8 @@ class GameStateMock extends EventProvider<GSEvent, GSEventData> implements OB_IG
 		super();
 		this.#player = fabric.player( player );
 		this.#enemy = fabric.enemy( enemy );
+		this.#player.setDiagram( fabric.diagram() );
+		this.#enemy.setDiagram( fabric.diagram() );
 		this.state = 'instruction';
 		this.statesChain = ['preparing', 'selecting', 'instruction'];
 

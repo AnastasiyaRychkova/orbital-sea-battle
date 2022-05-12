@@ -5,17 +5,16 @@ import OB_ILocalPlayer from './interfaces/OB_LocalPlayerInterface';
 export type PlayersFabric = {
 	player: ( user: User ) => OB_ILocalPlayer,
 	enemy: ( user: User ) => OB_IEnemy,
+	diagram: () => OB_IDiagram,
 };
 
 export type SCompleteState = 'end';
 
-export type SGivingIn = 'giving_in' // Подтверждение намерения сдаться.
-						| 'surrender'; // Капитуляция
-
 export type SGameState = 'preparing' // Подготовка к перестрелке. Каждый сам за себя.
 						| 'waiting' // Ожидание соперника, пока тот закончит подготовительный этап.
 						| 'shooting' // Перестрелка. Игра с противником.
-						| 'results'; // Показ результатов.
+						| 'results' // Показ результатов.
+						| 'game_over'; // Игра завершена.
 
 export type SPreparingState = 'selecting' // Выбор химического элемента.
 						| 'filling'; // Заполнение диаграммы.
@@ -37,9 +36,7 @@ export type SShootingState = 'instruction' // Выдача задания. Де�
 
 export type SResultsState = 'final' // Показ результатов матча. Реванш доступен.
 						| 'request' // Ожидание ответа противника на отправленный запрос реванша.
-						| 'response' // Показ сообщения о запрошенном реванше.
-						| 'rematch_unavailable' // Показ результатов матча. Реванш не доступен.
-						| 'rematch_confirmed'; // Реванш одобрен.
+						| 'response'; // Показ сообщения о запрошенном реванше.
 
 
 export type SState = SPreparingState
@@ -48,7 +45,6 @@ export type SState = SPreparingState
 					| SShootingState
 					| SResultsState
 					| SGameState
-					| SGivingIn
 					| SCompleteState;
 
 

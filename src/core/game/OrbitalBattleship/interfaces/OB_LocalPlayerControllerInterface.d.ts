@@ -17,6 +17,14 @@ interface OB_ILocalPlayerController
 	nameElement( elemNumber: number ): void;
 
 	requestRematch(): void;
+
+	giveIn(): void;
+
+	confirmRematch(): void;
+
+	rejectRematch(): void;
+
+	exit(): void;
 }
 
 

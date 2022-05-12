@@ -48,8 +48,8 @@ class OB_AIEnemyBehaviour
 	
 	constructor( game: OB_IGameState )
 	{
-		this.#player = game.enemy;
 		this.#game = game;
+		this.#player = game.enemy;
 		this.#elementSelected = false;
 		this.#hasFilled = false;
 		this._bindFunctions();
@@ -67,6 +67,7 @@ class OB_AIEnemyBehaviour
 		this._selectElement = this._selectElement.bind( this );
 		this._fillOutDiagram = this._fillOutDiagram.bind( this );
 		this._move = this._move.bind( this );
+		this._reset = this._reset.bind( this );
 	}
 
 	private _listenGame(): void
@@ -75,6 +76,8 @@ class OB_AIEnemyBehaviour
 			'change',
 			this._gameStateChangeHandler,
 		);
+
+		this.#game.on( 'new', this._reset );
 	}
 
 	/** Слушатель изменений состояния игры */
@@ -204,6 +207,16 @@ class OB_AIEnemyBehaviour
 				shot: this.#shotsAnalyzer.pickOutCell()
 			} as ShootingContext
 		);
+	}
+
+	private _reset(): void
+	{
+		this.#player = this.#game.enemy;
+		this.#shotsAnalyzer = this.#player.shotsAnalyzer;
+		this.#enemyAnalyzer = this.#game.player.shotsAnalyzer;
+
+		this.#elementSelected = false;
+		this.#hasFilled = false;
 	}
 
 

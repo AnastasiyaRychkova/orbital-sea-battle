@@ -11,19 +11,17 @@ describe( 'AI Player', () => {
 	const game = new GameStateMock( user, user, {
 		player: entities.localPlayer,
 		enemy: entities.aiPlayer,
+		diagram: () => entities.diagram( entities.filter() ),
 	} );
 	const player = game.player;
-	const playerDiagram = entities.diagram();
 
 	const enemy = game.enemy as OB_AIPLayer;
-	const enemyDiagram = entities.diagram();
 
 	const ai = entities.aiPlayerBehaviour( game );
 
 	const randomFunc = Math.random;
 
 
-	player.setDiagram( playerDiagram );
 
 	// preparing.selecting.instruction --(instruction.start)--> 
 	test( 'element selection when game state become Choice', () => {
@@ -62,8 +60,8 @@ describe( 'AI Player', () => {
 	// waiting --(waiting.ready)--> shooting.instruction
 	test( 'mark player shot', () => {
 		// game.send( 'ready' );
-		ai.setDiagram( enemyDiagram );
 		// game.send( 'play' );
+		const enemyDiagram = enemy.diagram!;
 		game._setStateChain( ['shooting', 'moving'] );
 
 		const cellQN = Chemistry.cell( {n: 5, l: 'd', m: 2, s: 1} );
@@ -77,6 +75,7 @@ describe( 'AI Player', () => {
 	// shooting.enemy_waiting >--(t)>-->(enemy_waiting.shot)--> shooting.moving
 	test( 'making a shot', () => {
 		jest.useFakeTimers();
+		const playerDiagram = player.diagram!;
 		Math.random = () => 1;
 		const diagramFire = jest.fn( () => {} );
 		playerDiagram.once( 'shot', diagramFire );

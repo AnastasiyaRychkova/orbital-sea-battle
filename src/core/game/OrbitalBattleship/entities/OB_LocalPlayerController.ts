@@ -1,11 +1,10 @@
 import Chemistry, { BlockQN, CellQN } from "../../Services/Chemistry";
-import type { OB_IGameState, OB_ILocalPlayer, OB_ILocalPlayerController } from '../OB_Entities';
+import type { OB_IGameState, OB_ILocalPlayerController } from '../OB_Entities';
 
 
 
 class OB_LocalPlayerController implements OB_ILocalPlayerController
 {
-	#player: OB_ILocalPlayer;
 
 	#game: OB_IGameState;
 
@@ -13,7 +12,6 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 	constructor( game: OB_IGameState )
 	{
 		this.#game = game;
-		this.#player = game.player as OB_ILocalPlayer;
 	}
 
 	completeOnBoarding(): void
@@ -30,10 +28,10 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 			return;
 		}
 
-		if( this.#player.hasSelectedElement )
+		if( this.#game.player.hasSelectedElement )
 		{
 			this.#game.send(
-				this.#player.isThisElementSelected( elemNumber ) ? 'back' : 'reselect',
+				this.#game.player.isThisElementSelected( elemNumber ) ? 'back' : 'reselect',
 				{ elemNumber }
 			);
 			return;
@@ -45,7 +43,7 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 	toggleCell( cell: CellQN ): void
 	{
 		try {
-			this.#player.toggleCell( cell );
+			this.#game.player.toggleCell( cell );
 		} catch (error) {
 			// TODO: PlayerController.toggleCell: Обработать ошибку
 		}
@@ -54,7 +52,7 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 	toggleBlock( block: BlockQN ): void
 	{
 		try {
-			this.#player.toggleBlock( block );
+			this.#game.player.toggleBlock( block );
 		} catch (error) {
 			// TODO: PlayerController.toggleBlock: Обработать ошибку
 		}
@@ -62,7 +60,7 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 
 	checkDiagram(): void
 	{
-		this.#game.send( this.#player.diagramFilledOutCorrectly() ? 'correct' : 'fail' );
+		this.#game.send( this.#game.player.diagramFilledOutCorrectly() ? 'correct' : 'fail' );
 	}
 
 	cancelElementSelection(): void
@@ -84,6 +82,26 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 	requestRematch(): void
 	{
 		this.#game.send( 'send_request' );
+	}
+
+	giveIn(): void
+	{
+		this.#game.send( 'give_in' );
+	}
+
+	confirmRematch(): void
+	{
+		this.#game.send( 'rematch' );
+	}
+
+	rejectRematch(): void
+	{
+		this.#game.send( 'reject' );
+	}
+
+	exit(): void
+	{
+		this.#game.send( 'exit' );
 	}
 }
 
