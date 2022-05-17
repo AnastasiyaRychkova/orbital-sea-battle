@@ -1,0 +1,51 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bubble {
+	position: fixed;
+	right: 50%;
+	bottom: 50%;
+	z-index: 1002;
+	max-width: 25%;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 150%;
+	letter-spacing: 0.02rem;
+	text-align: center;
+	color: black;
+	padding: 25px;
+	background-color: white;
+	border-radius: 25px;
+}
+
+.bubble:after {
+	content: "";
+	position: fixed;
+	right: calc( 20px + 50% );
+	top: 50%;
+	z-index: 1002;
+	width: 60px;
+	height: 50px;
+	background: url("../../img/instruction/tail.svg");
+}
+
+.captain {
+	position: fixed;
+	left: 50%;
+	bottom: 0;
+	max-height: 90%;
+	max-width: 60%;
+	z-index: 1001;
+}
