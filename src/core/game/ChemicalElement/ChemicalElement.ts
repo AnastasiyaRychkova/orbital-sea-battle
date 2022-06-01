@@ -15,12 +15,9 @@ type ChemicalElement = {
 	/** Электронная конфигурация */
 	config: ElemConfig;
 
+	/** Является ли исключением */
+	exception: boolean;
 
-/* 	mainQN: MainQN;
-
-	orbitalQN: OrbitalQN;
-
-	magneticQN: MagneticQN; */
 };
 
 export type {
