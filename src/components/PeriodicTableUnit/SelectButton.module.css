@@ -1,0 +1,75 @@
+
+button{
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing: 0.13rem;
+	border:none;
+	cursor:pointer;
+}
+
+.button-icon{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap:1rem;
+}
+
+.button-text{
+	font-weight: 500;
+	font-size: 1.125rem;
+	line-height: 120%;
+	letter-spacing: 0.05rem;
+	text-transform: uppercase;
+}
+
+.button-select-element{
+	padding:0.56em;
+	min-width:20.5em;
+	padding: 0.2em;
+
+}
+.button-exit{
+	background-color: var(--secondary-800-background) ;
+	color: var(--primary-200-clickable);
+	outline:  solid var(--primary-200-clickable) 1px;
+	font-size:1rem;
+	padding: 0.2em 0.4em;
+	text-transform: uppercase;
+}
+
+.button-exit-position{
+	position:absolute;
+	left:1rem;
+	bottom:1rem;
+}
+
+.button-exit:hover{
+	color: var(--primary-100);
+	box-shadow: var(--glow-button-L-light);
+}
+.button-exit:active{
+	color: var(--primary-100);
+	color:var(--primary-900-text);
+	background-color:var(--primary-400-main);
+}
+
+.button-primary{
+	outline: solid var(--primary-400-main) 2px;
+	color:var(--primary-900-text);
+	background-color:var(--primary-400-main);
+}
+
+.button-primary:hover{
+	background-color:var(--primary-200-clickable);
+	box-shadow: var(--glow-button-L-light);
+}
+
+.button-primary:active{
+	color:var(--primary-900-text);
+	background-color:var(--primary-600-subheader);
+}
+.button-primary:disabled{
+	color:var(--disable-500);
+	background-color:var(--disable-900);
+}
+

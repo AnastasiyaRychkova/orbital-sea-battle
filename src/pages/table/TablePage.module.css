@@ -1,0 +1,14 @@
+.body2 {
+	margin:0;
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing: 0.13rem;
+	color:var(--secondary-100-text);
+	min-width: 320px;
+	height: 100vh;
+	display:flex;
+	flex-direction: column;
+	justify-content: space-between; 
+	box-sizing: border-box;
+	align-items: center;
+	padding: 1rem;
+}

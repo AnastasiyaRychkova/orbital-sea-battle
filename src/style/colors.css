@@ -1,46 +1,38 @@
-/* @value primary: #51CF15;
-@value primaryDark: #299601;
-@value light: #a2ffb6;
-@value dark: #00200A;
-
-@value background: #1E2C26; --secondary-800
-@value main: #61C35A; --primary-400
-@value subtitle: #40843C; --primary-600
-@value text: #96C2AF; --secondary-100
-@value nonClickableElement: #627661; --disable-500
-@value clickableElement: #9CDF9A; --primary-200
-@value darkBacking: #15211C; --secondary-900
-@value lightBacking: #2E3D36; --disable-800
-@value subElement: #517465; --secondary-400
-@value error: #C03F37; --error-500
-
-@value menu: #2C4135;
-@value inactiveArrow: #446249;
-@value missing: #6F362E;
-*/
-
 
 @value custom-white: #FFFFFF;
+
 @value primary-50: #EAF8E9;
+
 @value primary-100: #C4ECC3;
 @value primary-200: #9CDF9A;
+@value primary-200-clickable: #9CDF9A;
 @value primary-300: #79CF76;
 @value primary-400: #61C35A;
+@value primary-400-main: #61C35A;
 @value primary-500: #4EA448;
 @value primary-600: #40843C;
-@value primary-700: #2D5E2A;
-@value primary-800: #284A25;
-@value primary-900: #1D341C;
+@value primary-600-subheader: #40843C;
+@value primary-700: #286124;
+@value primary-800: #1C4519;
+@value primary-900: #163914;
+@value primary-900-text: #163914;
+
 @value secondary-50: #B6E4D0;
 @value secondary-100: #96C2AF;
+@value secondary-100-text: #96C2AF;
 @value secondary-200: #71AA91;
 @value secondary-300: #5A8C77;
+@value secondary-300-subelement: #5A8C77;
 @value secondary-400: #517465;
 @value secondary-500: #456356;
 @value secondary-600: #354E43;
 @value secondary-700: #2C463A;
+@value secondary-700-light-backing: #2C463A;
 @value secondary-800: #1E2C26;
+@value secondary-800-background: #1E2C26;
 @value secondary-900: #15211C;
+@value secondary-900-dark-backing: #15211C;
+
 @value disable-50: #EEF3EE;
 @value disable-100: #D0DFCF;
 @value disable-200: #B1CAB0;
@@ -48,20 +40,26 @@
 @value disable-400: #899988;
 @value disable-500: #627661;
 @value disable-600: #566B5B;
+@value disable-600-non-clickable: #566B5B;
 @value disable-700: #3A4D40;
 @value disable-800: #2E3D36;
+@value disable-800-light-backing: #2E3D36;
 @value disable-900: #1C221E;
-@value error-50: #FFECEB;
+
+/* @value error-50: #FFECEB;
 @value error-100: #FFC0BC;
 @value error-200: #FFA19B;
-@value error-300: #FA7971;
+@value error-300: #FA7971; */
 @value error-400: #EB564D;
-@value error-500: #C03F37;
-@value error-600: #9C2F28;
+@value error-400-error: #EB564D;
+/* @value error-500: #C03F37; */
+@value error-500-miss: #9C2F28;
+/* @value error-600: #9C2F28;
 @value error-700: #7E281C;
 @value error-800: #6A281F;
-@value error-900: #57241D;
+@value error-900: #57241D; */
 
+@value outline-400: #EEFF25;
 
 /* FIXME: Удалить */
 .test {
