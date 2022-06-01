@@ -14,6 +14,9 @@ interface IProps
 	/** Режим таблицы */
 	mode: TableMode;
 
+	/** Показывается ли блок */
+	isVisible?: boolean
+
 	/** Номер выбранного элемент, 0 если не выбран */
 	number: number;
 }
@@ -31,7 +34,7 @@ export const SelectedElement = ( props: IProps ) => {
 	return (
 		<div
 			className = { cn( styles, ["cell", "selected-element"] ) }
-			style = { (props.number === 0) ? { visibility: "hidden" } : { } }
+			style = { (props.isVisible) ? { } : { visibility: "hidden" } }
 		>
 			<div className={ cn( styles, ["cell", "element-preview"] ) }>
 				<span className={ cn( styles, ["element-preview__name"] ) + " " + cn( texts, ["text-long-Lt-Small"] ) }>
@@ -65,11 +68,12 @@ export const SelectedElement = ( props: IProps ) => {
 							{ t( "components.table.ammo" ) }
 						</span>
 						<div className={ cn( styles, ["ammunition"] ) }>
-							<img
+							
+							{/* <img
 								className = { styles.ammunition__img }
 								src = { ammo }
 								alt = ""
-							/>
+							/> */}
 
 							<span className={ cn( texts, ["text-header-bold-h4"] ) }>
 								{ element.number }

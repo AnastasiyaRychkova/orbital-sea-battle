@@ -17,14 +17,14 @@ interface IProps
 	/** Режим таблицы */
 	mode?: TableMode;
 
-	/** Функция по нажатию (для передачи номера выбранного элемента) */
-	onClick: (elementNumber: number) => void,
+	/** Функция для передачи номера выбранного элемента */
+	onSubmit: (elementNumber: number) => void
 }
 
 /** Модуль периодической таблицы с выбором элемента */
 const PeriodicTableUnit: FC<IProps> = ( {
 	mode = "choosing",
-	onClick
+	onSubmit
 } ) => {
 	// const { t } = useTranslation();
 
@@ -71,6 +71,7 @@ const PeriodicTableUnit: FC<IProps> = ( {
 			key = { key++ }
 			mode = { mode }
 			number = { element }
+			isVisible = { element !== 0 }
 		/>
 	);
 	addEmpty();
@@ -152,9 +153,10 @@ const PeriodicTableUnit: FC<IProps> = ( {
 			<div className={ styles["interface-bottom"] }>
 				<SelectButton
 					mode = { mode }
+					isDisabled = { element === 0 }
 					onClick = { () => {
-							if ( element != 0 )
-								onClick( element );
+							if ( element !== 0 )
+								onSubmit( element );
 						}
 					}
 				/>

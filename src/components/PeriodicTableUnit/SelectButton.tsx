@@ -11,6 +11,9 @@ interface IProps
 	/** Режим таблицы */
 	mode: TableMode;
 
+	/** Отключена ли кнопка */
+	isDisabled?: boolean
+
 	/** Функция по нажатию */
 	onClick: () => void,
 }
@@ -25,6 +28,7 @@ export const SelectButton = ( props: IProps ) => {
 				cn( styles, ["button-primary", "button-select-element"] ) + " "
 				+ cn( texts, ["text-button-B-Medium"] )
 			}
+			disabled = { ( props.isDisabled ) ? true : false }
 			onClick = { props.onClick }
 		>
 			{

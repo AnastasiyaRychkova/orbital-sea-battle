@@ -59,17 +59,20 @@ button{
 	background-color:var(--primary-400-main);
 }
 
-.button-primary:hover{
+.button-primary:hover:not([disabled]) {
+	outline: solid var(--primary-200-clickable) 2px; /* ? */
 	background-color:var(--primary-200-clickable);
 	box-shadow: var(--glow-button-L-light);
 }
 
 .button-primary:active{
 	color:var(--primary-900-text);
+	outline: solid var(--primary-600-subheader) 2px; /* ? */
 	background-color:var(--primary-600-subheader);
 }
 .button-primary:disabled{
 	color:var(--disable-500);
+	outline: solid var(--disable-900) 2px; /* ? */
 	background-color:var(--disable-900);
 }
 
