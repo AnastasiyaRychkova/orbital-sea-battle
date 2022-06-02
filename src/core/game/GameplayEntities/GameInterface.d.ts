@@ -27,6 +27,11 @@ interface IGame
 	 * Добавление слушателя на событие окончания игры
 	 */
 	onComplete( callback: () => void ): IGame;
+
+	/**
+	 * Состояние игры. Если игра не начата, то возвращает `undefined`
+	 */
+	gameState: any;
 }
 
 

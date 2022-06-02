@@ -26,6 +26,11 @@ class OrbitalBattleshipGameAI implements IGame
 		this.end = this.end.bind( this );
 	}
 
+	get gameState(): IGameState | undefined
+	{
+		return this.#game;
+	}
+
 	start( user: User ): IGame
 	{
 		if( this.#game )
