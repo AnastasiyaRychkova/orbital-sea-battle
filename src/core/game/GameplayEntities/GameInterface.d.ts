@@ -1,3 +1,5 @@
+import type User from "./User";
+
 interface IGame
 {
 	/** Название игры */
@@ -13,13 +15,18 @@ interface IGame
 	 * 
 	 * Вызывается после смены адреса страницы.
 	 */
-	start(): void;
+	start( user: User ): IGame;
 
 	/** Метод завершения игры.
 	 * 
 	 * Вызывается для отчистки памяти или отправки сообщений перед сменой адреса страницы.
 	 */
-	end(): void;
+	end(): IGame;
+
+	/**
+	 * Добавление слушателя на событие окончания игры
+	 */
+	onComplete( callback: () => void ): IGame;
 }
 
 

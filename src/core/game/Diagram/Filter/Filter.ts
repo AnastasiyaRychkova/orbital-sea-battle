@@ -80,17 +80,17 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 
 	_updateMode()
 	{
-		if( this.store.s.isSat() )
+		if( this.store.s.isSet() )
 		{
 			this.mode = 'cell';
 			return;
 		}
-		if( this.store.m.isSat() )
+		if( this.store.m.isSet() )
 		{
 			this.mode = 'box';
 			return;
 		}
-		if( this.store.l.isSat() || this.store.n.isSat() )
+		if( this.store.l.isSet() || this.store.n.isSet() )
 		{
 			this.mode = 'block';
 			return;
@@ -163,22 +163,22 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		{
 			case 'n':
 				return Math.max(
-					this._isSat( 'l' )
+					this._isSet( 'l' )
 							? this._get( 'l' ).get()!.value + 1 : QN.qClass.n.MIN,
-					this._isSat( 'm' )
+					this._isSet( 'm' )
 							? Math.abs( this._get( 'm' ).get()!.value ) + 1 : QN.qClass.n.MIN,
 				); // max( l+1, |m|+1 )
 			
 			case 'l':
-				return this._isSat( 'm' )
+				return this._isSet( 'm' )
 							? Math.abs( this._get( 'm' ).get()!.value )
 							: QN.qClass.l.MIN;
 			case 'm':
 				return Math.max(
-					this._isSat( 'n' )
+					this._isSet( 'n' )
 							? Math.abs( this._get( 'n' ).get()!.value - 4.5 ) - 3.5
 							: QN.qClass.m.MIN,
-					this._isSat( 'l' )
+					this._isSet( 'l' )
 							? this._get( 'l' ).get()!.value * -1
 							: QN.qClass.m.MIN,
 				);
@@ -193,21 +193,21 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		{
 			case 'n':
 				return Math.min(
-					this._isSat( 'l' )
+					this._isSet( 'l' )
 							? 8 - this._get( 'l' ).get()!.value : QN.qClass.n.MAX,
-					this._isSat( 'm' )
+					this._isSet( 'm' )
 							? 8 - Math.abs( this._get( 'm' ).get()!.value ) : QN.qClass.n.MAX,
 				);
 			case 'l':
-				return this._isSat( 'n' )
+				return this._isSet( 'n' )
 							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
 							: QN.qClass.l.MAX;
 			case 'm':
 				return Math.min(
-					this._isSat( 'n' )
+					this._isSet( 'n' )
 							? -1 * Math.abs( this._get( 'n' ).get()!.value - 4.5 ) + 3.5
 							: QN.qClass.m.MAX,
-					this._isSat( 'l' )
+					this._isSet( 'l' )
 							? this._get( 'l' ).get()!.value
 							: QN.qClass.m.MAX,
 				);
@@ -216,9 +216,9 @@ class Filter extends EventProvider<FilterEvent, FilterEventData> implements IFil
 		}
 	}
 
-	private _isSat( key: StoreKey ): boolean
+	private _isSet( key: StoreKey ): boolean
 	{
-		return this._get( key ).isSat();
+		return this._get( key ).isSet();
 	}
 
 

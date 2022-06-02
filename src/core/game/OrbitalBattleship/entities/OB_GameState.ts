@@ -22,16 +22,6 @@ type Milliseconds = number;
 type Seconds = number;
 
 
-/* TODO:
-* PlayerController
-* Тестирование GameState
-* Авторизация
-* Статистика
-* Покупка подсказок
-* Покупка Оболочек
-*/
-
-
 
 class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameState
 {
@@ -531,7 +521,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 								entry: completeFunc,
 							},
 						},
-						onDone: 'complete', // TODO: Условный переход
+						onDone: 'complete',
 					},
 				},
 				results: {

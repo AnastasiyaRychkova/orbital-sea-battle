@@ -58,7 +58,7 @@ class Note implements INote
 		return this._qNumber;
 	}
 
-	isSat(): boolean
+	isSet(): boolean
 	{
 		return !this._disabled && this._qNumber !== undefined;
 	}

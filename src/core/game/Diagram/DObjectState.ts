@@ -57,7 +57,7 @@ class DStateUnit
 		for( const key of keys ) {
 			const note = filter._get( key )!;
 
-			if( note.isSat() )
+			if( note.isSet() )
 			{
 				if( note.isEqual( qn[ key ] ) )
 					equalFilters++;

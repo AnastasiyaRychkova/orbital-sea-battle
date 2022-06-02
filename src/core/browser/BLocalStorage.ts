@@ -1,4 +1,4 @@
-const browserStorage = {
+const bLocalStorage = {
 	get( key: string ): string | null
 	{
 		return _get( key );
@@ -66,4 +66,4 @@ function _setString( key: string, value: string): void
 
 
 
-export default browserStorage;
+export default bLocalStorage;

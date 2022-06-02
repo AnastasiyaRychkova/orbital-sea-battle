@@ -11,7 +11,7 @@ interface INote
 	get(): IQuantumNumber | undefined;
 
 	/** Установлено ли значение. Если фильтр деактивирован, то метод возвращает `false`. */
-	isSat(): boolean;
+	isSet(): boolean;
 	isDisabled(): boolean;
 	setDisabled( disabled: boolean ): void;
 	reset(): void;

@@ -1,5 +1,5 @@
 import IBrowser from "./BrowserInterface";
-import browserStorage from "./BrowserStorage";
+import bLocalStorage from "./BLocalStorage";
 import fullScreenService, { FullScreenServiceType } from "./FullScreenService";
 
 
@@ -62,7 +62,7 @@ class Browser implements IBrowser
 
 	get storage()
 	{
-		return browserStorage;
+		return bLocalStorage;
 	}
 }
 

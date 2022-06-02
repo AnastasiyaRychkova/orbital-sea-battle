@@ -2,26 +2,44 @@ export interface Alias
 {
 	name: string;
 	description: string;
+	id: string;
 }
 
-const Aliases = {
-	array: [] as Alias[],
+export type AliasId = string;
 
-	load(): void
+let _base = new Map<string, Alias>();
+
+const Aliases = {
+
+	get array(): Alias[]
 	{
-		this.array.push( {
-			name: 'Менделеев',
-			description: 'Химик',
-		},
-		{
-			name: 'Гофман',
-			description: 'Другой химик',
-		} );
+		return Array.from(_base.values() );
 	},
 
 	random(): Alias
 	{
-		return this.array[ Math.round( this.array.length * Math.random() ) ];
+		return Array.from(_base.values() )[ Math.round( this.array.length * Math.random() ) ];
+	},
+
+	getById( id: AliasId ): Alias | undefined
+	{
+		return _base.get( id );
+	},
+
+	load(): void
+	{
+		_base = new Map<string, Alias>( [
+			['mdl', {
+				name: 'Менделеев',
+				description: 'Химик',
+				id: 'mdl',
+			}],
+			['gfm', {
+				name: 'Гофман',
+				description: 'Другой химик',
+				id: 'gfm',
+			}],
+		] );
 	},
 }
 
