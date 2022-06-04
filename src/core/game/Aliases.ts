@@ -1,11 +1,14 @@
 export interface Alias
 {
 	name: string;
-	description: string;
 	id: string;
 }
 
-export type AliasId = string;
+export type AliasId = 'mdl'
+					| 'gfm'
+					| 'mrn'
+					| '_ai';
+
 
 let _base = new Map<string, Alias>();
 
@@ -28,16 +31,22 @@ const Aliases = {
 
 	load(): void
 	{
-		_base = new Map<string, Alias>( [
+		_base = new Map<AliasId, Alias>( [
 			['mdl', {
 				name: 'Менделеев',
-				description: 'Химик',
 				id: 'mdl',
 			}],
 			['gfm', {
 				name: 'Гофман',
-				description: 'Другой химик',
 				id: 'gfm',
+			}],
+			['mrn', {
+				name: 'Мёрнер',
+				id: 'mrn',
+			}],
+			['_ai', {
+				name: 'Droid',
+				id: '_ai'
 			}],
 		] );
 	},

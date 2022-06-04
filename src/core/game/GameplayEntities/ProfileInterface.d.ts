@@ -1,4 +1,4 @@
-import { Alias } from "../Aliases";
+import { AliasId } from "../Aliases";
 
 interface IProfile
 {
@@ -8,9 +8,17 @@ interface IProfile
 
 	id: number
 
+	points: number
+
+	level: number
+
+	lastVisit: Date
+
+	created: Date
+
 	rename( newName: string ): void
 
-	changeAlias( newAlias: Alias ): void
+	changeAlias( newAliasId: AliasId ): void
 }
 
 

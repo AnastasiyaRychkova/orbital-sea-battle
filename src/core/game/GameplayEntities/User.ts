@@ -1,14 +1,10 @@
-import { Alias } from "../Aliases";
-import AchievementSystem from "../Services/AchievementSystem";
+import { Alias, AliasId } from "../Aliases";
 import UserStatistics from "../UserStatistics";
-import type { AchievementType as Achievement } from "../Services/AchievementSystem";
 import type IProfile from "./ProfileInterface";
 import type IUser from "./UserInterface";
 
 export type IUserInitObj = {
-	lastVisit?: Date,
-	created?: Date,
-	achievement?: Achievement,
+	balance?: number,
 	statistics?: UserStatistics,
 };
 
@@ -16,17 +12,13 @@ export type IUserInitObj = {
 class User implements IUser
 {
 	private _profile: IProfile;
-	private _lastVisitDate: Date;
-	private _creationDate: Date;
-	private _achievement: Achievement;
+	private _balance: number;
 	private _statistics: UserStatistics;
 
 	constructor( profile: IProfile, initObj: IUserInitObj = {} )
 	{
 		this._profile = profile;
-		this._creationDate = initObj.created || new Date();
-		this._lastVisitDate = initObj.lastVisit || this._creationDate;
-		this._achievement = initObj.achievement || AchievementSystem.create();
+		this._balance = initObj.balance || 0;
 		this._statistics = initObj.statistics || new UserStatistics();
 	}
 
@@ -47,27 +39,27 @@ class User implements IUser
 
 	get lastVisit(): Date
 	{
-		return this._lastVisitDate;
+		return this._profile.lastVisit;
 	}
 
 	get created(): Date
 	{
-		return this._creationDate;
+		return this._profile.created;
 	}
 
 	get balance(): number
 	{
-		return this._achievement.coins;
+		return this._balance;
 	}
 
 	get points(): number
 	{
-		return this._achievement.points;
+		return this._profile.points;
 	}
 
 	get level(): number
 	{
-		return this._achievement.level;
+		return this._profile.level;
 	}
 
 	rename( newName: string ): void
@@ -76,9 +68,9 @@ class User implements IUser
 			this._profile.rename( newName );
 	}
 
-	changeAlias( newAlias: Alias ): void
+	changeAlias( newAliasId: AliasId ): void
 	{
-		this._profile.changeAlias( newAlias );
+		this._profile.changeAlias( newAliasId );
 	}
 
 	wasCreatedFromProfile( profile: IProfile ): boolean
@@ -90,3 +82,7 @@ class User implements IUser
 
 
 export default User;
+
+export type {
+	IUser,
+};

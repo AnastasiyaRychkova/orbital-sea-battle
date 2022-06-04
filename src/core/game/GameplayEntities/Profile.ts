@@ -6,6 +6,10 @@ export type IProfileInitObj = {
 	name: string,
 	aliasId?: AliasId,
 	id?: number,
+	level?: number,
+	points?: number,
+	lastVisit?: Date,
+	created?: Date,
 }
 
 class Profile implements IProfile
@@ -13,6 +17,10 @@ class Profile implements IProfile
 	protected _nickname: string;
 	protected _alias: Alias;
 	protected _id: number;
+	protected _points: number;
+	protected _level: number;
+	protected _lastVisitDate: Date;
+	protected _creationDate: Date;
 
 	constructor( initObj: IProfileInitObj )
 	{
@@ -21,6 +29,10 @@ class Profile implements IProfile
 						? (Aliases.getById( initObj.aliasId ) || Aliases.random())
 						: Aliases.random();
 		this._id = initObj.id || this._generateId();
+		this._points = initObj.points || 0;
+		this._level = initObj.level || 1;
+		this._creationDate = initObj.created || new Date();
+		this._lastVisitDate = initObj.lastVisit || this._creationDate;
 	}
 
 	get name(): string
@@ -38,6 +50,26 @@ class Profile implements IProfile
 		return this._id;
 	}
 
+	get points(): number
+	{
+		return this._points;
+	}
+
+	get level(): number
+	{
+		return this._level;
+	}
+
+	get lastVisit(): Date
+	{
+		return this._lastVisitDate;
+	}
+
+	get created(): Date
+	{
+		return this._creationDate;
+	}
+
 	private _generateId(): number
 	{
 		return randomInRange( 100000000000, 999999999999 );
@@ -48,9 +80,9 @@ class Profile implements IProfile
 		this._nickname = newName;
 	}
 
-	changeAlias( newAlias: Alias ): void
+	changeAlias( newAliasId: AliasId ): void
 	{
-		this._alias = newAlias;
+		this._alias = Aliases.getById( newAliasId ) || this._alias;
 	}
 }
 
