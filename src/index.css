@@ -1,4 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Prompt:wght@500&display=swap');
+:root{
+	--primary-50:#EAF8E9;
+	--primary-100:#C4ECC3;
+	--primary-200-clickable:#9CDF9A;
+	--primary-300:#79CF76;
+	--primary-400-main:#61C35A;
+	--primary-500:#4EA448;
+	--primary-600-subheader:#40843C;
+	--primary-700:#286124;
+	--primary-800:#1C4519;
+	--primary-900-text:#163914;
+
+	--secondary-50:#B6E4D0;
+	--secondary-100-text:#96C2AF;
+	--secondary-200:#71AA91;
+	--secondary-300-subelement:#5A8C77;
+	--secondary-400:#517465;
+	--secondary-500:#456356;
+	--secondary-600:#354E43;
+	--secondary-700-light-backing:#2C463A;
+	--secondary-800-background:#1E2C26;
+	--secondary-900-dark-backing:#15211C;
+
+	--disable-50:#EEF3EE;
+	--disable-100:#D0DFCF;
+	--disable-200:#B1CAB0;
+	--disable-300:#A0B09F;
+	--disable-400:#899988;
+	--disable-500:#627661;
+	--disable-600-non-clickable:#566B5B;
+	--disable-700:#3A4D40;
+	--disable-800-light-backing:#2E3D36;
+	--disable-900:#1C221E;
+
+	--error-300-error:#FA7971;
+	--error-400-error:#EB564D;
+	--error-500-miss:#9C2F28;
+	--outline-400:#EEFF25;
+	--jewel:#116F42;
+	--corn:#FFEC8A;
+	
+	--cont-width:68.8rem;
+	--cont-profile-width:61.1rem;
+
+	--glow-button-L-primary:0px 0px 20px rgba(78, 164, 72, 0.4);
+	--glow-button-M-primary:0px 0px 10px rgba(78, 164, 72, 0.5);
+	--glow-button-L-light:0px 0px 25px rgba(191, 239, 189, 0.4);
+	--glow-button-M-light:0px 0px 10px rgba(219, 243, 237, 0.4);
+	--glow-button-error-normal:0px 0px 8px rgba(218, 78, 78, 0.7);
+	--glow-button-error-light:0px 0px 10px rgba(255, 153, 153, 0.7);
+	--glow-arrow-selected: 0px 0px 4px #E8FFF5, 0px 0px 6px #B6F3E5;
+
+
+	--box-shadow-bright:0.5rem 0.5rem 0.5rem rgba(65, 137, 95, 0.5);
+	--box-shadow-input: 0.3rem 0.3rem 0.3rem rgb(28, 34, 30, 0.7);
+
+	--bacg-with-triangle:linear-gradient(310deg, #2E3D36 52.55%, #2F3F37 90.86%, #EB564D 90.86%, #EB564D 100%);
+
+	/* font-size: 16px; */
+	height:100%;
+}
 
 html {
 	font-family:'Montserrat', sans-serif;
@@ -20,7 +81,7 @@ body {
 	color: #96C2AF;
 }
 
-@media (pointer: fine) {
+/* @media (pointer: fine) {
 
 	::-webkit-scrollbar {
 		width: .88em;
@@ -38,5 +99,51 @@ body {
 	::-webkit-scrollbar-thumb:active {
 		background-color: #2D5E2A;
 	}
+} */
 
+
+/* дизайн прокрутки в chrome и opera */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background-color:var(--disable-500);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color:var(--primary-200-clickable);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color:var(--primary-100);
+}
+::-webkit-scrollbar-thumb:active {
+	background-color:var(--primary-300);
+}
+
+@media screen and (max-width:1024px){
+	::-webkit-scrollbar {
+		width: 5px;
+		height:5px;
+	}
+	::-webkit-scrollbar-track {
+		border-radius: 8px;
+	}
+	
+}
+
+@media screen and (max-height: 1366px) and (max-width:1570px){
+	html{
+		font-size:14px;
+	}
+}
+
+@media screen and (max-width:1400px){
+	html{
+		font-size:10px;
+	}
 }

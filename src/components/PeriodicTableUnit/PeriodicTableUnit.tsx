@@ -14,17 +14,28 @@ export type TableMode = 'choosing' | 'guessing';
 
 interface IProps
 {
-	/** Режим таблицы */
+	/** Режим таблицы:
+	 * 'choosing' выбор своего элемента
+	 * или 'guessing' угадывание элемента противника
+	 */
 	mode?: TableMode;
 
 	/** Функция для передачи номера выбранного элемента */
-	onSubmit: (elementNumber: number) => void
+	onSubmit: (elementNumber: number) => void;
+
+	/** Показывать исключения */
+	exceptions?: boolean;
+
+	/** Набор номеров элементов, недоступных для выбора */
+	disabledElements?: Array<number>;
 }
 
 /** Модуль периодической таблицы с выбором элемента */
 const PeriodicTableUnit: FC<IProps> = ( {
-	mode = "choosing",
-	onSubmit
+	mode = "guessing",
+	onSubmit,
+	exceptions = false,
+	disabledElements = []
 } ) => {
 	// const { t } = useTranslation();
 
@@ -40,6 +51,9 @@ const PeriodicTableUnit: FC<IProps> = ( {
 			<Cell
 				number = { n }
 				symbol = { periodicTable.element(n).symbol }
+				exception = { exceptions && periodicTable.element(n).exception }
+				isSelected = { element === n }
+				isDisabled = { disabledElements.includes(n) }
 				onClick = { select.bind(null, n++) }
 				key = { key++ } 
 			/>

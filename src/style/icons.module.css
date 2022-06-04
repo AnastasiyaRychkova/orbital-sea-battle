@@ -1,0 +1,96 @@
+/*иконки-заливки*/
+.icon__color{
+	fill:var(--primary-300);
+}
+.icon__color:hover{
+	fill:var(--primary-100);
+	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+}
+.icon__color:active{
+	fill:var(--primary-500);
+}
+.icon__color:disabled{
+	fill:var(--disable-700);
+}
+
+/*иконки-линии*/
+.icon-stroke__color{
+	stroke:var(--primary-300);
+}
+.icon-stroke__color:hover{
+	stroke:var(--primary-100);
+	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+}
+.icon-stroke__color:active{
+	stroke:var(--primary-500);
+}
+.icon-stroke__color:disabled{
+	stroke:var(--disable-700);
+}
+
+/*второстепенные иконки (например, навигация по станицам)*/
+.icon-secondary{
+	fill:var(--primary-600-subheader);
+}
+.icon-secondary:hover{
+	fill:var(--primary-100);
+	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+}
+.icon-secondary:active{
+	fill:var(--primary-200-clickable);
+}
+.icon-secondary:disabled{
+	fill:var(--disable-700);
+}
+.icon-secondary-selected{
+	fill:var(--primary-200-clickable);
+}
+
+
+
+
+/*размерыы иконок*/
+.icon-medium{
+	height: 36px;
+	width: 36px;
+}
+.icon-small{
+	height: 30px;
+	width: 30px;
+}
+.icon-tiny{
+	height: 24px;
+	width: 24px;
+}
+.icon-mini-tiny{
+	height:18px;
+}
+
+.icon-flip{
+	transform: rotate(180deg);
+}
+
+@media screen  and (max-width:1920px){ /*1400*/
+	.icon-medium{
+		height: 18.7px;
+		width: 18.7px;
+	}
+	.icon-small{
+		height: 26px;
+		width: 26px;
+	}
+	.icon-tiny{
+		height: 20px;
+		width: 20px;
+	}
+}
+@media screen and  (max-width:812px){ /*520*/
+	.icon-small{
+		height: 20px;
+		width: 20px;
+	}
+	.icon-tiny{
+		height: 14px;
+		width: 14px;
+	}
+}

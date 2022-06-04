@@ -84,22 +84,42 @@ interface ICellProps {
 	symbol: string;
 
 	/** Функция по нажатию */
-	onClick?: () => void,
+	onClick?: () => void;
+
+	/** Выбран ли данный элемент */
+	isSelected?: boolean;
+
+	/** Отключена ли возможность выбора данного элемента */
+	isDisabled?: boolean;
+
+	/** Является ли исключением */
+	exception?: boolean;
 }
 
 /** Ячейка с химическим элементом */
 export const Cell: FC<ICellProps> = ( {
 	number,
 	symbol,
-	onClick
+	onClick,
+	isSelected = false,
+	isDisabled = false,
+	exception = false
 } ) => {
 	const { t } = useTranslation();
 
 	return (
 		<div
-			className={ cn( styles, ["cell", "element"] ) }
-			onClick={ onClick }
-			title={ t( "periodic_table." + number ) }
+			className = {
+				cn( styles, [
+					"cell",
+					"element",
+					(isDisabled ? "element--disabled" : undefined),
+					(isSelected ? "element--selected" : undefined),
+					( (exception && !isDisabled && !isSelected) ? "element--exception" : undefined)
+				] )
+			}
+			onClick = { isDisabled ? () => {} : onClick }
+			title = { t( "periodic_table." + number ) }
 		>
 			<span className={ styles.element__number + " " + cn( texts, ["text-bold-T-Small"] ) }>
 				{ number }

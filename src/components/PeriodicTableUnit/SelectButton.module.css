@@ -42,10 +42,11 @@ button{
 	left:1rem;
 	bottom:1rem;
 }
-
-.button-exit:hover{
-	color: var(--primary-100);
-	box-shadow: var(--glow-button-L-light);
+@media(hover: hover) {
+	.button-exit:hover{
+		color: var(--primary-100);
+		box-shadow: var(--glow-button-L-light);
+	}
 }
 .button-exit:active{
 	color: var(--primary-100);
@@ -59,10 +60,12 @@ button{
 	background-color:var(--primary-400-main);
 }
 
-.button-primary:hover:not([disabled]) {
-	outline: solid var(--primary-200-clickable) 2px; /* ? */
-	background-color:var(--primary-200-clickable);
-	box-shadow: var(--glow-button-L-light);
+@media(hover: hover) {
+	.button-primary:hover:not([disabled]) {
+		outline: solid var(--primary-200-clickable) 2px; /* ? */
+		background-color:var(--primary-200-clickable);
+		box-shadow: var(--glow-button-L-light);
+	}
 }
 
 .button-primary:active{

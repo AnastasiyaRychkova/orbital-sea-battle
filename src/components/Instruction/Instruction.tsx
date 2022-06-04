@@ -14,6 +14,7 @@ interface IProps {
 	onClick: () => void,
 }
 
+/** Компонент для вывода инструкций игроку */
 export default function Instruction( props: IProps ) {
 	const { t } = useTranslation();
 

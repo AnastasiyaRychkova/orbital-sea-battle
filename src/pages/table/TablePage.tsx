@@ -4,26 +4,47 @@ import styles from './TablePage.module.css';
 import PeriodicTable from '../../components/PeriodicTableUnit/PeriodicTableUnit';
 import Instruction from '../../components/Instruction/Instruction';
 
+import Profile from '../../core/game/GameplayEntities/Profile'
+
+import { GameTopInterface } from '../../components/GameInterface/GameInterface';
+
 export default function TablePage() {
 	const { t } = useTranslation();
 	
-	function choose( n: number )
-	{
-		console.log( "choose", n );
-	}
-
 	function guess( n: number )
 	{
-		console.log( "guess", n );
+		console.log( n );
 	}
+
+	const tempA = new Profile( {
+		name: "Иван Иванов",
+	} )
+
+	const tempB = new Profile( {
+		name: "Дроид",
+		aliasId: "_ai",	
+	} )
 
 	return (
 		<div className={ styles.body2 } >
-			{/* <Instruction message="Hello world" onClick={ ()=>{} } /> */}
-			
-			<PeriodicTable mode="choosing" onClick={ choose } />
 
-			{/* <PeriodicTable mode="guessing" onClick={ guess } /> */}
+			{/* <Instruction message="Для начала нужно выбрать план погрузки" onClick={ ()=>{} } /> */}
+
+			<GameTopInterface
+				player = { tempA }
+				playerStatus = { "ходит" }
+				enemy = { tempB }
+				enemyStatus = { "ожидает" }
+				turn = { "local" }
+			/>
+			
+			<PeriodicTable
+				// mode = "guessing"
+				onSubmit = { guess }
+				// exceptions = { true }
+				// disabledElements = { [] }
+			/>
+
 		</div>
 	);
 }

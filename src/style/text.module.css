@@ -114,9 +114,9 @@
 }
 
 @media screen and (max-height: 1366px) and (max-width:1570px){
-	html{
+	/* html{
 		font-size:14px;
-	}
+	} */
 	.text-bold-T-Small{
 		font-size:12px;
 	}
@@ -141,9 +141,9 @@
 }
 
 @media screen and (max-width:1400px){
-	html{
+	/* html{
 		font-size:10px;
-	}
+	} */
 	.text-bold-T-XL{
 		font-size:24px;
 	}

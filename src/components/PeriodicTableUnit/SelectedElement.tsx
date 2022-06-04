@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './PeriodicTable.module.css';
 import texts from '../../style/text.module.css';
 import cn from '../className';
-import ammo from '../../img/components/ammunition.svg'
+// import ammo from '../../img/components/ammunition.svg'
 
 import { periodicTable } from "../../core/game/Services/Chemistry";
 
