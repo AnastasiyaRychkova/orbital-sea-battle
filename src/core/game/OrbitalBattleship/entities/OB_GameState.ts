@@ -1,4 +1,4 @@
-import { randomBool } from '../../../util/util';
+import { IStopwatch, randomBool, stopwatch } from '../../../util/util';
 import EventProvider, { IEventProvider, ListenerFunc } from "../../../util/EventEmitter/EventProvider";
 import StateMachine, { IStateMachine, MachineActionType } from "../../../util/StateMachine/StateMachine";
 import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
@@ -19,7 +19,6 @@ import type {
 type SEvent = string;
 
 type Milliseconds = number;
-type Seconds = number;
 
 
 
@@ -32,6 +31,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	#player: OB_ILocalPlayer;
 	#enemy: OB_IEnemy;
 	#winner?: OB_IPlayer;
+	#timeCounter: IStopwatch;
 
 	#history: GSResults[];
 
@@ -45,6 +45,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#entitiesFabric = fabric;
 		this.#player = fabric.player( player );
 		this.#enemy = fabric.enemy( enemy );
+		this.#timeCounter = stopwatch();
 		this.#machine = this._initStateMachine();
 		this.#history = [];
 
@@ -52,6 +53,8 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#enemy.setDiagram( fabric.diagram() );
 
 		this.send = this.send.bind( this );
+
+		this.#timeCounter.start();
 	}
 
 	get player(): OB_ILocalPlayer
@@ -333,7 +336,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 			isLocalPlayerWinner: this.#winner === this.#player,
 			player: this.#player.getResults()!,
 			enemy: this.#enemy.getResults()!,
-			duration: 0, // FIXME: Match duration
+			duration: this.#timeCounter.value,
 		};
 
 		this.#history.push( result );
@@ -352,6 +355,8 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 		this.#enemy = this.#entitiesFabric.enemy( this.#enemy.user );
 		this.#enemy.setDiagram( this.#entitiesFabric.diagram() );
 		this.#winner = undefined;
+		this.#timeCounter.reset()
+						.start()
 		this._emit( 'new' );
 	}
 
@@ -362,6 +367,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	 */
 	private _finishGameWithWinner( winner: OB_IPlayer ): void
 	{
+		this.#timeCounter.stop();
 		this.#winner = winner;
 		this.#enemy.finishGame();
 		this.#player.finishGame();

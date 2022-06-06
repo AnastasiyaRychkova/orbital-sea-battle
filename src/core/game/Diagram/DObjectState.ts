@@ -8,7 +8,7 @@ import type {
 	QuantumNumbers,
 	MainQN,
 } from '../Services/Chemistry';
-import type { DEnvironment, SpinQNString } from "./DObjectState.d";
+import type { IBlock, ICell, DEnvironment, IDiagramState, InteractionMode, SpinQNString, DUnit, IBox } from "./DObjectState.d";
 import IFilter, { StoreKey } from "./Filter/FilterInterface";
 
 
@@ -70,7 +70,7 @@ class DStateUnit
 }
 
 
-class Cell extends DStateUnit
+class Cell extends DStateUnit implements ICell
 {
 	/** Отмечен ли игроком */
 	selected: boolean = false;
@@ -114,6 +114,11 @@ class Cell extends DStateUnit
 		return this.selected;
 	}
 
+	onClick(): void
+	{
+		this._env.root.onCellClick( this );
+	}
+
 	get filtered(): boolean
 	{
 		if( !this._env.filter )
@@ -134,7 +139,7 @@ class Cell extends DStateUnit
 }
 
 
-class Box extends DStateUnit
+class Box extends DStateUnit implements IBox
 {
 	children: {[key in SpinQNString]: Cell};
 
@@ -160,9 +165,14 @@ class Box extends DStateUnit
 		};
 	}
 
-	get isFilled(): boolean
+	get selectedCellsNum(): number
 	{
-		return this.children["+1/2"].selected && this.children["−1/2"].selected;
+		let counter: number = 0;
+		if( this.children["+1/2"].selected )
+			counter++;
+		if( this.children["−1/2"].selected )
+			counter++;
+		return counter;
 	}
 
 	fill(): void
@@ -205,7 +215,7 @@ class Box extends DStateUnit
 	}
 }
 
-class Block extends DStateUnit
+class Block extends DStateUnit implements IBlock
 {
 	children: {[key: string]: Box} = {};
 
@@ -213,13 +223,15 @@ class Block extends DStateUnit
 
 	_env: DEnvironment;
 
+	#length: number;
+
 
 	constructor( qn: BlockQN, env: DEnvironment )
 	{
 		super();
 		this.qn = qn;
 		this._env = env;
-		this._createBoxes();
+		this.#length = this._createBoxes();
 
 		makeObservable( this, {
 			children: observable,
@@ -229,7 +241,11 @@ class Block extends DStateUnit
 		} );
 	}
 
-	private _createBoxes(): void
+	/**
+	 * Создать контейнеры
+	 * @returns Количество созданных контейнеров
+	 */
+	private _createBoxes(): number
 	{
 		const mMax = this.qn.l.value;
 		const mMin = this.qn.l.value * -1;
@@ -239,31 +255,31 @@ class Block extends DStateUnit
 			const m = QN.m( i );
 			this.children[ m.toString() ] = new Box({ ...this.qn, m }, this._env);
 		}
+
+		return mMax * 2 + 1;
 	}
 
-	toggle(): boolean
+	toggle(): number
 	{
-		if( this.isFilled )
+		const selectedCells = this.selectedCellsNum;
+		if( selectedCells === this.#length * 2 )
 		{
 			this.clear();
-			return false;
+			return -1 * selectedCells;
 		}
-			
 		else
 		{
 			this.fill();
-			return true;
+			return this.#length - selectedCells;
 		}
 	}
 
-	get isFilled(): boolean
+	get selectedCellsNum(): number
 	{
+		let counter: number = 0;
 		for( const box of Object.values( this.children ) )
-		{
-			if( !box.isFilled )
-				return false;
-		}
-		return true;
+			counter += box.selectedCellsNum;
+		return counter;
 	}
 
 	fill(): void
@@ -281,6 +297,11 @@ class Block extends DStateUnit
 	getBox( m: string ): Box | undefined
 	{
 		return this.children[ m ];
+	}
+
+	onClick(): void
+	{
+		this._env.root.onBlockClick( this );
 	}
 
 	get filtered(): boolean
@@ -342,10 +363,12 @@ class Column
 =            State Class            =
 =============================================*/
 
-class DiagramState
+class DiagramState implements IDiagramState
 {
 	children: {[key: string]: Column} = {};
 	lastShot?: Cell;
+	mode: InteractionMode;
+	cellCounter: number;
 	_env: DEnvironment;
 
 	constructor( filter?: IFilter, highlight?: IFilter )
@@ -353,16 +376,22 @@ class DiagramState
 		this._env = {
 			filter,
 			highlight,
+			root: this,
 		};
 		
 		this._createColumns();
 
 		makeObservable( this, {
 			children: observable,
+			mode: observable,
+			cellCounter: observable,
 			_env: observable,
 			doesSpecifyCell: computed,
 			doDamage: action,
 		});
+
+		this.mode = 'none';
+		this.cellCounter = 0;
 	}
 
 	private _createColumns(): void
@@ -375,6 +404,11 @@ class DiagramState
 				this._env
 			);
 		}
+	}
+
+	setInteractionMode( mode: InteractionMode ): void
+	{
+		this.mode = mode;
 	}
 
 	getColumn( n: string ): Column | undefined
@@ -397,12 +431,31 @@ class DiagramState
 
 	toggleBlock( qn: BlockQN ): boolean
 	{
-		return this.getBlock( qn )?.toggle() === true;
+		const selectedCells = this.getBlock( qn )?.toggle() || 0;
+		return selectedCells > 0;
 	}
 
 	toggleCell( qn: CellQN ): boolean
 	{
 		return this.getCell( qn )?.toggle() === true;
+	}
+
+	onCellClick( cell: ICell ): void
+	{
+		if( this.mode === 'cell' )
+		{
+			const cellState = cell.toggle();
+			if( cellState )
+				this.cellCounter++;
+			else
+				this.cellCounter--;
+		}
+	}
+
+	onBlockClick( block: IBlock ): void
+	{
+		if( this.mode === 'block' )
+			this.cellCounter += block.toggle();
 	}
 
 	get doesSpecifyCell(): boolean

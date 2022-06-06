@@ -89,3 +89,7 @@ class Profile implements IProfile
 
 
 export default Profile;
+
+export type {
+	IProfile,
+}

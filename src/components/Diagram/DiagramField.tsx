@@ -2,7 +2,9 @@ import React, {FC} from 'react';
 import { observer } from 'mobx-react';
 import Ship from './Ship';
 import IDiagram from '../../core/game/Diagram/DiagramInterface';
+import Chemistry from '../../core/game/Services/Chemistry';
 
+const block = Chemistry.block;
 
 interface IProps {
 	diagram: IDiagram,
@@ -15,44 +17,25 @@ const DiagramField: FC<IProps> = observer(({
 	const state = diagram.observableState;
 	return (
 		<g>
-			<Ship block={state.getBlock( '1', 's' )!}
-			/>
-			<Ship block={state.getBlock( '2', 's' )!}
-			/>
-			<Ship block={state.getBlock( '2', 'p' )!}
-			/>
-			<Ship block={state.getBlock( '3', 's' )!}
-			/>
-			<Ship block={state.getBlock( '3', 'p' )!}
-			/>
-			<Ship block={state.getBlock( '3', 'd' )!}
-			/>
-			<Ship block={state.getBlock( '4', 's' )!}
-			/>
-			<Ship block={state.getBlock( '4', 'p' )!}
-			/>
-			<Ship block={state.getBlock( '4', 'd' )!}
-			/>
-			<Ship block={state.getBlock( '4', 'f' )!}
-			/>
-			<Ship block={state.getBlock( '5', 's' )!}
-			/>
-			<Ship block={state.getBlock( '5', 'p' )!}
-			/>
-			<Ship block={state.getBlock( '5', 'd' )!}
-			/>
-			<Ship block={state.getBlock( '5', 'f' )!}
-			/>
-			<Ship block={state.getBlock( '6', 's' )!}
-			/>
-			<Ship block={state.getBlock( '6', 'p' )!}
-			/>
-			<Ship block={state.getBlock( '6', 'd' )!}
-			/>
-			<Ship block={state.getBlock( '7', 's' )!}
-			/>
-			<Ship block={state.getBlock( '7', 'p' )!}
-			/>
+			<Ship block={state.getBlock( block({ n: 1, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 2, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 2, l: 'p' }) )!} />
+			<Ship block={state.getBlock( block({ n: 3, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 3, l: 'p' }) )!} />
+			<Ship block={state.getBlock( block({ n: 3, l: 'd' }) )!} />
+			<Ship block={state.getBlock( block({ n: 4, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 4, l: 'p' }) )!} />
+			<Ship block={state.getBlock( block({ n: 4, l: 'd' }) )!} />
+			<Ship block={state.getBlock( block({ n: 4, l: 'f' }) )!} />
+			<Ship block={state.getBlock( block({ n: 5, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 5, l: 'p' }) )!} />
+			<Ship block={state.getBlock( block({ n: 5, l: 'd' }) )!} />
+			<Ship block={state.getBlock( block({ n: 5, l: 'f' }) )!} />
+			<Ship block={state.getBlock( block({ n: 6, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 6, l: 'p' }) )!} />
+			<Ship block={state.getBlock( block({ n: 6, l: 'd' }) )!} />
+			<Ship block={state.getBlock( block({ n: 7, l: 's' }) )!} />
+			<Ship block={state.getBlock( block({ n: 7, l: 'p' }) )!} />
 		</g>
 	);
 });

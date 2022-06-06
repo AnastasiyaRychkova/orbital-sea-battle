@@ -1,13 +1,13 @@
+export type AliasId = 'mdl'
+| 'gfm'
+| 'mrn'
+| '_ai';
+
 export interface Alias
 {
 	name: string;
-	id: string;
+	id: AliasId;
 }
-
-export type AliasId = 'mdl'
-					| 'gfm'
-					| 'mrn'
-					| '_ai';
 
 
 let _base = new Map<string, Alias>();

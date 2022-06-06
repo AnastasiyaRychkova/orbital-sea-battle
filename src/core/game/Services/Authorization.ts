@@ -1,6 +1,7 @@
 import { Alias } from "../Aliases";
 import Profile from "../GameplayEntities/Profile";
 import User from "../GameplayEntities/User";
+import Store from "./Store/Store";
 
 let authorizedUser: User | null = null;
 
@@ -15,9 +16,9 @@ export default {
 		return authorizedUser || undefined;
 	},
 
-	get savedProfiles(): Profile[]
+	async getSavedProfiles(): Promise<Profile[]>
 	{
-		return [];
+		return await Store.loadProfiles();
 	},
 
 	authorize( profile: Profile ): User
@@ -30,7 +31,10 @@ export default {
 		if( authorizedUser )
 			throw new Error( "Creating a new profile and authorization is not available due to an active profile" );
 			
-		const profile = new Profile( { name, aliasId: alias } );
+		const profile = new Profile( {
+			name,
+			aliasId: alias?.id || '_ai'
+		});
 		// _saveProfile( profile );
 		const user = new User( profile );
 		authorizedUser = user;

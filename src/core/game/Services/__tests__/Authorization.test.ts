@@ -11,7 +11,9 @@ describe( 'Authorization Service', () => {
 
 	test( 'no authorized user after loading service', () => {
 		expect( Auth.authorizationPassed ).toBeFalsy();
-		expect( Auth.savedProfiles ).toHaveLength( 0 );
+		Auth.getSavedProfiles().catch( () => {
+			expect( true ).toBe( true );
+		} )
 	} );
 
 	test( 'creation a new profile', () => {
@@ -30,7 +32,7 @@ describe( 'Authorization Service', () => {
 		const user = Auth.authorizedUser!;
 		const profile = new Profile( {
 			name: user.name,
-			aliasId: user.alias,
+			aliasId: user.alias.id,
 			id: user.id,
 		} );
 
@@ -41,7 +43,7 @@ describe( 'Authorization Service', () => {
 		const user = Auth.authorizedUser!;
 		const profile = new Profile( {
 			name: 'Other name',
-			aliasId: user.alias,
+			aliasId: user.alias.id,
 			id: user.id,
 		} );
 

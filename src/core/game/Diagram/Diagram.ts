@@ -6,7 +6,7 @@ import EventProvider from "../../util/EventEmitter/EventProvider";
 
 import type { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
 import type { default as IDiagram, DiagramEvent, DiagramEventData } from "./DiagramInterface";
-import type { StateType } from "./DObjectState.d";
+import type { IDiagramState } from "./DObjectState.d";
 import type IFilter from "./Filter/FilterInterface";
 
 
@@ -57,7 +57,7 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		this._disabled = false;
 	}
 
-	get observableState(): StateType
+	get observableState(): IDiagramState
 	{
 		return this._state;
 	}

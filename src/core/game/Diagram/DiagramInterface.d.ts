@@ -2,7 +2,7 @@ import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
 import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
 import type { CellQN, BlockQN, QNStringScheme
 } from "../ChemicalElement/QuantumNumbers";
-import { StateType } from "./DObjectState.d";
+import { IDiagramState } from "./DObjectState.d";
 import { ElemConfig } from '../Services/Chemistry';
 
 
@@ -24,7 +24,7 @@ export type DiagramEventData = {
 export default interface IDiagram extends IEventProvider<DiagramEvent, DiagramEventData>
 {
 	
-	observableState: StateType;
+	observableState: IDiagramState;
 	
 	/**
 	 * Установить состояние диаграммы, соответствующее химическому элементу с указанным порядковым номером

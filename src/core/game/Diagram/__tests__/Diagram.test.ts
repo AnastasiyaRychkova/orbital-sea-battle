@@ -13,11 +13,11 @@ describe( 'Diagram without filter and highlight layout', () => {
 
 	test( 'toggle block', () => {
 		const blockQN = Chemistry.block( {n: 3, l: 'd'} );
-		expect( diagram.observableState.getBlock( blockQN ).isFilled ).toBeFalsy();
+		expect( diagram.observableState.getBlock( blockQN )?.selectedCellsNum ).toBe( 1 );
 
 		expect( diagram.toggleBlock( blockQN ) ).toBeTruthy();
 
-		expect( diagram.observableState.getBlock( blockQN ).isFilled ).toBeTruthy();
+		expect( diagram.observableState.getBlock( blockQN )?.selectedCellsNum ).toBe( 5 * 2 );
 	} );
 
 	test( 'listening shot event', () => {

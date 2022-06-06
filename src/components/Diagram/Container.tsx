@@ -2,14 +2,14 @@ import React, {FC} from 'react';
 import { observer } from 'mobx-react';
 import Cell from './Cell';
 import ContainerSelection from './ContainerSelection';
-import type { BoxType } from '../../core/game/Diagram/DObjectState';
+import type { IBox } from '../../core/game/Diagram/DObjectState.d';
 import { CELL_WIDTH } from './properties';
 
 
 interface IProps {
 	x: number,
 	y: number,
-	box: BoxType,
+	box: IBox,
 }
 
 

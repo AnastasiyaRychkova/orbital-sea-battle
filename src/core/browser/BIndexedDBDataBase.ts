@@ -24,12 +24,20 @@ class BIndexedDBDataBase
 		this.#db = db;
 	}
 
-	start()
+	open( onClose?: ( name: string ) => void )
 	{
 		this.#db.onversionchange = event => {
-			this.#db.close();
+			this.close();
 			console.log("A new version of this page is ready. Please reload or close this tab!");
 		};
+
+		if( onClose )
+			this.#db.onclose = () => { onClose( this.#db.name ) };
+	}
+
+	close()
+	{
+		this.#db.close();
 	}
 
 	/**
@@ -96,6 +104,23 @@ class BIndexedDBDataBase
 	{
 		throw new Error("Method not implemented");
 		
+	}
+
+	getRow( storeName: string, keyValue: any ): Promise<any>
+	{
+		const promise = new Promise<any[]>(( resolve, reject ) => {
+			const request = this.#db.transaction( [storeName], 'readonly' )
+									.objectStore( storeName )
+									.get( keyValue );
+
+			request.onsuccess = () => {
+				resolve( request.result );
+			}
+			request.onerror = () => {
+				reject( request.error?.message );
+			}
+		} );
+		return promise;
 	}
 
 	getAll( storeName: string ): Promise<any[]>

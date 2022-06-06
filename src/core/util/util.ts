@@ -1,3 +1,5 @@
+import Stopwatch, { IStopwatch } from "./Stopwatch/Stopwatch";
+
 export function randomInRange( from: number, to: number ): number
 {
 	return (to - from) * Math.random() + from;
@@ -25,4 +27,13 @@ export function promiseWithValue<T>( value: T ): Promise<T>
 	return new Promise<T>( ( resolve ) => {
 		resolve( value );
 	} );
+}
+
+export function stopwatch( value?: number | Date ): IStopwatch
+{
+	return new Stopwatch( value );
+}
+
+export type {
+	IStopwatch,
 }

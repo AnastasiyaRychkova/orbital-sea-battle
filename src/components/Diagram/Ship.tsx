@@ -5,7 +5,7 @@ import Container from './Container';
 import ShipName from './ShipName';
 import ShipSelection from './ShipSelection';
 import type { Coordinates } from './types';
-import type{ BlockType } from '../../core/game/Diagram/DObjectState';
+import type{ IBlock } from '../../core/game/Diagram/DObjectState.d';
 
 import {
 	CONTAINER_HEIGHT,
@@ -22,7 +22,7 @@ const COL_WIDTH_INTEGRAL: readonly number[] = [ 0, 1, 4, 9, 16, 23, 28 ];
 
 
 interface IProps {
-	block: BlockType,
+	block: IBlock,
 }
 
 

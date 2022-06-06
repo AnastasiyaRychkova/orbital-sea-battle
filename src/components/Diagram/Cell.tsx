@@ -6,14 +6,14 @@ import {
 	CONTAINER_WIDTH
 } from './properties';
 import styles from './cell.module.css';
-import type { CellType } from '../../core/game/Diagram/DObjectState';
+import type { ICell } from '../../core/game/Diagram/DObjectState.d';
 
 
 
 interface IProps {
 	x: number,
 	y: number,
-	cell: CellType,
+	cell: ICell,
 }
 
 

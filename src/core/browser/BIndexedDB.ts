@@ -1,4 +1,4 @@
-import { promiseWithError } from '../util/util';
+import { promiseWithError, promiseWithValue } from '../util/util';
 import BIndexedDBDataBase, { StoreParameters } from "./BIndexedDBDataBase";
 
 type DBScheme = {
@@ -28,7 +28,7 @@ const _bases = new Map<string, DbType>();
 	promise.then( databases => {
 		databases.forEach( ( db ) => {
 			if( db.name )
-				addNewDBNote( db.name, db.version );
+				_addNewDBNote( db.name, db.version );
 		} )
 	} )
 	.catch( ( reason ) => {
@@ -41,16 +41,22 @@ const _bases = new Map<string, DbType>();
  * @param dbName Название базы данных
  * @param version Версия базы данных
  */
-function addNewDBNote( dbName: string, version: number = 0 )
+function _addNewDBNote( dbName: string, version: number = 0 )
 {
-	_bases.set(
-		dbName,
-		{
+	const note = {
 			version,
 			opened: false,
 			db: null,
-		}
-	);
+		};
+	_bases.set( dbName, note );
+	return note;
+}
+
+function _closeDBHandler( dbName:string ) {
+	const db = _bases.get( dbName );
+	if( !db )
+		return;
+	db.opened = false;
 }
 
 
@@ -80,14 +86,17 @@ export default {
 	 * @param scheme Схема базы (версия и данные для инициализации хранилищ)
 	 * @returns База данных (BIndexedDBDataBase) или ошибка
 	 */
-	open( dbName: string, scheme: DBScheme ): Promise<BIndexedDBDataBase>
+	async openDB( dbName: string, scheme: DBScheme ): Promise<BIndexedDBDataBase>
 	{
 		if( !this.isAvailable() )
 			return promiseWithError( 'IndexedDB is not available' );
 
-		const database = _bases.get( dbName );
+		let database = _bases.get( dbName );
 		if( !database )
-			addNewDBNote( dbName, scheme.version );
+			database = _addNewDBNote( dbName, scheme.version );
+
+		if( database.opened && database.db )
+			return promiseWithValue( database.db );
 
 		const promise = new Promise<BIndexedDBDataBase>( ( resolve, reject ) => {
 			
@@ -100,7 +109,7 @@ export default {
 				resolve( database!.db );
 			};
 
-			request.onerror = ( event ) => {
+			request.onerror = () => {
 				reject( request.error );
 			};
 
@@ -110,7 +119,7 @@ export default {
 				database!.version = scheme.version;
 				database!.opened = true;
 
-				db.start();
+				db.open( _closeDBHandler );
 				if( db.isEmpty() )
 					db.init( scheme.stores );
 				else
@@ -125,6 +134,14 @@ export default {
 		
 		return promise;
 	},
+
+	closeDB( dbName: string ): void
+	{
+		const base = _bases.get( dbName );
+		if( !base )
+			return;
+		base.db?.close();
+	}
 }
 
 export type {

@@ -52,13 +52,13 @@ describe( 'Diagram state without filter or highlight layout', () => {
 		diagram.toggleBlock( blockQN );
 
 		expect( diagram.hasSpin( Chemistry.cell( {n: 3, l: 's', m: 0, s: -1 } ) ) ).toBeTruthy();
-		expect( block!.isFilled ).toBeTruthy();
+		expect( block!.selectedCellsNum ).toBe( 2 );
 
 		diagram.toggleBlock( blockQN );
 
 		expect( diagram.hasSpin( Chemistry.cell( {n: 3, l: 's', m: 0, s: -1 } ) ) ).toBeFalsy();
 		expect( diagram.hasSpin( Chemistry.cell( {n: 3, l: 's', m: 0, s: 1 } ) ) ).toBeFalsy();
-		expect( block!.isFilled ).toBeFalsy();
+		expect( block!.selectedCellsNum ).toBe( 0 );
 	} );
 
 	test( 'toggle block with multiple boxes from empty state', () => {
@@ -67,23 +67,23 @@ describe( 'Diagram state without filter or highlight layout', () => {
 		expect( block ).not.toBeUndefined();
 
 		block!.toggle();
-		expect( block!.isFilled ).toBeTruthy();
+		expect( block!.selectedCellsNum ).toBe( 7 * 2 );
 
 		block!.toggle();
-		expect( block?.isFilled ).toBeFalsy();
+		expect( block?.selectedCellsNum ).toBe( 0 );
 	} );
 
 	test( 'toggle partially filled block: ▮▯ ▮▯ ▯▯ --> ▮▮ ▮▮ ▮▮ ', () => {
 		diagram.getCell( Chemistry.cell( {n: 3, l: 'p', m: 1, s: 1} ) )?.toggle();
 		diagram.getCell( Chemistry.cell( {n: 3, l: 'p', m: 0, s: 1} ) )?.toggle();
 		const block = diagram.getBlock( Chemistry.block( {n: 3, l: 'p'} ) );
-		expect( block?.isFilled ).toBeFalsy();
+		expect( block?.selectedCellsNum ).toBe( 2 );
 		
 		block!.toggle();
-		expect( block!.isFilled ).toBeTruthy();
+		expect( block!.selectedCellsNum ).toBe( 6 );
 
 		block!.toggle();
-		expect( block!.isFilled ).toBeFalsy();
+		expect( block!.selectedCellsNum ).toBe( 0 );
 	} );
 
 	test( 'doing damage', () => {
