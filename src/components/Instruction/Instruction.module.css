@@ -9,7 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.25);
 }
 
 .bubble {
@@ -28,6 +28,7 @@
 	padding: 25px;
 	background-color: white;
 	border-radius: 25px;
+	user-select: none;
 }
 
 .bubble:after {
@@ -48,4 +49,8 @@
 	max-height: 90%;
 	max-width: 60%;
 	z-index: 1001;
+}
+
+.blur {
+	filter: blur(3px);
 }

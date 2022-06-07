@@ -20,9 +20,17 @@
 	"actions": {
 		
 		"play" : "Play",
-		"main" : "Back to main"
+		"main" : "Back to main",
+		"giveup" : "Give Up"
 
 	},
+
+	"status": {
+		"choosing" : "choosing",
+		"filling" : "filling",
+		"moving" : "moving",
+		"waiting" : "waiting"
+ 	},
 
 	"pages": {
 
@@ -36,6 +44,19 @@
 			"construction": "Under construction"
 		}
 
+	},
+
+	"instructions": {
+		"selecting": "Let's choose the shipment plan",
+		"filling": "Now fill the ships"
+	},
+
+
+	"aliases": {
+		"_ai" : "Droid",
+		"mdl" : "Mendeleev",
+		"gfm" : "Hofmann",
+		"mrn" : "Moerner"
 	},
 
 	"periodic_table": [

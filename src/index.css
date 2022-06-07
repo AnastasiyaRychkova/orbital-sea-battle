@@ -147,3 +147,18 @@ body {
 		font-size:10px;
 	}
 }
+
+
+@media screen and (max-height: 375px) and (max-width:812px){
+	body {
+		background: none;
+		background-color: var(--secondary-800-background);
+	}
+}
+
+@media screen and (max-height: 812px) and (max-width:375px){
+	body {
+		background: none;
+		background-color: var(--secondary-800-background);
+	}
+}

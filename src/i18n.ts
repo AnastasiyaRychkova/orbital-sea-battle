@@ -9,7 +9,7 @@ i18n
 	.use( LanguageDetector ) // для определения языка пользователя
 	.use( initReactI18next )
 	.init( {
-		debug: true,
+		// debug: true,
 		fallbackLng: 'ru',
 		load: 'languageOnly'
 	} );

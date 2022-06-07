@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './GameInterface.module.css';
 import texts from '../../style/text.module.css';
 // import icons from '../../style/icons.module.css';
@@ -56,6 +57,8 @@ const PlayerInfo: FC<IPlayerProps> = ( {
 	status,
 	isOpponent = false
 } ) => {
+	const { t } = useTranslation();
+
 	return (
 		<div className = {
 			styles.player + " " +
@@ -70,7 +73,8 @@ const PlayerInfo: FC<IPlayerProps> = ( {
 						: styles["player__avatar-active"]
 					)
 					: "" )
-				} 
+				}
+				alt = { t( "aliases." + alias.id ) }
 				src = { "/img/aliases/" + alias.id + ".png" }
 			/>
 
@@ -112,6 +116,7 @@ export default function TurnInfo( props: ITurnProps ) {
 
 				<img
 					className = { styles["sputnik-img"] }
+					alt = ""
 					src = {
 						(props.turn === "none")
 						? spNone

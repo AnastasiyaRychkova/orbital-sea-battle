@@ -184,7 +184,12 @@
 	display: flex;
 	justify-content: center;
 }
-
+.default-menu-left-center-right{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap:1rem;
+}
 .button-exit-position{
 	position:absolute;
 	left:0;

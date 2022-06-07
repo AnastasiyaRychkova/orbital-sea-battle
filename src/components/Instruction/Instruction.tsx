@@ -8,32 +8,39 @@ import { useTranslation } from 'react-i18next';
 
 interface IProps {
 	/** Сообщение */
-	message: string
+	message: string,
 
-	/** Функция по нажатию (для закрытия окна) */
+	/** Функция для закрытия окна */
 	onClick: () => void,
+
+	children: React.ReactNode,
 }
 
 /** Компонент для вывода инструкций игроку */
 export default function Instruction( props: IProps ) {
 	const { t } = useTranslation();
 
-	return (
-		<div
-			className = { styles.overlay }
-			onClick = { props.onClick }
-		>
-			<div className = { styles.bubble }>
-				{ props.message }
-			</div>
+	return ( 
+		<>
+			<div
+				className = { styles.overlay }
+				onClick = { () => { props.onClick(); } }
+			>
+				<div className = { styles.bubble }>
+					{ props.message }
+				</div>
 
-			<img
-				className = { styles.captain }
-				src = { captain }
-				height = "760"
-				width = "600"
-				alt = { t("components.captain") }
-			/>
-		</div>
-	)
+				<img
+					className = { styles.captain }
+					src = { captain }
+					height = "760"
+					width = "600"
+					alt = { t("components.captain") }
+				/>
+			</div>
+			<div className = { styles.blur }>
+				{ props.children }
+			</div>
+		</>
+	);
 }
