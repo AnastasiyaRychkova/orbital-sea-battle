@@ -71,6 +71,8 @@ export interface IBlock extends DUnit
 	 * */
 	toggle(): number
 
+	onClick(): void
+
 	selectedCellsNum: number
 }
 

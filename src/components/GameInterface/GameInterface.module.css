@@ -1,37 +1,40 @@
 .all-interface{
-	position: absolute;
+	box-sizing: border-box;
 	display: flex;
+	position: absolute;
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
+	min-width:320px;
 	height: 100%;
 	min-height: 200px;
-	min-width:320px;
 	padding: 1rem;
-	box-sizing: border-box;
+	pointer-events: none;
 }
 
 /*верхняя панель управления интерфейса*/
 .interface{
-	width:100%;
+	box-sizing: border-box;
 	display:flex;
 	justify-content:space-between;
-	box-sizing: border-box;
+	width:100%;
+	pointer-events: all;
 }
 
 .interface__function__info{
+	display: flex;
 	position: absolute;
 	top:6rem;
-	display: flex;
-	flex-direction: column;
-	gap:1.5rem;
 	align-items: flex-start;
+	flex-direction: column;
+	pointer-events: all;
+	gap:1.5rem;
 }
 
 /*все кнопки-иконки интерфейса*/
 .interface-icon-button{  /*icon-interface*/
-	min-height: 3.5rem;
 	min-width:3.5rem;
+	min-height: 3.5rem;
 	padding: 1rem;
 	outline: none;
 	box-shadow: var(--box-shadow-input);
@@ -48,9 +51,9 @@
 
 /*характереистики иконки элемента в левом меню*/
 .icon-element{
-	color: var(--secondary-100-text);
-	background-color:  var(--secondary-900-dark-backing) ;
 	outline:  solid var(--secondary-100-text) 1px;
+	background-color:  var(--secondary-900-dark-backing) ;
+	color: var(--secondary-100-text);
 }
 
 /*скрытие выбранного элемента при больших экранах*/
@@ -61,19 +64,19 @@
 /*расположение характеристик время/точность слева для маленьких экранов*/
 .left-mini-info-list{
 	display: flex;
+	align-items: flex-start;
 	flex-direction: column;
 	gap:0.5rem;
-	align-items: flex-start;
 }
 
 /*блок характеристика*/
 .move-info-wrap{
-	padding:0.5rem 1rem ;
 	display:flex;
 	align-items: center;
-	gap: 0.8rem;
-	background-color: var(--secondary-900-dark-backing);
 	height:min-content;
+	padding:0.5rem 1rem ;
+	background-color: var(--secondary-900-dark-backing);
+	gap: 0.8rem;
 }
 .move-target {
     margin: 0 4.5rem;
@@ -101,21 +104,21 @@
 }
 
 .player{
-	background-color: var(--disable-800-light-backing) ;
-	padding:0.5rem;
+	display:flex;
+	align-items: center;
 	width:19.93rem;
 	height: min-content;
-	display:flex;
-	align-items: center;	
-	gap:1rem;
+	padding:0.5rem;
 	box-shadow: var(--box-shadow-input);
+	background-color: var(--disable-800-light-backing) ;	
+	gap:1rem;
 }
 
 /* фото игрока */
 .player__avatar{
 	opacity: 0.7;
-	height: 3rem;
 	width:3rem;
+	height: 3rem;
 }
 
 .player__info{
@@ -139,15 +142,15 @@
 }
 
 .truncate-text {
-	white-space: nowrap;
+	width:13rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width:13rem;
+	white-space: nowrap;
 }
 .player__info__status{
 	display:flex;
-	gap: 0.5rem;
 	align-items: center;
+	gap: 0.5rem;
 }
 /* .circle {
 	height: 0.5em;
@@ -174,10 +177,11 @@
 
 /* нижняя панель интерфейса */
 .bottom-control-panel{
-	width:100%;
+	box-sizing: border-box;
 	position: sticky;
 	bottom:1rem;
-	box-sizing: border-box;
+	width:100%;
+	pointer-events: all;
 }
 
 .default-menu{
@@ -186,14 +190,14 @@
 }
 .default-menu-left-center-right{
 	display: flex;
-	justify-content: space-between;
 	align-items: flex-end;
+	justify-content: space-between;
 	gap:1rem;
 }
 .button-exit-position{
 	position:absolute;
-	left:0;
 	bottom:0;
+	left:0;
 }
 
 .nav-3{
@@ -203,8 +207,8 @@
 
 @media screen and  (max-width:1400px){ 
 	.interface__function__info{
-		gap:1rem;
 		top:6.5rem;
+		gap:1rem;
 	}
 
 }
@@ -241,8 +245,8 @@
 
 @media screen and (max-height: 375px) and (max-width:812px){
 	.interface{
-		background-image: none;
 		background-color: var(--secondary-800-background);
+		background-image: none;
 	}
 
 	.interface-exit{
@@ -259,20 +263,20 @@
 }
 @media screen and  (max-width:520px){
 	.sputnik-img{
-		grid-row: 1 / 3;
-		grid-column: 2/3;
 		display: flex;
 		align-self: center;
 		width: 36px;
 		height:36px;
+		grid-row: 1 / 3;
+		grid-column: 2/3;
 	}
 	.players{
-		grid-template-columns:  repeat(2, min-content);
 		column-gap: 2rem;
+		grid-template-columns:  repeat(2, min-content);
 	}
 	.icon-tiny{
-		height: 14px;
 		width: 14px;
+		height: 14px;
 	}
 	.nav-3{
 		display:flex;

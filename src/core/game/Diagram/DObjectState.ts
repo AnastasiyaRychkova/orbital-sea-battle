@@ -8,7 +8,7 @@ import type {
 	QuantumNumbers,
 	MainQN,
 } from '../Services/Chemistry';
-import type { IBlock, ICell, DEnvironment, IDiagramState, InteractionMode, SpinQNString, DUnit, IBox } from "./DObjectState.d";
+import type { IBlock, ICell, DEnvironment, IDiagramState, InteractionMode, SpinQNString, IBox } from "./DObjectState.d";
 import IFilter, { StoreKey } from "./Filter/FilterInterface";
 
 
@@ -96,10 +96,12 @@ class Cell extends DStateUnit implements ICell
 			filtered: computed,
 			highlighted: computed,
 			doDamage: action,
+			onClick: action,
 		} );
 
 		this.qn = qn
 		this._env = env;
+		this.onClick = this.onClick.bind( this );
 	}
 
 	toggle(): boolean
@@ -116,6 +118,7 @@ class Cell extends DStateUnit implements ICell
 
 	onClick(): void
 	{
+		console.log( 'click' );
 		this._env.root.onCellClick( this );
 	}
 
@@ -229,16 +232,18 @@ class Block extends DStateUnit implements IBlock
 	constructor( qn: BlockQN, env: DEnvironment )
 	{
 		super();
-		this.qn = qn;
-		this._env = env;
-		this.#length = this._createBoxes();
-
 		makeObservable( this, {
 			children: observable,
 			_env: observable,
 			filtered: computed,
 			highlighted: computed,
+			onClick: action,
 		} );
+
+		this.qn = qn;
+		this._env = env;
+		this.#length = this._createBoxes();
+		this.onClick = this.onClick.bind( this );
 	}
 
 	/**

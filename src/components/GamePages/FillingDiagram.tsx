@@ -6,7 +6,6 @@ import { GameTopInterface, GameBottomInterface, All } from '../GameInterface/Gam
 import DiagramComponent from '../Diagram/Diagram';
 
 import IProfile from '../../core/game/GameplayEntities/ProfileInterface';
-import IDiagram from '../../core/game/Diagram/DiagramInterface';
 import Diagram from '../../core/game/Diagram/Diagram';
 import { ChemicalElement } from '../../core/game/ChemicalElement/ChemicalElement';
 
@@ -31,7 +30,8 @@ interface IProps {
 export default function FillingDiagram( props: IProps ) {
 	const { t } = useTranslation();
 
-	const D = new Diagram();
+	const diagramState = new Diagram();
+	diagramState.observableState.setInteractionMode( 'cell' );
 
 	return (
 		<Body>
@@ -54,7 +54,7 @@ export default function FillingDiagram( props: IProps ) {
 
 			<div className = { styles["diagram-container"] } >
 				<DiagramComponent
-					diagram = { D }
+					diagram = { diagramState }
 					zooming = { true }
 					className = { styles["diagram"] }
 				/>

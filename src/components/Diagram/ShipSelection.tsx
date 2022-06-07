@@ -1,21 +1,21 @@
 import React, {FC} from 'react';
+import { observer } from 'mobx-react';
 import cn from 'classnames';
 import { OrbitalQN } from '../../core/game/ChemicalElement/QuantumNumbers';
-import type { BlockType } from '../../core/game/Diagram/DObjectState';
-import type { Coordinates } from './types';
 import styles from './diagram.module.css';
 
 import {
 	CONTAINER_HEIGHT,
 	CONTAINER_WIDTH,
 } from './properties';
-import { observer } from 'mobx-react';
+import type { IBlock } from '../../core/game/Diagram/DObjectState.d';
+import type { Coordinates } from './types';
 
 
 
 interface IProps {
 	location: Coordinates,
-	block: BlockType,
+	block: IBlock,
 	children: React.ReactNode,
 }
 
@@ -53,6 +53,7 @@ const ShipSelection: FC<IProps> = observer(({
 			width={CONTAINER_WIDTH * length}
 			height={CONTAINER_HEIGHT}
 			fill="none"
+			onClick={block.onClick}
 			/>
 		</>
 	);

@@ -38,6 +38,7 @@ const Cell: FC<IProps> = observer(({
 			})}
 			x={x}
 			y={y}
+			onClick={cell.onClick}
 
 			transform={cell.qn.s.value < 0
 						? "rotate( 180 "+(x + CONTAINER_WIDTH/4)+" "+(y + CONTAINER_HEIGHT/2)+")"
