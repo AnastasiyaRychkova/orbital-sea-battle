@@ -1,11 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Body from '../Body/Body';
-import PeriodicTable from '../PeriodicTableUnit/PeriodicTableUnit';
-import { GameTopInterface, GameBottomInterface } from '../GameInterface/GameInterface';
+import Body from '../../../components/Body/Body';
+import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
+import { GameTopInterface, GameBottomInterface } from '../../../components/GameInterface/GameInterface';
 
-import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
-
+import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
 
 interface IProps {
 	/** Локальный игрок */

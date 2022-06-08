@@ -1,0 +1,43 @@
+.button-icon{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap:1rem;
+}
+
+.paging-left{
+	position: absolute;
+	top:50%;
+	left:1rem;
+}
+
+.paging-right{
+	position: absolute;
+	top:50%;
+	right:1rem;
+}
+
+.button-paging {
+	padding: 0;
+	outline: none;
+	background-color: transparent;
+}
+
+.nav-3 {
+	display:flex;
+	gap:3.75rem;
+	justify-self: center;
+}
+
+/* @media screen and (max-height: 375px) and (max-width:812px) {
+	.nav-3{
+		display: none;
+	}
+}
+
+@media screen and (max-width:520px) {
+	.nav-3 {
+		display:flex;
+	}
+} */

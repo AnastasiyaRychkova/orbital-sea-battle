@@ -2,9 +2,11 @@
 .icon__color{
 	fill:var(--primary-300);
 }
-.icon__color:hover{
-	fill:var(--primary-100);
-	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+@media(hover: hover) {
+	.icon__color:hover{
+		fill:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
 }
 .icon__color:active{
 	fill:var(--primary-500);
@@ -17,9 +19,11 @@
 .icon-stroke__color{
 	stroke:var(--primary-300);
 }
-.icon-stroke__color:hover{
-	stroke:var(--primary-100);
-	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+@media(hover: hover) {
+	.icon-stroke__color:hover{
+		stroke:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
 }
 .icon-stroke__color:active{
 	stroke:var(--primary-500);
@@ -32,9 +36,11 @@
 .icon-secondary{
 	fill:var(--primary-600-subheader);
 }
-.icon-secondary:hover{
-	fill:var(--primary-100);
-	filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+@media(hover: hover) {
+	.icon-secondary:hover{
+		fill:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
 }
 .icon-secondary:active{
 	fill:var(--primary-200-clickable);
@@ -42,11 +48,21 @@
 .icon-secondary:disabled{
 	fill:var(--disable-700);
 }
-.icon-secondary-selected{
+.icon-secondary:disabled, .icon-secondary--selected:disabled {
+	fill:var(--disable-700);
+}
+.icon-secondary--selected{
 	fill:var(--primary-200-clickable);
 }
-
-
+@media(hover: hover) {
+	.icon-secondary--selected:hover{
+		fill:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
+}
+.icon-secondary--selected:active{
+	fill:var(--primary-300);
+}
 
 
 /*размерыы иконок*/

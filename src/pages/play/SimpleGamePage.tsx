@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ChoosingTable from '../../components/GamePages/ChoosingTable';
-import FillingDiagram from '../../components/GamePages/FillingDiagram';
+import ChoosingTable from './preparing/ChoosingTable';
+import FillingDiagram from './preparing/FillingDiagram';
 import Instruction from '../../components/Instruction/Instruction';
 
 

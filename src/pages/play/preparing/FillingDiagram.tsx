@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Diagram.module.css';
-import Body from '../Body/Body';
-import { GameTopInterface, GameBottomInterface, All } from '../GameInterface/GameInterface';
-import DiagramComponent from '../Diagram/Diagram';
+import Body from '../../../components/Body/Body';
+import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import DiagramComponent from '../../../components/Diagram/Diagram';
 
-import IProfile from '../../core/game/GameplayEntities/ProfileInterface';
-import Diagram from '../../core/game/Diagram/Diagram';
-import { ChemicalElement } from '../../core/game/ChemicalElement/ChemicalElement';
+import IProfile from '../../../core/game/GameplayEntities/ProfileInterface';
+import Diagram from '../../../core/game/Diagram/Diagram';
+import { ChemicalElement } from '../../../core/game/ChemicalElement/ChemicalElement';
 
 interface IProps {
 	/** Локальный игрок */
