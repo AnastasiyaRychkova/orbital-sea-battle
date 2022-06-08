@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next';
 import styles from './Diagram.module.css';
 import Body from '../../../components/Body/Body';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import SelectedElement from '../../../components/GameInterface/SelectedElement/SelectedElement';
+import StartMissionButton from '../../../components/GameInterface/StartMission/StartMissionButton';
+import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 
 import IProfile from '../../../core/game/GameplayEntities/ProfileInterface';
 import Diagram from '../../../core/game/Diagram/Diagram';
 import { ChemicalElement } from '../../../core/game/ChemicalElement/ChemicalElement';
+
 
 interface IProps {
 	/** Локальный игрок */
@@ -42,13 +46,24 @@ export default function FillingDiagram( props: IProps ) {
 					enemy = { props.enemy }
 					enemyStatus = { t("status.filling") }
 					turn = { "local" }
-					// leftCorner = {  }
+					leftCorner = {
+						<SelectedElement
+							element = { props.element }
+							chosen = { 0 }
+						/>
+					}
 				/>
 		
 				<GameBottomInterface
 					giveUp = { props.back }
 				>
-					<></>
+					<FillingPanel
+						mode = { 'cell' }
+						change = { ()=>{} }
+					/>
+
+					<StartMissionButton onClick={ props.forward } />
+
 				</GameBottomInterface>
 			</All>
 

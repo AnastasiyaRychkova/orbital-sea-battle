@@ -3,6 +3,10 @@
 	display:flex;
 	flex-direction: column;
 }
+.text-wrap{
+	width: min-content;
+	text-align: left;
+}
 
 /* СТИЛИ ТЕКСТА */
 

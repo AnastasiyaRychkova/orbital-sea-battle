@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './GameInterface.module.css';
-import button from './FullScreenButton.module.css';
-import icons from '../../style/icons.module.css';
+import styles from '../GameInterface.module.css';
+import button from '../Buttons.module.css';
+import icons from '../../../style/icons.module.css';
 
-// import sprite from "../../img/sprite.svg";
-import img from '../../img/components/ability.svg'
+// import sprite from "../../../img/sprite.svg";
+import img from '../../../img/components/ability.svg'
 
 interface IProps {
 	/** Функция по нажатию */

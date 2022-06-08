@@ -79,8 +79,9 @@
 	width: 24px;
 }
 .icon-mini-tiny{
-	height:18px;
-}
+	height:12px;
+	max-width:30px;
+} 
 
 .icon-flip{
 	transform: rotate(180deg);

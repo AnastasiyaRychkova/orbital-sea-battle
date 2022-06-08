@@ -30,6 +30,9 @@
 	pointer-events: all;
 	gap:1.5rem;
 }
+.interface__function-big-gap {
+	gap: 1.5rem;
+}
 
 /*все кнопки-иконки интерфейса*/
 .interface-icon-button{  /*icon-interface*/
@@ -200,11 +203,6 @@
 	left:0;
 }
 
-.nav-3{
-	display:flex;
-	gap:3.75rem;
-}
-
 @media screen and  (max-width:1400px){ 
 	.interface__function__info{
 		top:6.5rem;
@@ -277,8 +275,5 @@
 	.icon-tiny{
 		width: 14px;
 		height: 14px;
-	}
-	.nav-3{
-		display:flex;
 	}
 }

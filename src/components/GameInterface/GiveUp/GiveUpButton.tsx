@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './GiveUpButton.module.css';
-import icons from '../../style/icons.module.css';
+import buttons from '../Buttons.module.css';
+import icons from '../../../style/icons.module.css';
 import { useTranslation } from 'react-i18next';
 
-import sprite from "../../img/sprite.svg";
+import sprite from "../../../img/sprite.svg";
 
 interface IProps {
 	/** Функция по нажатию */
@@ -17,7 +18,7 @@ export default function FullScreenButton( props: IProps ) {
 	return (
 		<button
 			onClick = { props.onClick }
-			className = { styles["button-icon"] + " " + styles["button-exit"] }
+			className = { buttons["button-icon"] + " " + styles["button-exit"] }
 		>
 			<svg
 				width = "20"

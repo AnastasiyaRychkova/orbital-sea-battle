@@ -4,9 +4,9 @@ import styles from './GameInterface.module.css';
 import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
 
 import TurnInfo, { Turn } from './TurnInfo';
-import AbilityButton from './AbilityButton';
-import FullScreenButton from './FullScreenButton';
-import GiveUpButton from './GiveUpButton';
+import AbilityButton from './AbilityButton/AbilityButton';
+import FullScreenButton from './FullScreen/FullScreenButton';
+import GiveUpButton from './GiveUp/GiveUpButton';
 
 interface IGameTopProps {
 	/** Локальный игрок */
@@ -35,7 +35,16 @@ export function GameTopInterface( props: IGameTopProps ) {
 			
 			<div>
 				<AbilityButton onClick = { ()=>{} } />
-				{ props.leftCorner }
+
+				<div className = {
+						styles["interface__function__info"]
+						+ " " +
+						styles["interface__function-big-gap"]
+					}
+				>
+					{ props.leftCorner }
+				</div>
+				
 			</div>
 
 			<TurnInfo
@@ -74,6 +83,7 @@ export function GameBottomInterface( props: IGameBottomProps ) {
 		</div>
 	);
 }
+
 
 interface IAllProps {
 	children: React.ReactNode;

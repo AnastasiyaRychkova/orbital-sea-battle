@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './FullScreenButton.module.css';
-import icons from '../../style/icons.module.css';
+import styles from '../Buttons.module.css';
+import icons from '../../../style/icons.module.css';
 
-import sprite  from "../../img/sprite.svg";
+import sprite  from "../../../img/sprite.svg";
 
-import Browser from "../../core/browser/Browser"
+import Browser from "../../../core/browser/Browser"
 
 function Click()
 {
