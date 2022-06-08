@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-	// MemoryRouter,
 	Routes,
 	Route,
 	Navigate,
@@ -10,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import ChoosingTable from './preparing/ChoosingTable';
 import FillingDiagram from './preparing/FillingDiagram';
 import Instruction from '../../components/Instruction/Instruction';
+import Page404 from '../404/Page404';
 
 import gameTesting from './gameTesting';
 import StatesChainObserver from './StatesChainObserver';
@@ -52,22 +52,21 @@ const SimpleGame = observer(() =>
 					<ChoosingTable
 						player = { game.player.user }
 						enemy = { game.enemy.user }
-						back = { () => {} }
+						back = { () => { controller?.giveIn() } }
 						forward = { (n: number) => {
-							console.log('Select');
 							controller?.selectElement( n );
 						} }
 					/>
 				} />
 				<Route path='/preparing/filling/*' element={
 					<FillingDiagram
-						player = { game.player.user }
-						enemy = { game.enemy.user }
-						element = { game.player.selectedElement! }
+						player = { game.player }
+						enemy = { game.enemy }
 						back = { ()=>{} }
 						forward = { ()=>{} }
 					/>
 				} />
+				<Route path="*" element={ <Page404/> } />
 				
 			</Routes>
 		</>

@@ -31,7 +31,7 @@ export default function ChoosingTable( props: IProps ) {
 				playerStatus = { t("status.choosing") }
 				enemy = { props.enemy }
 				enemyStatus = { t("status.choosing") }
-				turn = { "local" }
+				turn = { 'none' }
 			/>
 		
 			<PeriodicTable

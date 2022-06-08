@@ -118,7 +118,6 @@ class Cell extends DStateUnit implements ICell
 
 	onClick(): void
 	{
-		console.log( 'click' );
 		this._env.root.onCellClick( this );
 	}
 
@@ -275,7 +274,7 @@ class Block extends DStateUnit implements IBlock
 		else
 		{
 			this.fill();
-			return this.#length - selectedCells;
+			return (this.#length * 2) - selectedCells;
 		}
 	}
 

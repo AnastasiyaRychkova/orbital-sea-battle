@@ -1,14 +1,17 @@
-import React from 'react';
+import { observer } from 'mobx-react';
+import React, { FC } from 'react';
 import styles from './Body.module.css';
 
 interface IProps {
 	children: React.ReactNode;
 }
 
-export default function Body( props: IProps ) {
+const Body: FC<IProps> = observer(( props ) => {
 	return (
 		<div className={ styles.body2 } >
 			{ props.children }
 		</div>
 	);
-}
+});
+
+export default Body;

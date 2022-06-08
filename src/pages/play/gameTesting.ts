@@ -9,6 +9,7 @@ import type {
 
 const profile = entities.profile({
 	name: 'Игрок',
+	aliasId: 'mdl',
 	level: 2,
 	points: 100,
 });

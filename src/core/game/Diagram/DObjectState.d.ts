@@ -89,6 +89,8 @@ export interface IDiagramState
 
 	doesSpecifyCell: boolean
 
+	cellCounter: number
+
 	hasSpin( cell: CellQN ): boolean
 
 	hasCell( cell: CellQN ): boolean

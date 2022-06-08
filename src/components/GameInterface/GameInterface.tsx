@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './GameInterface.module.css';
 
 import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
@@ -7,6 +7,7 @@ import TurnInfo, { Turn } from './TurnInfo';
 import AbilityButton from './AbilityButton/AbilityButton';
 import FullScreenButton from './FullScreen/FullScreenButton';
 import GiveUpButton from './GiveUp/GiveUpButton';
+import { observer } from 'mobx-react';
 
 interface IGameTopProps {
 	/** Локальный игрок */
@@ -29,7 +30,7 @@ interface IGameTopProps {
 }
 
 /** Верхняя часть игрового интерфейса */
-export function GameTopInterface( props: IGameTopProps ) {
+const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 	return (
 		<div className = { styles.interface } >
 			
@@ -59,7 +60,7 @@ export function GameTopInterface( props: IGameTopProps ) {
 
 		</div>
 	);
-}
+});
 
 
 interface IGameBottomProps {
@@ -70,7 +71,7 @@ interface IGameBottomProps {
 }
 
 /** Нижняя часть интерфейса с кнопкой "Сдаться" */
-export function GameBottomInterface( props: IGameBottomProps ) {
+const GameBottomInterface: FC<IGameBottomProps> = observer(( props ) => {
 	return (
 		<div className = { styles["bottom-control-panel"] } >
 			<div className = { styles["default-menu-left-center-right"] } >
@@ -82,17 +83,23 @@ export function GameBottomInterface( props: IGameBottomProps ) {
 			</div>
 		</div>
 	);
-}
+});
 
 
 interface IAllProps {
 	children: React.ReactNode;
 }
 
-export function All( props: IAllProps ) {
+const All: FC<IAllProps> = observer(( props ) => {
 	return (
 		<div className={ styles["all-interface"] } >
 			{ props.children }
 		</div>
 	);
+})
+
+export {
+	GameTopInterface,
+	GameBottomInterface,
+	All,
 }

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import styles from './PeriodicTable.module.css';
 
 import { periodicTable } from '../../core/game/Services/Chemistry';
@@ -7,7 +7,7 @@ import { periodicTable } from '../../core/game/Services/Chemistry';
 import useElement from './useElement';
 import { SelectedElement } from './SelectedElement';
 import { Cell, EmptyCell, PeriodCell, GroupCell, SeriesCell } from './Cells';
-import { SelectButton } from './SelectButton';
+import Button from '../Button/Default/Button';
 
 /** Режим работы таблицы: выбор элемента или угадывание */
 export type TableMode = 'choosing' | 'guessing';
@@ -37,7 +37,7 @@ const PeriodicTableUnit: FC<IProps> = ( {
 	exceptions = false,
 	disabledElements = []
 } ) => {
-	// const { t } = useTranslation();
+	const { t } = useTranslation();
 
 	const [element, select] = useElement();
 
@@ -165,15 +165,16 @@ const PeriodicTableUnit: FC<IProps> = ( {
 				{ cells }
 			</div>
 			<div className={ styles["interface-bottom"] }>
-				<SelectButton
-					mode = { mode }
-					isDisabled = { element === 0 }
-					onClick = { () => {
-							if ( element !== 0 )
-								onSubmit( element );
-						}
-					}
-				/>
+				<Button
+					priority='primary'
+					value={t( mode === "choosing"
+								? "components.table.choose"
+								: "components.table.guess"
+					)}
+					className={styles.selectBtn}
+					disabled={element === 0}
+					onClick={() => {onSubmit( element );}}
+					/>
 			</div>
 		</>
 	);

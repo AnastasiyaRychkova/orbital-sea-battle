@@ -7,6 +7,7 @@ import texts from '../../../style/text.module.css';
 import sprite from "../../../img/sprite.svg";
 
 import { ChemicalElement } from '../../../core/game/ChemicalElement/ChemicalElement';
+import { observer } from 'mobx-react';
 
 interface IProps
 {
@@ -18,7 +19,7 @@ interface IProps
 }
 
 /** Блок с отображением выбранного элемента */
-export default function SelectedElement( props: IProps ) {
+const SelectedElement = observer(( props: IProps ) => {
 	const { t } = useTranslation();
 	
 	// const element = periodicTable.element( props.number );
@@ -102,4 +103,7 @@ export default function SelectedElement( props: IProps ) {
 			</div>
 		</>
 	);
-}
+});
+
+
+export default SelectedElement;

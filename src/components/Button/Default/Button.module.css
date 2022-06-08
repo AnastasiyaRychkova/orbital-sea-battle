@@ -109,7 +109,5 @@
 =============================================*/
 
 .text {
-	composes: button from '../../../style/typography.css';
-	composes: button-medium from '../../../style/typography.css';
+	composes: text-button-B-Medium from '../../../style/text.module.css';
 }
-

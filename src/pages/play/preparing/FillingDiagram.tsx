@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { FC, useCallback } from 'react';
+import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import styles from './Diagram.module.css';
 import Body from '../../../components/Body/Body';
@@ -8,20 +9,14 @@ import StartMissionButton from '../../../components/GameInterface/StartMission/S
 import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 
-import IProfile from '../../../core/game/GameplayEntities/ProfileInterface';
-import Diagram from '../../../core/game/Diagram/Diagram';
-import { ChemicalElement } from '../../../core/game/ChemicalElement/ChemicalElement';
-
+import type { OB_IEnemy, OB_ILocalPlayer } from '../../../core/game/OrbitalBattleship/OB_Entities';
 
 interface IProps {
 	/** Локальный игрок */
-	player: IProfile;
+	player: OB_ILocalPlayer;
 
 	/** Противник */
-	enemy: IProfile;
-
-	/** Выбранный элемент */
-	element: ChemicalElement;
+	enemy: OB_IEnemy;
 
 	/** Функция для выхода */
 	back: () => void;
@@ -30,46 +25,56 @@ interface IProps {
 	forward: () => void;
 }
 
+
 /** Страница с заполнением диаграммы */
-export default function FillingDiagram( props: IProps ) {
+const FillingDiagram: FC<IProps> = observer(( {
+	player,
+	enemy,
+	back,
+	forward,
+} ) => {
 	const { t } = useTranslation();
 
-	const diagramState = new Diagram();
-	diagramState.mode = 'cell';
+	const diagram = player.diagram!;
+	if( diagram.mode === 'none' )
+		diagram.mode = 'cell';
+	const toggleMode = useCallback( () => {
+		diagram.mode = diagram.mode === 'cell' ? 'block' : 'cell';
+	}, [] );
 
 	return (
 		<Body>
 			<All>
 				<GameTopInterface
-					player = { props.player }
+					player = { player.user }
 					playerStatus = { t("status.filling") }
-					enemy = { props.enemy }
+					enemy = { enemy.user }
 					enemyStatus = { t("status.filling") }
-					turn = { "local" }
+					turn = { "none" }
 					leftCorner = {
 						<SelectedElement
-							element = { props.element }
-							chosen = { 0 }
+							element = { player.selectedElement! }
+							chosen = { diagram.observableState.cellCounter || 0 }
 						/>
 					}
 				/>
 		
 				<GameBottomInterface
-					giveUp = { props.back }
+					giveUp = { back }
 				>
 					<FillingPanel
-						mode = { 'cell' }
-						change = { ()=>{} }
+						mode = { diagram.mode }
+						change = { toggleMode }
 					/>
 
-					<StartMissionButton onClick={ props.forward } />
+					<StartMissionButton onClick={ forward } />
 
 				</GameBottomInterface>
 			</All>
 
 			<div className = { styles["diagram-container"] } >
 				<DiagramComponent
-					diagram = { diagramState }
+					diagram = { diagram }
 					zooming = { true }
 					style = { 'ships' }
 					className = { styles["diagram"] }
@@ -77,4 +82,6 @@ export default function FillingDiagram( props: IProps ) {
 			</div>
 		</Body>	
 	);
-}
+});
+
+export default FillingDiagram;
