@@ -29,7 +29,7 @@ function PagingButton( props: IPagingButtonProps ) {
 					+ " " +
 					( props.isSelected ? icons["icon-secondary--selected"] : "" )
 				}
-				onClick = { () => { if (!props.isSelected) props.onClick; } }
+				onClick = { () => { if (!props.isSelected) props.onClick(); } }
 			>
 					<use href = { sprite + props.icon } />
 			</svg>
@@ -57,14 +57,14 @@ function Arrow( props: IArrowProps ) {
 				<svg
 					role = "presentation" width = "20" height = "20"
 					className = {
-						icons["icon-flip"]
+						( props.direction === "right" ? icons["icon-flip"] : "" )
 						+ " " +
 						icons["icon-small"]
 						+ " " +
 						icons["icon-stroke__color"]
 					}
 				>
-					<use href = { sprite + "#arrow-" + props.direction } />
+					<use href = { sprite + "#arrow-left" } />
 				</svg>
 			</button>
 		);
@@ -73,7 +73,7 @@ function Arrow( props: IArrowProps ) {
 
 
 interface IProps {
-	/** Номер выранной вкладки */
+	/** Номер выбранной вкладки */
 	tabNumber: 1 | 2 | 3;
 
 	/** Действие при выборе вкладки с отображением собственной диаграммы */
@@ -107,7 +107,7 @@ export default function TabSwitcher( props: IProps ) {
 				direction = "right"
 			/>
 
-			<nav className="nav-3">
+			<nav className = { styles["nav-3"] }>
 				<PagingButton
 					onClick = { props.first }
 					icon = "#choose"

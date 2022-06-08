@@ -4,6 +4,8 @@
 	position: absolute;
 	flex-direction: column;
 	justify-content: space-between;
+	top: 0;
+	left: 0;
 	width: 100%;
 	min-width:320px;
 	height: 100%;

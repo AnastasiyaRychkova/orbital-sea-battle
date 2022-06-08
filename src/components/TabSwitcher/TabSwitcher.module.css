@@ -7,13 +7,13 @@
 }
 
 .paging-left{
-	position: absolute;
+	position: fixed;
 	top:50%;
 	left:1rem;
 }
 
 .paging-right{
-	position: absolute;
+	position: fixed;
 	top:50%;
 	right:1rem;
 }

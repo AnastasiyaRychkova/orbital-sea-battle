@@ -9,7 +9,7 @@
 	grid-column-gap: 1.8rem;
 	grid-row-gap: 1rem;
 	box-sizing: border-box;
-	background-color: var(--secondary-900-dark-backing); 
+	/* background-color: var(--secondary-900-dark-backing);  */
 	padding: 0.8rem;
 }
 
