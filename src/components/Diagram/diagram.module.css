@@ -4,14 +4,21 @@
 @value effects: '../../style/effects.css';
 @value glow__diagram-selection-1, glow__diagram-selection-2 from effects;
 
+
 .shipName {
-	fill: secondary-100;
 	cursor: default;
-	font-size: 1.5em;
+	font-size: 24px;
 	font-family: var(--primary-font);
 	font-weight: normal;
 	user-select: none;
+	fill: secondary-100;
+	pointer-events: none;
 }
+
+
+/*=============================================
+=            Normal Style            =
+=============================================*/
 
 .container {
 	stroke: #A1FDD666;
@@ -64,4 +71,45 @@
 .shipStroke.filtered {
 	stroke: primary-50;
 	filter: drop-shadow(glow__diagram-selection-2);
+}
+
+
+/*=============================================
+=            Ship Style            =
+=============================================*/
+
+svg[data-mode='cell'] .shipSilhouette {
+	fill: var(--disable-900);
+}
+
+svg[data-mode='block'] .shipSilhouette {
+	fill: var(--primary-700);
+}
+
+svg[data-mode='none'] .shipSilhouette {
+	fill: var(--secondary-900-dark-backing);
+}
+
+svg .containersBg {
+	fill: var(--disable-900);
+}
+
+svg[data-mode='none'] .containersBg {
+	fill: var(--secondary-900-dark-backing);
+}
+
+svg[data-mode='block'][data-style='ships'] .shipName {
+	fill: var(--primary-50);
+}
+
+svg[data-mode='cell'][data-style='ships'] .container {
+	stroke: #21C31566;
+}
+
+svg[data-mode='block'][data-style='ships'] .container {
+	fill: none;
+}
+
+svg[data-mode='block'][data-style='ships'] .shipFill {
+	fill: none;
 }

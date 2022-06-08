@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
-import Ship from './Ship';
+import Block from './Block';
+import Battleship from './Ship';
 import IDiagram from '../../core/game/Diagram/DiagramInterface';
 import Chemistry from '../../core/game/Services/Chemistry';
 
@@ -8,13 +9,16 @@ const block = Chemistry.block;
 
 interface IProps {
 	diagram: IDiagram,
+	style: 'normal'|'ships',
 }
 
 
 const DiagramField: FC<IProps> = observer(({
 	diagram,
+	style,
 }) => {
 	const state = diagram.observableState;
+	const Ship = style === 'ships' ? Battleship : Block;
 	return (
 		<g>
 			<Ship block={state.getBlock( block({ n: 1, l: 's' }) )!} />

@@ -65,7 +65,7 @@ const ShipSelection: FC<IProps> = observer(({
  * @param l Орбитальное число корабля
  * @returns Длина корабля
  */
- function calcLength( l: OrbitalQN ): number {
+function calcLength( l: OrbitalQN ): number {
 	/* 
 	Определение члена арифметической последовательности
 	с a1 = 1 и шагом d = 2 (1, 3, 5, 7)

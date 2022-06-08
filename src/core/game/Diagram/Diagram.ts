@@ -6,7 +6,7 @@ import EventProvider from "../../util/EventEmitter/EventProvider";
 
 import type { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
 import type { default as IDiagram, DiagramEvent, DiagramEventData } from "./DiagramInterface";
-import type { IDiagramState } from "./DObjectState.d";
+import type { IDiagramState, InteractionMode } from "./DObjectState.d";
 import type IFilter from "./Filter/FilterInterface";
 
 
@@ -18,13 +18,13 @@ import type IFilter from "./Filter/FilterInterface";
  * * Выступает в качестве *игрового поля*
  * * Изменяет состояние напрямую, меняя состояние определенных клеток или задавая состояние всей диаграммы целиком
  * * Изменяет диаграмму, переключая состояние ячеек или блоков на противоположное
- * * Параметр `disabled` блокирует выполнение игровых команд (🎲)
+ * * Параметр `mode` задает режим редактирования
  * * Оповещает о совершении событий
  */
 class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements IDiagram
 {
 	_state!: State;
-	_disabled: boolean; // TODO: rename diagram.disabled => .editable
+	// _disabled: boolean; // TODO: rename diagram.disabled => .editable
 	_filter?: IFilter;
 	_highlight?: IFilter;
 
@@ -37,12 +37,12 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		makeObservable(this, {
 
 			_state: observable,
-			_disabled: observable,
+			// _disabled: observable,
 			_filter: observable,
 			_highlight: observable,
 
-			disabled: computed,
 			observableState: computed,
+			mode: computed,
 			setElementByNumber: action,
 			toggleCell: action,
 			toggleBlock: action,
@@ -54,7 +54,7 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		this._highlight = highlight;
 
 		this.reset(); // Initialization of _state
-		this._disabled = false;
+		// this._disabled = false;
 	}
 
 	get observableState(): IDiagramState
@@ -67,27 +67,26 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 		throw new Error("Method not implemented.");
 	}
 
-	get disabled(): boolean
+	get mode(): InteractionMode
 	{
-		return this._disabled;
+		return this._state.mode;
 	}
 
-	set disabled( disable: boolean )
+	set mode( mode: InteractionMode )
 	{
-		this._disabled = disable;
-		this._emit( disable ? 'disabled' : 'enabled' );
+		this._state.mode = mode;
 	}
 
 	toggleCell( qn: CellQN ): boolean
 	{
-		if( this._disabled )
+		if( this.mode !== 'none' )
 			return false;
 		return this._state.toggleCell( qn );
 	}
 
 	toggleBlock( qn: BlockQN ): boolean
 	{
-		if( this._disabled )
+		if( this.mode !== 'none' )
 			return false;
 		return this._state.toggleBlock( qn );
 	}
@@ -104,8 +103,7 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 
 	fire( qn: CellQN ): boolean
 	{
-		if( this._disabled
-			|| this._state.isDamaged( qn )
+		if( this._state.isDamaged( qn )
 			|| !this._state.hasCell( qn )
 		)
 			return false;

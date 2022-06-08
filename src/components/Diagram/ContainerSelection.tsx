@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import cn from 'classnames';
-import type { BoxType } from '../../core/game/Diagram/DObjectState';
+import type { IBox } from '../../core/game/Diagram/DObjectState.d';
 import styles from './diagram.module.css';
 
 import {
@@ -14,7 +14,7 @@ import { observer } from 'mobx-react';
 interface IProps {
 	x: number,
 	y: number,
-	box: BoxType,
+	box: IBox,
 }
 
 

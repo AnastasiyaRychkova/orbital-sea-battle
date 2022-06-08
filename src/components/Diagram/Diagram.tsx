@@ -4,11 +4,14 @@ import DiagramField from './DiagramField';
 import panzoom from 'panzoom';
 import type {PanZoom} from 'panzoom';
 import IDiagram from '../../core/game/Diagram/DiagramInterface';
+import ShipFrontSymbol from './ShipFrontSymbol';
+import ShipBackSymbol from './ShipBackSymbol';
 
 interface IProps {
 	diagram: IDiagram,
 	zooming: boolean,
 	className: string,
+	style?: 'normal'|'ships',
 }
 
 class Diagram extends React.Component<IProps>
@@ -95,17 +98,33 @@ class Diagram extends React.Component<IProps>
 
 	render() {
 		return(
-			<svg className={(this.props as IProps).className} 
+			<svg className={(this.props as IProps).className}
 				viewBox="-50 -2 1520 602"
 				fill="none"
 				preserveAspectRatio="xMidYMid meet"
-				xmlns="http://www.w3.org/2000/svg">
+				xmlns="http://www.w3.org/2000/svg"
+				data-mode={this.props.diagram.mode}
+				data-style={this.props.style || 'normal'}>
 
 				<defs>
 					<CellSymbol />
+					{
+						this.props.style === 'ships'
+						?
+							<>
+							<ShipFrontSymbol />
+							<ShipBackSymbol />
+							</>
+						: null
+					}
 				</defs>
-				<g ref={this.fieldRef} id='diagram-field'>
-						<DiagramField diagram={this.props.diagram} />
+				<g
+					ref={this.fieldRef}
+					id='diagram-field'>
+					
+					<DiagramField
+						diagram={this.props.diagram}
+						style={this.props.style || 'normal'} />
 				</g>
 
 			</svg>

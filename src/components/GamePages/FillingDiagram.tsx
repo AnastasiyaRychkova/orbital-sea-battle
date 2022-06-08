@@ -31,7 +31,7 @@ export default function FillingDiagram( props: IProps ) {
 	const { t } = useTranslation();
 
 	const diagramState = new Diagram();
-	diagramState.observableState.setInteractionMode( 'cell' );
+	diagramState.mode = 'cell';
 
 	return (
 		<Body>
@@ -56,6 +56,7 @@ export default function FillingDiagram( props: IProps ) {
 				<DiagramComponent
 					diagram = { diagramState }
 					zooming = { true }
+					style = { 'ships' }
 					className = { styles["diagram"] }
 				/>
 			</div>

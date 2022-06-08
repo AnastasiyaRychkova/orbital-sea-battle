@@ -23,10 +23,6 @@ const Cell: FC<IProps> = observer(({
 	cell,
 }) =>
 {
-	/* const fn = () => {
-			props.controller!.cellClickFunction( props.qn )
-		}; */
-
 	return (
 		<use href="#cell"
 			className={cn({

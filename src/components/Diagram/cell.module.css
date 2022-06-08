@@ -1,5 +1,5 @@
 @value colors: '../../style/colors.css';
-@value custom-white, primary-50, primary-200, primary-300, primary-400, secondary-400, secondary-600, secondary-900, error-100, error-400, error-600, error-900 from colors;
+@value custom-white, primary-50, primary-200, primary-300, primary-400, primary-600, secondary-400, secondary-600, secondary-900, error-100, error-400, error-600, error-900 from colors;
 
 @value effects: '../../style/effects.css';
 @value glow__arrow-selection-1, glow__arrow-selection-2, glow__arrow-selection--error-1, glow__arrow-selection--error-2 from effects;
@@ -12,8 +12,50 @@
 .selected {
 	fill: primary-300;
 	stroke: primary-300;
-	animation: blink 1.4s ease-in infinite both;
+	/* animation: blink 1.4s ease-in infinite both; */
 }
+
+
+/*=============================================
+=            Ship Style            =
+=============================================*/
+
+svg[data-mode='cell'][data-style='ships'] .cell {
+	fill: var(--primary-700);
+	stroke: var(--primary-700);
+}
+
+svg[data-mode='cell'][data-style='ships'] .selected {
+	fill: var(--primary-50);
+	stroke: var(--primary-50);
+}
+
+svg[data-mode='block'][data-style='ships'] .cell {
+	pointer-events: none;
+	fill: var(--secondary-400);
+	stroke: var(--secondary-400);
+}
+
+svg[data-mode='block'][data-style='ships'] .selected {
+	fill: var(--secondary-50);
+	stroke: var(--secondary-50);
+}
+
+svg[data-mode='none'][data-style='ships'] .cell {
+	pointer-events: none;
+	fill: var(--secondary-600);
+	stroke: var(--secondary-600);
+}
+
+svg[data-mode='none'][data-style='ships'] .selected {
+	fill: var(--primary-300);
+	stroke: var(--primary-300);
+}
+
+/*=====  End of Ship Style  ======*/
+
+
+
 
 .selected.damage {
 	fill: error-400;

@@ -4,26 +4,21 @@ import { MainQN, OrbitalQN, BlockQN } from '../../core/game/ChemicalElement/Quan
 import Container from './Container';
 import ShipName from './ShipName';
 import ShipSelection from './ShipSelection';
-import ShipSilhouette from './ShipSilhouette';
 import type { Coordinates } from './types';
 import type{ IBlock } from '../../core/game/Diagram/DObjectState.d';
 
 import {
 	CONTAINER_HEIGHT,
 	CONTAINER_WIDTH,
-	SHIP_BORDER,
-	BACK_WIDTH,
-	FRONT_WIDTH,
 } from './properties';
 
-const COLUMN_SPACING = 15;
-const LINE_SPACING = 24;
-const NAME_X_OFFSET = 12;
-const NAME_Y_OFFSET = 32;
-const COLUMN_DECOR = BACK_WIDTH + FRONT_WIDTH + COLUMN_SPACING;
+const COLUMN_SPACING = 30;
+const LINE_SPACING = 30;
+const NAME_X_OFFSET = -8;
+const NAME_Y_OFFSET = 64;
 
 const COL_WIDTH: readonly number[] = [ 1, 3, 5, 7, 7, 5, 3 ];
-const LEFT_CONTAINERS: readonly number[] = [ 0, 0, 1, 4, 10, 17, 22 ];
+const COL_WIDTH_INTEGRAL: readonly number[] = [ 0, 1, 4, 9, 16, 23, 28 ];
 
 
 
@@ -36,20 +31,11 @@ const Ship: FC<IProps> = observer(( {
 	block,
 } ) => {
 	const location = calcCoordinates( block.qn );
-	const boxesXY: Coordinates = {
-		x: location.x + BACK_WIDTH,
-		y: location.y + SHIP_BORDER,
-	};
 	const name = makeName( block.qn );
 	const maxM = block.qn.l.value;
 
 	return (
 		<g>
-			<ShipSilhouette
-				location={location}
-				length={calcLength(block.qn.l)}
-				block={block}
-				/>
 			<ShipSelection
 				location={location}
 				block={block} >
@@ -58,8 +44,8 @@ const Ship: FC<IProps> = observer(( {
 						.map( ([ key, box ] ) => (
 						<Container
 							key={name + key}
-							x={boxesXY.x + (maxM - box.qn.m.value) * CONTAINER_WIDTH}
-							y={boxesXY.y}
+							x={location.x + (maxM - box.qn.m.value) * CONTAINER_WIDTH}
+							y={location.y}
 							box={box}
 							/>
 					) )
@@ -122,7 +108,7 @@ function calcCoordinates( qn: BlockQN ): Coordinates
 function getX( n: MainQN, l: OrbitalQN ): number
 {
 	const i = n.value - 1;
-	return CONTAINER_WIDTH * (LEFT_CONTAINERS[i] + ((COL_WIDTH[i] - calcLength(l)) / 2)) + i * COLUMN_DECOR;
+	return ( COL_WIDTH_INTEGRAL[i] + ( COL_WIDTH[i] - calcLength( l ) ) / 2 ) * CONTAINER_WIDTH + i * COLUMN_SPACING;
 }
 
 /**
