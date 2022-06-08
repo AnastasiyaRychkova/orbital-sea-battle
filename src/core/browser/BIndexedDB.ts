@@ -12,19 +12,19 @@ type DbType = {
 	db: BIndexedDBDataBase | null,
 }
 
-window.indexedDB = window.indexedDB || (window as any).mozIndexedDB || (window as any).webkitIndexedDB || (window as any).msIndexedDB;
-window.IDBTransaction = window.IDBTransaction || (window as any).webkitIDBTransaction || (window as any).msIDBTransaction;
-window.IDBKeyRange = window.IDBKeyRange || (window as any).webkitIDBKeyRange || (window as any).msIDBKeyRange;
+const indexedDB = window.indexedDB || (window as any).mozIndexedDB || (window as any).webkitIndexedDB || (window as any).msIndexedDB;
+/* window.IDBTransaction = window.IDBTransaction || (window as any).webkitIDBTransaction || (window as any).msIDBTransaction;
+window.IDBKeyRange = window.IDBKeyRange || (window as any).webkitIDBKeyRange || (window as any).msIDBKeyRange; */
 
 
 const _bases = new Map<string, DbType>();
 
 (function loadDataBases()
 {
-	if( window.indexedDB === undefined )
+	if( indexedDB === undefined )
 		return;
 
-	const promise = window.indexedDB.databases();
+	const promise = indexedDB.databases();
 	promise.then( databases => {
 		databases.forEach( ( db ) => {
 			if( db.name )
@@ -67,7 +67,7 @@ export default {
 	/** Есть ли поддержка IndexedDB в браузере */
 	isAvailable(): boolean
 	{
-		return window.indexedDB !== undefined;
+		return indexedDB !== undefined;
 	},
 
 	/**
@@ -100,7 +100,7 @@ export default {
 
 		const promise = new Promise<BIndexedDBDataBase>( ( resolve, reject ) => {
 			
-			const request = window.indexedDB.open( dbName, scheme.version );
+			const request = indexedDB.open( dbName, scheme.version );
 
 			request.onsuccess = () => {
 				database!.db = new BIndexedDBDataBase( request.result );

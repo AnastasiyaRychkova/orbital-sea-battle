@@ -1,4 +1,4 @@
-import User from './game/GameplayEntities/User';
+import User, { IUser } from './game/GameplayEntities/User';
 import type IGame from './game/GameplayEntities/GameInterface';
 import Auth from './game/Services/Authorization';
 import Profile from './game/GameplayEntities/Profile';
@@ -7,6 +7,9 @@ import Aliases from './game/Aliases';
 export {default as browser} from './browser/Browser';
 // export {default as achievements} from './browser/AchievementSystem';
 export {default as storage} from './browser/BLocalStorage';
+export {
+	Auth,
+}
 
 let currentGame: IGame | null = null;
 
@@ -17,12 +20,12 @@ function _gameEndHandler() {
 let aiUser: User | null = null;
 
 export default {
-	get currentUser(): User | undefined
+	get currentUser(): IUser | undefined
 	{
 		return Auth.authorizedUser;
 	},
 
-	get aiUser(): User
+	get aiUser(): IUser
 	{
 		if( !aiUser )
 		{

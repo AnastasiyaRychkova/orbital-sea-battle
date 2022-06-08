@@ -1,15 +1,15 @@
 import Chemistry, { BlockQN, CellQN } from "../../Services/Chemistry";
-import type { OB_IGameState, OB_ILocalPlayerController } from '../OB_Entities';
+import type { IGameState, ILocalPlayerController } from '../OB_Entities';
 
 
 
-class OB_LocalPlayerController implements OB_ILocalPlayerController
+class OB_LocalPlayerController implements ILocalPlayerController
 {
 
-	#game: OB_IGameState;
+	#game: IGameState;
 
 
-	constructor( game: OB_IGameState )
+	constructor( game: IGameState )
 	{
 		this.#game = game;
 	}
@@ -110,5 +110,5 @@ class OB_LocalPlayerController implements OB_ILocalPlayerController
 export default OB_LocalPlayerController;
 
 export type {
-	OB_ILocalPlayerController,
+	ILocalPlayerController as OB_ILocalPlayerController,
 }

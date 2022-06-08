@@ -12,8 +12,6 @@ interface IProps {
 
 	/** Функция для закрытия окна */
 	onClick: () => void,
-
-	children: React.ReactNode,
 }
 
 /** Компонент для вывода инструкций игроку */
@@ -37,9 +35,6 @@ export default function Instruction( props: IProps ) {
 					width = "600"
 					alt = { t("components.captain") }
 				/>
-			</div>
-			<div className = { styles.blur }>
-				{ props.children }
 			</div>
 		</>
 	);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	BrowserRouter as Router,
+	BrowserRouter,
 	Routes,
 	Route,
 } from "react-router-dom";
@@ -12,14 +12,14 @@ import Stub from './pages/404/Stub';
 
 function App() {
 	return (
-		<Router>
+		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={ <Landing/> } />
-				<Route path="play" element={ <SimpleGame/> } />
+				<Route path="play/*" element={ <SimpleGame/> } />
 				<Route path="theory" element={ <Stub/> } />
 				<Route path="*" element={ <Page404/> } />
 			</Routes>
-		</Router>
+		</BrowserRouter>
 	);
 }
 

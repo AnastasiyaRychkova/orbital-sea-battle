@@ -15,7 +15,7 @@ interface IGame
 	 * 
 	 * Вызывается после смены адреса страницы.
 	 */
-	start( user: User ): IGame;
+	start( user: IUser ): IGame;
 
 	/** Метод завершения игры.
 	 * 

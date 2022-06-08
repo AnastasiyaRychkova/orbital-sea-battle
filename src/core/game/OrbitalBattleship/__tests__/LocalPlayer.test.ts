@@ -10,7 +10,7 @@ describe( 'LocalPlayer', () => {
 	};
 
 	test( 'selecting element', () => {
-		const user = entities.user( userInitObj );
+		const user = entities.user( entities.profile(userInitObj) );
 		const player = entities.localPlayer( user );
 		let receivedElementNumber: number = -1;
 		player.once(
@@ -27,7 +27,7 @@ describe( 'LocalPlayer', () => {
 	} );
 
 	test( 'attempt to select element with invalid number throws error', () => {
-		const user = entities.user( userInitObj );
+		const user = entities.user( entities.profile(userInitObj) );
 		const player = entities.localPlayer( user );
 
 		expect( () => player.selectElement( -1 ) ).toThrow();
@@ -35,10 +35,9 @@ describe( 'LocalPlayer', () => {
 } );
 
 describe( 'diagram filling throw player', () => {
-	const user = entities.user( {
+	const user = entities.user( entities.profile({
 		name: 'John',
-		alias: Aliases.random(),
-	} );
+	}) );
 	const player = entities.localPlayer( user );
 	const diagram = entities.diagram();
 

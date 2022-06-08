@@ -3,7 +3,7 @@ import entities from "../OB_EntitiesFabric";
 import GameState from "../entities/OB_GameState";
 import type { EventData } from '../../../util/EventEmitter/types';
 import type { PlayerEventData, PlayerSelectionEventData, PlayerShotEventData } from "../types";
-import type { DiagramEventData, OB_ILocalPlayerController } from "../OB_Entities";
+import type { DiagramEventData, ILocalPlayerController } from "../OB_Entities";
 import { GSResults, GSEventData } from "../interfaces/OB_GameStateInterface";
 
 const MAX_ELEM_NUMBER = periodicTable.MAX_ELEM_NUMBER;
@@ -12,7 +12,7 @@ const randomFn = Math.random;
 
 
 describe( 'Game State: General', () => {
-	const user = entities.user( { name: 'Max' } );
+	const user = entities.user( entities.profile({ name: 'Max' }) );
 	const game = new GameState(
 		user,
 		user,
@@ -298,7 +298,7 @@ describe( 'Game State: General', () => {
 		} );
 
 
-		function fillDiagram_Cu29( controller: OB_ILocalPlayerController )
+		function fillDiagram_Cu29( controller: ILocalPlayerController )
 		{
 			controller.toggleBlock( Chemistry.block({ n: 1, l: 's' }) );
 			controller.toggleBlock( Chemistry.block({ n: 2, l: 's' }) );

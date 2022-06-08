@@ -1,12 +1,12 @@
 import GameState, { OB_IGameState as IGameState } from "./entities/OB_GameState";
 import entities from "./OB_EntitiesFabric";
 import type IGame from "../GameplayEntities/GameInterface";
-import { User } from "./OB_Entities";
+import type { IAIEnemyBehaviour, IUser } from "./OB_Entities.d";
 
 export type GameOptions = {
 	name: string,
 	path: string,
-	ai: User,
+	ai: IUser,
 }
 
 class OrbitalBattleshipGameAI implements IGame
@@ -15,7 +15,8 @@ class OrbitalBattleshipGameAI implements IGame
 	path: string;
 
 	#game?: IGameState;
-	#aiUser: User;
+	#aiUser: IUser;
+	#aiBehaviour?: IAIEnemyBehaviour;
 
 	constructor( options: GameOptions )
 	{
@@ -31,7 +32,7 @@ class OrbitalBattleshipGameAI implements IGame
 		return this.#game;
 	}
 
-	start( user: User ): IGame
+	start( user: IUser ): IGame
 	{
 		if( this.#game )
 			return this;
@@ -44,6 +45,7 @@ class OrbitalBattleshipGameAI implements IGame
 				enemy: entities.aiPlayer,
 				diagram: entities.diagram,
 			} );
+		this.#aiBehaviour = entities.aiPlayerBehaviour( this.#game );
 
 		this.#game.once( 'end', this.end );
 		return this;

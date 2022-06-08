@@ -4,7 +4,7 @@ import StateMachine, { IStateMachine, MachineActionType } from "../../../util/St
 import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
 
 import type { ActionFunction, Context } from "../../../util/StateMachine/StateMachineTypes";
-import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, User } from "../OB_Entities";
+import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, IUser } from "../OB_Entities";
 import type {
 	EventContext,
 	NamingContext,
@@ -39,7 +39,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	#DIAGRAM_CHECKING_TIMEOUT = 1000;
 
 
-	constructor( player: User, enemy: User, fabric: PlayersFabric )
+	constructor( player: IUser, enemy: IUser, fabric: PlayersFabric )
 	{
 		super();
 		this.#entitiesFabric = fabric;

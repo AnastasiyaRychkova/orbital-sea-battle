@@ -1,9 +1,9 @@
 import { Alias } from "../Aliases";
-import Profile from "../GameplayEntities/Profile";
-import User from "../GameplayEntities/User";
+import Profile, { IProfile } from "../GameplayEntities/Profile";
+import User, { IUser } from "../GameplayEntities/User";
 import Store from "./Store/Store";
 
-let authorizedUser: User | null = null;
+let authorizedUser: IUser | null = null;
 
 export default {
 	get authorizationPassed(): boolean
@@ -11,22 +11,23 @@ export default {
 		return authorizedUser !== null;
 	},
 
-	get authorizedUser(): User | undefined
+	get authorizedUser(): IUser | undefined
 	{
 		return authorizedUser || undefined;
 	},
 
-	async getSavedProfiles(): Promise<Profile[]>
+	async getSavedProfiles(): Promise<IProfile[]>
 	{
 		return await Store.loadProfiles();
 	},
 
-	authorize( profile: Profile ): User
+	authorize( profile: IProfile ): IUser
 	{
-		throw new Error("Method is not implemented");
+		authorizedUser = new User( profile );
+		return authorizedUser;
 	},
 
-	createProfileAndAuthorize( name: string, alias?: Alias ): User
+	createProfileAndAuthorize( name: string, alias?: Alias ): IUser
 	{
 		if( authorizedUser )
 			throw new Error( "Creating a new profile and authorization is not available due to an active profile" );
@@ -46,7 +47,7 @@ export default {
 		authorizedUser = null;
 	},
 
-	deleteProfile( profile: Profile ): void
+	deleteProfile( profile: IProfile ): void
 	{
 		if( authorizedUser?.wasCreatedFromProfile( profile ) )
 			throw new Error( 'Can not delete active profile. Sign out of your account and then delete it' );

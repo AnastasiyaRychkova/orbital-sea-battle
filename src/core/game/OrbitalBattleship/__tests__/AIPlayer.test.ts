@@ -5,9 +5,9 @@ import GameState from "../entities/OB_GameState";
 import GameStateMock from '../__mocks__/GameStateMock';
 
 describe( 'AI Player', () => {
-	const user = entities.user( {
+	const user = entities.user( entities.profile({
 		name: 'John',
-	} );
+	}) );
 	const game = new GameStateMock( user, user, {
 		player: entities.localPlayer,
 		enemy: entities.aiPlayer,

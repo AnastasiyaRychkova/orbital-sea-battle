@@ -1,22 +1,22 @@
 import Chemistry from "../../Services/Chemistry";
 import entities from "../OB_EntitiesFabric";
 import GameState, { OB_IGameState } from "../entities/OB_GameState";
-import type { OB_IEnemy, OB_ILocalPlayer, OB_ILocalPlayerController, User } from "../OB_Entities";
+import type { OB_IEnemy, OB_ILocalPlayer, ILocalPlayerController, IUser } from "../OB_Entities";
 import OB_AIEnemyBehaviour from "../entities/OB_AIEnemyBehaviour";
 
 
 
 describe( 'Game State: General', () => {
-	let user: User;
+	let user: IUser;
 	let game: OB_IGameState;
-	let controller: OB_ILocalPlayerController;
+	let controller: ILocalPlayerController;
 	let ai: OB_AIEnemyBehaviour;
 	let player: OB_ILocalPlayer;
 	let enemy: OB_IEnemy;
 
 
 	beforeEach( () => {
-		user = entities.user( { name: 'Max' } );
+		user = entities.user( entities.profile({ name: 'Max' }) );
 		game = new GameState(
 			user,
 			user,

@@ -51,6 +51,6 @@
 	z-index: 1001;
 }
 
-.blur {
+.overlay ~ div {
 	filter: blur(3px);
 }
