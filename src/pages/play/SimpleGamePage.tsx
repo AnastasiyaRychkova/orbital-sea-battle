@@ -27,12 +27,11 @@ const SimpleGame = observer(() =>
 {
 	console.log( useLocation().pathname );
 	const { t } = useTranslation();
-	return (
+
+	return useLocation().pathname !== '/play/'+ statesObserver.asPath
+		? ( <Navigate to={statesObserver.asPath} replace={true} /> )
+		: (
 		<>
-			{
-				useLocation().pathname !== '/play/'+ statesObserver.asPath
-					&& <Navigate to={statesObserver.asPath} replace={true} />
-			}
 			<Routes>
 				<Route path='/preparing/selecting/instruction' element={
 					<Instruction
@@ -52,7 +51,7 @@ const SimpleGame = observer(() =>
 					<ChoosingTable
 						player = { game.player.user }
 						enemy = { game.enemy.user }
-						back = { () => { controller?.giveIn() } }
+						back = { controller!.giveIn }
 						forward = { (n: number) => {
 							controller?.selectElement( n );
 						} }

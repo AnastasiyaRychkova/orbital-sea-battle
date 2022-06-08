@@ -12,6 +12,7 @@ class OB_LocalPlayerController implements ILocalPlayerController
 	constructor( game: IGameState )
 	{
 		this.#game = game;
+		this.giveIn = this.giveIn.bind( this );
 	}
 
 	completeOnBoarding(): void
