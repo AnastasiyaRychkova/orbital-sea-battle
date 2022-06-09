@@ -51,6 +51,15 @@ export default {
 					.onComplete( _gameEndHandler );
 	},
 
+	completeGame(): void
+	{
+		if( !currentGame )
+			return;
+
+		currentGame.end();
+		currentGame = null;
+	},
+
 	get game(): IGame | null
 	{
 		return currentGame;

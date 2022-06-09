@@ -1,4 +1,5 @@
 import core, {Auth} from "../../core/core";
+import { action, observable } from "mobx";
 import entities from "../../core/game/OrbitalBattleship/OB_EntitiesFabric";
 import GamesManager from "../../core/game/Services/GamesManager";
 import type {
@@ -6,6 +7,7 @@ import type {
 	IGameState,
 	ILocalPlayerController,
 } from "../../core/game/OrbitalBattleship/OB_Entities";
+import StatesChainObserver from "./StatesChainObserver";
 
 const profile = entities.profile({
 	name: 'Игрок',
@@ -13,8 +15,27 @@ const profile = entities.profile({
 	level: 2,
 	points: 100,
 });
-const user = entities.user( profile );
-let playerController: ILocalPlayerController | null = null;
+// let playerController: ILocalPlayerController | null = null;
+const statesObserver = new StatesChainObserver();
+
+type StoreType = {
+	gameState: IGameState | null,
+	playerController: ILocalPlayerController | null,
+}
+
+const store: StoreType = observable( {
+	gameState: null,
+	playerController: null,
+} );
+
+const createController = action( ( game: IGameState ) => {
+	store.playerController = entities.localPlayerController( game );
+} );
+
+const setGameState = action( () => {
+	store.gameState = (core.game as OrbitalBattleshipGameAI).gameState as IGameState;
+	return store.gameState;
+} )
 
 
 
@@ -23,19 +44,35 @@ export default {
 	{
 		Auth.authorize( profile );
 		GamesManager.load();
-		core.play( (GamesManager.gamesList)[0] );
 	},
 
 	start(): IGameState
 	{
-		const game = core.game as OrbitalBattleshipGameAI;
-		const gameState = game.gameState as IGameState;
-		playerController = entities.localPlayerController( gameState );
-		return gameState;
+		core.play( (GamesManager.gamesList)[0] );
+		const game = setGameState();
+		createController( game );
+		statesObserver.listen( game );
+		return game;
+	},
+
+	exit(): void
+	{
+		core.completeGame();
+		store.playerController = null;
 	},
 
 	get controller(): ILocalPlayerController | null
 	{
-		return playerController;
+		return store.playerController;
+	},
+
+	get states(): StatesChainObserver
+	{
+		return statesObserver;
+	},
+
+	get gameState(): IGameState | null
+	{
+		return store.gameState;
 	},
 }

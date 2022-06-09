@@ -22,8 +22,10 @@ interface IProps {
 	/** Стиль кнопки */
 	theme: Theme,
 
+	disabled?: boolean,
+
 	/** Функция по нажатию */
-	onClick?: MouseEventHandler<HTMLAnchorElement>,
+	onClick?: MouseEventHandler<HTMLElement>,
 	
 	/** URL */
 	to?: string,
@@ -40,12 +42,27 @@ const Button: FC<IProps> = ({
 	glyph,
 	priority,
 	theme,
+	disabled = false,
 	className,
 	onClick,
 	to = '#',
 	replace = false,
 }) => {
-	return (
+	return to === '#'
+	? (
+		<button
+			type='button'
+			disabled = {disabled}
+			onClick={onClick}
+			className={cn( styles, ['button', priority, theme], className )} >
+				<Icon type={glyph} className={styles.icon}/>
+				<span className={styles.text}>
+					{value}
+				</span>
+		</button>
+	)
+	
+	: (
 		<Link
 			to={to}
 			replace={replace}
@@ -58,5 +75,6 @@ const Button: FC<IProps> = ({
 		</Link>
 	);
 };
+
 
 export default Button;

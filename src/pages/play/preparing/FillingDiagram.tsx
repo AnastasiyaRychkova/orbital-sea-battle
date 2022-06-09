@@ -5,7 +5,7 @@ import styles from './Diagram.module.css';
 import Body from '../../../components/Body/Body';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
 import SelectedElement from '../../../components/GameInterface/SelectedElement/SelectedElement';
-import StartMissionButton from '../../../components/GameInterface/StartMission/StartMissionButton';
+import IconButton from '../../../components/Button/WithIcon/Button';
 import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 
@@ -37,10 +37,12 @@ const FillingDiagram: FC<IProps> = observer(( {
 
 	const diagram = player.diagram!;
 	if( diagram.mode === 'none' )
-		diagram.mode = 'cell';
+		diagram.mode = 'block';
+
 	const toggleMode = useCallback( () => {
-		diagram.mode = diagram.mode === 'cell' ? 'block' : 'cell';
-	}, [] );
+		if( diagram.mode !== 'none' )
+			diagram.mode = diagram.mode === 'cell' ? 'block' : 'cell';
+	}, [diagram] );
 
 	return (
 		<Body>
@@ -67,7 +69,15 @@ const FillingDiagram: FC<IProps> = observer(( {
 						change = { toggleMode }
 					/>
 
-					<StartMissionButton onClick={ forward } />
+					<IconButton
+						value={t("actions.start")}
+						glyph='play'
+						priority='primary'
+						theme='muted'
+						onClick={ forward }
+						disabled={ diagram.observableState.cellCounter === 0 }
+						className={styles.startBtn}
+						/>
 
 				</GameBottomInterface>
 			</All>
@@ -83,5 +93,6 @@ const FillingDiagram: FC<IProps> = observer(( {
 		</Body>	
 	);
 });
+
 
 export default FillingDiagram;

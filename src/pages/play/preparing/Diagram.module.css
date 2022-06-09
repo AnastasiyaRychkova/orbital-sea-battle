@@ -10,3 +10,7 @@
 	height: 100vh;
 	outline: none;
 }
+
+button.startBtn {
+	width: min-content;
+}

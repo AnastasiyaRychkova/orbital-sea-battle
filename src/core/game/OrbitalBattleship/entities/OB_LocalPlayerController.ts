@@ -12,6 +12,7 @@ class OB_LocalPlayerController implements ILocalPlayerController
 	constructor( game: IGameState )
 	{
 		this.#game = game;
+		this.checkDiagram = this.checkDiagram.bind( this );
 		this.giveIn = this.giveIn.bind( this );
 	}
 
@@ -61,6 +62,7 @@ class OB_LocalPlayerController implements ILocalPlayerController
 
 	checkDiagram(): void
 	{
+		console.log( this.#game.state );
 		this.#game.send( this.#game.player.diagramFilledOutCorrectly() ? 'correct' : 'fail' );
 	}
 

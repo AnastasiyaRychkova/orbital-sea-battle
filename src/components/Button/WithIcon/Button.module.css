@@ -13,8 +13,8 @@
 	align-items: center;
 	flex-direction: row;
 	justify-content: center;
-	column-gap: 1em;
-	padding: 1em 1.5em;
+	column-gap: .75em;
+	padding: .75em 1em;
 }
 
 .icon {
@@ -29,18 +29,13 @@
 /*----------  Muted  ----------*/
 
 .button.primary.muted {
-	background-color: secondary-100;
-	color: secondary-700;
-}
-
-.button.primary.muted:hover {
-	background-color: secondary-50;
-	box-shadow: glow__button--light--m;
+	background-color: var(--primary-300);
+	color: var(--primary-900-text);
 }
 
 .button.primary.muted:active {
+	background-color: var(--primary-400-main);
 	box-shadow: none;
-	background-color: secondary-300;
 }
 
 
@@ -54,13 +49,22 @@
 	color: disable-600;
 }
 
-.button.primary.muted:disabled:hover,
-.button.secondary.muted:disabled:hover,
-.button.secondary.bright:disabled:hover,
-.button.secondary.dark:disabled:hover {
-	box-shadow: none;
-	background-color: disable-800;
-	color: disable-600;
+
+@media screen and (hover: hover)  {
+	.button.primary.muted:hover {
+		background-color: var(--primary-100);
+		color: var(--primary-800);
+		box-shadow: glow__button--light--m;
+	}
+
+	.button.primary.muted:disabled:hover,
+	.button.secondary.muted:disabled:hover,
+	.button.secondary.bright:disabled:hover,
+	.button.secondary.dark:disabled:hover {
+		box-shadow: none;
+		background-color: disable-800;
+		color: disable-600;
+	}
 }
 
 
@@ -146,8 +150,9 @@
 =============================================*/
 
 .text {
-	composes: button from '../../../style/typography.css';
-	composes: button-medium from '../../../style/typography.css';
+	/* composes: button from '../../../style/typography.css';
+	composes: button-medium from '../../../style/typography.css'; */
+	composes: text-button-B-Medium from '../../../style/text.module.css';
 	text-align: left;
 	word-wrap: break-word;
 }

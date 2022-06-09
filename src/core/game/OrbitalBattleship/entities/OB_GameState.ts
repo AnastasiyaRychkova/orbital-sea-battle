@@ -36,7 +36,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 	#history: GSResults[];
 
 
-	#DIAGRAM_CHECKING_TIMEOUT = 1000;
+	readonly #DIAGRAM_CHECKING_TIMEOUT = 1000;
 
 
 	constructor( player: IUser, enemy: IUser, fabric: PlayersFabric )
@@ -451,10 +451,10 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 											entry: this._delaySendingEvent( 'ready', this.#DIAGRAM_CHECKING_TIMEOUT ),
 										},
 										fail: {
-											delay: {
-												after: this.#DIAGRAM_CHECKING_TIMEOUT,
-												to: 'diagram',
-											},
+											entry: this._delaySendingEvent( 'continue', this.#DIAGRAM_CHECKING_TIMEOUT ),
+											on: {
+												continue: 'diagram',
+											}
 										},
 									},
 								},

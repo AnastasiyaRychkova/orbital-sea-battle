@@ -99,7 +99,7 @@ class Diagram extends React.Component<IProps>
 	render() {
 		return(
 			<svg className={(this.props as IProps).className}
-				viewBox="-50 -2 1520 602"
+				viewBox={this.props.style === 'normal' ? "-50 -2 1520 602" : "-50 -2 1760 602"}
 				fill="none"
 				preserveAspectRatio="xMidYMid meet"
 				xmlns="http://www.w3.org/2000/svg"
