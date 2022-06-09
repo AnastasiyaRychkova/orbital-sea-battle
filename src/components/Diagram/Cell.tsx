@@ -23,6 +23,7 @@ const Cell: FC<IProps> = observer(({
 	cell,
 }) =>
 {
+	console.log( 'Cell:', cell );
 	return (
 		<use href="#cell"
 			className={cn({

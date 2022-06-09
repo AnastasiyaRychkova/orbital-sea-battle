@@ -57,14 +57,16 @@ svg[data-mode='none'][data-style='ships'] .selected {
 
 
 
-.selected.damage {
-	fill: error-400;
-	stroke: error-400;
+.selected.damage,
+svg[data-mode='none'][data-style='ships'] .selected.damage {
+	fill: var(--error-400-error);
+	stroke: var(--error-400-error);
 }
 
-.damage {
-	fill: custom-white;
-	stroke: custom-white;
+.damage,
+svg[data-mode='none'][data-style='ships'] .damage {
+	fill: white;
+	stroke: white;
 }
 
 

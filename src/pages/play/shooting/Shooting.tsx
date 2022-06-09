@@ -88,7 +88,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { player.diagram! }
 					zooming = { true }
-					style = { 'normal' }
+					style = { 'ships' }
 					className = { styles["diagram"] }
 					/>
 				
