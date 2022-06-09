@@ -1,6 +1,6 @@
 import React, {createContext, FC, useContext} from "react"
 import {observer} from 'mobx-react'
-import { action, makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 class RouterStore
 {
@@ -11,6 +11,7 @@ class RouterStore
 		makeObservable( this, {
 			pathChain: observable,
 			setPath: action.bound,
+			lastPart: computed,
 		} );
 		this.pathChain = [];
 	}
@@ -18,6 +19,11 @@ class RouterStore
 	setPath( path: string[] ): void
 	{
 		this.pathChain = path;
+	}
+
+	get lastPart(): string
+	{
+		return this.pathChain.length > 0 ? this.pathChain[ this.pathChain.length - 1 ] : '';
 	}
 }
 

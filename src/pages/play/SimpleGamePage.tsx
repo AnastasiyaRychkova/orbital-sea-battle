@@ -10,6 +10,7 @@ import gameTesting from './gameTesting';
 import { observer } from 'mobx-react-lite';
 import { MemoRouter, Route } from '../../components/Router/Router';
 import ResultsPage from './results/ResultsPage';
+import Shooting from './shooting/Shooting';
 
 
 gameTesting.loadGame();
@@ -46,6 +47,12 @@ const SimpleGame = observer(() =>
 					onClick={ () => {controller?.completeOnBoarding()} }
 					/>
 			</Route>
+			<Route path={['shooting','instruction']}>
+				<Instruction
+					message={ t( 'instructions.filling' ) }
+					onClick={ () => {controller?.completeOnBoarding()} }
+					/>
+			</Route>
 			<Route path={['preparing','selecting']} >
 				<ChoosingTable
 					player={ game!.player.user }
@@ -58,10 +65,16 @@ const SimpleGame = observer(() =>
 			</Route>
 			<Route path={['preparing','filling']} >
 				<FillingDiagram
-					player={ game!.player }
-					enemy={ game!.enemy }
+					game={game!}
 					back={ controller!.giveIn }
 					forward={ controller!.checkDiagram }
+				/>
+			</Route>
+			<Route path={['shooting']} >
+				<Shooting
+					game={game!}
+					guessElement={controller.nameElement}
+					back={controller.giveIn}
 				/>
 			</Route>
 			<Route path={['results']} >

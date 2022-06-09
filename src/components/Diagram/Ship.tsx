@@ -58,7 +58,7 @@ const Ship: FC<IProps> = observer(( {
 						.map( ([ key, box ] ) => (
 						<Container
 							key={name + key}
-							x={boxesXY.x + (maxM - box.qn.m.value) * CONTAINER_WIDTH}
+							x={boxesXY.x + (box.qn.m.value + maxM) * CONTAINER_WIDTH}
 							y={boxesXY.y}
 							box={box}
 							/>

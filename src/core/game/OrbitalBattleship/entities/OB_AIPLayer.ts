@@ -1,14 +1,14 @@
 import { CellQN, periodicTable } from '../../Services/Chemistry';
 import OB_Player from './OB_Player';
 import type OB_IEnemy from "../interfaces/OB_EnemyInterface";
-import type { User } from '../OB_Entities';
+import type { IUser } from '../OB_Entities.d';
 
 
 class OB_AIPLayer extends OB_Player implements OB_IEnemy
 {
 	#hasFilled: boolean;
 	
-	constructor( user: User )
+	constructor( user: IUser )
 	{
 		super( user );
 		this.#hasFilled = false;
@@ -66,6 +66,7 @@ class OB_AIPLayer extends OB_Player implements OB_IEnemy
 			return;
 
 		this._element = periodicTable.random();
+		console.log( 'AI Element:', this._element );
 		this._emit( 'selection' );
 	}
 

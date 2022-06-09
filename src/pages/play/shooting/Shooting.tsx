@@ -11,14 +11,13 @@ import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
 
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
 
-import type { OB_IEnemy, OB_ILocalPlayer } from '../../../core/game/OrbitalBattleship/OB_Entities';
+import type { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
+import { useAppPath } from '../../../components/Router/Router';
+import Filter from '../../../components/QnInputPanel/Filter';
+import UI from '../../../core/browser/UIStore';
 
 interface IProps {
-	/** Локальный игрок */
-	player: OB_ILocalPlayer;
-
-	/** Противник */
-	enemy: OB_IEnemy;
+	game: IGameState;
 
 	/** Функция для выхода */
 	back: () => void;
@@ -27,16 +26,18 @@ interface IProps {
 	guessElement: (elementNumber: number) => void;
 }
 
-/** Игровая страница c трёмя вкладками */
+/** Игровая страница c тремя вкладками */
 const Page: FC<IProps> = observer(( {
-	player,
-	enemy,
+	game,
 	back,
 	guessElement,
 } ) => {
 	const { t } = useTranslation();
+	const player = game.player;
+	const enemy = game.enemy;
 
 	const [tabNumber, swap] = useState<TabNumber>( 2 );
+	const state = useAppPath().lastPart;
 
 	return (
 		<Body>
@@ -45,7 +46,7 @@ const Page: FC<IProps> = observer(( {
 				player = { player.user }
 				enemy = { enemy.user }
 				// FIXME:
-				turn = { "local" }
+				turn = { state === 'moving' ? 'local' : ( state === 'enemy_waiting' ? 'enemy' : 'none' ) }
 				playerStatus = { t("status.choosing") }
 				enemyStatus = { t("status.choosing") }
 			/>
@@ -55,7 +56,12 @@ const Page: FC<IProps> = observer(( {
 				( tabNumber === 1 ? "" : styles.closed )
 			} >
 				
-				<h1>TAB1</h1>
+				<DiagramComponent
+					diagram = { player.diagram! }
+					zooming = { true }
+					style = { 'ships' }
+					className = { styles["diagram"] }
+					/>
 				
 			</div>
 
@@ -63,8 +69,13 @@ const Page: FC<IProps> = observer(( {
 				styles.tab + " " +
 				( tabNumber === 2 ? "" : styles.closed )
 			} >
-				
-				<h2>TAB2</h2>
+				<DiagramComponent
+					diagram = { enemy.diagram! }
+					zooming = { true }
+					style = { 'normal' }
+					className = { styles["diagram"] }
+					/>
+{/* 				<Filter ui={UI} /> */}
 				
 			</div>
 

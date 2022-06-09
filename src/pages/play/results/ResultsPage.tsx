@@ -9,9 +9,6 @@ import MiniInfo from '../../../components/MiniInfo/MiniInfo';
 import Button from '../../../components/Button/Default/Button';
 import FullScreenButton from '../../../components/GameInterface/FullScreen/FullScreenButton';
 
-import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
-import { GSResults } from '../../../core/game/OrbitalBattleship/interfaces/OB_GameStateInterface'
-import { GameScore } from '../../../core/game/OrbitalBattleship/types'
 import { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 
 interface IProps {
@@ -27,7 +24,7 @@ interface IProps {
 
 
 // FIXME: этим функциям тут не место
-// но нужно перевести милисекунды из GSResults в строку
+// но нужно перевести миллисекунды из GSResults в строку
 function _2digit( value: number ): string
 {
 	return (value >= 10 ? '' : '0') + Math.floor( value ).toString();

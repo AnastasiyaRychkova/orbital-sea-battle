@@ -1,7 +1,7 @@
 import EventProvider from "../../../util/EventEmitter/EventProvider";
 import ShotsAnalyzer from "./OB_ShotsAnalyzer";
 import type { CellQN, ChemicalElement } from "../../Services/Chemistry";
-import type { IDiagram, User, IShotsAnalyzer, OB_IPlayer } from "../OB_Entities";
+import type { IDiagram, IUser, IShotsAnalyzer, OB_IPlayer } from "../OB_Entities";
 import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 
 
@@ -9,7 +9,7 @@ import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 
 abstract class OB_Player extends EventProvider<PlayerEvent, PlayerEventData> implements OB_IPlayer
 {
-	protected _user: User;
+	protected _user: IUser;
 
 	protected _shotsAnalyzer: IShotsAnalyzer;
 
@@ -34,7 +34,7 @@ abstract class OB_Player extends EventProvider<PlayerEvent, PlayerEventData> imp
 	protected _isPlaying: boolean;
 
 
-	constructor( user: User )
+	constructor( user: IUser )
 	{
 		super();
 		this._user = user;
@@ -61,7 +61,7 @@ abstract class OB_Player extends EventProvider<PlayerEvent, PlayerEventData> imp
 		return this._diagram;
 	}
 
-	get user(): User
+	get user(): IUser
 	{
 		return this._user;
 	}

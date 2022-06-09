@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import styles from './Diagram.module.css';
@@ -9,14 +9,11 @@ import IconButton from '../../../components/Button/WithIcon/Button';
 import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 
-import type { OB_IEnemy, OB_ILocalPlayer } from '../../../core/game/OrbitalBattleship/OB_Entities';
+import type { IGameState, OB_IEnemy, OB_ILocalPlayer } from '../../../core/game/OrbitalBattleship/OB_Entities';
+import { useAppPath } from '../../../components/Router/Router';
 
 interface IProps {
-	/** Локальный игрок */
-	player: OB_ILocalPlayer;
-
-	/** Противник */
-	enemy: OB_IEnemy;
+	game: IGameState;
 
 	/** Функция для выхода */
 	back: () => void;
@@ -25,24 +22,29 @@ interface IProps {
 	forward: () => void;
 }
 
+type ModeType = 'cell' | 'block';
+
 
 /** Страница с заполнением диаграммы */
 const FillingDiagram: FC<IProps> = observer(( {
-	player,
-	enemy,
+	game,
 	back,
 	forward,
 } ) => {
 	const { t } = useTranslation();
 
+	const player = game.player;
+	const enemy = game.enemy;
 	const diagram = player.diagram!;
-	if( diagram.mode === 'none' )
-		diagram.mode = 'block';
+
+	const state = useAppPath().lastPart;
+	const [editMode, setEditMode] = useState( 'block' );
+	diagram.mode = state !== 'diagram' ? 'none' : editMode;
 
 	const toggleMode = useCallback( () => {
-		if( diagram.mode !== 'none' )
-			diagram.mode = diagram.mode === 'cell' ? 'block' : 'cell';
-	}, [diagram] );
+		setEditMode( editMode === 'cell' ? 'block' : 'cell' );
+	}, [editMode] );
+
 
 	return (
 		<Body>
@@ -65,7 +67,7 @@ const FillingDiagram: FC<IProps> = observer(( {
 					giveUp = { back }
 				>
 					<FillingPanel
-						mode = { diagram.mode }
+						mode = { editMode as ModeType }
 						change = { toggleMode }
 					/>
 
@@ -75,7 +77,7 @@ const FillingDiagram: FC<IProps> = observer(( {
 						priority='primary'
 						theme='muted'
 						onClick={ forward }
-						disabled={ diagram.observableState.cellCounter === 0 }
+						disabled={ state !== 'diagram' || diagram.observableState.cellCounter === 0 }
 						className={styles.startBtn}
 						/>
 
