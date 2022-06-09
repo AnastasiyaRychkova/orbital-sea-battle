@@ -12,7 +12,7 @@ interface IProps {
 }
 
 
-export default function FullScreenButton( props: IProps ) {
+export default function GiveUpButton( props: IProps ) {
 	const { t } = useTranslation();
 
 	return (

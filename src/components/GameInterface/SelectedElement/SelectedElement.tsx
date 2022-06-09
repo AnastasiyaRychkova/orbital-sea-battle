@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './SelectedElement.module.css';
 import gamestyles from '../GameInterface.module.css';
-// import buttons from '../Buttons.module.css';
+import buttons from '../Buttons.module.css';
 import texts from '../../../style/text.module.css';
 import sprite from "../../../img/sprite.svg";
 
@@ -32,7 +32,8 @@ const SelectedElement = observer(( props: IProps ) => {
 					gamestyles["icon-element"]
 					+ " " +
 					styles["selected-element-small"]
-					// + " " + buttons["button-content-center"]
+					+ " " +
+					buttons["button-content-center"]
 				}
 			>
 				<span className = { texts["text-bold-T-Normal"] }>

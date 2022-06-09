@@ -3,6 +3,7 @@
 	padding: 0.75rem 1.5rem;
 	flex-shrink: 0;
 	fill:currentColor;
+	user-select: none; 
 }
 
 @media screen and  (max-width:812px){

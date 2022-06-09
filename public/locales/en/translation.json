@@ -19,8 +19,18 @@
 			"text": "Mode",
 			"ships": "ships",
 			"items": "items"
-		}
+		},
 
+		"mission": {
+			"passed": "Mission passed",
+			"failed": "Mission failed"
+		}
+	},
+
+	"labels": {
+		"time": "time",
+		"shots": "shots",
+		"certainty": "certainty"
 	},
 
 	"actions": {
@@ -28,8 +38,8 @@
 		"play" : "Play",
 		"main" : "Back to main",
 		"giveup" : "Give Up",
-		"start" : "Start mission"
-
+		"start" : "Start mission",
+		"rematch" : "Rematch"
 	},
 
 	"status": {

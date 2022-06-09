@@ -15,6 +15,7 @@ button{
 	text-transform: uppercase;
 	fill:var(--primary-200-clickable);
 	flex-shrink: 0;
+	user-select: none;
 }
 @media (hover: hover) {
 	.button-exit:hover{

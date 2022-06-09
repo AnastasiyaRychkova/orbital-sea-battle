@@ -1,0 +1,77 @@
+
+.player-result-card{
+	background-color: var(--secondary-900-dark-backing);
+	padding:0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;	
+}
+
+.player-info{
+	display:flex;
+	width: 100%;
+	gap:1rem;
+	/* box-sizing: border-box; */
+}
+
+/* фото игрока*/
+.profile-item-card{
+	width:6rem;
+	height:6rem;
+}
+
+.name{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	justify-self: center;
+	gap:0.5rem;
+	width: 15rem;
+}
+
+/* загаданный элемент*/
+.pl-element{
+	display:flex;
+	flex-direction: column;
+	flex-basis:4rem;
+	flex-shrink: 0;
+	height:4rem;
+	padding:0.3rem;
+	box-sizing: border-box;
+	border: 2px solid var(--secondary-100-text);
+}
+
+.element__name {
+	align-self: center;
+}
+
+.game-progress{
+	display: flex;
+	align-items: center;
+	gap:1rem;
+	padding:0.5rem;
+}
+
+.level{
+	width:2rem;
+	height:2rem;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background-color: var(--disable-600-non-clickable);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.progress-bar{
+	width: 100%;
+	color: var(--disable-200);
+}
+
+
+
+@media screen and (max-width: 1400px){
+	.pl-element{
+		border-width: 1px;
+	}
+}

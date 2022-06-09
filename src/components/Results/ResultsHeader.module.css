@@ -1,0 +1,61 @@
+/* заголовок страницы */
+.results-header{
+	display:flex;
+	align-items: center;
+	gap:2rem;
+}
+
+/* картинки в заголовке */
+.icon-results-decoration{
+	height: 3.4rem;
+	width: 7.5rem;
+}
+.mirror{
+	transform: scale(-1, 1);
+	transform-origin: center;
+}
+
+/* состояния картинкок */
+.local-winner {
+	fill: var(--primary-400-main);
+}
+.enemy-winner {
+	fill: var(--error-400-error);
+}
+.loser {
+	fill: var(--disable-500);
+}
+
+.text-style {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.win {
+	color: var(--primary-400-main);
+}
+.lose {
+	color: var(--error-400-error);
+}
+
+
+@media screen and (max-width: 1400px){
+	.icon-results-decoration{
+		display: none;
+
+	}
+}
+
+@media screen and (max-height: 375px) and (max-width:812px){
+	.results-header{
+		margin:0;
+		transition: margin 0.5s ease-in;
+	}
+}
+
+@media screen and (max-height:812px) and (max-width:375px){
+	.results-header{
+		margin:0;
+		transition: margin 0.5s ease-in;
+	}
+}
