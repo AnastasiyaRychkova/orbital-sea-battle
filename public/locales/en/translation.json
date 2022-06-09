@@ -39,7 +39,8 @@
 		"main" : "Back to main",
 		"giveup" : "Give Up",
 		"start" : "Start mission",
-		"rematch" : "Rematch"
+		"rematch" : "Rematch",
+		"exit" : "Leave"
 	},
 
 	"status": {
@@ -65,7 +66,8 @@
 
 	"instructions": {
 		"selecting": "Let's choose the shipment plan",
-		"filling": "Now fill the ships"
+		"filling": "Now fill the ships",
+		"shooting": "Let's play!"
 	},
 
 

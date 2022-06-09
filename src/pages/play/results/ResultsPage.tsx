@@ -71,7 +71,7 @@ export default function ResultsPage( props: IProps ) {
 								glyph = "accuracy"
 								caption = { t("labels.shots") }
 							/>
-{/* 							<MiniInfo
+							{/* <MiniInfo
 								provider = { results.player.certainty }
 								glyph = "hit"
 								caption = { t("labels.certainty") }
@@ -113,7 +113,7 @@ export default function ResultsPage( props: IProps ) {
 								glyph = "accuracy"
 								caption = { t("labels.shots") }
 							/>
-{/* 							<MiniInfo
+							{/* <MiniInfo
 								provider = { results.enemy.certainty }
 								glyph = "hit"
 								caption = { t("labels.certainty") }
@@ -129,7 +129,7 @@ export default function ResultsPage( props: IProps ) {
 						onClick = { props.rematch }
 					/>
 					<Button
-						value = { t("actions.giveup") }
+						value = { t("actions.exit") }
 						priority = { "secondary" }
 						onClick = { props.exit }
 					/>

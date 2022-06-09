@@ -22,6 +22,7 @@
 	padding: 0;
 	outline: none;
 	background-color: transparent;
+	pointer-events: all;
 }
 
 .nav-3 {
@@ -33,6 +34,7 @@
 	gap:3.75rem;
 	justify-self: center;
 	justify-content: center;
+	pointer-events: none;
 }
 
 /* @media screen and (max-height: 375px) and (max-width:812px) {

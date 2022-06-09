@@ -6,7 +6,7 @@ import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
 import Panel from '../../../components/QnInputPanel/Panel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
-import { GameTopInterface, GameBottomInterface } from '../../../components/GameInterface/GameInterface';
+import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
 import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
 
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
@@ -41,18 +41,32 @@ const Page: FC<IProps> = observer(( {
 
 	return (
 		<Body>
+			<All>
+				<GameTopInterface
+					player = { player.user }
+					enemy = { enemy.user }
+					turn = { state === 'moving' ? 'local' : ( state === 'enemy_waiting' ? 'enemy' : 'none' ) }
+					playerStatus = { t( "status." +
+						( state === 'moving' ? 'moving' : 'waiting') 
+					) }
+					enemyStatus = { t( "status." +
+						( state === 'enemy' ? 'moving' : 'waiting') 
+					) }
+				/>
 			
-			<GameTopInterface
-				player = { player.user }
-				enemy = { enemy.user }
-				// FIXME:
-				turn = { state === 'moving' ? 'local' : ( state === 'enemy_waiting' ? 'enemy' : 'none' ) }
-				playerStatus = { t("status.choosing") }
-				enemyStatus = { t("status.choosing") }
-			/>
-		
+				<GameBottomInterface
+					giveUp = { back }
+				>
+					<TabSwitcher
+						tabNumber = { tabNumber }
+						change = { swap }
+					/>
+				</GameBottomInterface>
+			</All>
+			
 			<div className = {
 				styles.tab + " " +
+				styles.container + " " +
 				( tabNumber === 1 ? "" : styles.closed )
 			} >
 				
@@ -67,6 +81,7 @@ const Page: FC<IProps> = observer(( {
 
 			<div className = {
 				styles.tab + " " +
+				styles.container + " " +
 				( tabNumber === 2 ? "" : styles.closed )
 			} >
 				<DiagramComponent
@@ -75,8 +90,11 @@ const Page: FC<IProps> = observer(( {
 					style = { 'normal' }
 					className = { styles["diagram"] }
 					/>
-{/* 				<Filter ui={UI} /> */}
-				
+
+				{/* <Filter
+					ui = { UI }
+					className = { styles["filter"] }
+				/> */}
 			</div>
 
 			<div className = {
@@ -88,16 +106,8 @@ const Page: FC<IProps> = observer(( {
 					onSubmit = { guessElement }
 				/>
 			</div>
-			
-			<GameBottomInterface
-				giveUp = { back }
-			>
-				<TabSwitcher
-					tabNumber = { tabNumber }
-					change = { swap }
-				/>
-			</GameBottomInterface>
-		</Body>	
+		</Body>
+
 	);
 });
 

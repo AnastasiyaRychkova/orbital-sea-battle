@@ -49,7 +49,7 @@ const SimpleGame = observer(() =>
 			</Route>
 			<Route path={['shooting','instruction']}>
 				<Instruction
-					message={ t( 'instructions.filling' ) }
+					message={ t( 'instructions.shooting' ) }
 					onClick={ () => {controller?.completeOnBoarding()} }
 					/>
 			</Route>
