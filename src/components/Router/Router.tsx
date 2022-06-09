@@ -1,6 +1,6 @@
 import React, {createContext, FC, useContext} from "react"
 import {observer} from 'mobx-react'
-import { makeAutoObservable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 class RouterStore
 {
@@ -8,13 +8,24 @@ class RouterStore
 
 	constructor()
 	{
-		makeAutoObservable( this );
+		makeObservable( this, {
+			pathChain: observable,
+			setPath: action.bound,
+		} );
 		this.pathChain = [];
+	}
+
+	setPath( path: string[] ): void
+	{
+		this.pathChain = path;
 	}
 }
 
-
 const context = new RouterStore();
+const setPath = context.setPath;
+
+type PathType = typeof context;
+
 
 const RouterContext = createContext<RouterStore>( context );
 
@@ -28,7 +39,10 @@ interface IRouterProps {
 	children: React.ReactNode,
 }
 
-
+/**
+ * Использовать внутреннюю систему отслеживания "пути" в приложении
+ * ⚠️ Пока работает только в единственном экземпляре
+ */
 const MemoRouter: FC<IRouterProps> = observer((props) => {
 	return (
 		<RouterContext.Provider value={context}>
@@ -46,15 +60,20 @@ interface IRouteProps {
 	children: React.ReactNode,
 }
 
-function checkPath( expect: string[], sample: string[], exact: boolean = false ): boolean
+function checkPath( currPath: string[], sample: string[], exact: boolean = false ): boolean
 {
+	if( currPath.length < sample.length )
+		return false;
 	for (let i = 0; i < sample.length; i++) {
-		if( expect[i] !== sample[i] && sample[i] !== '*' )
+		if( currPath[i] !== sample[i] && sample[i] !== '*' )
 			return false;
 	}
-	return exact ? expect.length <= sample.length : true;
+	return exact ? currPath.length >= sample.length : true;
 }
 
+/**
+ * Отображает вложенные в него компоненты, если совпадает путь
+ */
 const Route: FC<IRouteProps> = observer( ( props ) => {
 	const path = useAppPath();
 	return checkPath( path.pathChain, props.path, props.exact )
@@ -71,4 +90,9 @@ export {
 	MemoRouter,
 	Route,
 	useAppPath,
+	setPath,
+}
+
+export type {
+	PathType,
 }

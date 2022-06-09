@@ -7,7 +7,8 @@ import type {
 	IGameState,
 	ILocalPlayerController,
 } from "../../core/game/OrbitalBattleship/OB_Entities";
-import StatesChainObserver from "./StatesChainObserver";
+import { setPath } from "../../components/Router/Router";
+import { EventData, GSEventData, GSStateChanging } from "../../core/game/OrbitalBattleship/interfaces/OB_GameStateInterface";
 
 const profile = entities.profile({
 	name: 'Игрок',
@@ -16,7 +17,7 @@ const profile = entities.profile({
 	points: 100,
 });
 // let playerController: ILocalPlayerController | null = null;
-const statesObserver = new StatesChainObserver();
+let statesObserver: (( data: EventData<GSEventData> ) => void) | null = null;
 
 type StoreType = {
 	gameState: IGameState | null,
@@ -35,11 +36,11 @@ const createController = action( ( game: IGameState ) => {
 const setGameState = action( () => {
 	store.gameState = (core.game as OrbitalBattleshipGameAI).gameState as IGameState;
 	return store.gameState;
-} )
+} );
 
 
+const gameTesting = {
 
-export default {
 	loadGame()
 	{
 		Auth.authorize( profile );
@@ -51,7 +52,12 @@ export default {
 		core.play( (GamesManager.gamesList)[0] );
 		const game = setGameState();
 		createController( game );
-		statesObserver.listen( game );
+		statesObserver = ( {detail} ) => {
+			console.log( 'To:', (detail as GSStateChanging).state );
+			setPath( (detail as GSStateChanging).state );
+		};
+		setPath( game.statesChain );
+		game.on( 'change', statesObserver );
 		return game;
 	},
 
@@ -59,6 +65,7 @@ export default {
 	{
 		core.completeGame();
 		store.playerController = null;
+		statesObserver = null;
 	},
 
 	get controller(): ILocalPlayerController | null
@@ -66,13 +73,10 @@ export default {
 		return store.playerController;
 	},
 
-	get states(): StatesChainObserver
-	{
-		return statesObserver;
-	},
-
 	get gameState(): IGameState | null
 	{
 		return store.gameState;
 	},
-}
+};
+
+export default gameTesting;

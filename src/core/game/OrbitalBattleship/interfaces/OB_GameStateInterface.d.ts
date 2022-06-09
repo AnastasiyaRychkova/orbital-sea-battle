@@ -15,7 +15,7 @@ export type GSStateChanging = {
 
 export type GSEvent = 'change' | 'finish' | 'new' | 'end';
 export type GSEventData = GSStateChanging | GSResults;
-
+export type {EventData} from '../../../util/EventEmitter/EventProviderInterface';
 
 
 

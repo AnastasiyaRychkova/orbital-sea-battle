@@ -12,19 +12,10 @@ import FullScreenButton from '../../../components/GameInterface/FullScreen/FullS
 import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
 import { GSResults } from '../../../core/game/OrbitalBattleship/interfaces/OB_GameStateInterface'
 import { GameScore } from '../../../core/game/OrbitalBattleship/types'
+import { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 
 interface IProps {
-	/** Локальный игрок */
-	player: IProfile;
-
-	/** Противник */
-	enemy: IProfile;
-
-	/** Результаты игры */
-	results: GSResults;
-
-	/** Общий счёт */
-	score: GameScore ;
+	game: IGameState
 
 	/** Функция для выхода */
 	exit: () => void;
@@ -50,6 +41,12 @@ function timeToString( time: number ): string
 
 /** Страница с результатами игры */
 export default function ResultsPage( props: IProps ) {
+	console.log( "Results:", props.game.result );
+	const results = props.game.result!;
+	const player = props.game.player.user;
+	const enemy = props.game.enemy.user;
+	const score = props.game.score;
+
 	const { t } = useTranslation();
 
 	return (
@@ -61,27 +58,27 @@ export default function ResultsPage( props: IProps ) {
 			<div className = { styles["results-content"] } >
 
 				<ResultsHeader areYouWinningSon = {
-					props.results.isLocalPlayerWinner
+					results.isLocalPlayerWinner
 				} />
 
 				<div className = { styles["game-results"] } >
 					<div className = { styles["player"] } >
 						<PlayerCard
-							player = { props.player }
-							number = { props.results.player.elemNumber }
+							player = { player }
+							number = { results.player.elemNumber }
 						/>
 
 						<div className = { styles.statistics } >
 							<MiniInfo
-								provider = { props.results.player.steps }
+								provider = { results.player.steps }
 								glyph = "accuracy"
 								caption = { t("labels.shots") }
 							/>
-							<MiniInfo
-								provider = { props.results.player.certainty }
+{/* 							<MiniInfo
+								provider = { results.player.certainty }
 								glyph = "hit"
 								caption = { t("labels.certainty") }
-							/>
+							/> */}
 						</div>
 					</div>
 
@@ -90,7 +87,7 @@ export default function ResultsPage( props: IProps ) {
 							texts["headers-bold-h1"] + " " +
 							styles["text-style"]
 						} >
-							{ props.score.player + ":" + props.score.enemy }
+							{ score.player + ":" + score.enemy }
 						</span>
 
 						<div className = { styles["result-time"] } >
@@ -99,15 +96,15 @@ export default function ResultsPage( props: IProps ) {
 							</span>
 
 							<span className = { texts["text-bold-T-Normal"] } >
-								{ timeToString( props.results.duration ) }
+								{ timeToString( results.duration ) }
 							</span>
 						</div>
 					</div>
 
 					<div className = { styles.player } >
 						<PlayerCard
-							player = { props.enemy }
-							number = { props.results.enemy.elemNumber }
+							player = { enemy }
+							number = { results.enemy.elemNumber }
 						/>
 						
 						<div className = {
@@ -115,15 +112,15 @@ export default function ResultsPage( props: IProps ) {
 							styles["st-right"]
 						} >
 							<MiniInfo
-								provider = { props.results.enemy.steps }
+								provider = { results.enemy.steps }
 								glyph = "accuracy"
 								caption = { t("labels.shots") }
 							/>
-							<MiniInfo
-								provider = { props.results.enemy.certainty }
+{/* 							<MiniInfo
+								provider = { results.enemy.certainty }
 								glyph = "hit"
 								caption = { t("labels.certainty") }
-							/>
+							/> */}
 						</div>
 					</div>
 				</div>

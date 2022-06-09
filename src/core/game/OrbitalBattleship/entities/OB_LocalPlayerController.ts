@@ -13,6 +13,7 @@ class OB_LocalPlayerController implements ILocalPlayerController
 	{
 		this.#game = game;
 		this.checkDiagram = this.checkDiagram.bind( this );
+		this.requestRematch = this.requestRematch.bind( this );
 		this.giveIn = this.giveIn.bind( this );
 	}
 

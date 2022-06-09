@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Route from '../../components/Router/Route';
+// import Route from '../../components/Router/Route';
 import ChoosingTable from './preparing/ChoosingTable';
 import FillingDiagram from './preparing/FillingDiagram';
 import Instruction from '../../components/Instruction/Instruction';
@@ -8,6 +8,8 @@ import Instruction from '../../components/Instruction/Instruction';
 
 import gameTesting from './gameTesting';
 import { observer } from 'mobx-react-lite';
+import { MemoRouter, Route } from '../../components/Router/Router';
+import ResultsPage from './results/ResultsPage';
 
 
 gameTesting.loadGame();
@@ -26,44 +28,51 @@ const SimpleGame = observer(() =>
 		}
 	}, [] );
 
-	const statesObserver = gameTesting.states!;
 	const controller = gameTesting.controller;
 	const game = gameTesting.gameState;
+	console.log( 'Render' );
 
 	return controller ? (
-		<>
-			<Route states={statesObserver} path={['preparing','selecting','instruction']} >
+		<MemoRouter>
+			<Route path={['preparing','selecting','instruction']} >
 				<Instruction
 					message={ t( 'instructions.selecting' ) }
 					onClick={ () => { controller?.completeOnBoarding()} }
 					/>
 			</Route>
-			<Route states={statesObserver} path={['preparing','filling','instruction']}>
+			<Route path={['preparing','filling','instruction']}>
 				<Instruction
 					message={ t( 'instructions.filling' ) }
 					onClick={ () => {controller?.completeOnBoarding()} }
 					/>
 			</Route>
-			<Route states={statesObserver} path={['preparing','selecting']} >
+			<Route path={['preparing','selecting']} >
 				<ChoosingTable
-					player = { game!.player.user }
-					enemy = { game!.enemy.user }
-					back = { controller!.giveIn }
-					forward = { (n: number) => {
+					player={ game!.player.user }
+					enemy={ game!.enemy.user }
+					back={ controller!.giveIn }
+					forward={ (n: number) => {
 						controller?.selectElement( n );
 					} }
 				/>
 			</Route>
-			<Route states={statesObserver} path={['preparing','filling']} >
+			<Route path={['preparing','filling']} >
 				<FillingDiagram
-					player = { game!.player }
-					enemy = { game!.enemy }
-					back = { controller!.giveIn }
-					forward = { controller!.checkDiagram }
+					player={ game!.player }
+					enemy={ game!.enemy }
+					back={ controller!.giveIn }
+					forward={ controller!.checkDiagram }
+				/>
+			</Route>
+			<Route path={['results']} >
+				<ResultsPage
+					game={game!}
+					exit={ () => {} }
+					rematch={ controller.requestRematch }
 				/>
 			</Route>
 			{/* <Route states={statesObserver} path={["*"]}> <Page404/> </Route> */}
-		</>
+		</MemoRouter>
 	) : null;
 });
 

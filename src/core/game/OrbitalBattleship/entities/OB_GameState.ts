@@ -74,7 +74,7 @@ class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameS
 
 	get result(): GSResults | undefined
 	{
-		return this.#machine.statesChain[0] === 'results' && this.#history.length > 0
+		return this.isOver && this.#history.length > 0
 				? this.#history[ this.#history.length - 1 ]
 				: undefined;
 	}
