@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import sprite from "../../img/sprite.svg";
 
+export type TabNumber = 1 | 2 | 3;
+
 
 
 {/* <svg ...> <use href = { sprite + "#message" } /> </svg> */}
@@ -63,6 +65,7 @@ function Arrow( props: IArrowProps ) {
 						+ " " +
 						icons["icon-stroke__color"]
 					}
+					onClick = { props.onClick }
 				>
 					<use href = { sprite + "#arrow-left" } />
 				</svg>
@@ -74,24 +77,21 @@ function Arrow( props: IArrowProps ) {
 
 interface IProps {
 	/** Номер выбранной вкладки */
-	tabNumber: 1 | 2 | 3;
+	tabNumber: TabNumber;
 
-	/** Действие при выборе вкладки с отображением собственной диаграммы */
-	first: () => void;
-
-	/** При выборе вкладки со стрельбой */
-	second: () => void;
-
-	/** При выборе вкладки с угадываем элемента соперника */
-	third: () => void;
+	/** Действие при выборе вкладки */
+	change: (newTab: TabNumber) => void;
 }
 
 /** Компонент для переключения вкладок игрового окна */
 export default function TabSwitcher( props: IProps ) {
 
-	const prev = ( props.tabNumber === 3) ? props.second : props.first;
+	const first = props.change.bind(null, 1);
+	const second = props.change.bind(null, 2);
+	const third = props.change.bind(null, 3);
 
-	const next = ( props.tabNumber === 1) ? props.second : props.third;
+	const prev = ( props.tabNumber === 3) ? second : first;
+	const next = ( props.tabNumber === 1) ? second : third;
 
 	return ( 
 		<>
@@ -109,17 +109,17 @@ export default function TabSwitcher( props: IProps ) {
 
 			<nav className = { styles["nav-3"] }>
 				<PagingButton
-					onClick = { props.first }
+					onClick = { first }
 					icon = "#choose"
 					isSelected = { props.tabNumber === 1 }
 				/>
 				<PagingButton
-					onClick = { props.second }
+					onClick = { second }
 					icon = "#shoot"
 					isSelected = { props.tabNumber === 2 }
 				/>
 				<PagingButton
-					onClick = { props.third }
+					onClick = { third }
 					icon = "#guess"
 					isSelected = { props.tabNumber === 3 }
 				/>

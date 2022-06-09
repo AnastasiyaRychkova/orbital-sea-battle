@@ -25,9 +25,14 @@
 }
 
 .nav-3 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	display:flex;
 	gap:3.75rem;
 	justify-self: center;
+	justify-content: center;
 }
 
 /* @media screen and (max-height: 375px) and (max-width:812px) {
