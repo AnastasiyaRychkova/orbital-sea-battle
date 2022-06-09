@@ -104,10 +104,9 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 	fire( qn: CellQN ): boolean
 	{
 		if( this._state.isDamaged( qn )
-			|| !this._state.hasCell( qn )
 		)
 			return false;
-
+		console.log( 'Fire:', qn );
 		const shotResult = this._state.doDamage( qn );
 		this._emit( 'shot', {
 			qn,
@@ -147,5 +146,6 @@ export default Diagram;
 export type {
 	IDiagram,
 	DiagramEvent,
-	DiagramEventData
+	DiagramEventData,
+	IDiagramState,
 };

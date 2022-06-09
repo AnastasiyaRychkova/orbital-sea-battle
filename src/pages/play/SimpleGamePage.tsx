@@ -74,6 +74,7 @@ const SimpleGame = observer(() =>
 				<Shooting
 					game={game!}
 					guessElement={controller.nameElement}
+					fireFn={controller.fire}
 					back={controller.giveIn}
 				/>
 			</Route>

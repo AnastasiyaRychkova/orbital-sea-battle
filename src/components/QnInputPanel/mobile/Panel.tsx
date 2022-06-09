@@ -1,19 +1,26 @@
 import { observer } from 'mobx-react';
 import React, {FC, useEffect} from 'react';
 import cn from '../../className';
-import {QN} from '../../../core/game/Services/Chemistry';
+import {CellQN, QN} from '../../../core/game/Services/Chemistry';
 import ConfirmButton from '../ConfirmButton';
 import InputValue from './InputValue';
 import styles from './Panel.module.css';
 import PanelController from './PanelController';
+import type { IDiagramState } from '../../../core/game/Diagram/DObjectState.d';
 
 interface IProps {
 	className?: string,
+	diagram: IDiagramState,
+	fireFn: ( cell: CellQN ) => void,
 }
 
 const store = new PanelController();
 
-const Panel: FC<IProps> = observer( ({ className }) => {
+const Panel: FC<IProps> = observer( ({ 
+	className,
+	diagram,
+	fireFn,
+}) => {
 
 	useEffect(() => {
 		const handleClickOutside = ( event: Event ): void => {
@@ -36,6 +43,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 			<div className={styles.inputsRow}>
 				<div className={styles.tabs}>
 					<InputValue
+						filter={diagram.filter!}
 						name='n'
 						storeKey='n'
 						values={[
@@ -50,6 +58,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						open={store.openTab === 'n'}
 						openTabHandle={store.openTabHandle} />
 					<InputValue
+						filter={diagram.filter!}
 						name='l'
 						storeKey='l'
 						values={[
@@ -61,6 +70,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						open={store.openTab === 'l'}
 						openTabHandle={store.openTabHandle} />
 					<InputValue
+						filter={diagram.filter!}
 						name='m'
 						sub='L'
 						storeKey='m'
@@ -76,6 +86,7 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 						open={store.openTab === 'm'}
 						openTabHandle={store.openTabHandle} />
 					<InputValue
+						filter={diagram.filter!}
 						name='m'
 						sub='S'
 						storeKey='s'
@@ -88,7 +99,10 @@ const Panel: FC<IProps> = observer( ({ className }) => {
 				</div>
 				<div className={styles.spacer} aria-hidden="true"></div>
 			</div>
-			<ConfirmButton mobile />
+			<ConfirmButton mobile
+				fireFn={fireFn}
+				diagram={diagram}
+				/>
 		</form>
 	);
 });

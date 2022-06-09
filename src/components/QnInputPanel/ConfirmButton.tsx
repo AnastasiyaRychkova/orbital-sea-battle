@@ -1,25 +1,27 @@
 import React from 'react';
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import styles from './ConfirmButton.module.css';
-import IDiagram from '../../core/game/Diagram/DiagramInterface';
+import type { IDiagramState } from '../../core/game/Diagram/DObjectState.d';
+import { CellQN } from '../../core/game/Services/Chemistry';
 
-type ControllerType = {
-	fire: () => void,
-	diagram: IDiagram,
-}
+
 
 interface IProps {
 	mobile?: boolean,
-	controller?: ControllerType,
+	fireFn: ( cell: CellQN ) => void,
+	diagram: IDiagramState,
 }
 
-const ConfirmButton = inject( "controller" )(observer(( props: IProps ) => {
+const ConfirmButton = (observer(( props: IProps ) => {
 	return (
 		<button
 			className={makeClassName( props.mobile )}
 			type="button"
-			onClick={props.controller!.fire}
-			disabled={!(props.controller!.diagram.observableState.doesSpecifyCell)}
+			onClick={() => {
+				props.fireFn( props.diagram.filter?.state as CellQN );
+				props.diagram.filter?.reset();
+			}}
+			disabled={!(props.diagram.doesSpecifyCell)}
 		>
 			<span className={styles.text}>
 				Пуск

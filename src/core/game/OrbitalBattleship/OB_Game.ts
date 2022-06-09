@@ -43,7 +43,7 @@ class OrbitalBattleshipGameAI implements IGame
 			{
 				player: entities.localPlayer,
 				enemy: entities.aiPlayer,
-				diagram: entities.diagram,
+				diagram: () => entities.diagram( entities.filter() ),
 			} );
 		this.#aiBehaviour = entities.aiPlayerBehaviour( this.#game );
 

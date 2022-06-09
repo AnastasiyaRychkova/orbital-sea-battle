@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 
 import IQuantumNumber from '../../core/game/ChemicalElement/QuantumNumberInterface';
 import ToggleButton from './ToggleButton';
@@ -10,10 +10,6 @@ import FilterType from "../../core/game/Diagram/Filter/FilterInterface";
 
 type StoreKey = 'n'|'l'|'m'|'s';
 
-type ControllerType = {
-
-	filter: FilterType;
-}
 
 
 interface IProps {
@@ -32,15 +28,13 @@ interface IProps {
 	/** Стиль кнопок */
 	theme: ToggleTheme,
 
-	/** Пробрасываемый через провайдер контроллер */
-	controller?: ControllerType,
+	filter: FilterType;
 }
 
 
 
-const InputValue = inject( "controller" )(observer(( props: IProps ) => {
-	!props.controller && console.error( 'Filter(desktop).InputValue: controller is undefined' );
-	const filter = props.controller!.filter;
+const InputValue = (observer(( props: IProps ) => {
+	const filter = props.filter;
 	const isFilterDisabled = filter.isDisable( props.storeKey );
 	const min = filter.minValid( props.storeKey );
 	const max = filter.maxValid( props.storeKey );
@@ -69,7 +63,7 @@ const InputValue = inject( "controller" )(observer(( props: IProps ) => {
 
 
 function make({
-	controller,
+	filter,
 	storeKey: key,
 	theme,
 	values,
@@ -78,7 +72,6 @@ function make({
 	min: number,
 	max: number ): JSX.Element[]
 {
-	const filter = controller!.filter;
 	let checkedValue = filter.getValue( key );
 	
 

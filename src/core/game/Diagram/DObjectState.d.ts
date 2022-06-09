@@ -102,4 +102,7 @@ export interface IDiagramState
 	onCellClick( cell: ICell ): void
 
 	onBlockClick( block: IBlock ): void
+
+	filter: IFilter | undefined
+
 }

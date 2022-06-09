@@ -7,7 +7,8 @@ export type { default as ILocalPlayerController } from './interfaces/OB_LocalPla
 export type { default as IGameState } from './interfaces/OB_GameStateInterface';
 export type { default as IDiagram,
 	DiagramEvent,
-	DiagramEventData
+	DiagramEventData,
+	IDiagramState,
 } from '../Diagram/DiagramInterface';
 export type { default as IFilter } from '../Diagram/Filter/FilterInterface';
 export type { default as IShotsAnalyzer } from './interfaces/OB_ShotsAnalyzerInterface';

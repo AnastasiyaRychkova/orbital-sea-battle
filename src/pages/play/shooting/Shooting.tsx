@@ -15,6 +15,7 @@ import type { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entitie
 import { useAppPath } from '../../../components/Router/Router';
 import Filter from '../../../components/QnInputPanel/Filter';
 import UI from '../../../core/browser/UIStore';
+import { CellQN } from '../../../core/game/Services/Chemistry';
 
 interface IProps {
 	game: IGameState;
@@ -24,6 +25,9 @@ interface IProps {
 
 	/** Функция для угадывания элемента */
 	guessElement: (elementNumber: number) => void;
+
+	/** Функция выстрела */
+	fireFn: ( cell: CellQN ) => void;
 }
 
 /** Игровая страница c тремя вкладками */
@@ -31,6 +35,7 @@ const Page: FC<IProps> = observer(( {
 	game,
 	back,
 	guessElement,
+	fireFn,
 } ) => {
 	const { t } = useTranslation();
 	const player = game.player;
@@ -73,7 +78,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { player.diagram! }
 					zooming = { true }
-					style = { 'ships' }
+					style = { 'normal' }
 					className = { styles["diagram"] }
 					/>
 				
@@ -91,10 +96,12 @@ const Page: FC<IProps> = observer(( {
 					className = { styles["diagram"] }
 					/>
 
-				{/* <Filter
-					ui = { UI }
-					className = { styles["filter"] }
-				/> */}
+				<Filter
+					ui={UI}
+					diagramState={enemy.diagram!.observableState}
+					fireFn={fireFn}
+					className={styles.filter}
+					/>
 			</div>
 
 			<div className = {

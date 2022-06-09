@@ -1,21 +1,29 @@
 import React, {FC} from 'react';
-import { QN } from "../../core/game/Services/Chemistry";
+import { CellQN, QN } from "../../core/game/Services/Chemistry";
 import InputValue from './InputValue';
 import ConfirmButton from './ConfirmButton';
 import styles from './style.module.css';
 import { ToggleTheme } from './types';
 import cn from '../className';
+import { IDiagramState } from '../../core/game/OrbitalBattleship/OB_Entities.d';
 
 interface IProps {
 	className?: string,
+	diagram: IDiagramState,
+	fireFn: ( cell: CellQN ) => void,
 }
 
-const Panel: FC<IProps> = ({className}) => {
+const Panel: FC<IProps> = ({
+	diagram,
+	fireFn,
+	className
+}) => {
 	return (
 		<form className={cn(styles, ['panel'], className)}>
 			<div className={styles.inputsRow}>
 				<div className={styles.inputPair}>
 					<InputValue
+						filter={diagram.filter}
 						name="n"
 						storeKey="n"
 						values={[
@@ -29,6 +37,7 @@ const Panel: FC<IProps> = ({className}) => {
 						]}
 						theme={ToggleTheme.default} />
 					<InputValue
+						filter={diagram.filter}
 						name="l"
 						storeKey="l"
 						values={[
@@ -41,6 +50,7 @@ const Panel: FC<IProps> = ({className}) => {
 				</div>
 				<div className={styles.inputPair}>
 					<InputValue
+						filter={diagram.filter}
 						name="m"
 						sub="L"
 						storeKey="m"
@@ -55,6 +65,7 @@ const Panel: FC<IProps> = ({className}) => {
 						]}
 						theme={ToggleTheme.default} />
 					<InputValue
+						filter={diagram.filter}
 						name="m"
 						sub="S"
 						storeKey="s"
@@ -65,7 +76,10 @@ const Panel: FC<IProps> = ({className}) => {
 						theme={ToggleTheme.squareM} />
 				</div>
 			</div>
-			<ConfirmButton/>
+			<ConfirmButton
+				fireFn={fireFn}
+				diagram={diagram}
+			/>
 		</form>
 	);
 }

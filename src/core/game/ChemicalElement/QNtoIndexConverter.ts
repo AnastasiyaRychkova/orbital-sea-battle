@@ -25,7 +25,7 @@ function cell( scheme: {n: number, l: string, m: number, s: -1|1} )
 	};
 }
 
-const toIndexScheme: ToIndexSchemeType = {
+export const toIndexScheme: ToIndexSchemeType = {
 	1: {
 		's': {
 			'0': [ index( 0 ), index( 1 ) ]

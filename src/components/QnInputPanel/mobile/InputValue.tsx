@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import cn from '../../className';
 import { ToggleTheme } from '../types';
 
@@ -12,10 +12,6 @@ import IQuantumNumber from '../../../core/game/ChemicalElement/QuantumNumberInte
 
 type StoreKey = 'n'|'l'|'m'|'s';
 
-type ControllerType = {
-
-	filter: FilterType;
-}
 
 
 interface IProps {
@@ -36,20 +32,18 @@ interface IProps {
 
 	openTabHandle: ( key: StoreKey ) => void,
 
-	/** Пробрасываемый через провайдер контроллер */
-	controller?: ControllerType,
+	filter: FilterType;
 }
 
-const InputValue: FC<IProps> = inject( "controller" )(observer( ({
+const InputValue: FC<IProps> = observer( ({
 	name,
 	sub,
 	values,
 	storeKey: key,
 	open,
 	openTabHandle,
-	controller,
+	filter,
 }) => {
-	const filter = controller!.filter;
 	const currentValueStr = filter.getValueAsString( key );
 	const min = filter.minValid( key );
 	const max = filter.maxValid( key );
@@ -90,7 +84,7 @@ const InputValue: FC<IProps> = inject( "controller" )(observer( ({
 			</ul>
 		</div>
 	);
-} ));
+} );
 
 
 

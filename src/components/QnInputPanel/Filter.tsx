@@ -1,7 +1,9 @@
 import React, {FC} from 'react';
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import PanelMobile from './mobile/Panel';
 import PanelDesktop from './Panel';
+import { IDiagramState } from '../../core/game/OrbitalBattleship/OB_Entities';
+import { CellQN } from '../../core/game/ChemicalElement/QuantumNumbers';
 
 type UiStore = {
 	mobile: boolean,
@@ -9,17 +11,29 @@ type UiStore = {
 
 
 interface IProps {
-	ui?: UiStore,
+	ui: UiStore,
 	className?: string,
+	diagramState: IDiagramState,
+	fireFn: ( cell: CellQN ) => void,
 }
 
-const Filter: FC<IProps> = inject( "ui" )(observer(({
+const Filter: FC<IProps> = (observer(({
 	ui,
-	className
+	diagramState,
+	fireFn,
+	className,
 }) => {
 	return ui && ui.mobile
-		? ( <PanelMobile className={className} /> )
-		: ( <PanelDesktop className={className} /> );
+		? ( <PanelMobile 
+				diagram={diagramState}
+				className={className}
+				fireFn={fireFn}
+				/> )
+		: ( <PanelDesktop
+				diagram={diagramState}
+				className={className}
+				fireFn={fireFn}
+				/> );
 }));
 
 export default Filter;
