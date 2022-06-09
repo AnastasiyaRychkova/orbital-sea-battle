@@ -58,6 +58,16 @@ const Page: FC<IProps> = observer(( {
 						( state === 'enemy' ? 'moving' : 'waiting') 
 					) }
 				/>
+
+				<div className = {
+					styles.tab + " " +
+					( tabNumber === 3 ? "" : styles.closed )
+				} >
+					<PeriodicTable
+						mode = "guessing"
+						onSubmit = { guessElement }
+					/>
+				</div>
 			
 				<GameBottomInterface
 					giveUp = { back }
@@ -104,15 +114,7 @@ const Page: FC<IProps> = observer(( {
 					/>
 			</div>
 
-			<div className = {
-				styles.tab + " " +
-				( tabNumber === 3 ? "" : styles.closed )
-			} >
-				<PeriodicTable
-					mode = "guessing"
-					onSubmit = { guessElement }
-				/>
-			</div>
+			
 		</Body>
 
 	);

@@ -115,7 +115,7 @@
 .series{
 	border: 1px solid var(--primary-600-subheader);
 	padding: 3px;
-	background-color: var(--disable-800-light-backing);
+	background-color: var(--secondary-800-background);
 	color: var(--primary-200-clickable);
 }
 
