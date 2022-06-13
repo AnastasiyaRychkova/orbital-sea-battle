@@ -1,4 +1,4 @@
-import core, {Auth} from "../../core/core";
+import core, {Auth, browser} from "../../core/core";
 import { action, observable } from "mobx";
 import entities from "../../core/game/OrbitalBattleship/OB_EntitiesFabric";
 import GamesManager from "../../core/game/Services/GamesManager";
@@ -58,6 +58,10 @@ const gameTesting = {
 		};
 		setPath( game.statesChain );
 		game.on( 'change', statesObserver );
+		if( browser.device === 'mobile' )
+		{
+			browser.fullScreen.on();
+		}
 		return game;
 	},
 

@@ -131,7 +131,8 @@ export default function ResultsPage( props: IProps ) {
 					<Button
 						value = { t("actions.exit") }
 						priority = { "secondary" }
-						onClick = { props.exit }
+						to='/'
+						replace={true}
 					/>
 				</div>
 			</div>
