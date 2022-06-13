@@ -81,7 +81,6 @@ const SimpleGame = observer(() =>
 			<Route path={['results']} >
 				<ResultsPage
 					game={game!}
-					exit={ () => {} }
 					rematch={ controller.requestRematch }
 				/>
 			</Route>

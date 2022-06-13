@@ -22,10 +22,10 @@
 	font-weight: 500;
 	font-size: 1.5em;
 	line-height: 150%;
-	letter-spacing: 0.02sem;
+	letter-spacing: 0.02em;
 	text-align: center;
 	color: black;
-	padding: 1.5em;
+	padding: 1em;
 	background-color: white;
 	border-radius: 25px;
 	user-select: none;
@@ -49,6 +49,37 @@
 	max-height: 90%;
 	max-width: 60%;
 	z-index: 1001;
+}
+
+@media screen and (max-width: 1024px) {
+	.bubble:after {
+		width: 42px;
+		height: 35px;
+		background-size: 42px 35px;
+	}
+}
+
+@media screen and (orientation: portrait) {
+	
+	.bubble {
+		right: auto;
+		left: 15%;
+		bottom: 75%;
+		max-width: 60%;
+	}
+
+	.bubble:after {
+		right: auto;
+		left: calc( 50px + 15% );
+		top: 25%;
+	}
+
+	.captain {
+		top: 30%;
+		left: 5%;
+		bottom: auto;
+		max-width: 120%;
+	}
 }
 
 .overlay ~ div {

@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import styles from './Shooting.module.css';
 import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
-import Panel from '../../../components/QnInputPanel/Panel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
 
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
@@ -69,9 +69,8 @@ const Page: FC<IProps> = observer(( {
 					/>
 				</div>
 			
-				<GameBottomInterface
-					giveUp = { back }
-				>
+				<GameBottomInterface>
+					<GiveUpButton onClick = { back } />
 					<TabSwitcher
 						tabNumber = { tabNumber }
 						change = { swap }

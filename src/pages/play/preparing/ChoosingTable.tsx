@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
 import { GameTopInterface, GameBottomInterface } from '../../../components/GameInterface/GameInterface';
+// import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 
 import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
 
@@ -39,9 +40,8 @@ export default function ChoosingTable( props: IProps ) {
 				onSubmit = { props.forward }
 			/>
 
-			<GameBottomInterface
-				giveUp = { props.back }
-			>
+			<GameBottomInterface>
+				{/* <GiveUpButton onClick = { props.back } /> */}
 			</GameBottomInterface>
 		</Body>	
 	);

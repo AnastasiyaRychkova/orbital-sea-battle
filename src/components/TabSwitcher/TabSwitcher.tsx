@@ -2,15 +2,10 @@ import React from 'react';
 import styles from './TabSwitcher.module.css';
 import icons from '../../style/icons.module.css';
 
-import { useTranslation } from 'react-i18next';
-
 import sprite from "../../img/sprite.svg";
 
 export type TabNumber = 1 | 2 | 3;
 
-
-
-{/* <svg ...> <use href = { sprite + "#message" } /> </svg> */}
 
 interface IPagingButtonProps {
 	onClick: () => void;

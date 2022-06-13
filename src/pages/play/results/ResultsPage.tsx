@@ -14,8 +14,7 @@ import { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 interface IProps {
 	game: IGameState
 
-	/** Функция для выхода */
-	exit: () => void;
+	// exit: () => void;
 
 	/** Функция для реванша */
 	rematch: () => void;

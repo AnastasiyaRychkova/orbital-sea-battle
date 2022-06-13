@@ -1,15 +1,17 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import styles from './Diagram.module.css';
 import Body from '../../../components/Body/Body';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import SelectedElement from '../../../components/GameInterface/SelectedElement/SelectedElement';
+
 import IconButton from '../../../components/Button/WithIcon/Button';
 import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 
-import type { IGameState, OB_IEnemy, OB_ILocalPlayer } from '../../../core/game/OrbitalBattleship/OB_Entities';
+import type { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 import { useAppPath } from '../../../components/Router/Router';
 
 interface IProps {
@@ -63,24 +65,23 @@ const FillingDiagram: FC<IProps> = observer(( {
 					}
 				/>
 		
-				<GameBottomInterface
-					giveUp = { back }
-				>
+				<GameBottomInterface>
+					<GiveUpButton onClick = { back } />
+
 					<FillingPanel
 						mode = { editMode as ModeType }
 						change = { toggleMode }
 					/>
 
 					<IconButton
-						value={t("actions.start")}
-						glyph='play'
-						priority='primary'
-						theme='muted'
-						onClick={ forward }
-						disabled={ state !== 'diagram' || diagram.observableState.cellCounter === 0 }
-						className={styles.startBtn}
-						/>
-
+						value = { t("actions.start") }
+						glyph = 'play'
+						priority = 'primary'
+						theme = 'muted'
+						onClick = { forward }
+						disabled = { state !== 'diagram' || diagram.observableState.cellCounter === 0 }
+						className = { styles.startBtn }
+					/>
 				</GameBottomInterface>
 			</All>
 

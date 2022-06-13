@@ -6,9 +6,7 @@ import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
 import TurnInfo, { Turn } from './TurnInfo';
 import AbilityButton from './AbilityButton/AbilityButton';
 import FullScreenButton from './FullScreen/FullScreenButton';
-import GiveUpButton from './GiveUp/GiveUpButton';
 import { observer } from 'mobx-react';
-import { useAppPath } from '../Router/Router';
 
 interface IGameTopProps {
 	/** Локальный игрок */
@@ -65,24 +63,14 @@ const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 
 
 interface IGameBottomProps {
-	/** Функция для выхода */
-	giveUp: () => void,
-
 	children: React.ReactNode;
 }
 
 /** Нижняя часть интерфейса с кнопкой "Сдаться" */
 const GameBottomInterface: FC<IGameBottomProps> = observer(( props ) => {
-	const statesChain = useAppPath().pathChain;
 	return (
 		<div className = { styles["bottom-control-panel"] } >
 			<div className = { styles["default-menu-left-center-right"] } >
-
-				{
-					statesChain.length >= 2 && statesChain[1] === 'selecting'
-					? null
-					: <GiveUpButton onClick = { props.giveUp } />
-				}
 		
 				{ props.children }
 			
