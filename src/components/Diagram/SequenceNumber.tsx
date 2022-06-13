@@ -3,25 +3,24 @@ import { observer } from 'mobx-react';
 import styles from './diagram.module.css';
 
 interface IProps {
-	name: string,
+	number: number,
 	x: number,
 	y: number,
-	anchor?: 'start' | 'middle' | 'end',
 }
 
 
-const ShipName = observer(( props: IProps ) => {
+const SequenceNumber = observer(( props: IProps ) => {
 
 	return (
 		<text
-			className={ styles.shipName }
+			className={ styles.sequencer }
 			x={props.x}
 			y={props.y}
-			textAnchor={props.anchor || 'start'}
+			textAnchor="end"
 		>
-			{props.name}
+			{props.number}
 		</text>
 	);
 });
 
-export default ShipName;
+export default SequenceNumber;

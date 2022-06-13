@@ -11,6 +11,8 @@ import {
 	CONTAINER_HEIGHT,
 	CONTAINER_WIDTH,
 } from './properties';
+import SequenceNumber from './SequenceNumber';
+import Chemistry from '../../core/game/Services/Chemistry';
 
 const COLUMN_SPACING = 30;
 const LINE_SPACING = 30;
@@ -36,6 +38,11 @@ const Ship: FC<IProps> = observer(( {
 
 	return (
 		<g>
+			<SequenceNumber
+				x={location.x - 3}
+				y={location.y + 10}
+				number={firstCellIndex( block )}
+				/>
 			<ShipSelection
 				location={location}
 				block={block} >
@@ -120,4 +127,15 @@ function getX( n: MainQN, l: OrbitalQN ): number
 function getY( n: MainQN, l: OrbitalQN ): number
 {
 	return ( 8 - n.value - l.value ) * ( CONTAINER_HEIGHT + LINE_SPACING );
+}
+
+
+function firstCellIndex( block: IBlock ): number
+{
+	// console.log( 'First Cell:', block.qn.l.value.toString(), block.children, block.children[block.qn.l.value.toString()] );
+	const maxM = block.qn.l.value;
+	return Chemistry.toIndex(block
+		.children[maxM > 0 ? '+'+maxM : maxM]
+		.children['+1/2']
+		.qn) + 1;
 }

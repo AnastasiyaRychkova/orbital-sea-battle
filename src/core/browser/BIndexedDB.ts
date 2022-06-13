@@ -12,29 +12,13 @@ type DbType = {
 	db: BIndexedDBDataBase | null,
 }
 
-const indexedDB = window.indexedDB || (window as any).mozIndexedDB || (window as any).webkitIndexedDB || (window as any).msIndexedDB;
+// const indexedDB = window.indexedDB || (window as any).mozIndexedDB || (window as any).webkitIndexedDB || (window as any).msIndexedDB;
 /* window.IDBTransaction = window.IDBTransaction || (window as any).webkitIDBTransaction || (window as any).msIDBTransaction;
 window.IDBKeyRange = window.IDBKeyRange || (window as any).webkitIDBKeyRange || (window as any).msIDBKeyRange; */
 
 
 const _bases = new Map<string, DbType>();
 
-(function loadDataBases()
-{
-	if( indexedDB === undefined )
-		return;
-
-	const promise = indexedDB.databases();
-	promise.then( databases => {
-		databases.forEach( ( db ) => {
-			if( db.name )
-				_addNewDBNote( db.name, db.version );
-		} )
-	} )
-	.catch( ( reason ) => {
-		console.log( 'IndexedDB databases list is not available: ' + reason );
-	} );
-})();
 
 /**
  * Сохранить в оперативной памяти быстрые запись и ссылку на базу данных
@@ -62,7 +46,7 @@ function _closeDBHandler( dbName:string ) {
 
 
 /** Обертка для браузерного IndexedDB */
-export default {
+const BIndexedDB = {
 
 	/** Есть ли поддержка IndexedDB в браузере */
 	isAvailable(): boolean
@@ -96,7 +80,7 @@ export default {
 			database = _addNewDBNote( dbName, scheme.version );
 
 		if( database.opened && database.db )
-			return promiseWithValue( database.db );
+			return database.db;
 
 		const promise = new Promise<BIndexedDBDataBase>( ( resolve, reject ) => {
 			
@@ -143,6 +127,8 @@ export default {
 		base.db?.close();
 	}
 }
+
+export default BIndexedDB;
 
 export type {
 	BIndexedDBDataBase,

@@ -15,6 +15,15 @@
 	pointer-events: none;
 }
 
+.sequencer {
+	font-size: 10px;
+	font-family: var(--secondary-font);
+	font-weight: normal;
+	user-select: none;
+	fill: var(--disable-300);
+	pointer-events: none;
+}
+
 
 /*=============================================
 =            Normal Style            =

@@ -258,7 +258,7 @@ class OB_AIEnemyBehaviour
 				moving: {
 					delay: {
 						to: 'waiting',
-						after: randomInRange( 0.4, 1 ),
+						after: randomInRange( 1, 2 ),
 						do: this._move,
 					},
 					on: {

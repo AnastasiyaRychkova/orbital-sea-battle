@@ -18,7 +18,7 @@ import {
 
 const COLUMN_SPACING = 15;
 const LINE_SPACING = 24;
-const NAME_X_OFFSET = 12;
+const NAME_X_OFFSET = 44;
 const NAME_Y_OFFSET = 32;
 const COLUMN_DECOR = BACK_WIDTH + FRONT_WIDTH + COLUMN_SPACING;
 
@@ -69,6 +69,7 @@ const Ship: FC<IProps> = observer(( {
 				x={location.x + NAME_X_OFFSET}
 				y={location.y + NAME_Y_OFFSET}
 				name={name}
+				anchor='end'
 			/>
 		</g>
 
