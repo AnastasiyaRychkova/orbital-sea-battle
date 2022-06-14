@@ -129,9 +129,9 @@ const PeriodicTableUnit: FC<IProps> = ( {
 			{
 				cells.push( 
 					<SeriesCell
-						start={ n }
-						finish={ n+=14 }
-						key={key++}
+						start = { n }
+						finish = { n+=14 }
+						key = { key++ }
 					/>
 				)
 				n++;
@@ -160,23 +160,26 @@ const PeriodicTableUnit: FC<IProps> = ( {
 	}
 
 	return (
-		<>
-			<div className={ styles["container-table"] }>
+		<div className = { styles.container } >
+			
+			<div className = { styles.table } >
 				{ cells }
 			</div>
-			<div className={ styles["interface-bottom"] }>
+
+			<div className = { styles.bottom }>
 				<Button
-					priority='primary'
-					value={t( mode === "choosing"
-								? "components.table.choose"
-								: "components.table.guess"
-					)}
-					className={styles.selectBtn}
-					disabled={element === 0}
-					onClick={() => {onSubmit( element );}}
+					priority = 'primary'
+					value = { t(
+						mode === "choosing"
+						? "components.table.choose"
+						: "components.table.guess"
+					) }
+					className ={ styles.selectBtn }
+					disabled = { element === 0 }
+					onClick={ () => { onSubmit(element); } }
 					/>
 			</div>
-		</>
+		</div>
 	);
 }
 

@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import styles from './Shooting.module.css';
-import Body from '../../../components/Body/Body';
+// import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
@@ -45,58 +45,27 @@ const Page: FC<IProps> = observer(( {
 	const state = useAppPath().lastPart;
 
 	return (
-		<Body>
-			<All>
-				<GameTopInterface
-					player = { player.user }
-					enemy = { enemy.user }
-					turn = { state === 'moving' ? 'local' : ( state === 'enemy_waiting' ? 'enemy' : 'none' ) }
-					playerStatus = { t( "status." +
-						( state === 'moving' ? 'moving' : 'waiting') 
-					) }
-					enemyStatus = { t( "status." +
-						( state === 'enemy' ? 'moving' : 'waiting') 
-					) }
-				/>
-
-				<div className = {
-					styles.tab + " " +
-					( tabNumber === 3 ? "" : styles.closed )
-				} >
-					<PeriodicTable
-						mode = "guessing"
-						onSubmit = { guessElement }
-					/>
-				</div>
-			
-				<GameBottomInterface>
-					<GiveUpButton onClick = { back } />
-					<TabSwitcher
-						tabNumber = { tabNumber }
-						change = { swap }
-					/>
-				</GameBottomInterface>
-			</All>
-			
+		<div className = { styles.box } >
 			<div className = {
 				styles.tab + " " +
 				styles.container + " " +
-				( tabNumber === 1 ? "" : styles.closed )
+				( tabNumber === 1 ? styles.normal : styles.prev )
 			} >
-				
 				<DiagramComponent
 					diagram = { player.diagram! }
 					zooming = { true }
 					style = { 'ships' }
 					className = { styles["diagram"] }
-					/>
-				
+					/>	
 			</div>
 
 			<div className = {
 				styles.tab + " " +
 				styles.container + " " +
-				( tabNumber === 2 ? "" : styles.closed )
+				( tabNumber === 2
+					? styles.normal
+					: ( ( tabNumber === 1 ) ? styles.next : styles.prev )
+				)
 			} >
 				<DiagramComponent
 					diagram = { enemy.diagram! }
@@ -113,8 +82,40 @@ const Page: FC<IProps> = observer(( {
 					/>
 			</div>
 
-			
-		</Body>
+			<All>
+				<GameTopInterface
+					player = { player.user }
+					enemy = { enemy.user }
+					turn = { state === 'moving' ? 'local' : ( state === 'enemy_waiting' ? 'enemy' : 'none' ) }
+					playerStatus = { t( "status." +
+						( state === 'moving' ? 'moving' : 'waiting') 
+					) }
+					enemyStatus = { t( "status." +
+						( state === 'enemy' ? 'moving' : 'waiting') 
+					) }
+				/>
+
+				<div className = {
+					styles.tab + " " +
+					styles.relative + " " +
+					( tabNumber === 3 ? styles.normal : styles.next )
+				} >
+					<PeriodicTable
+						mode = "guessing"
+						onSubmit = { guessElement }
+					/>
+				</div>
+
+				<GameBottomInterface>
+					<GiveUpButton onClick = { back } />
+					<TabSwitcher
+						tabNumber = { tabNumber }
+						change = { swap }
+					/>
+				</GameBottomInterface>
+
+			</All>
+		</div>
 
 	);
 });

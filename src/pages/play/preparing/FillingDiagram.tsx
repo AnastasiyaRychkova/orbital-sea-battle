@@ -50,6 +50,15 @@ const FillingDiagram: FC<IProps> = observer(( {
 
 	return (
 		<Body>
+			<div className = { styles["diagram-container"] } >
+				<DiagramComponent
+					diagram = { diagram }
+					zooming = { true }
+					style = { 'ships' }
+					className = { styles["diagram"] }
+				/>
+			</div>
+			
 			<All>
 				<GameTopInterface
 					player = { player.user }
@@ -84,15 +93,6 @@ const FillingDiagram: FC<IProps> = observer(( {
 					/>
 				</GameBottomInterface>
 			</All>
-
-			<div className = { styles["diagram-container"] } >
-				<DiagramComponent
-					diagram = { diagram }
-					zooming = { true }
-					style = { 'ships' }
-					className = { styles["diagram"] }
-				/>
-			</div>
 		</Body>	
 	);
 });

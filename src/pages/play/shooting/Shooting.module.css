@@ -1,21 +1,79 @@
-.tab {
+.box {
+	position: relative;
 	margin:0;
-	width: 100%;
+	min-width: 320px;
+	height: 100vh;
+	box-sizing: border-box;
+	padding: 1rem;
+	overflow: hidden;
+}
+
+.tab {
+	--transition-time: 250ms;
+
+	top: 0;
+	margin:0;
+
+	min-height: 0;
+	min-width: 0;
 	height: 100%;
+	width: 100%;
+
 	display:flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	pointer-events: all;
+
+	pointer-events: none;
+	
 }
 
-.closed {
-	/* position: absolute; */
-	display: none;
+.tab > * {
+	pointer-events: auto;
 }
 
 .container {
+	position: absolute;
 	overflow: hidden;
+	z-index: 0;
+}
+
+.relative {
+	position: relative;
+}
+
+.normal {
+	left: 0;
+	visibility: visible;
+	transition:
+		left var(--transition-time) ease-out,
+		visibility 0s linear;
+}
+
+.prev {
+	left: -100%;
+	visibility: hidden;
+	transition:
+		left var(--transition-time) ease-out,
+		visibility 0s linear var(--transition-time);
+}
+
+.next {
+	left: 100%;
+	visibility: hidden;
+	transition:
+		left var(--transition-time) ease-out,
+		visibility 0s linear var(--transition-time);
+}
+
+
+.closed {
+	display: none;
+}
+
+.hidden {
+	position: absolute;
+	visibility: hidden;
 }
 
 .diagram {
@@ -28,7 +86,7 @@
 
 .filter {
 	position: absolute;
-	bottom: 4rem;
+	bottom: 5.5rem;
 	right: 0;
 	user-select: none;
 }

@@ -81,6 +81,10 @@ body {
 	color: #96C2AF;
 }
 
+* {
+	-webkit-tap-highlight-color: transparent;
+}
+
 /* @media (pointer: fine) {
 
 	::-webkit-scrollbar {

@@ -1,16 +1,26 @@
-.interface-bottom{
-	min-height:max(3rem,50px);
-	display:flex;
+.container{
+	display: flex;
+	flex-direction: column;
 	align-items: center;
+	width: 100%;
+	min-height: 0;
+	min-width: 0;
 }
 
-.container-table{
+.bottom{
+	min-height: max(3rem,50px);
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+}
+
+.table{
 	display:grid;
 	grid-template-columns: 1.95rem repeat(18, 3.8rem);
-	grid-template-rows:  repeat(8,3.8rem) 1.2rem repeat(2,3.8rem);
-	overflow:auto;
+	grid-template-rows: repeat(8,3.8rem) 1.2rem repeat(2,3.8rem);
+	overflow: auto;
 	max-width: 100%;
-	padding:1rem;
+	padding: 1rem;
 	box-sizing: border-box;
 }
 .cell{
@@ -116,7 +126,7 @@
 	border: 1px solid var(--primary-600-subheader);
 	padding: 3px;
 	background-color: var(--secondary-800-background);
-	color: var(--primary-200-clickable);
+	color: var(--disable-400);
 }
 
 .element__name, .element-preview__name, .element-preview__symbol{
@@ -170,5 +180,7 @@
 
 
 .selectBtn{
-	min-width:20.5em;
+	margin-top: 1rem;
+	margin-bottom: 1.5rem;
+	min-width: 20.5rem;
 }
