@@ -48,18 +48,18 @@
 
 /*цвета конопок-иконок интерфейса*/
 .icon-message{
-	background-color: var(--secondary-700-light-backing) ;
+	background-color: var(--secondary-700) ;
 }
 
 .icon-info{
-	background-color: var(--secondary-900-dark-backing) ;
+	background-color: var(--secondary-900) ;
 }
 
 /*характереистики иконки элемента в левом меню*/
 .icon-element{
-	outline:  solid var(--secondary-100-text) 1px;
-	background-color:  var(--secondary-900-dark-backing) ;
-	color: var(--secondary-100-text);
+	outline:  solid var(--secondary-100) 1px;
+	background-color:  var(--secondary-900) ;
+	color: var(--secondary-100);
 }
 
 /*скрытие выбранного элемента при больших экранах*/
@@ -81,7 +81,7 @@
 	align-items: center;
 	height:min-content;
 	padding:0.5rem 1rem ;
-	background-color: var(--secondary-900-dark-backing);
+	background-color: var(--secondary-900);
 	gap: 0.8rem;
 }
 .move-target {
@@ -116,7 +116,7 @@
 	height: min-content;
 	padding:0.5rem;
 	box-shadow: var(--box-shadow-input);
-	background-color: var(--disable-800-light-backing) ;	
+	background-color: var(--disable-800) ;	
 	gap:1rem;
 }
 
@@ -134,17 +134,17 @@
 }
 
 .player-active{
-	background-color: var(--secondary-700-light-backing);
+	background-color: var(--secondary-700);
 }
 
 .player__avatar-active{
 	opacity: 1;
-	outline: solid var(--primary-400-main) 1px;
+	outline: solid var(--primary-400) 1px;
 }
 
 .player__avatar-opponent{
 	opacity: 1;
-	outline: solid var(--error-500-miss) 1px;
+	outline: solid var(--error-500) 1px;
 }
 
 .truncate-text {
@@ -165,16 +165,16 @@
 }
 
 .online{
-	background-color: var(--primary-200-clickable);
+	background-color: var(--primary-200);
 } */
 .text-online{
-	color:var(--primary-200-clickable);
+	color:var(--primary-200);
 }
 /* .offline{
-	background-color: var(--error-400-error);
+	background-color: var(--error-400);
 } */
 .text-offline{
-	color:var(--error-400-error);
+	color:var(--error-400);
 }
 
 .sputnik-img{
@@ -246,7 +246,7 @@
 
 @media screen and (max-height: 375px) and (max-width:812px){
 	/* .interface{
-		background-color: var(--secondary-800-background);
+		background-color: var(--secondary-800);
 		background-image: none;
 	} */
 

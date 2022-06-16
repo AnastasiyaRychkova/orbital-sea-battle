@@ -1,6 +1,6 @@
 
 .player-result-card{
-	background-color: var(--secondary-900-dark-backing);
+	background-color: var(--secondary-900);
 	padding:0.5rem;
 	display: flex;
 	flex-direction: column;
@@ -38,7 +38,7 @@
 	height:4rem;
 	padding:0.3rem;
 	box-sizing: border-box;
-	border: 2px solid var(--secondary-100-text);
+	border: 2px solid var(--secondary-100);
 }
 
 .element__name {
@@ -57,7 +57,7 @@
 	height:2rem;
 	flex-shrink: 0;
 	border-radius: 50%;
-	background-color: var(--disable-600-non-clickable);
+	background-color: var(--disable-600);
 	display: flex;
 	justify-content: center;
 	align-items: center;

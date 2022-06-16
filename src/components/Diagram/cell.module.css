@@ -1,17 +1,11 @@
-@value colors: '../../style/colors.css';
-@value custom-white, primary-50, primary-200, primary-300, primary-400, primary-600, secondary-400, secondary-600, secondary-900, error-100, error-400, error-600, error-900 from colors;
-
-@value effects: '../../style/effects.css';
-@value glow__arrow-selection-1, glow__arrow-selection-2, glow__arrow-selection--error-1, glow__arrow-selection--error-2 from effects;
-
 .cell {
-	fill: secondary-600;
-	stroke: secondary-600;
+	fill: var(--secondary-600);
+	stroke: var(--secondary-600);
 }
 
 .selected {
-	fill: primary-300;
-	stroke: primary-300;
+	fill: var(--primary-300);
+	stroke: var(--primary-300);
 	/* animation: blink 1.4s ease-in infinite both; */
 }
 
@@ -59,8 +53,8 @@ svg[data-mode='none'][data-style='ships'] .selected {
 
 .selected.damage,
 svg[data-mode='none'][data-style='ships'] .selected.damage {
-	fill: var(--error-400-error);
-	stroke: var(--error-400-error);
+	fill: var(--error-400);
+	stroke: var(--error-400);
 }
 
 .damage,
@@ -73,64 +67,67 @@ svg[data-mode='none'][data-style='ships'] .damage {
 /*----------  Selected  ----------*/
 
 .cell.filtered {
-	fill: secondary-400;
-	stroke: secondary-900;
-	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
+	fill: var(--secondary-400);
+	stroke: var(--secondary-900);
+	filter: drop-shadow( var(--glow__arrow-selection-1) )
+		drop-shadow( var(--glow__arrow-selection-2) );
 }
 
 .cell.highlighted {
-	fill: primary-300;
-	stroke: primary-300;
+	fill: var(--primary-300);
+	stroke: var(--primary-300);
 	filter: drop-shadow(0px 0px 5px rgba(127, 234, 120, 0.59));
 	animation: blink 1.5s ease-in infinite both;
 }
 
 .cell.highlighted.filtered {
-	fill: primary-400;
-	stroke: primary-50;
-	filter: drop-shadow(glow__arrow-selection-1) drop-shadow(glow__arrow-selection-2);
+	fill: var(--primary-400);
+	stroke: var(--primary-50);
+	filter: drop-shadow( var(--glow__arrow-selection-1) )
+		drop-shadow( var(--glow__arrow-selection-2) );
 	animation: blink-select 1s ease-in infinite both;
 }
 
 .selected.damage.filtered {
-	fill: error-900;
-	stroke: error-600;
-	filter: drop-shadow(glow__arrow-selection--error-1) drop-shadow(glow__arrow-selection--error-2);
+	fill: var(--error-900);
+	stroke: var(--error-600);
+	filter: drop-shadow( var(--glow__arrow-selection--error-1) ) 
+		drop-shadow( var(--glow__arrow-selection--error-2) );
 }
 
 .damage.filtered {
-	fill: error-600;
-	stroke: error-100;
-	filter: drop-shadow(glow__arrow-selection--error-1) drop-shadow(glow__arrow-selection--error-2);
+	fill: var(--error-600);
+	stroke: var(--error-100);
+	filter: drop-shadow( var(--glow__arrow-selection--error-1) ) drop-shadow( var(--glow__arrow-selection--error-2) );
 }
 
 
 
 @keyframes blink {
 	0% {
-		fill: primary-400;
-		stroke: primary-400;
+		fill: var(--primary-400);
+		stroke: var(--primary-400);
 	}
 	50% {
-		fill: primary-200;
-		stroke: primary-200;
+		fill: var(--primary-200);
+		stroke: var(--primary-200);
 		filter: drop-shadow(0px 0px 5px rgba(128, 234, 120, 0));
 	}
 	100% {
-		fill: primary-400;
-		stroke: primary-400;
+		fill: var(--primary-400);
+		stroke: var(--primary-400);
 	}
 }
 
 @keyframes blink-select {
 	0% {
-		fill: primary-400;
+		fill: var(--primary-400);
 	}
 	50% {
-		fill: secondary-400;
+		fill: var(--secondary-400);
 		filter: drop-shadow(0px 0px 5px rgba(128, 234, 120, 0));
 	}
 	100% {
-		fill: primary-200;
+		fill: var(--primary-200);
 	}
 }

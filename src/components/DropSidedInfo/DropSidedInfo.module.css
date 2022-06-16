@@ -1,13 +1,6 @@
 @value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../style/colors.css';
-@value primary-300, primary-500, secondary-100, secondary-900 from colors;
-
-@value effects: '../../style/effects.css';
-@value shadow__input from effects;
-
-
 .task {
 	box-sizing: border-box;
 	display: flex;
@@ -18,17 +11,17 @@
 	padding: 1em;
 	padding-right: 0;
 
-	box-shadow: shadow__input;
-	background-color: secondary-900;
+	box-shadow: var(--shadow__input);
+	background-color: var(--secondary-900);
 	cursor: pointer;
 	transition: width 1.5s ease;
-	color: secondary-100;
+	color: var(--secondary-100);
 	pointer-events: auto;
 }
 
 .infoIcon {
 	width: 2.5em;
-	color: secondary-100;
+	color: var(--secondary-100);
 }
 
 .content {
@@ -50,11 +43,11 @@
 	margin-right: 1.5em;
 	width: 1.8em;
 	cursor: pointer;
-	color: primary-500;
+	color: var(--primary-500);
 }
 
 .closeBtn:active {
-	color: primary-500;
+	color: var(--primary-500);
 }
 
 .checkbox {
@@ -66,13 +59,13 @@
 }
 
 .checkbox:checked ~ .infoIcon {
-	color: primary-300;
+	color: var(--primary-300);
 }
 
 
 @media screen and (hover: hover) {
 	.closeBtn:hover {
-		color: primary-200;
+		color: var(--primary-200);
 	}
 }
 

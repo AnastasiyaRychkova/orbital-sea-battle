@@ -13,7 +13,7 @@
 
 /* блок сведений о статистике игроков*/
 .game-results{
-	color: var(--secondary-100-text);
+	color: var(--secondary-100);
 	display: flex;
 	gap:5rem;
 	margin-bottom: 5rem;
@@ -54,7 +54,7 @@
 	text-transform: uppercase;
 	text-align: center;
 	color: var(--disable-100);
-	text-shadow: var(--glow-button-M-light);
+	text-shadow: var(--glow__button--light--m);
 }
 
 

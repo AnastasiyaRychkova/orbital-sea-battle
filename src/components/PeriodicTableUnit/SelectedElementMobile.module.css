@@ -6,9 +6,9 @@
 	min-height: 4rem;
 	padding: 1rem 0;
 	box-sizing: border-box;
-	border: solid var(--secondary-100-text) 1px;
-	background-color: var(--secondary-900-dark-backing) ;
-	color: var(--secondary-100-text);
+	border: solid var(--secondary-100) 1px;
+	background-color: var(--secondary-900) ;
+	color: var(--secondary-100);
 	box-shadow: var(--box-shadow-input);
 }
 

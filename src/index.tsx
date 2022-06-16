@@ -1,12 +1,16 @@
 import React from 'react';
 import { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './style/reset.css';
-import App from './App';
-import LoadingIcon from './components/Loading/LoadingIcon';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
+
+import './style/fonts/fonts.css';
+import './style/root.css';
+import './style/text.css';
+import './style/index.css';
+
+import App from './App';
+import LoadingIcon from './components/Loading/LoadingIcon';
 
 ReactDOM.render(
 	<React.StrictMode>

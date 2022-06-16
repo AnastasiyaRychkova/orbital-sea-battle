@@ -34,7 +34,7 @@
 
 /*второстепенные иконки (например, навигация по станицам)*/
 .icon-secondary{
-	fill:var(--primary-600-subheader);
+	fill:var(--primary-600);
 }
 @media(hover: hover) {
 	.icon-secondary:hover{
@@ -43,7 +43,7 @@
 	}
 }
 .icon-secondary:active{
-	fill:var(--primary-200-clickable);
+	fill:var(--primary-200);
 }
 .icon-secondary:disabled{
 	fill:var(--disable-700);
@@ -52,7 +52,7 @@
 	fill:var(--disable-700);
 }
 .icon-secondary--selected{
-	fill:var(--primary-200-clickable);
+	fill:var(--primary-200);
 }
 @media(hover: hover) {
 	.icon-secondary--selected:hover{

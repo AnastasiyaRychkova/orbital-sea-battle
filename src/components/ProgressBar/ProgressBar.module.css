@@ -1,13 +1,10 @@
-@value colors: '../../style/colors.css';
-@value primary-500, disable-500 from colors;
-
 .progressBar {
 	min-width: 30px;
 	height: .5em;
 	overflow: hidden;
 	border-radius: .25em;
-	background-color: disable-500;
-	/* color: primary-500; */
+	background-color: var(--disable-500);
+	/* color: var(--primary-500;) */
 }
 
 .infill {

@@ -1,17 +1,11 @@
-@value colors: '../../../style/colors.css';
-@value primary-100, primary-300, primary-500, secondary-500, secondary-700, secondary-800, disable-400, disable-700, disable-900 from colors;
-
-@value effects: '../../../style/effects.css';
-@value  glow__button--light--m, glow__button--primary--m from effects;
-
 .button {
 	padding: 0;
 	background-color: transparent;
-	color: primary-300;
+	color: var(--primary-300);
 }
 
 .button:active {
-	color: primary-500;
+	color: var(--primary-500);
 }
 
 .button:active svg {
@@ -19,17 +13,17 @@
 }
 
 .button:disabled {
-	color: disable-700;
+	color: var(--disable-700);
 }
 
 /* --- Inversive --- */
 
 .inversive {
-	color: secondary-700;
+	color: var(--secondary-700);
 }
 
 .inversive:active {
-	color: secondary-800;
+	color: var(--secondary-800);
 }
 
 .inversive:active svg {
@@ -37,7 +31,7 @@
 }
 
 .inversive:disabled {
-	color: disable-400;
+	color: var(--disable-400);
 }
 
 
@@ -46,18 +40,18 @@
 .backing {
 	box-sizing: border-box;
 	padding: .5em;
-	background-color: secondary-700;
-	color: primary-300;
+	background-color: var(--secondary-700);
+	color: var(--primary-300);
 }
 
 .backing:active {
-	background-color: secondary-700;
-	color: primary-100;
+	background-color: var(--secondary-700);
+	color: var(--primary-100);
 }
 
 .backing:disabled {
-	background-color: disable-900;
-	color: disable-700;
+	background-color: var(--disable-900);
+	color: var(--disable-700);
 }
 
 
@@ -67,7 +61,7 @@
 @media screen and (hover: hover) {
 
 	.button:hover {
-		color: primary-100;
+		color: var(--primary-100);
 	}
 	
 	.button:hover svg {
@@ -80,7 +74,7 @@
 
 
 	.inversive:hover {
-		color: secondary-500;
+		color: var(--secondary-500);
 	}
 	
 	.inversive:hover svg {
@@ -92,8 +86,8 @@
 	}
 
 	.backing:hover {
-		background-color: secondary-500;
-		color: primary-100;
+		background-color: var(--secondary-500);
+		color: var(--primary-100);
 	}
 	
 	.backing:hover svg {

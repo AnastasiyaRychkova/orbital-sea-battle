@@ -1,13 +1,6 @@
 @value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../style/colors.css';
-@value disable-800 from colors;
-
-@value effects: '../../style/effects.css';
-@value shadow__input from effects;
-
-
 .panel {
 	display: flex;
 	align-items: stretch;
@@ -24,8 +17,8 @@
 	column-gap: 1em;
 	column-gap: 1em;
 	padding: .5em;
-	box-shadow: shadow__input;
-	background-color: disable-800;
+	box-shadow: var(--shadow__input);
+	background-color: var(--disable-800);
 	pointer-events: auto;
 }
 

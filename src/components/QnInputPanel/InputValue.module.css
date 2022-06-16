@@ -1,29 +1,22 @@
 @value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../style/colors.css';
-@value secondary-200, secondary-800, secondary-900, disable-600 from colors;
-
-@value effects: '../../style/effects.css';
-@value shadow__input from effects;
-
-
 .inputValue {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	padding: .25em .75em .875em;
 	border: none;
-	box-shadow: shadow__input;
-	background-color: secondary-900;
-	color: secondary-200;
+	box-shadow: var(--shadow__input);
+	background-color: var(--secondary-900);
+	color: var(--secondary-200);
 	row-gap: .5em;
 	user-select: none;
 }
 
 .inputValue[data-switch-off=true] {
-	background-color: secondary-800;
-	color: disable-600;
+	background-color: var(--secondary-800);
+	color: var(--disable-600);
 }
 
 .row {

@@ -1,11 +1,9 @@
 @value typography: '../../style/typography.css';
-@value colors: '../../style/colors.css';
-@value primary-50 from colors;
 
 .title {
 	composes: large-header from typography;
 	composes: large-header-1 from typography;
-	color: primary-50;
+	color: var(--primary-50);
 }
 
 .sub {	

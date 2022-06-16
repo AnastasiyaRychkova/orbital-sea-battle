@@ -7,33 +7,33 @@ button{
 }
 
 .button-exit{
-	background-color: var(--secondary-800-background);
-	color: var(--primary-200-clickable);
-	outline:  solid var(--primary-200-clickable) 1px;
+	background-color: var(--secondary-800);
+	color: var(--primary-200);
+	outline:  solid var(--primary-200) 1px;
 	font-size:1rem;
 	padding: 0.2em 0.4em;
 	text-transform: uppercase;
-	fill:var(--primary-200-clickable);
+	fill:var(--primary-200);
 	flex-shrink: 0;
 	user-select: none;
 }
 @media (hover: hover) {
 	.button-exit:hover{
 		color: var(--primary-50);
-		box-shadow: var(--glow-button-L-light);
+		box-shadow: var(--glow__button--light--l);
 		fill:var(--primary-50);
 		outline-color: var(--primary-50);
 	}
 }
 .button-exit:active{
-	color: var(--primary-400-main);
-	fill:var(--primary-400-main);
-	outline-color: var(--primary-400-main);
+	color: var(--primary-400);
+	fill:var(--primary-400);
+	outline-color: var(--primary-400);
 }
 .button-exit:disabled, .button-exit:disabled:hover{
-	background-color: var(--disable-800-light-backing);
-	color: var(--disable-600-non-clickable);
-	fill:var(--disable-600-non-clickable);
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+	fill:var(--disable-600);
 	outline:none;
 	box-shadow: none;
 	cursor:default;

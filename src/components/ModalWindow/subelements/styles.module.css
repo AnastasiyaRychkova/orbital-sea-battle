@@ -1,9 +1,6 @@
 @value sizes: '../../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../../style/colors.css';
-@value primary-100, primary-200, secondary-100, secondary-800 from colors;
-
 .header {
 	margin: 0;
 	padding: 0;
@@ -12,7 +9,7 @@
 .headerText {
 	composes: header from '../../../style/typography.css';
 	composes: header-4 from '../../../style/typography.css';
-	color: primary-200;
+	color: var(--primary-200);
 }
 
 .paragraph {
@@ -22,13 +19,13 @@
 
 .paragraph.strong > .paragraphText {
 	font-weight: 700;
-	color: primary-100;
+	color: var(--primary-100);
 }
 
 .paragraphText {
 	composes: long-text from '../../../style/typography.css';
 	composes: long-text-m-normal from '../../../style/typography.css';
-	color: secondary-100;
+	color: var(--secondary-100);
 }
 
 
@@ -98,7 +95,7 @@
 }
 
 .mwMiniInfo {
-	background-color: secondary-800;
+	background-color: var(--secondary-800);
 }
 
 .mwImage {

@@ -17,10 +17,10 @@
 
 /* состояния картинкок */
 .local-winner {
-	fill: var(--primary-400-main);
+	fill: var(--primary-400);
 }
 .enemy-winner {
-	fill: var(--error-400-error);
+	fill: var(--error-400);
 }
 .loser {
 	fill: var(--disable-500);
@@ -32,10 +32,10 @@
 }
 
 .win {
-	color: var(--primary-400-main);
+	color: var(--primary-400);
 }
 .lose {
-	color: var(--error-400-error);
+	color: var(--error-400);
 }
 
 

@@ -29,9 +29,9 @@ button{
 
 }
 .button-exit{
-	background-color: var(--secondary-800-background) ;
-	color: var(--primary-200-clickable);
-	outline:  solid var(--primary-200-clickable) 1px;
+	background-color: var(--secondary-800) ;
+	color: var(--primary-200);
+	outline:  solid var(--primary-200) 1px;
 	font-size:1rem;
 	padding: 0.2em 0.4em;
 	text-transform: uppercase;
@@ -45,33 +45,33 @@ button{
 @media(hover: hover) {
 	.button-exit:hover{
 		color: var(--primary-100);
-		box-shadow: var(--glow-button-L-light);
+		box-shadow: var(--glow__button--light--l);
 	}
 }
 .button-exit:active{
 	color: var(--primary-100);
-	color:var(--primary-900-text);
-	background-color:var(--primary-400-main);
+	color:var(--primary-900);
+	background-color:var(--primary-400);
 }
 
 .button-primary{
-	outline: solid var(--primary-400-main) 2px;
-	color:var(--primary-900-text);
-	background-color:var(--primary-400-main);
+	outline: solid var(--primary-400) 2px;
+	color:var(--primary-900);
+	background-color:var(--primary-400);
 }
 
 @media(hover: hover) {
 	.button-primary:hover:not([disabled]) {
-		outline: solid var(--primary-200-clickable) 2px; /* ? */
-		background-color:var(--primary-200-clickable);
-		box-shadow: var(--glow-button-L-light);
+		outline: solid var(--primary-200) 2px; /* ? */
+		background-color:var(--primary-200);
+		box-shadow: var(--glow__button--light--l);
 	}
 }
 
 .button-primary:active{
-	color:var(--primary-900-text);
-	outline: solid var(--primary-600-subheader) 2px; /* ? */
-	background-color:var(--primary-600-subheader);
+	color:var(--primary-900);
+	outline: solid var(--primary-600) 2px; /* ? */
+	background-color:var(--primary-600);
 }
 .button-primary:disabled{
 	color:var(--disable-500);

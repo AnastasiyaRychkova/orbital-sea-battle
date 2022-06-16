@@ -1,12 +1,6 @@
 @value sizes: '../../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../../style/colors.css';
-@value secondary-50, secondary-100, secondary-300, secondary-500, secondary-700, disable-600, disable-700, disable-800, primary-200, primary-400, primary-600 from colors;
-
-@value effects: '../../../style/effects.css';
-@value glow__button--light--m, glow__button--primary--m from effects;
-
 .button {
 	box-sizing: border-box;
 	display: flex;
@@ -30,11 +24,11 @@
 
 .button.primary.muted {
 	background-color: var(--primary-300);
-	color: var(--primary-900-text);
+	color: var(--primary-900);
 }
 
 .button.primary.muted:active {
-	background-color: var(--primary-400-main);
+	background-color: var(--primary-400);
 	box-shadow: none;
 }
 
@@ -45,8 +39,8 @@
 .button.secondary.bright:disabled,
 .button.secondary.dark:disabled {
 	border: none;
-	background-color: disable-800;
-	color: disable-600;
+	background-color: var(--disable-800);
+	color: var(--disable-600);
 }
 
 
@@ -54,7 +48,7 @@
 	.button.primary.muted:hover {
 		background-color: var(--primary-100);
 		color: var(--primary-800);
-		box-shadow: glow__button--light--m;
+		box-shadow: var(--glow__button--light--m);
 	}
 
 	.button.primary.muted:disabled:hover,
@@ -62,8 +56,8 @@
 	.button.secondary.bright:disabled:hover,
 	.button.secondary.dark:disabled:hover {
 		box-shadow: none;
-		background-color: disable-800;
-		color: disable-600;
+		background-color: var(--disable-800);
+		color: var(--disable-600);
 	}
 }
 
@@ -82,12 +76,12 @@
 	border-style: solid;
 	border-color: currentColor;
 	background-color: transparent;
-	color: secondary-100;
+	color: var(--secondary-100);
 }
 
 .button.secondary.muted:active {
 	box-shadow: none;
-	color: secondary-300;
+	color: var(--secondary-300);
 }
 
 
@@ -98,12 +92,12 @@
 	border-style: solid;
 	border-color: currentColor;
 	background-color: transparent;
-	color: primary-400;
+	color: var(--primary-400);
 }
 
 .button.secondary.bright:active {
 	box-shadow: none;
-	color: primary-600;
+	color: var(--primary-600);
 }
 
 
@@ -111,13 +105,13 @@
 /*----------  Dark  ----------*/
 
 .button.secondary.dark {
-	background-color: disable-800;
-	color: primary-400;
+	background-color: var(--disable-800);
+	color: var(--primary-400);
 }
 
 .button.secondary.dark:active {
-	background-color: disable-800;
-	color: primary-600;
+	background-color: var(--disable-800);
+	color: var(--primary-600);
 }
 
 
@@ -127,18 +121,18 @@
 @media screen and (hover: hover)  {
 
 	.button.secondary.muted:hover {
-		box-shadow: glow__button--light--m;
-		color: secondary-50;
+		box-shadow: var(--glow__button--light--m);
+		color: var(--secondary-50);
 	}
 	
 	.button.secondary.bright:hover {
-		box-shadow: glow__button--primary--m;
-		color: primary-200;
+		box-shadow: var(--glow__button--primary--m);
+		color: var(--primary-200);
 	}
 
 	.button.secondary.dark:hover {
-		background-color: disable-700;
-		color: primary-200;
+		background-color: var(--disable-700);
+		color: var(--primary-200);
 	}
 }
 

@@ -3,9 +3,9 @@
 	min-height: 4rem;
 	padding: 1rem 0;
 	box-sizing: border-box;
-	border: solid var(--secondary-100-text) 1px;
-	background-color: var(--secondary-900-dark-backing) ;
-	color: var(--secondary-100-text);
+	border: solid var(--secondary-100) 1px;
+	background-color: var(--secondary-900) ;
+	color: var(--secondary-100);
 	box-shadow: var(--box-shadow-input);
 }
 
@@ -20,12 +20,12 @@
 	grid-column-gap: 1.8rem;
 	grid-row-gap: 1rem;
 	box-sizing: border-box;
-	/* background-color: var(--secondary-900-dark-backing);  */
+	/* background-color: var(--secondary-900);  */
 	padding: 0.8rem;
 }
 
 .element-preview{	
-	outline: solid var(--secondary-100-text) 2px;
+	outline: solid var(--secondary-100) 2px;
 	grid-area: 1 /1/ 3 /2;
 	display:flex;
 	flex-direction: column;
@@ -54,7 +54,7 @@
 }
 
 .collapse-vertical{
-	background-color: var(--secondary-900-dark-backing);
+	background-color: var(--secondary-900);
 	height: 3.5em;
 	width: 1.7rem;
 	/* padding: 3px; */

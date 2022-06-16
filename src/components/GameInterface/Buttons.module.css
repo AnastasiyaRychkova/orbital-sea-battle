@@ -9,7 +9,7 @@
 .icon-scaling {
 	min-height: max(2.2rem,30px);
 	min-width: max(2.2rem,30px);
-	background-color: var(--secondary-700-light-backing);
+	background-color: var(--secondary-700);
 	padding: 0;
 	height: min-content;
 	outline: none;
@@ -22,26 +22,26 @@
 }
 
 .button-secondary-bright-fill{
-	color: var(--primary-900-text);
-	background-color:var(--primary-400-main);
+	color: var(--primary-900);
+	background-color:var(--primary-400);
 }
 
 @media (hover: hover) {
 	.button-secondary-bright-fill:hover{
-		background-color:var(--primary-200-clickable);
-		box-shadow: var(--glow-button-M-primary);
+		background-color:var(--primary-200);
+		box-shadow: var(--glow__button--primary--m);
 	}
 }
 
 .button-secondary-bright-fill:active{
-	color:var(--primary-600-subheader);
+	color:var(--primary-600);
 
 
 }
 .button-secondary-bright-fill:disabled{
-	background-color:var(--disable-800-light-backing);
-	color:var(--disable-600-non-clickable);
-	outline-color:var(--disable-600-non-clickable);
+	background-color:var(--disable-800);
+	color:var(--disable-600);
+	outline-color:var(--disable-600);
 	box-shadow: none;
-	fill:var(--disable-600-non-clickable);
+	fill:var(--disable-600);
 }

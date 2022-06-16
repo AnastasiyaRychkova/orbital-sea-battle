@@ -1,12 +1,5 @@
-@value colors: '../../../style/colors.css';
-@value secondary-100, secondary-50, error-400, secondary-800, secondary-900, primary-400, disable-500, disable-600, disable-700, disable-800, disable-900, error-50, error-100, error-700, error-800, error-900 from colors;
-
-@value effects: '../../../style/effects.css';
-@value shadow__input from effects;
-
-
 .tab {
-	background-color: disable-700;
+	background-color: var(--disable-700);
 }
 
 .tab > input {
@@ -35,56 +28,56 @@
 	height: 1.688em;
 	padding: .25em;
 	border-bottom: 1px solid transparent;
-	background-color: disable-600;
+	background-color: var(--disable-600);
 	text-align: center;
-	color: secondary-50;
+	color: var(--secondary-50);
 }
 
 .titleBlock.undefined {
-	background: linear-gradient(315deg, disable-700 50%, disable-700 90%, error-400 90%, error-400 100%);
+	background: linear-gradient(315deg, var(--disable-700) 50%, var(--disable-700) 90%, var(--error-400) 90%, var(--error-400) 100%);
 }
 
 .tab :checked + .titleBlock {
-	background: secondary-900;
+	background: var(--secondary-900);
 	color: primary-400;
 }
 
 .tab :checked + .titleBlock .value {
 	border-color: primary-400;
-	background-color: secondary-800;
-	color: secondary-50;
+	background-color: var(--secondary-800);
+	color: var(--secondary-50);
 }
 
 /* - Disabled - */
 :disabled + .titleBlock {
-	background: disable-800;
-	color: disable-500;
+	background: var(--disable-800);
+	color: var(--disable-500);
 }
 
 :disabled + .titleBlock > .value {
-	background: disable-800;
-	color: disable-500;
+	background: var(--disable-800);
+	color: var(--disable-500);
 }
 
 /* - Invalid - */
 .tab.invalid .titleBlock {
-	background: error-800;
-	color: error-100;
+	background: var(--error-800);
+	color: var(--error-100);
 }
 
 .tab.invalid .value {
-	background: error-700;
-	color: error-50;
+	background: var(--error-700);
+	color: var(--error-50);
 }
 
 .tab.invalid :checked + .titleBlock {
-	background: secondary-900;
+	background: var(--secondary-900);
 	color: primary-400;
 }
 
 .tab.invalid :checked + .titleBlock > .value {
-	background: error-900;
-	color: error-50;
+	background: var(--error-900);
+	color: var(--error-50);
 }
 
 
@@ -105,8 +98,8 @@ ul.body {
 	height: 4.5em;
 	padding: .75em 1.25em;
 
-	box-shadow: shadow__input;
-	background-color: secondary-900;
+	box-shadow: var(--shadow__input);
+	background-color: var(--secondary-900);
 	list-style: none;
 	transition: opacity .2s ease .5s;
 }

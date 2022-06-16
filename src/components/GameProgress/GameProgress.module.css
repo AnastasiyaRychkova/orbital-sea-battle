@@ -1,9 +1,6 @@
 @value devices: '../../style/display.css';
 @value laptop from devices;
 
-@value colors: '../../style/colors.css';
-@value  secondary-50, secondary-100, disable-500, disable-600 from colors;
-
 .gameProgress {
 	box-sizing: border-box;
 	display: flex;
@@ -12,7 +9,7 @@
 	column-gap: .75em;
 	padding: .5em;
 	padding-right: 1em;
-	color: secondary-100;
+	color: var(--secondary-100);
 }
 
 .progress {
@@ -42,8 +39,8 @@
 	width: 2em;
 	height: 2em;
 	border-radius: 1em;
-	background-color: disable-600;
-	color: secondary-50;
+	background-color: var(--disable-600);
+	color: var(--secondary-50);
 }
 
 .score {

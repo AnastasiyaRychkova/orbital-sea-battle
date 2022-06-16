@@ -1,0 +1,20 @@
+/** Текстовые стили */
+
+html {
+	font-family: 'Montserrat', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 16px;
+}
+
+@media screen and (max-height: 1366px) and (max-width:1570px) {
+	html{
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width:1400px) {
+	html{
+		font-size: 10px;
+	}
+}

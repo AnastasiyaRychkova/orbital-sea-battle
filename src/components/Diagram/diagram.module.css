@@ -1,17 +1,10 @@
-@value colors: '../../style/colors.css';
-@value primary-50, primary-100, primary-200, primary-400, secondary-100, secondary-800, secondary-900 from colors;
-
-@value effects: '../../style/effects.css';
-@value glow__diagram-selection-1, glow__diagram-selection-2 from effects;
-
-
 .shipName {
 	cursor: default;
 	font-size: 24px;
 	font-family: var(--primary-font);
 	font-weight: normal;
 	user-select: none;
-	fill: secondary-100;
+	fill: var(--secondary-100);
 	pointer-events: none;
 }
 
@@ -36,20 +29,20 @@
 }
 
 .container.filtered {
-	stroke: primary-50;
-	filter: drop-shadow(glow__diagram-selection-2);
+	stroke: var(--primary-50);
+	filter: drop-shadow( var(--glow__diagram-selection-2) );
 }
 
 .container.highlighted {
-	fill: secondary-900;
-	stroke: primary-400;
+	fill: var(--secondary-900);
+	stroke: var(--primary-400);
 	stroke-width: 2;
 }
 
 .container.highlighted.filtered {
-	fill: secondary-900;
-	stroke: primary-400;
-	filter: drop-shadow(glow__diagram-selection-2);
+	fill: var(--secondary-900);
+	stroke: var(--primary-400);
+	filter: drop-shadow( var(--glow__diagram-selection-2) );
 }
 
 
@@ -64,22 +57,24 @@
 }
 
 .shipFill.highlighted {
-	fill: secondary-900;
+	fill: var(--secondary-900);
 }
 
 .shipStroke.highlighted {
-	stroke: primary-400;
+	stroke: var(--primary-400);
 	stroke-width: 2;
 }
 
 .shipStroke.highlighted.filtered {
-	stroke: primary-400;
-	filter: drop-shadow(glow__diagram-selection-1) drop-shadow(glow__diagram-selection-2);
+	stroke: var(--primary-400);
+	filter:
+		drop-shadow( var(--glow__diagram-selection-1) )
+		drop-shadow( var(--glow__diagram-selection-2) );
 }
 
 .shipStroke.filtered {
-	stroke: primary-50;
-	filter: drop-shadow(glow__diagram-selection-2);
+	stroke: var(--primary-50);
+	filter: drop-shadow( var(--glow__diagram-selection-2) );
 }
 
 
@@ -96,7 +91,7 @@ svg[data-mode='block'] .shipSilhouette {
 }
 
 svg[data-mode='none'] .shipSilhouette {
-	fill: var(--secondary-900-dark-backing);
+	fill: var(--secondary-900);
 }
 
 svg .containersBg {
@@ -104,7 +99,7 @@ svg .containersBg {
 }
 
 svg[data-mode='none'] .containersBg {
-	fill: var(--secondary-900-dark-backing);
+	fill: var(--secondary-900);
 }
 
 svg[data-mode='block'][data-style='ships'] .shipName {

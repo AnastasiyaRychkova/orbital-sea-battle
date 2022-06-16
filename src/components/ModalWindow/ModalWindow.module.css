@@ -1,13 +1,6 @@
 @value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../style/colors.css';
-@value secondary-100, secondary-900 from colors;
-
-@value effects: '../../style/effects.css';
-@value glow__button--primary--m from effects;
-
-
 .modalWindow {
 	box-sizing: border-box;
 	display: flex;
@@ -39,9 +32,9 @@
 
 	padding: 2em;
 
-	box-shadow: glow__button--primary--m;
-	background-color: secondary-900;
-	color: secondary-100;
+	box-shadow: var(--glow__button--primary--m);
+	background-color: var(--secondary-900);
+	color: var(--secondary-100);
 }
 
 

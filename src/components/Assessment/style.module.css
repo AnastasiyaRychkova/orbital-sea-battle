@@ -1,12 +1,6 @@
 @value sizes: '../../style/display.css';
 @value mobile, laptop from sizes;
 
-@value colors: '../../style/colors.css';
-@value primary-100, primary-200, primary-400, secondary-700, secondary-800 from colors;
-
-@value effects: '../../style/effects.css';
-@value glow__button--light--m from effects;
-
 .scale {
 	padding: 0;
 	margin: 0;
@@ -22,26 +16,26 @@
 
 
 .input:checked ~ .value > .star {
-	stroke: primary-100;
-	fill: primary-100;
-	filter: drop-shadow( glow__button--light--m );
+	stroke: var(--primary-100);
+	fill: var(--primary-100);
+	filter: drop-shadow( var(--glow__button--light--m) );
 }
 
 .star {
-	stroke: primary-400;
-	fill: secondary-800;
+	stroke: var(--primary-400);
+	fill: var(--secondary-800);
 	cursor: pointer;
 }
 
 @media screen and (hover: hover) {
 	.star:hover {
-		stroke: primary-200;
-		fill: secondary-700;
+		stroke: var(--primary-200);
+		fill: var(--secondary-700);
 	}
 
 	.input:checked ~ .value > .star:hover {
-		stroke: primary-200;
-		fill: primary-200;
+		stroke: var(--primary-200);
+		fill: var(--primary-200);
 	}
 }
 
