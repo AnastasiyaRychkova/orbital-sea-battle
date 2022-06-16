@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import styles from './Shooting.module.css';
 // import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
+import useElement from '../../../components/PeriodicTableUnit/useElement';
+import SelectedElementMobile from '../../../components/PeriodicTableUnit/SelectedElementMobile';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
 import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
@@ -16,6 +18,7 @@ import { useAppPath } from '../../../components/Router/Router';
 import Filter from '../../../components/QnInputPanel/Filter';
 import UI from '../../../core/browser/UIStore';
 import { CellQN } from '../../../core/game/Services/Chemistry';
+
 
 interface IProps {
 	game: IGameState;
@@ -43,6 +46,8 @@ const Page: FC<IProps> = observer(( {
 
 	const [tabNumber, swap] = useState<TabNumber>( 2 );
 	const state = useAppPath().lastPart;
+
+	const [number, select] = useElement();
 
 	return (
 		<div className = { styles.box } >
@@ -93,6 +98,12 @@ const Page: FC<IProps> = observer(( {
 					enemyStatus = { t( "status." +
 						( state === 'enemy' ? 'moving' : 'waiting') 
 					) }
+
+					leftCorner = {
+						<div className = { (tabNumber === 3 ? "" : styles.closed) }>
+							<SelectedElementMobile number = { number } />
+						</div>
+					}
 				/>
 
 				<div className = {
@@ -102,6 +113,7 @@ const Page: FC<IProps> = observer(( {
 				} >
 					<PeriodicTable
 						mode = "guessing"
+						use = { [number, select] }
 						onSubmit = { guessElement }
 					/>
 				</div>

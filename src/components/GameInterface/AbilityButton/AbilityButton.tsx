@@ -3,7 +3,6 @@ import styles from '../GameInterface.module.css';
 import button from '../Buttons.module.css';
 import icons from '../../../style/icons.module.css';
 
-// import sprite from "../../../img/sprite.svg";
 import img from '../../../img/components/ability.svg'
 
 interface IProps {
@@ -28,10 +27,8 @@ export default function AbilityButton( props: IProps ) {
 				width = "20"
 				height = "20"
 				alt = ""
-				className = { icons["icon-small"] + " " + icons["icon__color"] }
+				className = { icons["icon-small"] }
 			/>
-			{/* <svg ...> <use href = { sprite + "#message" } /> </svg> */}
-
 		</button>
 	);
 }

@@ -6,16 +6,16 @@
 	gap:1rem;
 }
 
-.paging-left{
+.paging-left {
 	position: fixed;
-	top:50%;
-	left:1rem;
+	top: 50%;
+	left: 1rem;
 }
 
-.paging-right{
+.paging-right {
 	position: fixed;
-	top:50%;
-	right:1rem;
+	top: 50%;
+	right: 1rem;
 }
 
 .button-paging {
@@ -37,12 +37,26 @@
 	pointer-events: none;
 }
 
+@media screen and (max-height: 540px) {
+	.paging-left {	
+		top: auto;
+		left: auto;
+		bottom: 1rem;
+		right: 4.5rem;
+	}
+
+	.paging-right {
+		top: auto;
+		right: 1rem;
+		bottom: 1rem;
+	}
+}
+
 /* @media screen and (max-height: 375px) and (max-width:812px) {
 	.nav-3{
 		display: none;
 	}
 }
-
 @media screen and (max-width:520px) {
 	.nav-3 {
 		display:flex;

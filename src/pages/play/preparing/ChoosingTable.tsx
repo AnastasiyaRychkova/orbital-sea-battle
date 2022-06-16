@@ -2,10 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
+import SelectedElementMobile from '../../../components/PeriodicTableUnit/SelectedElementMobile';
 import { GameTopInterface, GameBottomInterface } from '../../../components/GameInterface/GameInterface';
+// import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
 // import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 
 import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
+import useElement from '../../../components/PeriodicTableUnit/useElement';
+
 
 interface IProps {
 	/** Локальный игрок */
@@ -25,6 +29,8 @@ interface IProps {
 export default function ChoosingTable( props: IProps ) {
 	const { t } = useTranslation();
 
+	const [number, select] = useElement();
+
 	return (
 		<Body>
 			<GameTopInterface
@@ -33,11 +39,22 @@ export default function ChoosingTable( props: IProps ) {
 				enemy = { props.enemy }
 				enemyStatus = { t("status.choosing") }
 				turn = { 'none' }
+				leftCorner = {
+					<>
+						{/* <DropSidedInfo
+							message = { t("info.selecting.m")}
+							comment = { t("info.selecting.c") }
+						/> */}
+
+						<SelectedElementMobile number = { number } />
+					</>
+				}
 			/>
 		
 			<PeriodicTable
 				mode = "choosing"
-				onSubmit = { props.forward }
+				use = { [number, select] }
+				onSubmit = { props.forward }	
 			/>
 
 			<GameBottomInterface>

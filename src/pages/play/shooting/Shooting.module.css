@@ -90,3 +90,9 @@
 	right: 0;
 	user-select: none;
 }
+
+@media screen and (max-width: 812px) and (orientation: portrait) {
+	.filter {
+		bottom: 7.5rem;
+	}
+}

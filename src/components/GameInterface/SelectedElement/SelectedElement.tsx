@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './SelectedElement.module.css';
-import gamestyles from '../GameInterface.module.css';
 import buttons from '../Buttons.module.css';
 import texts from '../../../style/text.module.css';
 import sprite from "../../../img/sprite.svg";
@@ -27,9 +26,7 @@ const SelectedElement = observer(( props: IProps ) => {
 	return (
 		<>
 			<button className = {
-					gamestyles["interface-icon-button"]
-					+ " " +
-					gamestyles["icon-element"]
+					styles["icon-box"]
 					+ " " +
 					styles["selected-element-small"]
 					+ " " +

@@ -4,7 +4,7 @@ import styles from './PeriodicTable.module.css';
 
 import { periodicTable } from '../../core/game/Services/Chemistry';
 
-import useElement from './useElement';
+// import useElement from './useElement';
 import { SelectedElement } from './SelectedElement';
 import { Cell, EmptyCell, PeriodCell, GroupCell, SeriesCell } from './Cells';
 import Button from '../Button/Default/Button';
@@ -23,6 +23,9 @@ interface IProps
 	/** Функция для передачи номера выбранного элемента */
 	onSubmit: (elementNumber: number) => void;
 
+	/** Хук для выбора элемента */
+	use: [number, (n: number) => void];
+
 	/** Показывать исключения */
 	exceptions?: boolean;
 
@@ -34,12 +37,13 @@ interface IProps
 const PeriodicTableUnit: FC<IProps> = ( {
 	mode = "guessing",
 	onSubmit,
+	use,
 	exceptions = false,
 	disabledElements = []
 } ) => {
 	const { t } = useTranslation();
 
-	const [element, select] = useElement();
+	const [element, select] = use;
 
 	const cells = [];
 	let key = 0; // Each child in a list should have a unique "key" prop

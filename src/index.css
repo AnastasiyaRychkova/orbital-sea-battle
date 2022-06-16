@@ -113,20 +113,25 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-	background-color:var(--disable-500);
+	background-color: var(--disable-500);
 	border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 10px;
-	background-color:var(--primary-200-clickable);
+	background-color: var(--primary-200-clickable);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background-color:var(--primary-100);
+	background-color: var(--primary-100);
 }
+
 ::-webkit-scrollbar-thumb:active {
-	background-color:var(--primary-300);
+	background-color: var(--primary-300);
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
 }
 
 @media screen and (max-width:1024px){

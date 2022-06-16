@@ -31,6 +31,7 @@
 	flex-direction: column;
 	pointer-events: all;
 	gap:1.5rem;
+	z-index: 10;
 }
 .interface__function-big-gap {
 	gap: 1.5rem;
@@ -183,8 +184,8 @@
 /* нижняя панель интерфейса */
 .bottom-control-panel{
 	box-sizing: border-box;
-	position: sticky;
-	bottom:1rem;
+	position: relative;
+	/* bottom:1rem; */
 	width:100%;
 	pointer-events: all;
 }
@@ -244,10 +245,10 @@
 }
 
 @media screen and (max-height: 375px) and (max-width:812px){
-	.interface{
+	/* .interface{
 		background-color: var(--secondary-800-background);
 		background-image: none;
-	}
+	} */
 
 	.interface-exit{
 		justify-content:space-between; 

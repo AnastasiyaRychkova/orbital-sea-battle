@@ -1,0 +1,26 @@
+.small {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 4rem;
+	min-height: 4rem;
+	padding: 1rem 0;
+	box-sizing: border-box;
+	border: solid var(--secondary-100-text) 1px;
+	background-color: var(--secondary-900-dark-backing) ;
+	color: var(--secondary-100-text);
+	box-shadow: var(--box-shadow-input);
+}
+
+.closed
+{
+	display: none;
+}
+
+@media screen and (max-width: 812px),
+	screen and (max-height: 540px)
+{
+	.closed {
+		display: flex;
+	}
+}
