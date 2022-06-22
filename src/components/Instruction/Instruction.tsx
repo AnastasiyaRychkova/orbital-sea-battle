@@ -25,7 +25,9 @@ export default function Instruction( props: IProps ) {
 				onClick = { () => { props.onClick(); } }
 			>
 				<div className = { styles.bubble }>
-					{ props.message }
+					<span className = "long-medium" >
+						{ props.message }
+					</span>
 				</div>
 
 				<img

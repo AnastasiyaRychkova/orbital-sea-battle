@@ -6,4 +6,5 @@ export type Glyph = | 'cross'
 					| 'accuracy'
 					| 'play'
 					| 'full_screen'
+					| 'ability'
 					;

@@ -1,5 +1,5 @@
 @value sizes: '../../style/display.css';
-@value mobile, laptop from sizes;
+@value mobile, tablet, laptop from sizes;
 
 .task {
 	box-sizing: border-box;
@@ -87,7 +87,8 @@
 =============================================*/
 
 /* Tablet or Small Notebook */
-@media (min-width: mobile) and (max-width: laptop) {
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
 
 	.task {
 		column-gap: .75em;

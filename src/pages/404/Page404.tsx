@@ -8,10 +8,10 @@ export default function Page404() {
 
 	return (
 		<div className={ styles.container }>
-			<h1 className={ styles.title }>
+			<h1 className={ styles.title + " header-1 bold" }>
 				{ t("pages.404.title") }
 			</h1>
-			<p className={ styles.subtitle }>
+			<p className={ styles.subtitle + " text-normal" }>
 				{ t("pages.404.text") }
 			</p>
 			<Button

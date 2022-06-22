@@ -7,26 +7,26 @@ export default function Landing() {
 	const { t } = useTranslation();
 	
 	return (
-		<div className={ styles.content }>
-			<h1 className={ styles.title }>
+		<div className = { styles.content }>
+			<h1 className = { styles.title + " header-1" }>
 				{ t("title") }
 			</h1>
 
-			<span className={ styles.sub }>
+			<span className = { styles.sub + " header-5 bold" }>
 				{ t("pages.landing.educational") }
 			</span>
 
 			<img
-				src="/img/landing/pic.jpg"
-				className={ styles.image }
-				alt=""
+				src = "/img/landing/pic.jpg"
+				className = { styles.image }
+				alt = ""
 			/>
 
 			<Button
-				to="play"
-				value={ t("actions.play") }
-				priority="primary"
-				className={ styles.play }
+				to = "play"
+				value = { t("actions.play") }
+				priority = "primary"
+				className = { styles.play }
 			/>
 		</div>
 	);

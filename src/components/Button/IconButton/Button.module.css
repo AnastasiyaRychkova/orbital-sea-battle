@@ -4,6 +4,20 @@
 	color: var(--primary-300);
 }
 
+@media screen and (hover: hover) {
+	.button:hover {
+		color: var(--primary-100);
+	}
+	
+	.button:hover svg {
+		filter: drop-shadow( var(--glow__button--light--m) );
+	}
+	
+	.button:disabled:hover svg {
+		filter: none;
+	}
+}
+
 .button:active {
 	color: var(--primary-500);
 }
@@ -16,10 +30,25 @@
 	color: var(--disable-700);
 }
 
+
 /* --- Inversive --- */
 
 .inversive {
 	color: var(--secondary-700);
+}
+
+@media screen and (hover: hover) {
+	.inversive:hover {
+		color: var(--secondary-500);
+	}
+	
+	.inversive:hover svg {
+		filter: drop-shadow( var(--glow__button--primary--m) );
+	}
+	
+	.inversive:disabled:hover svg {
+		filter: none;
+	}
 }
 
 .inversive:active {
@@ -44,47 +73,7 @@
 	color: var(--primary-300);
 }
 
-.backing:active {
-	background-color: var(--secondary-700);
-	color: var(--primary-100);
-}
-
-.backing:disabled {
-	background-color: var(--disable-900);
-	color: var(--disable-700);
-}
-
-
-
-/*----------  Hover  ----------*/
-
 @media screen and (hover: hover) {
-
-	.button:hover {
-		color: var(--primary-100);
-	}
-	
-	.button:hover svg {
-		filter: drop-shadow( var(--glow__button--light--m) );
-	}
-	
-	.button:disabled:hover svg {
-		filter: none;
-	}
-
-
-	.inversive:hover {
-		color: var(--secondary-500);
-	}
-	
-	.inversive:hover svg {
-		filter: drop-shadow( var(--glow__button--primary--m) );
-	}
-	
-	.inversive:disabled:hover svg {
-		filter: none;
-	}
-
 	.backing:hover {
 		background-color: var(--secondary-500);
 		color: var(--primary-100);
@@ -93,4 +82,14 @@
 	.backing:hover svg {
 		filter: none;
 	}
+}
+
+.backing:active {
+	background-color: var(--secondary-700);
+	color: var(--primary-100);
+}
+
+.backing:disabled {
+	background-color: var(--disable-900);
+	color: var(--disable-700);
 }

@@ -1,9 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './PeriodicTable.module.css';
-import texts from '../../style/text.module.css';
-import cn from '../className';
-
 import ammo from '../../img/components/ammunition.svg'
 
 import { periodicTable } from "../../core/game/Services/Chemistry";
@@ -34,22 +31,31 @@ export const SelectedElement = ( props: IProps ) => {
 	
 	return (
 		<div
-			className = { cn( styles, ["cell", "selected-element"] ) }
+			className = { styles.cell + " " + styles["selected-element"] }
 			style = { (props.isVisible) ? { } : { visibility: "hidden" } }
 		>
-			<div className={ cn( styles, ["cell", "element-preview"] ) }>
-				<span className={ cn( styles, ["element-preview__name"] ) + " " + cn( texts, ["text-long-Lt-Small"] ) }>
+			<div className = { styles.cell + " " + styles["element-preview"] }>
+				<span className = {
+					styles["element-preview__name"]
+					+ " long-small"
+				}>
 					{ element.name }
 				</span>
-				<span className={ cn( styles, ["element-preview__symbol"] ) + " " + cn( texts, ["text-bold-T-XL"] ) }>
+				<span className = {
+					styles["element-preview__symbol"]
+					+ " text-xl bold"
+				}>
 					{ element.symbol }
 				</span>
-				<span className={ cn( styles, ["element-preview__number"] ) + " " + cn( texts, ["text-reg-T-m-Normal"] ) }>
+				<span className = { 
+					styles["element-preview__number"]
+					+ " text-normal"
+				}>
 					{ element.number }
 				</span>
 			</div>
-			<div className={ cn( styles, ["selected-element__name"] ) }>
-				<span className={ cn( texts, ["text-reg-T-m-Small"] ) }>
+			<div className={ styles["selected-element__name"] }>
+				<span className = "text-small" >
 					{
 						t(
 							props.mode === "guessing"
@@ -58,23 +64,23 @@ export const SelectedElement = ( props: IProps ) => {
 						)
 					}
 				</span>
-				<span className={ cn( texts, ["text-header-bold-h4"] ) }>
+				<span className = "header-4 bold" >
 					{ t( "periodic_table." + element.number ) }
 				</span>
 			</div>
 			{
 				props.mode === "guessing" ? null :
-					<div className={ cn( styles, ["selected-element__number"] ) + " " + cn( texts, ["text-bold-T-Small"] ) }>
-						<span className={ cn( texts, ["text-reg-T-m-Small"] ) }>
+					<div className = { styles["selected-element__number"] }>
+						<span className = "text-small" >
 							{ t( "components.table.ammo" ) }
 						</span>
-						<div className={ cn( styles, ["ammunition"] ) }>
+						<div className={ styles.ammunition }>
 							<img
 								className = { styles.ammunition__img }
 								src = { ammo }
 								alt = ""
 							/>
-							<span className={ cn( texts, ["text-header-bold-h4"] ) }>
+							<span className = "header-4 bold" >
 								{ element.number }
 							</span>
 						</div>
