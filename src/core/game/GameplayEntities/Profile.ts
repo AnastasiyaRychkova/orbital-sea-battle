@@ -1,4 +1,4 @@
-import { randomInRange } from "../../util/util";
+import { randomInRange } from "../../util";
 import Aliases, { Alias, AliasId } from "../Aliases";
 import IProfile from "./ProfileInterface";
 

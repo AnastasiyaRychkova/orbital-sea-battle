@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
+import Chemistry from '../../core/game/Chemistry';
 import Block from './Block';
 import Battleship from './Ship';
-import IDiagram from '../../core/game/Diagram/DiagramInterface';
-import Chemistry from '../../core/game/Services/Chemistry';
+import type { IDiagram } from '../../core/game/Diagram/types';
 
 const block = Chemistry.block;
 

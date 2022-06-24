@@ -1,6 +1,6 @@
 type Seconds = number;
 
-interface ITimer
+export interface ITimer
 {
 	start( callback: Function, delay: Seconds, ...args: any[] ): void;
 
@@ -8,6 +8,3 @@ interface ITimer
 
 	isRunning(): boolean;
 }
-
-
-export default ITimer;

@@ -1,12 +1,13 @@
-import Chemistry, { periodicTable, CellQN } from "../../Services/Chemistry";
+import Chemistry, { periodicTable } from "../../Chemistry";
 import entities from "../OB_EntitiesFabric";
 import GameState from "../entities/OB_GameState";
-import type { EventData } from '../../../util/EventEmitter/types';
-import type { PlayerEventData, PlayerSelectionEventData, PlayerShotEventData } from "../types";
+import type { CellQN } from "../../Chemistry/types";
+import type { EventData } from '../../../util/types';
 import type { DiagramEventData, ILocalPlayerController } from "../OB_Entities";
-import { GSResults, GSEventData } from "../interfaces/OB_GameStateInterface";
+import type { GSResults, GSEventData } from "../interfaces/OB_GameStateInterface";
+import type { PlayerEventData, PlayerSelectionEventData, PlayerShotEventData } from "../types";
 
-const MAX_ELEM_NUMBER = periodicTable.MAX_ELEM_NUMBER;
+const MAX_ELEM_NUMBER = periodicTable.MAX_NUMBER;
 const randomFn = Math.random;
 
 

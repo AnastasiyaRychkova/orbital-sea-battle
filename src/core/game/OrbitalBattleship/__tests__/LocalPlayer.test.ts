@@ -1,7 +1,7 @@
 import entities from '../OB_EntitiesFabric';
 import Aliases from '../../Aliases';
-import type { EventData } from '../../../util/EventEmitter/EventProvider';
-import Chemistry from '../../Services/Chemistry';
+import Chemistry from '../../Chemistry';
+import type { EventData } from '../../../util/types';
 
 describe( 'LocalPlayer', () => {
 	const userInitObj = {
@@ -59,14 +59,14 @@ describe( 'diagram filling throw player', () => {
 		player.selectElement( 6 );
 		player.toggleBlock( Chemistry.block( {n: 1, l: 's'} ) );
 		player.toggleBlock( Chemistry.block( {n: 2, l: 's'} ) );
-		player.toggleCell( Chemistry.cell( {n: 2, l: 'p', m: -1, s: 1} ) );
+		player.toggleCell( Chemistry.cell( {n: 2, l: 'p', m: 1, s: 1} ) );
 		player.toggleCell( Chemistry.cell( {n: 2, l: 'p', m: 0, s: 1} ) );
 
 		expect( player.diagramFilledOutCorrectly() ).toBeTruthy();
 	} );
 
 	test( 'mark enemy shot', () => {
-		const cellQN = Chemistry.cell( {n: 2, l: 'p', m: -1, s: 1} );
+		const cellQN = Chemistry.cell( {n: 2, l: 'p', m: 1, s: 1} );
 		
 		expect( player.markEnemyShot( cellQN ) ).toBeTruthy();
 		expect( diagram.observableState.isDamaged( cellQN ) ).toBeTruthy();

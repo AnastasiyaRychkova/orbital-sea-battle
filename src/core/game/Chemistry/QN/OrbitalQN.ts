@@ -1,6 +1,5 @@
-import type { OrbitalStr } from "./QuantumNumbers";
-import IntInRange from '../../util/IntInRange';
-import IQuantumNumber, { QNStrType } from "./QuantumNumberInterface";
+import { IntInRange } from '../../../util';
+import type { IQuantumNumber, QNStrType, OrbitalStr } from "./types";
 
 /**
  * **Орбитальное квантовое число (l)**

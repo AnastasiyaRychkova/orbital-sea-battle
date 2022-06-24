@@ -1,6 +1,6 @@
-import { randomInRange } from "../../../util/util";
-import StateMachine, { IStateMachine } from "../../../util/StateMachine/StateMachine";
+import { randomInRange, StateMachine } from "../../../util";
 import OB_IGameState, { GSEventData, GSStateChanging } from "../interfaces/OB_GameStateInterface";
+import type { IStateMachine } from "../../../util/types";
 import type {IShotsAnalyzer, IDiagram, OB_IEnemy} from "../OB_Entities";
 import type { NamingContext, ShootingContext } from "../types";
 

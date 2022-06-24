@@ -1,4 +1,4 @@
-import type { CellQN, ChemicalElement } from '../../Services/Chemistry'
+import type { CellQN, ChemicalElement } from '../../Chemistry/types'
 
 interface OB_IShotsAnalyzer
 {

@@ -1,5 +1,6 @@
-import Chemistry, { CellQN, BlockQN, periodicTable, ChemicalElement } from "../../Services/Chemistry";
+import Chemistry, { periodicTable } from "../../Chemistry";
 import OB_Player from "./OB_Player";
+import type { CellQN, BlockQN, ChemicalElement } from "../../Chemistry/types";
 import type OB_ILocalPlayer from "../interfaces/OB_LocalPlayerInterface";
 
 

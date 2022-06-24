@@ -8,7 +8,7 @@ type Milliseconds = number;
  * Значение возвращается в миллисекундах.
  * Строковое значение вернется в формате `hh:mm:ss`.
  */
-interface IStopwatch
+export interface IStopwatch
 {
 	/** Запустить таймер */
 	start(): IStopwatch
@@ -28,6 +28,3 @@ interface IStopwatch
 	/** Текущее значение секундомера в формате `hh:mm:ss`. */
 	toString(): string
 }
-
-
-export default IStopwatch;

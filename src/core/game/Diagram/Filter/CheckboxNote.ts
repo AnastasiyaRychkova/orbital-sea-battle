@@ -1,7 +1,7 @@
 import { makeObservable, observable, action } from "mobx";
 
-import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
-import INote from "./NoteInterface";
+import type { IQuantumNumber } from "../../Chemistry/types";
+import type INote from "./NoteInterface";
 
 class Note implements INote
 {

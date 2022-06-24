@@ -1,16 +1,29 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import Chemistry, { QN, ElemConfig, CellIndex } from '../Services/Chemistry';
+import Chemistry, {
+	QN,
+	ElemConfig,
+	SpinIndex,
+	MainQN,
+	toIndexScheme,
+} from '../Chemistry';
 
 import type {
 	BlockQN,
 	BoxQN,
 	CellQN,
 	QuantumNumbers,
-	MainQN,
-} from '../Services/Chemistry';
-import type { IBlock, ICell, DEnvironment, IDiagramState, InteractionMode, SpinQNString, IBox } from "./DObjectState.d";
-import IFilter, { StoreKey } from "./Filter/FilterInterface";
-import { toIndexScheme } from "../ChemicalElement/QNtoIndexConverter";
+} from '../Chemistry/types';
+import type {
+	IBlock,
+	ICell,
+	DEnvironment,
+	IDiagramState,
+	InteractionMode,
+	SpinQNString,
+	IBox,
+	IFilter,
+	StoreKey
+} from "./types";
 
 
 const index = Chemistry.cellIndex;
@@ -540,7 +553,7 @@ class DiagramState implements IDiagramState
 
 	setState( config: ElemConfig ): void
 	{
-		this._traverse( ( box: Box, scheme: CellIndex[] ) => {
+		this._traverse( ( box: Box, scheme: SpinIndex[] ) => {
 			box.children["+1/2"].selected = config.hasSpin( scheme[0] );
 			box.children["−1/2"].selected = config.hasSpin( scheme[1] );
 		} );
@@ -550,7 +563,7 @@ class DiagramState implements IDiagramState
 	{
 		const config = Chemistry.config();
 
-		this._traverse( ( box: Box, scheme: CellIndex[] ) => {
+		this._traverse( ( box: Box, scheme: SpinIndex[] ) => {
 			config.write( scheme[0], box.children["+1/2"].selected );
 			config.write( scheme[1], box.children["−1/2"].selected );
 		} );
@@ -558,7 +571,7 @@ class DiagramState implements IDiagramState
 		return config;
 	}
 
-	private _traverse( boxCallback: ( box: Box, scheme: CellIndex[] ) => void ): void
+	private _traverse( boxCallback: ( box: Box, scheme: SpinIndex[] ) => void ): void
 	{
 		for( const [n, column] of Object.entries( this.children ) ) {
 			const columnScheme = (DiagramState.configScheme as any)[n];

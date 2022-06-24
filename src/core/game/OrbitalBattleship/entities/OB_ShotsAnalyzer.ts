@@ -1,12 +1,11 @@
 import OB_IShotsAnalyzer from "../interfaces/OB_ShotsAnalyzerInterface";
-import { randomIndex } from "../../../util/util";
+import { randomIndex } from "../../../util";
 import Chemistry, {
 	ElemConfig,
-	ChemicalElement,
 	periodicTable,
-	CellQN,
-	CellIndex,
-} from "../../Services/Chemistry";
+	SpinIndex,
+} from "../../Chemistry";
+import type { ChemicalElement, CellQN, } from '../../Chemistry/types';
 
 
 /**
@@ -35,7 +34,7 @@ class ShotsAnalyzer implements OB_IShotsAnalyzer
 	private _initIndefiniteIndexes(): number[]
 	{
 		const indexes: number[] = [];
-		for (let index = 0; index < periodicTable.MAX_ELEM_NUMBER; index++)
+		for (let index = 0; index < periodicTable.MAX_NUMBER; index++)
 			indexes.push( index );
 		return indexes;
 	}
@@ -49,7 +48,7 @@ class ShotsAnalyzer implements OB_IShotsAnalyzer
 		this.#shotsCounter++;
 	}
 
-	private _getIndex( qn: CellQN ): CellIndex | undefined
+	private _getIndex( qn: CellQN ): SpinIndex | undefined
 	{
 		return periodicTable.converter.toIndex( qn );
 	}
@@ -59,7 +58,7 @@ class ShotsAnalyzer implements OB_IShotsAnalyzer
 		return periodicTable.converter.toQN( index );
 	}
 
-	private _update( index: CellIndex, result: boolean ): void
+	private _update( index: SpinIndex, result: boolean ): void
 	{
 		const newCandidates: ChemicalElement[] = [];
 		let probablyHas: ElemConfig = Chemistry.config();
@@ -123,7 +122,7 @@ class ShotsAnalyzer implements OB_IShotsAnalyzer
 		if( this.#indefiniteIndexes.length === 0 )
 			return undefined;
 
-		if( this.#indefiniteIndexes.length === (CellIndex.MAX + 1) )
+		if( this.#indefiniteIndexes.length === (SpinIndex.MAX + 1) )
 		{
 			return this._getQN( this.#indefiniteIndexes[ randomIndex( this.#indefiniteIndexes.length - 1 ) ] ); // TOTHINK: добавить немного случайности?
 		}

@@ -1,4 +1,4 @@
-import IQuantumNumber from "../../ChemicalElement/QuantumNumberInterface";
+import type { IQuantumNumber } from "../../Chemistry/types";
 
 /**
  * Элемент фильтра, отвечающий за одно квантовое число. Может по разному реагировать на повторное присвоение значения.

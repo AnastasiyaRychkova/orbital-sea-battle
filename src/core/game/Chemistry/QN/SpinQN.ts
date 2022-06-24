@@ -1,4 +1,4 @@
-import IQuantumNumber, { QNStrType } from "./QuantumNumberInterface";
+import { IQuantumNumber, QNStrType } from "./types";
 
 export type SpinType = -1 | 1;
 

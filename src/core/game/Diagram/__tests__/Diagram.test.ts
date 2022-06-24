@@ -1,5 +1,5 @@
 import entities from "../../OrbitalBattleship/OB_EntitiesFabric";
-import Chemistry, { periodicTable } from "../../Services/Chemistry";
+import Chemistry, { periodicTable } from "../../Chemistry";
 
 describe( 'Diagram without filter and highlight layout', () => {
 	const diagram = entities.diagram();

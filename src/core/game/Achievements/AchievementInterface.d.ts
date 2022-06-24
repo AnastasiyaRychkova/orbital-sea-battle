@@ -1,4 +1,4 @@
-import type IEventProvider from '../../util/EventEmitter/EventProviderInterface';
+import type { IEventProvider } from '../../util/types';
 import type { EAchievementType } from './AchievementsDescription';
 
 type PlayerType = {

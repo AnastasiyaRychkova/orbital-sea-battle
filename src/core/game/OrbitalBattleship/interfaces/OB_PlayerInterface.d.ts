@@ -1,5 +1,5 @@
-import IEventProvider from '../../../util/EventEmitter/EventProviderInterface';
-import type { CellQN } from '../../Services/Chemistry';
+import { IEventProvider } from '../../../util/types';
+import type { CellQN } from '../../Chemistry/types';
 import type { IDiagram, IShotsAnalyzer, User } from "../OB_Entities";
 import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 

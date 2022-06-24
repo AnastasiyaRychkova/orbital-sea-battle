@@ -6,8 +6,8 @@ import { ToggleTheme } from '../types';
 import ToggleButton from '../ToggleButton';
 import styles from './InputValue.module.css';
 
-import FilterType from "../../../core/game/Diagram/Filter/FilterInterface";
-import IQuantumNumber from '../../../core/game/ChemicalElement/QuantumNumberInterface';
+import { IFilter } from "../../../core/game/Diagram/types";
+import { IQuantumNumber } from '../../../core/game/Chemistry/types';
 
 
 type StoreKey = 'n'|'l'|'m'|'s';
@@ -32,7 +32,7 @@ interface IProps {
 
 	openTabHandle: ( key: StoreKey ) => void,
 
-	filter: FilterType;
+	filter: IFilter;
 }
 
 const InputValue: FC<IProps> = observer( ({
@@ -90,7 +90,7 @@ const InputValue: FC<IProps> = observer( ({
 
 function make(
 	values: IQuantumNumber[],
-	filter: FilterType,
+	filter: IFilter,
 	key: StoreKey,
 	min: number,
 	max: number

@@ -1,4 +1,4 @@
-import type IStopwatch from "./StopwatchInterface";
+import type { IStopwatch } from "./types";
 
 type Milliseconds = number;
 type Timestamp = Milliseconds;

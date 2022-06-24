@@ -1,14 +1,14 @@
 import React from 'react';
 import { observer } from "mobx-react";
 
-import IQuantumNumber from '../../core/game/ChemicalElement/QuantumNumberInterface';
+import type { IQuantumNumber, QNStrType } from '../../core/game/Chemistry/types';
 import ToggleButton from './ToggleButton';
 import styles from './InputValue.module.css';
 
 import { ToggleTheme } from './types';
-import FilterType from "../../core/game/Diagram/Filter/FilterInterface";
+import type { IFilter as FilterType } from "../../core/game/Diagram/types";
 
-type StoreKey = 'n'|'l'|'m'|'s';
+type StoreKey = QNStrType;
 
 
 

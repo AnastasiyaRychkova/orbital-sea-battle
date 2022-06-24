@@ -1,8 +1,8 @@
-import MainQN from "../MainQN";
-import OrbitalQN from "../OrbitalQN";
-import MagneticQN from "../MagneticQN";
-import SpinQN from "../SpinQN";
-import QN from "../QNModule";
+import MainQN from "../QN/MainQN";
+import OrbitalQN from "../QN/OrbitalQN";
+import MagneticQN from "../QN/MagneticQN";
+import SpinQN from "../QN/SpinQN";
+import QN from "../QN";
 
 let QNClass: typeof MainQN | typeof OrbitalQN | typeof MagneticQN | typeof SpinQN;
 

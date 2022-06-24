@@ -4,7 +4,7 @@ import type {
 	IStateMachine,
 	IMachineNodeTesting,
 	MachineActionType,
-} from '../StateMachineTypes';
+} from '../types';
 
 
 describe( 'Simple State Machine', () => {

@@ -1,21 +1,22 @@
-import QN from "./qnModule";
-import { CellIndex } from "./DiagramCell";
-import { CellQN } from "./QuantumNumbers";
+import QN from "./QN";
+import SpinIndex from "./SpinIndex";
+import type { CellQN, OrbitalStr } from "./QN/types";
+import { N1to7, S1or_1 } from "./types";
 
 
-type ColumnKeyType = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-type BlockKeyType = 's' | 'p' | 'd' | 'f';
+type ColumnKeyType = N1to7;
+type BlockKeyType = OrbitalStr;
 
-type BlockType = { [key in string]: CellIndex[] };
+type BlockType = { [key in string]: SpinIndex[] };
 type ColumnType = { [key in BlockKeyType]?: BlockType };
 type ToIndexSchemeType = { [key in ColumnKeyType]: ColumnType };
 
 function index( number: number )
 {
-	return new CellIndex( number );
+	return new SpinIndex( number );
 };
 
-function cell( scheme: {n: number, l: string, m: number, s: -1|1} )
+function cell( scheme: {n: number, l: string, m: number, s: S1or_1} )
 {
 	return {
 		n: QN.n( scheme.n ),
@@ -166,8 +167,8 @@ const toQNScheme: CellQN[] = makeReverseScheme( toIndexScheme );
 =                  CONVERTER                  =
 =============================================*/
 
-export default {
-	toIndex( qn: CellQN ): CellIndex | undefined
+const QNtoIndexConverter = {
+	toIndex( qn: CellQN ): SpinIndex | undefined
 	{
 		const column = toIndexScheme[ qn.n.value as ColumnKeyType ];
 		if( column )
@@ -217,3 +218,5 @@ function makeReverseScheme( scheme: ToIndexSchemeType ): CellQN[]
 
 	return reverseScheme;
 }
+
+export default QNtoIndexConverter;

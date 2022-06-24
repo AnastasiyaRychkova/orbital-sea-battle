@@ -1,5 +1,6 @@
-import { CellQN, periodicTable } from '../../Services/Chemistry';
+import { periodicTable } from '../../Chemistry';
 import OB_Player from './OB_Player';
+import type { CellQN } from '../../Chemistry/types';
 import type OB_IEnemy from "../interfaces/OB_EnemyInterface";
 import type { IUser } from '../OB_Entities.d';
 

@@ -1,9 +1,9 @@
-import IEventProvider from "../../util/EventEmitter/EventProviderInterface";
-import { EDiagramCellState } from "../ChemicalElement/DiagramCell";
+import { EDiagramCellState } from "../Chemistry/DiagramCell";
+import type { ElemConfig } from '../Services/Chemistry';
+import type { IEventProvider } from "../../util/types";
 import type { CellQN, BlockQN, QNStringScheme
-} from "../ChemicalElement/QuantumNumbers";
-import { IDiagramState } from "./DObjectState.d";
-import { ElemConfig } from '../Services/Chemistry';
+} from "../Chemistry/QN/types";
+import type { IDiagramState } from "./DObjectState.d";
 
 
 /** События, которые генерирует диаграмма */

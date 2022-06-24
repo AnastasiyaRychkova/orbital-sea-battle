@@ -1,8 +1,8 @@
 import React from 'react';
 import { observer } from "mobx-react";
 import styles from './ConfirmButton.module.css';
-import type { IDiagramState } from '../../core/game/Diagram/DObjectState.d';
-import { CellQN } from '../../core/game/Services/Chemistry';
+import type { IDiagramState } from '../../core/game/Diagram/types';
+import type { CellQN } from '../../core/game/Chemistry/types';
 
 
 

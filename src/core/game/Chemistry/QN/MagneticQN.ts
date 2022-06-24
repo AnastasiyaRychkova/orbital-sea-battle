@@ -1,5 +1,5 @@
-import IntInRange from '../../util/IntInRange';
-import IQuantumNumber, { QNStrType } from './QuantumNumberInterface';
+import { IntInRange } from '../../../util';
+import type { IQuantumNumber, QNStrType } from "./types";
 
 /**
  * **Магнитное квантовое число (m)**

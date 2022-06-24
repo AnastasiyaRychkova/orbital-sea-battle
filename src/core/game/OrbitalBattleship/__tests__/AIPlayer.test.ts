@@ -1,7 +1,6 @@
-import Chemistry from "../../Services/Chemistry";
+import Chemistry from "../../Chemistry";
 import OB_AIPLayer from "../entities/OB_AIPLayer";
 import entities from "../OB_EntitiesFabric"
-import GameState from "../entities/OB_GameState";
 import GameStateMock from '../__mocks__/GameStateMock';
 
 describe( 'AI Player', () => {

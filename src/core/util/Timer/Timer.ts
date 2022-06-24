@@ -1,4 +1,4 @@
-import ITimer from "./TimerInterface";
+import type { ITimer } from "./types";
 
 type Seconds = number;
 

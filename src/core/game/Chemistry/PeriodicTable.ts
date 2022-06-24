@@ -860,7 +860,7 @@ const periodicTable = {
 
 	random(): ChemicalElement
 	{
-		return periodicTableElements[ Math.round( this.MAX_ELEM_NUMBER * Math.random() ) ];
+		return periodicTableElements[ Math.round( this.MAX_NUMBER * Math.random() ) ];
 	},
 
 
@@ -869,7 +869,7 @@ const periodicTable = {
 		return QNtoIndexConverter;
 	},
 
-	get MAX_ELEM_NUMBER(): number
+	get MAX_NUMBER(): number
 	{
 		return periodicTableElements.length;
 	},

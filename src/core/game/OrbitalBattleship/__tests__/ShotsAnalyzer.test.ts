@@ -1,5 +1,4 @@
-import converter from "../../ChemicalElement/QNtoIndexConverter";
-import Chemistry from "../../Services/Chemistry";
+import Chemistry, { QNtoIndexConverter as converter } from "../../Chemistry";
 import ShotsAnalyzer from "../entities/OB_ShotsAnalyzer";
 
 

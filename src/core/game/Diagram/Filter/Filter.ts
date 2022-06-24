@@ -1,17 +1,17 @@
 import { makeObservable, observable, action, computed } from "mobx";
-import {QN} from '../../Services/Chemistry';
+import { QN } from '../../Chemistry';
+import { EventProvider } from "../../../util";
+import CheckboxNote from "./CheckboxNote";
 
 import type {
 	MainQN,
 	OrbitalQN,
 	MagneticQN,
 	SpinQN,
-	QuantumNumbers,
-} from "../../Services/Chemistry";
-import IFilter, { StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface";
+} from '../../Chemistry';
+import type { QuantumNumbers } from "../../Chemistry/types";
+import type { default as IFilter, StoreKey, FilterEvent, FilterEventData, StringState } from "./FilterInterface";
 import type INote from "./NoteInterface";
-import CheckboxNote from "./CheckboxNote";
-import EventProvider from "../../../util/EventEmitter/EventProvider";
 
 
 

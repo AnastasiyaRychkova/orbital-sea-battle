@@ -2,12 +2,21 @@ import MainQN from "./MainQN"
 import OrbitalQN from "./OrbitalQN";
 import MagneticQN from "./MagneticQN";
 import SpinQN from "./SpinQN";
-import { stringSchemeToQuantumNumbers } from "./QuantumNumbers";
-
+import { QNStringScheme, QuantumNumbers } from './types';
 export type { default as IQuantumNumber, QNStrType } from "./QuantumNumberInterface";
 
+function stringSchemeToQuantumNumbers( scheme: QNStringScheme ): QuantumNumbers
+{
+	return {
+		n: scheme[0] ? new MainQN( parseInt( scheme[0] ) ) : undefined,
+		l: scheme[1] ? new OrbitalQN( scheme[1] ) : undefined,
+		m: scheme[2] ? new MagneticQN( parseInt( scheme[2] ) ) : undefined,
+		s: scheme[3] ? new SpinQN( scheme[3] ) : undefined,
+	}
+}
 
-export default {
+
+const QN = {
 	n( value: number|MainQN = MainQN.MIN ): MainQN {
 		return new MainQN( value );
 	},
@@ -32,4 +41,13 @@ export default {
 	},
 
 	strSchemeToQN: stringSchemeToQuantumNumbers,
+};
+
+export default QN;
+
+export {
+	MainQN,
+	OrbitalQN,
+	MagneticQN,
+	SpinQN,
 };

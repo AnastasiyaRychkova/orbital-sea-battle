@@ -1,5 +1,5 @@
-import QN from "../QNModule";
-import type { OrbitalStr } from "../QuantumNumbers";
+import QN from "../QN";
+import type { OrbitalStr } from "../QN/QuantumNumbers";
 
 describe( 'Orbital QN', () => {
 	test( 'check string conversion', () => {

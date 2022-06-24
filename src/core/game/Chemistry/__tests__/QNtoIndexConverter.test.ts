@@ -1,5 +1,5 @@
 import converter from "../QNtoIndexConverter"
-import Chemistry from "../../Services/Chemistry"
+import Chemistry from "../index"
 
 
 describe( 'Quantum Numbers to cell index converter testing', () => {

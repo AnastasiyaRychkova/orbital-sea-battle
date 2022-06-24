@@ -4,9 +4,9 @@ import OB_LocalPlayer, { OB_ILocalPlayer } from "./entities/OB_LocalPlayer";
 import OB_LocalPlayerController, { OB_ILocalPlayerController } from "./entities/OB_LocalPlayerController";
 import OB_AIPLayer from "./entities/OB_AIPLayer";
 import OB_AIEnemyBehaviour from "./entities/OB_AIEnemyBehaviour";
-import Diagram, { IDiagram } from "../Diagram/Diagram";
-import Filter, { IFilter } from "../Diagram/Filter/Filter";
+import { Diagram, Filter } from "../Diagram";
 
+import type { IDiagram, IFilter } from "../Diagram/types";
 import type { OB_IEnemy, IGameState } from './OB_Entities.d';
 
 

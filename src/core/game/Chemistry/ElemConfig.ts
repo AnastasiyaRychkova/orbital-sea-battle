@@ -1,8 +1,8 @@
 import {
-	CellIndex,
 	calcCellState,
 	EDiagramCellState as CellState,
 } from './DiagramCell';
+import SpinIndex from './SpinIndex';
 import type { SpinMark, SpinState } from './DiagramCell';
 
 /**
@@ -93,7 +93,7 @@ class ElemConfig
 	 * 
 	 * @param spin Индекс спина
 	 */
-	hasSpin( spin: CellIndex ): boolean
+	hasSpin( spin: SpinIndex ): boolean
 	{
 		return this._isMarked( spin.value ) !== 0;
 	}
@@ -128,7 +128,7 @@ class ElemConfig
 	 * @param spin Индекс спина
 	 * @param state Отмечен ли спин
 	 */
-	write( spin: CellIndex, state: SpinMark | SpinState ): ElemConfig
+	write( spin: SpinIndex, state: SpinMark | SpinState ): ElemConfig
 	{
 		state ? this._mark( spin.value )
 				:	this._remove( spin.value );
@@ -164,7 +164,7 @@ class ElemConfig
 	{
 		const result: SpinState[] = [];
 
-		for( let spinIndex = 0; spinIndex <= CellIndex.MAX; spinIndex++ )
+		for( let spinIndex = 0; spinIndex <= SpinIndex.MAX; spinIndex++ )
 			result.push( this._isMarked( spinIndex ) );
 
 		return result;
@@ -194,7 +194,7 @@ class ElemConfig
 	{
 		const indexes: number[] = [];
 
-		for( let index = 0; index <= CellIndex.MAX; index++ )
+		for( let index = 0; index <= SpinIndex.MAX; index++ )
 			if( this._isMarked( index ) )
 				indexes.push( index );
 
@@ -252,7 +252,7 @@ class ElemConfig
 	 * @param shots Схема выстрелов
 	 * @returns Перечислительный тип состояния спина элемента
 	 */
-	static getCellState( spinIndex: CellIndex,
+	static getCellState( spinIndex: SpinIndex,
 						 element: ElemConfig,
 						 shots: ElemConfig
 						): CellState
@@ -271,7 +271,7 @@ class ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= CellIndex.MAX; i++ )
+		for( let i = 0; i <= SpinIndex.MAX; i++ )
 			result.push( calcCellState( diagram._isMarked( i ), shots._isMarked( i ) ) );
 		
 		return result;
@@ -287,7 +287,7 @@ class ElemConfig
 	{
 		const result: CellState[] = [];
 
-		for( let i = 0; i <= CellIndex.MAX; i++ )
+		for( let i = 0; i <= SpinIndex.MAX; i++ )
 		{
 			const state: CellState = calcCellState( diagram._isMarked( i ), shots._isMarked( i ) );
 			result.push( state === CellState.on ? CellState.off : state );
@@ -305,7 +305,7 @@ class ElemConfig
 
 	private _writeSpinArrayInConfig( spinArray: SpinState[] ): void
 	{
-		const iterator = CellIndex.iterator();
+		const iterator = SpinIndex.iterator();
 		for (const spin of iterator)
 		{
 			const spinState = spinArray[ spin.value ] || 0;

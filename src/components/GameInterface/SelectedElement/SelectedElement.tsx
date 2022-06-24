@@ -5,7 +5,7 @@ import buttons from '../Buttons.module.css';
 import texts from '../../../style/text.module.css';
 import sprite from "../../../img/sprite.svg";
 
-import { ChemicalElement } from '../../../core/game/ChemicalElement/ChemicalElement';
+import { ChemicalElement } from '../../../core/game/Chemistry/ChemicalElement';
 import { observer } from 'mobx-react';
 
 interface IProps
