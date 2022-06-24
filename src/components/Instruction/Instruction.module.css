@@ -18,16 +18,11 @@
 	bottom: 50%;
 	z-index: 1002;
 	max-width: 25%;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 1.5em;
-	line-height: 150%;
-	letter-spacing: 0.02em;
 	text-align: center;
 	color: black;
-	padding: 1em;
 	background-color: white;
-	border-radius: 25px;
+	padding: 1.25em 1.5em;
+	border-radius: 1.125em;
 	user-select: none;
 }
 
@@ -51,23 +46,18 @@
 	z-index: 1001;
 }
 
-@media screen and (max-width: 1024px) {
-	.bubble:after {
-		width: 42px;
-		height: 35px;
-		background-size: 42px 35px;
-	}
-}
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
 
 @media screen and (orientation: portrait) {
 	
 	.bubble {
 		right: auto;
 		left: 15%;
-		bottom: 75%;
+		bottom: 75%;	
 		max-width: 60%;
 	}
-
+	
 	.bubble:after {
 		right: auto;
 		left: calc( 50px + 15% );
@@ -79,6 +69,48 @@
 		left: 5%;
 		bottom: auto;
 		max-width: 120%;
+	}
+}
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.bubble {
+		padding: 1em 1.25em;
+		border-radius: 1em;
+	}
+
+	.bubble:after {
+		width: 42px;
+		height: 35px;
+		background-size: 42px 35px;
+	}
+
+	.captain {
+		height: 710px;
+		width: 560px;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+	
+	.bubble {
+		padding: 0.875em 1.25em;
+		border-radius: 0.875em;
+	}
+
+	.bubble:after {
+		width: 30px;
+		height: 25px;
+		background-size: 30px 25px;
+	}
+
+	.bubble > span {
+		font-size: 1em;
+	}
+
+	.captain {
+		width: 450px;
 	}
 }
 

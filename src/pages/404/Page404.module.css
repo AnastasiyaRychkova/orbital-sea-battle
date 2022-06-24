@@ -1,15 +1,10 @@
-@value typography: '../../style/typography.css';
-
 .title {
-	composes: large-header from typography;
-	composes: large-header-1 from typography;
-	max-width: 50%;
+	max-width: 90%;
 	text-align: center;
 	color: var(--secondary-100);
 }
 
 .subtitle {
-	composes: text from typography;
 	max-width: 50%;
 	text-align: center;
 	color: var(--secondary-100);

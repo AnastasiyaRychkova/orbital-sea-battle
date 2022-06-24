@@ -1,6 +1,3 @@
-@value sizes: '../../../style/display.css';
-@value mobile, laptop from sizes;
-
 .button {
 	box-sizing: border-box;
 	display: flex;
@@ -144,9 +141,6 @@
 =============================================*/
 
 .text {
-	/* composes: button from '../../../style/typography.css';
-	composes: button-medium from '../../../style/typography.css'; */
-	composes: text-button-B-Medium from '../../../style/text.module.css';
 	text-align: left;
 	word-wrap: break-word;
 }
@@ -156,8 +150,12 @@
 =               Media Requests               =
 =============================================*/
 
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
 /* Tablet or Small Notebook */
-@media (min-width: mobile) and (max-width: laptop) {
+@media (min-height: mobile) and (max-height: tablet), 
+(min-width: mobile) and (max-width: laptop) {
 	.button {
 		padding: .75em 1.25em;
 	}

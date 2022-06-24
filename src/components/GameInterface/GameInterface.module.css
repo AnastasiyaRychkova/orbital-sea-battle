@@ -1,45 +1,6 @@
-.all-interface{
-	box-sizing: border-box;
-	display: flex;
-	position: absolute;
-	flex-direction: column;
-	justify-content: space-between;
-	top: 0;
-	left: 0;
-	width: 100%;
-	min-width:320px;
-	height: 100%;
-	min-height: 200px;
-	padding: 1rem;
-	pointer-events: none;
-}
-
-/*верхняя панель управления интерфейса*/
-.interface{
-	box-sizing: border-box;
-	display:flex;
-	justify-content:space-between;
-	width:100%;
-	pointer-events: all;
-}
-
-.interface__function__info{
-	display: flex;
-	position: absolute;
-	top:6rem;
-	align-items: flex-start;
-	flex-direction: column;
-	pointer-events: all;
-	gap:1.5rem;
-	z-index: 10;
-}
-.interface__function-big-gap {
-	gap: 1.5rem;
-}
-
 /*все кнопки-иконки интерфейса*/
-.interface-icon-button{  /*icon-interface*/
-	min-width:3.5rem;
+.interface-icon-button {  /*icon-interface*/
+	min-width: 3.5rem;
 	min-height: 3.5rem;
 	padding: 1rem;
 	outline: none;
@@ -47,40 +8,40 @@
 }
 
 /*цвета конопок-иконок интерфейса*/
-.icon-message{
+.icon-message {
 	background-color: var(--secondary-700) ;
 }
 
-.icon-info{
+.icon-info {
 	background-color: var(--secondary-900) ;
 }
 
 /*характереистики иконки элемента в левом меню*/
-.icon-element{
+.icon-element {
 	outline:  solid var(--secondary-100) 1px;
 	background-color:  var(--secondary-900) ;
 	color: var(--secondary-100);
 }
 
 /*скрытие выбранного элемента при больших экранах*/
-.interface__function__element{
-	display:none;
+.interface__function__element {
+	display: none;
 }
 
 /*расположение характеристик время/точность слева для маленьких экранов*/
-.left-mini-info-list{
+.left-mini-info-list {
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
-	gap:0.5rem;
+	gap: 0.5rem;
 }
 
 /*блок характеристика*/
-.move-info-wrap{
-	display:flex;
+.move-info-wrap {
+	display: flex;
 	align-items: center;
-	height:min-content;
-	padding:0.5rem 1rem ;
+	height: min-content;
+	padding: 0.5rem 1rem ;
 	background-color: var(--secondary-900);
 	gap: 0.8rem;
 }
@@ -89,193 +50,62 @@
 }
 
 /*скрытие левого блока характеристик при больших экранах*/
-.move-info-vertical{
+.move-info-vertical {
 	display: none;
 }
 
-.move-info{
-	display:flex;
+.move-info {
+	display: flex;
 }
 
 /*отступы для центрирования игроков*/
-.move-number{
-	margin-right:1rem;
+.move-number {
+	margin-right: 1rem;
 }
 
-/* вид игроков */
-.players{
-	display:grid;
-	grid-template-columns: repeat(3, min-content);
-	gap:0.5rem;
+
+
+
+.button-exit-position {
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
 
-.player{
-	display:flex;
-	align-items: center;
-	width:19.93rem;
-	height: min-content;
-	padding:0.5rem;
-	box-shadow: var(--box-shadow-input);
-	background-color: var(--disable-800) ;	
-	gap:1rem;
-}
 
-/* фото игрока */
-.player__avatar{
-	opacity: 0.7;
-	width:3rem;
-	height: 3rem;
-}
-
-.player__info{
-	display: flex;
-	flex-direction: column;
-	gap:0.5rem;
-}
-
-.player-active{
-	background-color: var(--secondary-700);
-}
-
-.player__avatar-active{
-	opacity: 1;
-	outline: solid var(--primary-400) 1px;
-}
-
-.player__avatar-opponent{
-	opacity: 1;
-	outline: solid var(--error-500) 1px;
-}
-
-.truncate-text {
-	width:13rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-.player__info__status{
-	display:flex;
-	align-items: center;
-	gap: 0.5rem;
-}
-/* .circle {
-	height: 0.5em;
-	width:0.5em;
-	border-radius: 50%;
-}
-
-.online{
-	background-color: var(--primary-200);
-} */
-.text-online{
-	color:var(--primary-200);
-}
-/* .offline{
-	background-color: var(--error-400);
-} */
-.text-offline{
-	color:var(--error-400);
-}
-
-.sputnik-img{
-	height: 4rem;
-}
-
-/* нижняя панель интерфейса */
-.bottom-control-panel{
-	box-sizing: border-box;
-	position: relative;
-	/* bottom:1rem; */
-	width:100%;
-	pointer-events: all;
-}
-
-.default-menu{
-	display: flex;
-	justify-content: center;
-}
-.default-menu-left-center-right{
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	gap:1rem;
-}
-.button-exit-position{
-	position:absolute;
-	bottom:0;
-	left:0;
-}
-
-@media screen and  (max-width:1400px){ 
-	.interface__function__info{
-		top:6.5rem;
-		gap:1rem;
-	}
-
-}
-
-@media screen and  (max-width:1024px){
-	.player{
-		width: 16rem;
-	}
-
-	.truncate-text {
-		width:10rem;
-	}
+@media screen and  (max-width: 1024px) {
 
 	/* переместить иконки хода */
-	.move-target, .move-info{
+	.move-target, .move-info {
 		display: none;
 	}
-	.move-info-vertical{
+	.move-info-vertical {
 		display: flex;
 	}
 }
 
-@media screen and  (max-width:812px){
-	.sputnik-img{
-		width: 72px;
-		height:36px;
-		object-fit: cover;
-	}
-
-	.interface__function__element{
-		display:block;
+@media screen and  (max-width: 812px) {
+	.interface__function__element {
+		display: block;
 	}
 }
 
-@media screen and (max-height: 375px) and (max-width:812px){
-	/* .interface{
-		background-color: var(--secondary-800);
-		background-image: none;
-	} */
-
-	.interface-exit{
-		justify-content:space-between; 
+@media screen and (max-height: 375px) and (max-width: 812px) {
+	.interface-exit {
+		justify-content: space-between; 
 	}
 
 }
 
-@media screen and (max-width: 600px){
-	.interface-exit{
+@media screen and (max-width: 600px) {
+	.interface-exit {
 		box-sizing: border-box;
 	}
 
 }
-@media screen and  (max-width:520px){
-	.sputnik-img{
-		display: flex;
-		align-self: center;
-		width: 36px;
-		height:36px;
-		grid-row: 1 / 3;
-		grid-column: 2/3;
-	}
-	.players{
-		column-gap: 2rem;
-		grid-template-columns:  repeat(2, min-content);
-	}
-	.icon-tiny{
+@media screen and (max-width: 520px) {
+
+	.icon-tiny {
 		width: 14px;
 		height: 14px;
 	}

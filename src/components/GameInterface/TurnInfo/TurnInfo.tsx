@@ -1,15 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './GameInterface.module.css';
-import texts from '../../style/text.module.css';
-// import icons from '../../style/icons.module.css';
-// import sprite  from "../../img/sprite.svg";
-import spLocal from '../../img/components/sputnik-local.svg';
-import spEnemy from '../../img/components/sputnik-enemy.svg';
-import spNone from '../../img/components/sputnik-none.svg';
+import styles from './TurnInfo.module.css';
 
-import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
-// import { AliasId } from '../../core/game/Aliases'
+import spLocal from '../../../img/components/sputnik-local.svg';
+import spEnemy from '../../../img/components/sputnik-enemy.svg';
+import spNone from '../../../img/components/sputnik-none.svg';
+
+import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
 
 /** Чей сейчас ход: ничей / свой / чужой */
 export type Turn = 'none' | 'local' | 'enemy';
@@ -66,39 +63,33 @@ const PlayerInfo: FC<IPlayerProps> = ( {
 		} >
 			<img
 				className = {
-					styles.player__avatar + " " +
+					styles.avatar + " " +
 					( isActive
 					? ( isOpponent
-						? styles["player__avatar-opponent"]
-						: styles["player__avatar-active"]
-					)
-					: "" )
+						? styles["avatar-opponent"]
+						: styles["avatar-active"]
+					) : "" )
 				}
 				alt = { t( "aliases." + alias.id ) }
 				src = { "/img/aliases/" + alias.id + ".png" }
 			/>
 
-			<div className = { styles.player__info } >		
+			<div className = { styles.info } >		
 				<span className = {
-					texts["text-bold-T-Small"]
-					+ " " +
-					texts["truncate-text"]
-					+ " " +
+					styles.name +
+					" text-small bold " + 
 					( isActive
 					? ( isOpponent
 						? styles["text-offline"]
 						: styles["text-online"]
-					)
-					: "" )
+					) : "" )
 				} >
 					{ name }
 				</span>
 				
-				<div className = { styles.player__info__status }>
-					<span className = { texts["text-bold-T-Tiny"] } >
-						{ status }
-					</span>
-				</div>
+				<span className = { styles.status } >
+					{ status }
+				</span>
 			</div>
 		</div>
 	);

@@ -1,3 +1,4 @@
+import ability from './ability';
 import accuracy from './accuracy';
 import clock from './clock';
 import cross from "./cross";
@@ -8,6 +9,7 @@ import play from './play';
 import shot from "./shot";
 
 const glyphs = {
+	ability,
 	accuracy,
 	clock,
 	cross,

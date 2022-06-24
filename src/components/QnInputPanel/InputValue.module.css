@@ -1,5 +1,5 @@
 @value sizes: '../../style/display.css';
-@value mobile, laptop from sizes;
+@value mobile, tablet, laptop from sizes;
 
 .inputValue {
 	display: flex;
@@ -40,7 +40,8 @@
 	composes: text-m-small from '../../style/typography.css';
 }
 
-@media (min-width: mobile) and (max-width: laptop) {
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
 	.row {
 		height: 2.5em;
 	}

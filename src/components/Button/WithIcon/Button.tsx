@@ -56,7 +56,7 @@ const Button: FC<IProps> = ({
 			onClick={onClick}
 			className={cn( styles, ['button', priority, theme], className )} >
 				<Icon type={glyph} className={styles.icon}/>
-				<span className={styles.text}>
+				<span className={ styles.text + " button-medium" }>
 					{value}
 				</span>
 		</button>
@@ -69,7 +69,7 @@ const Button: FC<IProps> = ({
 			onClick={onClick}
 			className={cn( styles, ['button', priority, theme], className )} >
 				<Icon type={glyph} className={styles.icon}/>
-				<span className={styles.text}>
+				<span className={ styles.text + " button-medium" }>
 					{value}
 				</span>
 		</Link>

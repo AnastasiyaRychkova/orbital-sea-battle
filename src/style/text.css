@@ -1,20 +1,398 @@
 /** Текстовые стили */
 
 html {
-	font-family: 'Montserrat', sans-serif;
+	--primary-font: "Montserrat", sans-serif;
+	--secondary-font: "Roboto", sans-serif;
+
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-size: 16px;
+	font-family: var(--primary-font);
+	font-size: 100%;
 }
 
-@media screen and (max-height: 1366px) and (max-width:1570px) {
-	html{
-		font-size: 14px;
-	}
+
+html .bold {
+	font-weight: 700;
 }
 
-@media screen and (max-width:1400px) {
-	html{
-		font-size: 10px;
+
+/* Заголовки */
+
+.header-1,
+.header-2,
+.header-3,
+.header-4,
+.header-5,
+.header-6
+{
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: 400;
+	font-style: normal;
+}
+
+.header-1 {
+	letter-spacing: 0.02em;
+	font-size: 3.75em; /* 60px */
+}
+
+.header-2 {
+	letter-spacing: 0.02em;
+	font-size: 3em; /* 48px */
+}
+
+.header-3 {
+	letter-spacing: 0.05em;
+	font-size: 2em; /* 32px */
+}
+
+.header-4 {
+	letter-spacing: 0.05em;
+	font-size: 1.5em; /* 24px */
+}
+
+.header-5 {
+	letter-spacing: 0.05em;
+	font-size: 1.125em; /* 18px */
+}
+
+.header-6 {
+	letter-spacing: 0.05em;
+	font-size: 1em; /* 16px */
+}
+
+@media (min-height: 540px) and (max-height: 812px),
+(min-width: 540px) and (max-width: 1200px) {
+
+	.header-1 {
+		font-size: 3.125em; /* 50px */
 	}
+	.header-2 {
+		font-size: 2.5em; /* 40px */
+	}
+	.header-3 {
+		font-size: 1.6875em; /* 27px */
+	}
+	.header-4 {
+		font-size: 1.25em; /* 20px */
+	}
+	.header-5 {
+		font-size: 0.9375em; /* 15px */
+	}
+	.header-6 {
+		font-size: 0.8125em; /* 13px */
+	}
+
+}
+
+@media (max-width: 540px), (max-height: 540px) {
+
+	.header-1 {
+		font-size: 2.375em; /* 38px */
+	}
+	.header-2 {
+		font-size: 1.875em; /* 30px */
+	}
+	.header-3 {
+		font-size: 1.25em; /* 20px */
+	}
+	.header-4 {
+		font-size: 0.9375em; /* 15px */
+	}
+	.header-5 {
+		font-size: 0.6875em; /* 11px */
+	}
+	.header-6 {
+		font-size: 0.625em; /* 10px */
+	}
+
+}
+
+
+/* Текст */
+
+.text-xl,
+.text-large,
+.text-big,
+.text-medium,
+.text-normal,
+.text-small
+{
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-style: normal;
+}
+
+.text-xl {
+	font-weight: 400;
+	font-size: 3em; /* 48px */
+}
+
+.text-large {
+	font-weight: 400;
+	font-size: 2em; /* 32px */
+}
+
+.text-big {
+	font-weight: 400;
+	font-size: 1.5em; /* 24px */
+}
+
+.text-medium {
+	font-weight: 500;
+	font-size: 1.25em; /* 20px */
+}
+
+.text-normal {
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	font-size: 1em; /* 16px */
+}
+
+	.text-normal.bold {
+		letter-spacing: 0em;
+	}
+
+.text-small {
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	font-size: 0.875em; /* 14px */
+}
+
+	.text-small.bold {
+		letter-spacing: 0.01em;
+	}
+
+
+@media (min-height: 540px) and (max-height: 812px),
+(min-width: 540px) and (max-width: 1200px) {
+
+	.text-xl {
+		font-size: 2.5em; /* 40px */
+	}
+	.text-large {
+		font-size: 1.6875em; /* 27px */
+	}
+	.text-big {
+		font-size: 1.25em; /* 20px */
+	}
+	.text-medium {
+		font-size: 1.0625em; /* 17px */
+	}
+	.text-normal {
+		font-size: 0.8125em; /* 13px */
+	}
+		.text-normal.bold {
+			letter-spacing: 0.01em;
+		}
+	.text-small {
+		font-size: 0.75em; /* 12px */
+	}
+
+}
+
+@media (max-width: 540px), (max-height: 540px) {
+
+	.text-xl {
+		font-size: 1.875em; /* 30px */
+	}
+	.text-large {
+		font-size: 1.25em; /* 20px */
+	}
+	.text-big {
+		font-size: 0.9375em; /* 15px */
+	}
+	.text-medium {
+		font-size: 0.75em; /* 12px */
+	}
+	.text-normal {
+		font-size: 0.625em; /* 10px */
+	}
+	.text-small {
+		font-size: 0.5625em; /* 9px */
+	}
+		.text-small.bold {
+			letter-spacing: 0.04em;
+		}
+
+}
+
+
+/* Длинный текст */
+
+.long-medium,
+.long-normal,
+.long-small,
+.long-little
+{
+	font-family: var(--secondary-font);
+	font-weight: 500;
+	font-style: normal;
+}
+
+.long-medium {
+	line-height: 140%;
+	font-weight: 400;
+	font-size: 1.25em; /* 20px */
+}
+
+.long-normal {
+	line-height: 140%;
+	letter-spacing: 0.05em;
+	font-size: 1em; /* 16px */
+}
+
+.long-small {
+	line-height: 132%;
+	letter-spacing: 0.05em;
+	font-size: 0.875em; /* 14px */
+}
+
+.long-little {
+	line-height: 132%;
+	letter-spacing: 0.05em;
+	font-size: 0.75em; /* 12px */
+}
+
+
+@media (min-height: 540px) and (max-height: 812px),
+(min-width: 540px) and (max-width: 1200px) {
+
+	.long-medium {
+		font-size: 1.05em; /* 16.8px */
+	}
+	.long-normal {
+		font-size: 0.84em; /* 13.44px */
+	}
+	.long-small {
+		font-size: 0.75em; /* 12px */
+	}	
+	.long-little {
+		font-size: 0.625em; /* 10px */
+	}
+
+}
+
+@media (max-width: 540px), (max-height: 540px) {
+
+	.long-medium {
+		font-size: 0.75em; /* 12px */
+	}
+	.long-normal {
+		font-size: 0.625em; /* 10px */
+	}
+	.long-small {
+		font-size: 0.55em; /* 8.8px */
+	}	
+	.long-little {
+		font-size: 0.47em; /* 7.52px */
+	}
+
+}
+
+
+/* Кнопки */
+
+.button-large,
+.button-big,
+.button-medium,
+.button-normal,
+.button-small,
+.button-little,
+.button-tiny
+{
+	text-transform: uppercase;
+	line-height: 120%;
+	font-family: var(--primary-font);
+	font-weight: 600;
+	font-style: normal;
+}
+
+.button-large {
+	letter-spacing: 0.05em;
+	font-size: 1.875em; /* 30px */
+}
+
+.button-big {
+	letter-spacing: 0.05em;
+	font-size: 1.5em; /* 24px */
+}
+
+.button-medium {
+	letter-spacing: 0.05em;
+	font-size: 1.125em; /* 18px */
+}
+
+.button-normal {
+	letter-spacing: 0.08em;
+	font-size: 1em; /* 16px */
+}
+
+.button-small {
+	letter-spacing: 0.08em;
+	font-size: 0.875em; /* 14px */
+}
+
+.button-little {
+	letter-spacing: 0.08em;
+	font-size: 0.75em; /* 12px */
+}
+
+.button-tiny {
+	letter-spacing: 0.08em;
+	font-size: 0.625em; /* 10px */
+}
+
+@media (min-height: 540px) and (max-height: 812px),
+(min-width: 540px) and (max-width: 1200px) {
+
+	.button-large {
+		font-size: 1.5625em; /* 25px */
+	}
+	.button-big {
+		font-size: 1.25em; /* 20px */
+	}
+	.button-medium {
+		font-size: 0.9375em; /* 15px */
+	}
+	.button-normal {
+		font-size: 0.8125em; /* 13px */
+	}
+	.button-small {
+		font-size: 0.75em; /* 12px */
+	}
+	.button-little {
+		font-size: 0.625em; /* 10px */
+	}
+	.button-tiny {
+		font-size: 0.5em; /* 8px */
+	}
+
+}
+
+@media (max-width: 540px), (max-height: 540px) {
+
+	.button-large {
+		font-size: 1.1875em; /* 19px */
+	}
+	.button-big {
+		font-size: 0.9375em; /* 15px */
+	}
+	.button-medium {
+		font-size: 0.70em; /* 11.2px */
+	}
+	.button-normal {
+		font-size: 0.625em; /* 10px */
+	}
+	.button-small {
+		font-size: 0.55em; /* 8.8px */
+	}
+	.button-little {
+		font-size: 0.47em; /* 7.52px */
+	}
+	.button-tiny {
+		font-size: 0.39em; /* 6.24px */
+	}
+
 }

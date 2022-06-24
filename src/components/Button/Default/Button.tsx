@@ -42,7 +42,7 @@ const Button: FC<IProps> = ({
 		<button
 			onClick={onClick}
 			className={cn( styles, ['button', priority, (disabled ? 'disabled' : undefined)], className )} >
-				<span className={styles.text}>
+				<span className="button-medium">
 					{value}
 				</span>
 		</button>
@@ -53,7 +53,7 @@ const Button: FC<IProps> = ({
 			replace={replace}
 			onClick={onClick}
 			className={cn( styles, ['button', priority, (disabled ? 'disabled' : undefined)], className )} >
-				<span className={styles.text}>
+				<span className="button-medium">
 					{value}
 				</span>
 		</Link>
