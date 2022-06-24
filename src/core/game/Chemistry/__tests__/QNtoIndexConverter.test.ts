@@ -5,7 +5,7 @@ import Chemistry from "../index"
 describe( 'Quantum Numbers to cell index converter testing', () => {
 
 	test( 'creating cell index function is defined', () => {
-		expect( Chemistry.cellIndex ).not.toBeUndefined();
+		expect( Chemistry.spinIndex ).not.toBeUndefined();
 	} );
 
 	test( 'converting cell quantum numbers to Cell Index', () => {

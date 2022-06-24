@@ -1,5 +1,6 @@
-import { SpinIndex, EDiagramCellState } from "../DiagramCell";
-import ElemConfig from "../ElemConfig";
+import { CHEMICAL_ELEM_NUM } from '../constants';
+import { EDiagramCellState } from "../DiagramCell";
+import { ElemConfig, SpinIndex } from "../index";
 
 import type { SpinState } from '../DiagramCell';
 
@@ -99,7 +100,7 @@ describe( 'Element Configuration', ()=> {
 
 	test( 'converting configuration to array with indexes of 1', () => {
 		const elem = new ElemConfig( [-1, -1, -1, -1] );
-		expect( elem.asIndexes() ).toHaveLength( 118 );
+		expect( elem.asIndexes() ).toHaveLength( CHEMICAL_ELEM_NUM );
 	} );
 
 

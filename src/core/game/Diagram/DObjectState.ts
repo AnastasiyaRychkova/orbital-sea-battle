@@ -26,7 +26,7 @@ import type {
 } from "./types";
 
 
-const index = Chemistry.cellIndex;
+const index = Chemistry.spinIndex;
 
 
 

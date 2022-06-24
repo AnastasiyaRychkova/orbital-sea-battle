@@ -1,0 +1,1 @@
+export const CHEMICAL_ELEM_NUM = 118;

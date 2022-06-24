@@ -11,7 +11,7 @@ type BlockType = { [key in string]: SpinIndex[] };
 type ColumnType = { [key in BlockKeyType]?: BlockType };
 type ToIndexSchemeType = { [key in ColumnKeyType]: ColumnType };
 
-function index( number: number )
+function index( number: number ): SpinIndex
 {
 	return new SpinIndex( number );
 };

@@ -1,15 +1,15 @@
 import { IntInRange } from '../../util';
-import periodicTable from './PeriodicTable';
+import { CHEMICAL_ELEM_NUM } from './constants';
 
 /**
  * **Индекс электрона (спина)**
  * 
  * Хранит индекс ячейки: [0;117]
  */
-export default class SpinIndex extends IntInRange
+class SpinIndex extends IntInRange
 {
 	static readonly MIN: number = 0;
-	static readonly MAX: number = periodicTable.MAX_NUMBER;
+	static readonly MAX: number = CHEMICAL_ELEM_NUM - 1;
 
 	constructor( number: number = SpinIndex.MIN )
 	{
@@ -29,3 +29,5 @@ export default class SpinIndex extends IntInRange
 			yield cell;
 	}
 }
+
+export default SpinIndex;

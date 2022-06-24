@@ -1,3 +1,4 @@
+import { CHEMICAL_ELEM_NUM } from "../../Chemistry/constants";
 import Chemistry, { QNtoIndexConverter as converter } from "../../Chemistry";
 import ShotsAnalyzer from "../entities/OB_ShotsAnalyzer";
 
@@ -7,7 +8,7 @@ describe( 'Shots Analyzer', () => {
 	const randomFunc = Math.random;
 
 	test( 'testing new analyzer', () => {
-		expect( analyzer.candidates ).toBe( 118 );		
+		expect( analyzer.candidates ).toBe( CHEMICAL_ELEM_NUM );		
 	} );
 
 	test( 'random getting cell, when candidates are 118: random = 1', () => {

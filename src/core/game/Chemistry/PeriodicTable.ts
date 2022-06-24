@@ -1,3 +1,4 @@
+import { CHEMICAL_ELEM_NUM } from './constants';
 import {
 	default as ElemConfig,
 } from './ElemConfig';
@@ -8,7 +9,13 @@ import type {
 import QNtoIndexConverter from './QNtoIndexConverter';
 
 
-type PeriodicTableStructure = Array<ChemicalElement>;
+type Tuple<
+	T,
+	N extends number,
+	R extends readonly T[] = [],
+> = R['length'] extends N ? R : Tuple<T, N, readonly [T, ...R]>;
+
+type PeriodicTableStructure = Tuple<ChemicalElement, typeof CHEMICAL_ELEM_NUM>;
 
 /**
  * Таблица Менделеева

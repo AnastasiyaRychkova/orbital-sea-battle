@@ -35,7 +35,7 @@ const ChemistryUtil = {
 		return new ElemConfig( buf );
 	},
 
-	cellIndex( index: number ): SpinIndex
+	spinIndex( index: number ): SpinIndex
 	{
 		return new SpinIndex( index );
 	},
