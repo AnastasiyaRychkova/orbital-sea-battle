@@ -15,7 +15,7 @@
 
 .table {
 	--side: 3.8em;
-	display:grid;
+	display: grid;
 	grid-template-columns: calc(0.5 * var(--side)) repeat(18, var(--side));
 	grid-template-rows: repeat(8, var(--side)) 1.2em repeat(2, var(--side));
 	overflow: auto;
@@ -25,14 +25,14 @@
 }
 
 .cell {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	user-select: none;
 }
 
 .selected-element {
+	display: grid;
 	grid-area: 1 / 6 / 3 / 13;
-	display:grid;
 	grid-template-columns: 2.2fr 5fr;
 	grid-template-rows: 1fr 1fr;
 	grid-column-gap: 1.8em;
@@ -41,26 +41,26 @@
 }
 
 .element-preview {
-	outline: solid var(--secondary-100) 2px;
+	border: solid var(--secondary-100) 2px;
 	grid-area: 1 / 1 / 3 / 2;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 0.8em 0;
+	padding: 0.75em 0;
 }
 
 .element-preview__number {
-	margin: 0 0.8em;
+	margin: 0 0.75em;
 }
 
 .selected-element__name, .selected-element__number {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	gap: 0.3em;
 }
 
 .ammunition {
-	display:flex;
+	display: flex;
 	align-items: center;
 	gap: 0.8em;
 }
@@ -149,7 +149,7 @@
 
 .border {
 	border: 1px solid var(--primary-600);
-	/* outline нужен чтобы внешние границы ячеек были толщиной 1+1=2 px */
+	/* outline нужен чтобы внешние границы ячеек были толщиной 1+1=2px */
 	outline: 1px solid var(--primary-600);
 }
 

@@ -1,4 +1,4 @@
-import type { OrbitalStr } from "./QN/types";
+import type { OrbitalStr } from "./QN/types.d";
 
 export type N1to7 = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type M3to_3 = 3 | 2 | 1 | 0 | -1 | -2 | -3;
@@ -16,5 +16,5 @@ export type CellDescription = {
 
 
 
-export * from './QN/types';
+export * from './QN/types.d';
 export * from './ChemicalElement.d';

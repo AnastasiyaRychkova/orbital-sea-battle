@@ -1,49 +1,93 @@
-
-button{
-	font-family: 'Montserrat', sans-serif;
-	border:none;
-	cursor:pointer;
+.icon {
+	width: 1.25em;
+	height: 1.25em;
 }
 
-.button-exit{
+.button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	gap: 0.5em;
+	padding: 0.5em 0.625em;
+	box-sizing: border-box;
+	border: solid var(--primary-200) 1px;
 	background-color: var(--secondary-800);
 	color: var(--primary-200);
-	outline:  solid var(--primary-200) 1px;
-	font-size:1rem;
-	padding: 0.2em 0.4em;
-	text-transform: uppercase;
-	fill:var(--primary-200);
-	flex-shrink: 0;
 	user-select: none;
 }
-@media (hover: hover) {
-	.button-exit:hover{
-		color: var(--primary-50);
-		box-shadow: var(--glow__button--light--l);
-		fill:var(--primary-50);
-		outline-color: var(--primary-50);
-	}
-}
-.button-exit:active{
-	color: var(--primary-400);
-	fill:var(--primary-400);
-	outline-color: var(--primary-400);
-}
-.button-exit:disabled, .button-exit:disabled:hover{
-	background-color: var(--disable-800);
-	color: var(--disable-600);
-	fill:var(--disable-600);
-	outline:none;
-	box-shadow: none;
-	cursor:default;
+
+.box {
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 2em;
 }
 
-@media screen and (max-width:812px){
-	.button-exit{
-		width:40px;
-		height: 40px;
+
+@media (hover: hover) {
+	.button:hover {
+		color: var(--primary-50);
+		box-shadow: var(--glow__button--light--m);
+		border-color: var(--primary-50);
 	}
-	.button-exit>span{
+}
+
+.button:active{
+	color: var(--primary-400);
+	border-color: var(--primary-400);
+}
+
+.button:disabled, .button:disabled:hover {
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+	box-shadow: none;
+	cursor: default;
+}
+
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.button {
+		gap: 0.4125em;	
+	}
+
+	.box {
+		height: 1.875em;
+	}
+
+	.icon {
+		width: 1em;
+		height: 1em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+	
+	.icon {
+		width: 0.75em;
+		height: 0.75em;
+	}
+}
+
+/* скрытие надписи на кнопке при малой ширине */
+@media screen and (max-width: tablet) {
+	
+	.icon {
+		width: 1.125em;
+		height: 1.125em;
+	}
+
+	.box {
+		height: 2.5em;
+		width: 2.5em;
+		padding: 0;
+	}
+
+	.box > span {
 		display: none;
 	}
 }

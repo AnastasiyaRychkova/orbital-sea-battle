@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './GiveUpButton.module.css';
-import buttons from '../Buttons.module.css';
-import icons from '../../../style/icons.module.css';
 import { useTranslation } from 'react-i18next';
 
 import sprite from "../../../img/sprite.svg";
@@ -11,23 +9,22 @@ interface IProps {
 	onClick: () => void,
 }
 
-
 export default function GiveUpButton( props: IProps ) {
 	const { t } = useTranslation();
 
 	return (
 		<button
 			onClick = { props.onClick }
-			className = { buttons["button-icon"] + " " + styles["button-exit"] }
+			className = { styles.button + " " + styles.box }
 		>
 			<svg
 				width = "20"
 				height = "20"
-				className = { icons["icon-tiny"] } // "icon-primary"
+				className = { styles.icon }
 			>
 				<use href = { sprite + "#exit" } />
 			</svg>
-			<span>
+			<span className = "button-normal">
 				{ t("actions.giveup") }
 			</span>
 		</button>

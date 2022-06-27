@@ -7,6 +7,7 @@ import hit from './hit';
 import info from "./info";
 import play from './play';
 import shot from "./shot";
+import left from './left';
 
 const glyphs = {
 	ability,
@@ -18,6 +19,7 @@ const glyphs = {
 	info,
 	play,
 	shot,
+	left,
 }
 
 export default glyphs;

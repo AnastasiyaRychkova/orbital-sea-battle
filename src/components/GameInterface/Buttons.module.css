@@ -2,19 +2,11 @@ html .ability {
 	color: var(--corn);
 }
 
-/* .button-icon {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-} */
-
-/* .center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-} */
+@media screen and (hover: hover) {
+	html .ability:hover {
+		color: var(--corn);
+	}
+}
 
 html .small {
 	height: 2.25em;
