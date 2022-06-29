@@ -8,4 +8,6 @@ export type Glyph = | 'cross'
 					| 'full_screen'
 					| 'ability'
 					| 'left'
+					| 'repeat'
+					| 'flag'
 					;

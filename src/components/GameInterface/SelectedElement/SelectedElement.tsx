@@ -22,8 +22,8 @@ const SelectedElement = observer(( props: IProps ) => {
 
 	const [isOpen, toggle] = useState( false );
 
-	const selectedElementBlock = (
-		<div className = { styles["selected-element"] }>
+	const selectedElementUnit = (
+		<div className = { styles["unit"] }>
 			<div className ={ styles["element-preview"] }>
 				<span className = {
 					styles["element-preview__name"]
@@ -45,7 +45,7 @@ const SelectedElement = observer(( props: IProps ) => {
 				</span>
 			</div>
 
-			<div className = { styles["selected-element__name"] } >
+			<div className = { styles["unit__name"] } >
 				<span className = "text-small" >
 					{ t("components.table.code") }
 				</span>
@@ -54,7 +54,7 @@ const SelectedElement = observer(( props: IProps ) => {
 				</span>
 			</div>
 
-			<div className = { styles["selected-element__number"] }>
+			<div className = { styles["unit__number"] }>
 				<span className = "text-small" >
 					{ t( "components.table.ammo" ) }
 				</span>
@@ -96,7 +96,7 @@ const SelectedElement = observer(( props: IProps ) => {
 					( isOpen ? "" : styles.hidden )
 				}>
 					<div className = { styles.backing }> 
-						{ selectedElementBlock }
+						{ selectedElementUnit }
 					</div>
 					<Button
 						className = { styles.collapse }
@@ -107,7 +107,7 @@ const SelectedElement = observer(( props: IProps ) => {
 			</div>
 				
 			<div className = { styles.full } >
-				{ selectedElementBlock }
+				{ selectedElementUnit }
 			</div>
 		</>
 	);

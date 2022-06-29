@@ -207,7 +207,7 @@ html {
 }
 
 
-@media (min-width: 540px) and (max-width: 1300px) {
+@media (min-width: 540px) and (max-width: 1200px) {
 	.header {
 		--large: 3em;
 		--big: 1.5em;

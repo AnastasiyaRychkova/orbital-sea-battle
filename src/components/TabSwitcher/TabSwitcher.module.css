@@ -1,64 +1,155 @@
-.button-icon{
+.flex-centered {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	gap:1rem;
 }
 
-.paging-left {
+/* стрелки для переключения вкладок вправо/влево */
+.left {
 	position: fixed;
 	top: 50%;
-	left: 1rem;
+	left: 1em;
 }
 
-.paging-right {
+.right {
 	position: fixed;
 	top: 50%;
-	right: 1rem;
+	right: 1em;
 }
 
-.button-paging {
-	padding: 0;
-	outline: none;
+/* иконка вправо — это перевёрнутая иконка влево */
+	.right svg {
+		transform: rotate(180deg);
+	}
+
+/* размеры иконок */
+.small {
+	height: 2em;
+	width: 2em;
+}
+
+.tiny {
+	height: 1.5em;
+	width: 1.5em;
+}
+
+/* иконки навигации */
+.paging {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--primary-600);
 	background-color: transparent;
 	pointer-events: all;
 }
 
-.nav-3 {
+.selected {
+	color: var(--primary-200);
+}
+
+@media(hover: hover) {
+	.paging:hover {
+		color: var(--primary-400);
+	}
+
+		.paging:hover svg {
+			filter: drop-shadow( var(--glow__button--light--m) );
+		}
+
+	.selected:hover {
+		color: var(--primary-100);
+	}
+}
+
+.paging:active {
+	color: var(--primary-200);
+}
+
+.selected:active {
+	color: var(--primary-300);
+}
+
+.paging:disabled,
+.selected:disabled {
+	color: var(--disable-700);
+}
+
+.nav {
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	display:flex;
-	gap:3.75rem;
+	gap: 3.75em;
 	justify-self: center;
 	justify-content: center;
 	pointer-events: none;
 }
 
-@media screen and (max-height: 540px) {
-	.paging-left {	
+
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.left {
+		left: .75em;
+	}
+	.right {
+		right: .75em;
+	}
+
+	.small {
+		height: 1.75em;
+		width: 1.75em;
+	}
+	.tiny {
+		height: 1.25em;
+		width: 1.25em;
+	}
+
+	.nav {
+		gap: 3.125em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	.left {
+		left: .5em;
+	}
+	.right {
+		right: .5em;
+	}
+
+	.small {
+		height: 1.375em;
+		width: 1.375em;
+	}
+	.tiny {
+		height: 1.125em;
+		width: 1.125em;
+	}
+
+	.nav {
+		gap: 2.375em;
+	}
+}
+
+/* при малой высоте экрана кнопки вправо/влево пермещаются вниз экрана */
+@media screen and (max-height: mobile) {
+	.left {
 		top: auto;
 		left: auto;
-		bottom: 1rem;
-		right: 4.5rem;
+		bottom: 0.5em;
+		right: 3em;
 	}
 
-	.paging-right {
+	.right {
 		top: auto;
-		right: 1rem;
-		bottom: 1rem;
+		right: 0.75em;
+		bottom: 0.5em;
 	}
 }
-
-/* @media screen and (max-height: 375px) and (max-width:812px) {
-	.nav-3{
-		display: none;
-	}
-}
-@media screen and (max-width:520px) {
-	.nav-3 {
-		display:flex;
-	}
-} */

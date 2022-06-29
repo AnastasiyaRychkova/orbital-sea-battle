@@ -8,6 +8,8 @@ import info from "./info";
 import play from './play';
 import shot from "./shot";
 import left from './left';
+import repeat from './repeat';
+import flag from './flag';
 
 const glyphs = {
 	ability,
@@ -20,6 +22,8 @@ const glyphs = {
 	play,
 	shot,
 	left,
+	repeat,
+	flag,
 }
 
 export default glyphs;

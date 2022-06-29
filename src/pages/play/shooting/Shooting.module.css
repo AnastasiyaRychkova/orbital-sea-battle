@@ -1,10 +1,10 @@
 .box {
 	position: relative;
-	margin:0;
+	margin: 0;
 	min-width: 320px;
 	height: 100vh;
 	box-sizing: border-box;
-	padding: 1rem;
+	padding: 1em;
 	overflow: hidden;
 }
 
@@ -25,7 +25,6 @@
 	align-items: center;
 
 	pointer-events: none;
-	
 }
 
 .tab > * {
@@ -86,13 +85,35 @@
 
 .filter {
 	position: absolute;
-	bottom: 5.5rem;
+	bottom: 4em;
 	right: 0;
 	user-select: none;
 }
 
-@media screen and (max-width: 812px) and (orientation: portrait) {
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.box {
+		padding: 0.75em;
+	}
+
 	.filter {
-		bottom: 7.5rem;
+		bottom: 3.5em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	.box {
+		padding: 0.5em;
+	}
+
+	.filter {
+		bottom: 3.375em;
+		right: 0.5em;
+		left: 0.5em;
 	}
 }

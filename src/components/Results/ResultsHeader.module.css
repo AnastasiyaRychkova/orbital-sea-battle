@@ -1,61 +1,65 @@
-/* заголовок страницы */
-.results-header{
-	display:flex;
+.container {
+	display: flex;
 	align-items: center;
-	gap:2rem;
+	gap: 2em;
 }
 
-/* картинки в заголовке */
-.icon-results-decoration{
-	height: 3.4rem;
-	width: 7.5rem;
+.icon {
+	height: 3.4em;
+	width: 7.5em;
 }
-.mirror{
+
+.mirror {
 	transform: scale(-1, 1);
 	transform-origin: center;
-}
-
-/* состояния картинкок */
-.local-winner {
-	fill: var(--primary-400);
-}
-.enemy-winner {
-	fill: var(--error-400);
-}
-.loser {
-	fill: var(--disable-500);
-}
-
-.text-style {
-	text-transform: uppercase;
-	text-align: center;
 }
 
 .win {
 	color: var(--primary-400);
 }
+
 .lose {
 	color: var(--error-400);
 }
 
+.none {
+	color: var(--disable-500);
+}
 
-@media screen and (max-width: 1400px){
-	.icon-results-decoration{
+
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.container {
+		gap: 1.5em;
+	}
+
+	.icon {
+		height: 2.4em;
+		width: 5em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	.container {
+		gap: 1em;
+	}
+
+	.icon {
+		height: 1.6em;
+		width: 3.5em;
+	}
+}
+
+/* При малой ширине экрана иконки кораблей не отображаются */
+@media (max-width: 720px),
+(min-height: mobile) and (min-width: mobile) and (max-width: 960px)
+{
+	.icon {
 		display: none;
-
-	}
-}
-
-@media screen and (max-height: 375px) and (max-width:812px){
-	.results-header{
-		margin:0;
-		transition: margin 0.5s ease-in;
-	}
-}
-
-@media screen and (max-height:812px) and (max-width:375px){
-	.results-header{
-		margin:0;
-		transition: margin 0.5s ease-in;
 	}
 }

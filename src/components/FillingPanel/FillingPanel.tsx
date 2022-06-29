@@ -1,13 +1,10 @@
 import React from 'react';
-import styles from './FillingPanel.module.css';
-import icons from '../../style/icons.module.css';
-import texts from '../../style/text.module.css';
 import { useTranslation } from 'react-i18next';
-
+import styles from './FillingPanel.module.css';
 import sprite from "../../img/sprite.svg";
 
 interface IProps {
-	/** Теукщий режим заполнения */
+	/** Текущий режим заполнения */
 	mode: "cell" | "block",
 
 	/** Функция для изменения режима */
@@ -17,59 +14,40 @@ interface IProps {
 export default function FillingPanel( props: IProps ) {
 	const { t } = useTranslation();
 
-	const cellMode = props.mode === "cell";
+	const cellMode = ( props.mode === "cell" );
 
 	return (
-		<div className = { styles["filling-mode-selection"] } >
+		<div className = { styles.panel }>
 			
-			<span> { t("components.filling.text") } </span>
+			<span className = "text-normal" >
+				{ t("components.filling.text") }
+			</span>
 			
-			<div className = { styles["select-switch"] } >
-				
+			<div className = { styles.switch }>	
 				<button
-					className = {
-						styles["button-icon"] + " " +
-						styles["select-switch__button"] + " " +
-						(
-							cellMode
-							? styles["button-tertiary"]
-							: styles["selected"]
-						) 
-					}
+					className = { styles.toggle }
+					disabled = { !cellMode }
 					onClick = { cellMode ? props.change : undefined }
-					style = { (cellMode) ? {} : { cursor: "default" } }
 				>
-					<svg
-						className = { icons["icon-mini-tiny"] }
-						xmlns="http://www.w3.org/2000/svg"
-					>
+					<svg xmlns="http://www.w3.org/2000/svg"
+						className = { styles.icon }>
 						<use href = { sprite + "#ship" } />
 					</svg>
-					<span className = { texts["text-button-B-Normal"] }>
+					<span className = "button-normal" >
 						{ t("components.filling.ships") }
 					</span>
 				</button>
 				
 				<button
-					className = {
-						styles["button-icon"] + " " +
-						styles["select-switch__button"] + " " +
-						(
-							cellMode
-							? styles["selected"]
-							: styles["button-tertiary"]
-						) 
-					}
+					className = { styles.toggle }
+					disabled = { cellMode }
 					onClick = { cellMode ? undefined : props.change }
-					style = { (cellMode) ? { cursor: "default" } : {} }
 				>
-					<svg
-						className = { icons["icon-mini-tiny"] }
-						xmlns="http://www.w3.org/2000/svg"
-					>
+					<svg xmlns = "http://www.w3.org/2000/svg"
+						className = { styles.icon }>
 						<use href = { sprite + "#ballons-wide" } />
 					</svg>
-					<span className = { texts["text-button-B-Normal"] }>
+					<span className = "button-normal" >
 						{ t("components.filling.items") }
 					</span>
 				</button>

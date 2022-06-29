@@ -22,6 +22,18 @@
 	color: var(--primary-900);
 }
 
+@media screen and (hover: hover) {
+	.primary:hover {
+		box-shadow: var(--glow__button--light--l);
+		background-color: var(--primary-200);
+		border-color: var(--primary-200);
+	}
+
+	.primary.disabled:hover {
+		box-shadow: none;
+	}
+}
+
 .primary:active {
 	background-color: var(--primary-600);
 	border-color: var(--primary-600);
@@ -40,6 +52,18 @@
 	border: 2px solid currentColor;
 	background-color: var(--secondary-800);
 	color: var(--primary-400);
+}
+
+@media screen and (hover: hover) {
+	.secondary:hover {
+		border-color: var(--primary-200);
+		box-shadow: var(--glow__button--primary--l);
+		background-color: var(--secondary-900);
+	}
+	
+	.secondary.disabled:hover {
+		box-shadow: none;
+	}
 }
 
 .secondary:active {
@@ -61,31 +85,6 @@
 
 .secondary:disabled .text {
 	text-shadow: none;
-}
-
-
-/*----------  Hover  ----------*/
-
-@media screen and (hover: hover) {
-	.primary:hover {
-		box-shadow: var(--glow__button--light--l);
-		background-color: var(--primary-200);
-		border-color: var(--primary-200);
-	}
-	
-	.primary.disabled:hover {
-		box-shadow: none;
-	}
-
-	.secondary:hover {
-		border-color: var(--primary-200);
-		box-shadow: var(--glow__button--primary--l);
-		background-color: var(--secondary-900);
-	}
-	
-	.secondary.disabled:hover {
-		box-shadow: none;
-	}
 }
 
 

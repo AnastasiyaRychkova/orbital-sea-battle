@@ -14,14 +14,8 @@ body {
 	color: var(--secondary-100);
 }
 
-@media screen and (max-height: 375px) and (max-width:812px) {
-	body {
-		background: none;
-		background-color: var(--secondary-800);
-	}
-}
-
-@media screen and (max-height: 812px) and (max-width:375px) {
+@media (max-height: 375px) and (max-width: 812px),
+(max-height: 812px) and (max-width: 375px) {
 	body {
 		background: none;
 		background-color: var(--secondary-800);

@@ -1,42 +1,43 @@
 
-.player-result-card{
+.card {
+	--gap: 1em;
+
 	background-color: var(--secondary-900);
-	padding:0.5rem;
+	padding: calc(0.5*var(--gap));
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;	
+	gap: var(--gap);
 }
 
-.player-info{
-	display:flex;
+.player {
+	display: flex;
 	width: 100%;
-	gap:1rem;
-	/* box-sizing: border-box; */
+	gap: var(--gap);
 }
 
-/* фото игрока*/
-.profile-item-card{
-	width:6rem;
-	height:6rem;
+.pic {
+	width: 6em;
+	height: 6em;
 }
 
-.name{
+.name {
 	display: flex;
 	flex-direction: column;
 	align-self: center;
 	justify-self: center;
-	gap:0.5rem;
-	width: 15rem;
+	gap: calc(0.5*var(--gap));
+	width: 16em;
+	color: var(--secondary-50);
 }
 
-/* загаданный элемент*/
-.pl-element{
+.element {
 	display:flex;
 	flex-direction: column;
-	flex-basis:4rem;
+	flex-basis: 4em;
 	flex-shrink: 0;
-	height:4rem;
-	padding:0.3rem;
+	height: 4em;
+	padding: 0.25em;
+	color: var(--secondary-100);
 	box-sizing: border-box;
 	border: 2px solid var(--secondary-100);
 }
@@ -45,33 +46,86 @@
 	align-self: center;
 }
 
-.game-progress{
+.progress {
 	display: flex;
 	align-items: center;
-	gap:1rem;
-	padding:0.5rem;
+	gap: var(--gap);
+	padding: calc(0.5*var(--gap));
 }
 
-.level{
-	width:2rem;
-	height:2rem;
+.level {
+	width: 2em;
+	height: 2em;
 	flex-shrink: 0;
 	border-radius: 50%;
+	color: var(--primary-50);
 	background-color: var(--disable-600);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.progress-bar{
+.bar {
 	width: 100%;
 	color: var(--disable-200);
 }
 
 
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
 
-@media screen and (max-width: 1400px){
-	.pl-element{
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.card {
+		--gap: 0.8em;
+	}
+
+	.pic {
+		width: 5em;
+		height: 5em;
+	}
+
+	.name {
+		width: 14em;
+	}
+
+	.element {
+		flex-basis: 3.375em;
+		height: 3.375em;
+		padding: 0.2em;
+	}
+
+	.level {
+		width: 1.75em;
+		height: 1.75em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	.card {
+		--gap: 0.625em;
+	}
+
+	.pic {
+		width: 3.75em;
+		height: 3.75em;
+	}
+
+	.name {
+		width: 10.25em;
+	}
+
+	.element {
+		flex-basis: 2.5em;
+		height: 2.5em;
+		padding: 0.15em;
 		border-width: 1px;
+	}
+
+	.level {
+		width: 1.375em;
+		height: 1.375em;
 	}
 }

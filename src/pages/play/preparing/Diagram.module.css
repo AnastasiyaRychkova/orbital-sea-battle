@@ -1,4 +1,4 @@
-.diagram-container{
+.diagram-container {
 	position: absolute;
 	z-index: 0;
 	top: 0;
@@ -9,7 +9,7 @@
 	pointer-events: none;
 }
 
-.diagram{
+.diagram {
 	width: 1166px;
 	height: 482px;
 	width: 100%;
@@ -18,6 +18,21 @@
 	pointer-events: auto;
 }
 
-button.startBtn {
+.startBtn {
 	width: min-content;
+}
+
+@value sizes: '../../../style/display.css';
+@value tablet from sizes;
+
+/* скрытие надписи на кнопке при малой ширине */
+@media screen and (max-width: tablet) {
+	
+	html .startBtn {
+		padding: 0.5em;
+	}
+
+	.startBtn > span:last-child {
+		display: none;
+	}
 }

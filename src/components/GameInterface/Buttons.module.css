@@ -8,6 +8,10 @@ html .ability {
 	}
 }
 
+html .ability:active {
+	color: var(--corn);
+}
+
 html .small {
 	height: 2.25em;
 	width: 2.25em;

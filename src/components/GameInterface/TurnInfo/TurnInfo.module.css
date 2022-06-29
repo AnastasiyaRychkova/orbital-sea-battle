@@ -95,7 +95,7 @@
 @media (max-width: tablet) 
 {
 	.sputnik-img {
-		width: 4em;
+		width: 4.125em;
 		height: 3em;
 	}
 }
@@ -130,8 +130,5 @@
 	}
 	.status {
 		font-size: 0.5625em; /* 9px */
-	}
-	.sputnik-img {
-		height: 2.5em;
 	}
 }

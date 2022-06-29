@@ -5,7 +5,7 @@
 	flex-direction: row;
 	justify-content: center;
 	column-gap: .75em;
-	padding: .75em 1em;
+	padding: .75em 1.125em;
 }
 
 .icon {
@@ -14,7 +14,7 @@
 
 
 /*=============================================
-=            Primary            =
+=                   Primary                   =
 =============================================*/
 
 /*----------  Muted  ----------*/
@@ -24,93 +24,32 @@
 	color: var(--primary-900);
 }
 
+.button.primary.muted:disabled {
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+}
+
+@media screen and (hover: hover) {
+	.button.primary.muted:hover {
+		background-color: var(--primary-100);
+		color: var(--primary-800);
+		box-shadow: var(--glow__button--light--m);
+	}
+}
+
 .button.primary.muted:active {
 	background-color: var(--primary-400);
 	box-shadow: none;
 }
 
 
-
-.button.primary.muted:disabled,
-.button.secondary.muted:disabled,
-.button.secondary.bright:disabled,
-.button.secondary.dark:disabled {
-	border: none;
-	background-color: var(--disable-800);
-	color: var(--disable-600);
-}
-
-
-@media screen and (hover: hover)  {
-	.button.primary.muted:hover {
-		background-color: var(--primary-100);
-		color: var(--primary-800);
-		box-shadow: var(--glow__button--light--m);
-	}
-
-	.button.primary.muted:disabled:hover,
-	.button.secondary.muted:disabled:hover,
-	.button.secondary.bright:disabled:hover,
-	.button.secondary.dark:disabled:hover {
-		box-shadow: none;
-		background-color: var(--disable-800);
-		color: var(--disable-600);
-	}
-}
-
-
 /*=============================================
-=            Secondary            =
+=                  Secondary                  =
 =============================================*/
 
 .button.secondary {
 	border-width: 3px;
 }
-
-/*----------  Muted  ----------*/
-
-.button.secondary.muted {
-	border-style: solid;
-	border-color: currentColor;
-	background-color: transparent;
-	color: var(--secondary-100);
-}
-
-.button.secondary.muted:active {
-	box-shadow: none;
-	color: var(--secondary-300);
-}
-
-
-
-/*----------  Bright  ----------*/
-
-.button.secondary.bright {
-	border-style: solid;
-	border-color: currentColor;
-	background-color: transparent;
-	color: var(--primary-400);
-}
-
-.button.secondary.bright:active {
-	box-shadow: none;
-	color: var(--primary-600);
-}
-
-
-
-/*----------  Dark  ----------*/
-
-.button.secondary.dark {
-	background-color: var(--disable-800);
-	color: var(--primary-400);
-}
-
-.button.secondary.dark:active {
-	background-color: var(--disable-800);
-	color: var(--primary-600);
-}
-
 
 
 /*----------  Hover  ----------*/
@@ -131,9 +70,70 @@
 		background-color: var(--disable-700);
 		color: var(--primary-200);
 	}
+
+	.button.primary.muted:disabled:hover,
+	.button.secondary.muted:disabled:hover,
+	.button.secondary.bright:disabled:hover,
+	.button.secondary.dark:disabled:hover {
+		box-shadow: none;
+		background-color: var(--disable-800);
+		color: var(--disable-600);
+	}
 }
 
 
+/*----------  Muted  ----------*/
+
+.button.secondary.muted {
+	border-style: solid;
+	border-color: currentColor;
+	background-color: transparent;
+	color: var(--secondary-100);
+}
+
+.button.secondary.muted:active {
+	box-shadow: none;
+	color: var(--secondary-300);
+}
+
+
+/*----------  Bright  ----------*/
+
+.button.secondary.bright {
+	border-style: solid;
+	border-color: currentColor;
+	background-color: transparent;
+	color: var(--primary-400);
+}
+
+.button.secondary.bright:active {
+	box-shadow: none;
+	color: var(--primary-600);
+}
+
+
+/*----------  Dark  ----------*/
+
+.button.secondary.dark {
+	background-color: var(--disable-800);
+	color: var(--primary-400);
+}
+
+.button.secondary.dark:active {
+	background-color: var(--disable-800);
+	color: var(--primary-600);
+}
+
+
+/*--------  Disabled  --------*/
+
+.button.secondary.muted:disabled,
+.button.secondary.bright:disabled,
+.button.secondary.dark:disabled {
+	border: none;
+	background-color: var(--disable-800);
+	color: var(--disable-600);
+}
 
 
 /*=============================================
@@ -157,7 +157,7 @@
 @media (min-height: mobile) and (max-height: tablet), 
 (min-width: mobile) and (max-width: laptop) {
 	.button {
-		padding: .75em 1.25em;
+		padding: 0.625em 1em;
 	}
 	
 	.icon {
@@ -172,7 +172,7 @@
 /* Smartphone */
 @media (max-width: mobile), (max-height: mobile) {
 	.button {
-		padding: .5em 1em;
+		padding: 0.5em 0.875em;
 	}
 	
 	.icon {
