@@ -11,7 +11,7 @@
 	height: min-content;
 	width: min-content;
 	padding: var(--gap);
-	box-shadow: var(--box-shadow-input);
+	box-shadow: var(--shadow__input);
 	background-color: var(--disable-800) ;	
 	gap: calc(2 * var(--gap));
 }

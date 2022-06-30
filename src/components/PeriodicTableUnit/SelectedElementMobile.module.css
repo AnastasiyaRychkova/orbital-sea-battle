@@ -8,7 +8,7 @@
 	border: solid var(--secondary-100) 1px;
 	background-color: var(--secondary-900) ;
 	color: var(--secondary-100);
-	box-shadow: var(--box-shadow-input);
+	box-shadow: var(--shadow__input);
 }
 
 .symbol {

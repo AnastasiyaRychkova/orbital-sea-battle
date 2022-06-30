@@ -73,9 +73,6 @@
 	--glow__button--light--m: 0px 0px 10px rgba(219, 243, 237, 0.4);
 	--glow__button--error--normal: 0px 0px 8px rgba(218, 78, 78, 0.7);
 	--glow__button--error--light: 0px 0px 10px rgba(255, 153, 153, 0.7);
-
-	--box-shadow-bright:0.5rem 0.5rem 0.5rem rgba(65, 137, 95, 0.5);
-	--box-shadow-input: 0.3rem 0.3rem 0.3rem rgb(28, 34, 30, 0.7);
 }
 
 * {

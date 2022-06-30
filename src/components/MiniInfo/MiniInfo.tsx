@@ -35,15 +35,15 @@ const MiniInfo: FC<IProps> = observer(({
 	className,
 }) => {
 	return (
-		<div className={cn( styles, ['miniInfo'], className )}>
-			<Icon type={glyph} className={styles.icon} />
-			<div className={styles.message}>
-				<span className={styles.valueText}>
-					{provider}
+		<div className = {cn( styles, ['miniInfo'], className )}>
+			<Icon type = { glyph } className = { styles.icon } />
+			<div className = { styles.message }>
+				<span className = "button-medium">
+					{ provider }
 				</span>
 				{ caption &&
-					<span className={styles.captionText}>
-						{caption}
+					<span className = "button-tiny">
+						{ caption }
 					</span>
 				}
 			</div>

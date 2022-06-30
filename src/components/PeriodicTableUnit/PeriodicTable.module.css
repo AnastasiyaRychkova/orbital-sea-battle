@@ -138,6 +138,7 @@
 }
 
 .element__number {
+	padding-left: 2px;
 	align-self: flex-start;
 }
 
@@ -223,7 +224,7 @@
 
 	.selectBtn {
 		min-width: 18em;
-	}	
+	}
 }
 
 @media (max-width: mobile), (max-height: mobile) {
@@ -236,9 +237,13 @@
 		padding: 0.625em;
 	}
 
+	.element__number {
+		padding-left: 1px;
+	}
+
 	.selectBtn {
 		margin-top: 0.5em;
 		margin-bottom: 0;
 		min-width: 14em;
-	}	
-} 
+	}
+}

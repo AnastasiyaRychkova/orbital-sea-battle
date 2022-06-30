@@ -5,7 +5,6 @@ import Body from '../../../components/Body/Body';
 import ResultsHeader from '../../../components/Results/ResultsHeader';
 import PlayerCard from '../../../components/Results/PlayerCard';
 import MiniInfo from '../../../components/MiniInfo/MiniInfo';
-import DButton from '../../../components/Button/Default/Button';
 import Button from '../../../components/Button/WithIcon/Button';
 import FullScreenButton from '../../../components/GameInterface/FullScreen/FullScreenButton';
 

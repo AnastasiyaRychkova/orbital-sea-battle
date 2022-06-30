@@ -27,7 +27,7 @@
 .corner {
 	display: flex;
 	position: absolute;
-	top: 7em;
+	top: 6.5em;
 	left: auto;
 	align-items: flex-start;
 	flex-direction: column;
@@ -64,6 +64,7 @@
 
 	.corner {
 		top: 5.5em;
+		gap: 1.25em;
 	}
 }
 
@@ -74,7 +75,8 @@
 	}
 
 	.corner {
-		top: 4.75em;
+		top: 4.5em;
+		gap: 1em;
 	}
 }
 

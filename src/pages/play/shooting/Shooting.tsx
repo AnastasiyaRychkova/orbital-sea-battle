@@ -7,15 +7,15 @@ import useElement from '../../../components/PeriodicTableUnit/useElement';
 import SelectedElementMobile from '../../../components/PeriodicTableUnit/SelectedElementMobile';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
 import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
-
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
+import Filter from '../../../components/QnInputPanel/Filter';
+import UI from '../../../core/browser/UIStore';
 
 import type { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 import { useAppPath } from '../../../components/Router/Router';
-import Filter from '../../../components/QnInputPanel/Filter';
-import UI from '../../../core/browser/UIStore';
 import { CellQN } from '../../../core/game/Services/Chemistry';
 
 
@@ -99,9 +99,16 @@ const Page: FC<IProps> = observer(( {
 					) }
 
 					leftCorner = {
-						<div className = { (tabNumber === 3 ? "" : styles.closed) }>
-							<SelectedElementMobile number = { number } />
-						</div>
+						<>
+							<DropSidedInfo
+								message = { t("info.shooting." + tabNumber + ".m") }
+								comment = { t("info.shooting." + tabNumber + ".c") }
+							/>
+
+							<div className = { (tabNumber === 3 ? "" : styles.closed) }>
+								<SelectedElementMobile number = { number } />
+							</div>
+						</>
 					}
 				/>
 

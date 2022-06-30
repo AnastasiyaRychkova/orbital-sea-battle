@@ -4,8 +4,7 @@ import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
 import SelectedElementMobile from '../../../components/PeriodicTableUnit/SelectedElementMobile';
 import { GameTopInterface, GameBottomInterface } from '../../../components/GameInterface/GameInterface';
-// import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
-// import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
+import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
 
 import IProfile from '../../../core/game/GameplayEntities/ProfileInterface'
 import useElement from '../../../components/PeriodicTableUnit/useElement';
@@ -41,10 +40,10 @@ export default function ChoosingTable( props: IProps ) {
 				turn = { 'none' }
 				leftCorner = {
 					<>
-						{/* <DropSidedInfo
-							message = { t("info.selecting.m")}
+						<DropSidedInfo
+							message = { t("info.selecting.m") }
 							comment = { t("info.selecting.c") }
-						/> */}
+						/>
 
 						<SelectedElementMobile number = { number } />
 					</>
@@ -58,7 +57,6 @@ export default function ChoosingTable( props: IProps ) {
 			/>
 
 			<GameBottomInterface>
-				{/* <GiveUpButton onClick = { props.back } /> */}
 			</GameBottomInterface>
 		</Body>	
 	);

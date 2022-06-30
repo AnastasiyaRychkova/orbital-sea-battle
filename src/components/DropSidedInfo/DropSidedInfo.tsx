@@ -1,40 +1,49 @@
 import React, {FC} from 'react';
-import cn from '../className';
-
-import Icon from '../Icon/Icon';
 import styles from './DropSidedInfo.module.css';
-
+import cn from '../className';
+import Icon from '../Icon/Icon';
 
 interface IProps {
-	/** Надпись на кнопке */
+	/** Основное сообщение */
 	message: string,
 
-	/** Надпись на кнопке */
+	/** Пояснение */
 	comment: string,
 
+	/** Раскрыт ли по умолчанию */
+	isOpen?: boolean,
+	
 	/** Стили, переданные родителями */
 	className?: string,
 }
 
-
+/** Информационный блок */
 const DropSidedInfo: FC<IProps> = ({
 	message,
 	comment,
+	isOpen = false,
 	className,
 }) => {
-	const id = 'task-' + Math.random().toFixed( 4 );
+	const id = 'info-' + Math.random().toString(16).slice(-4);
+
 	return (
 		<label className={cn( styles, ['task'], className )} role="button">
-			<input type="checkbox" className={styles.checkbox} id={id}/>
-			<Icon type="info" className={styles.infoIcon} />
+			<input
+				type = "checkbox"
+				className = {styles.checkbox}
+				id = {id}
+				defaultChecked = {isOpen}
+				// checked в раскрытом состоянии
+			/>
+			<Icon type = "info" className = {styles.infoIcon} />
 
 			<div className={styles.content}>
 				<div className={styles.description}>
-					<span className={styles.messageText}>
-						{message}
+					<span className = "button-medium" >
+						{ message }
 					</span>
-					<span className={styles.commentText}>
-						{comment}
+					<span className = "long-normal" >
+						{ comment }
 					</span>
 				</div>
 				<label htmlFor={id} className={styles.closeBtn} role="button">
