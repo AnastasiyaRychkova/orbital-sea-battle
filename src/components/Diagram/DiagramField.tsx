@@ -9,16 +9,16 @@ const block = Chemistry.block;
 
 interface IProps {
 	diagram: IDiagram,
-	style: 'normal'|'ships',
+	mode: 'normal' | 'ships',
 }
 
 
 const DiagramField: FC<IProps> = observer(({
 	diagram,
-	style,
+	mode,
 }) => {
 	const state = diagram.observableState;
-	const Ship = style === 'ships' ? Battleship : Block;
+	const Ship = mode === 'ships' ? Battleship : Block;
 	return (
 		<g>
 			<Ship block={state.getBlock( block({ n: 1, l: 's' }) )!} />

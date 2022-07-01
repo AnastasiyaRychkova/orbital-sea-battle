@@ -66,14 +66,10 @@
 }
 
 
-.closed {
+html .closed {
 	display: none;
 }
 
-.hidden {
-	position: absolute;
-	visibility: hidden;
-}
 
 .diagram {
 	width: 1166px;

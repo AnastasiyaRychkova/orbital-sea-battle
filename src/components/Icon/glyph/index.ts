@@ -10,6 +10,7 @@ import shot from "./shot";
 import left from './left';
 import repeat from './repeat';
 import flag from './flag';
+import diagram from './diagram';
 
 const glyphs = {
 	ability,
@@ -24,6 +25,7 @@ const glyphs = {
 	left,
 	repeat,
 	flag,
+	diagram,
 }
 
 export default glyphs;

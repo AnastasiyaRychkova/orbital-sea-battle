@@ -24,8 +24,14 @@ interface IGameTopProps {
 	/** Чей сейчас ход: ничей 'none', игрока 'local' или противника 'enemy' */
 	turn: Turn;
 
-	/** Элементы в левом углу */
-	leftCorner?: React.ReactNode;
+	/** Элементы в левом верхнем углу */
+	cornerElements?: React.ReactNode;
+	
+	/** Информационный блок слева */
+	leftElements?: React.ReactNode;
+	
+	/** Информационный блок справа */
+	rightElements?: React.ReactNode;
 }
 
 /** Верхняя часть игрового интерфейса */
@@ -37,9 +43,24 @@ const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 				<AbilityButton onClick = { ()=>{} } />
 
 				<div className = { styles.corner }>
-					{ props.leftCorner }
-				</div>		
+					{ props.cornerElements }
+
+					{ (props.leftElements !== undefined
+					|| props.rightElements !== undefined) &&
+
+						<div className = { styles["info-corner"] }>	
+							{ props.rightElements }
+							{ props.leftElements }
+						</div>
+					}
+				</div>
 			</div>
+
+			{ props.leftElements !== undefined &&
+				<div className = { styles.info }>
+					{ props.leftElements }
+				</div>
+			}
 
 			<TurnInfo
 				player = { props.player }
@@ -48,6 +69,12 @@ const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 				enemyStatus = { props.enemyStatus }
 				turn = { props.turn }
 			/>
+
+			{ props.rightElements !== undefined &&
+				<div className = { styles.info }>
+					{ props.rightElements }
+				</div>
+			}
 
 			<FullScreenButton />
 		</div>

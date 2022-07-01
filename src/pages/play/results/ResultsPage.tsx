@@ -70,11 +70,14 @@ export default function ResultsPage( props: IProps ) {
 							provider = { results.player.steps }
 							glyph = "accuracy"
 							caption = { t("labels.shots") }
+							orientation = "vertical"
 						/>
+						
 						{/* <MiniInfo
-							provider = { results.player.certainty }
+							provider = { results.player.certainty.toFixed(4) }
 							glyph = "hit"
 							caption = { t("labels.certainty") }
+							orientation = "vertical"
 						/> */}
 					</div>
 
@@ -105,11 +108,14 @@ export default function ResultsPage( props: IProps ) {
 							provider = { results.enemy.steps }
 							glyph = "accuracy"
 							caption = { t("labels.shots") }
+							orientation = "vertical"
 						/>
+						
 						{/* <MiniInfo
-							provider = { results.enemy.certainty }
+							provider = { results.enemy.certainty.toFixed(4) }
 							glyph = "hit"
 							caption = { t("labels.certainty") }
+							orientation = "vertical"
 						/> */}
 					</div>
 

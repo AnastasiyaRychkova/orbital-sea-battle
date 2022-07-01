@@ -10,4 +10,5 @@ export type Glyph = | 'cross'
 					| 'left'
 					| 'repeat'
 					| 'flag'
+					| 'diagram'
 					;

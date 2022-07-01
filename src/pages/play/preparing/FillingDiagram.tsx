@@ -54,7 +54,7 @@ const FillingDiagram: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { diagram }
 					zooming = { true }
-					style = { 'ships' }
+					mode = { 'ships' }
 					className = { styles["diagram"] }
 				/>
 			</div>
@@ -66,19 +66,17 @@ const FillingDiagram: FC<IProps> = observer(( {
 					enemy = { enemy.user }
 					enemyStatus = { t("status.filling") }
 					turn = { "none" }
-					leftCorner = {
-						<>
-							<DropSidedInfo
-								message = { t("info.filling.m") }
-								comment = { t("info.filling.c") }
-							/>
-							
-							<SelectedElement
-								element = { player.selectedElement! }
-								chosen = { diagram.observableState.cellCounter || 0 }
-							/>
-						</>
-					}
+
+					cornerElements = {<>
+						<DropSidedInfo
+							message = { t("info.filling.m") }
+							comment = { t("info.filling.c") }
+						/>
+						<SelectedElement
+							element = { player.selectedElement! }
+							chosen = { diagram.observableState.cellCounter || 0 }
+						/>
+					</>}
 				/>
 		
 				<GameBottomInterface>

@@ -38,7 +38,7 @@ export default function ChoosingTable( props: IProps ) {
 				enemy = { props.enemy }
 				enemyStatus = { t("status.choosing") }
 				turn = { 'none' }
-				leftCorner = {
+				cornerElements = {
 					<>
 						<DropSidedInfo
 							message = { t("info.selecting.m") }

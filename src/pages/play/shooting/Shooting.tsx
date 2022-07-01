@@ -8,6 +8,7 @@ import SelectedElementMobile from '../../../components/PeriodicTableUnit/Selecte
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
 import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
+import MiniInfo from '../../../components/MiniInfo/MiniInfo';
 import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
@@ -58,7 +59,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { player.diagram! }
 					zooming = { true }
-					style = { 'ships' }
+					mode = { 'ships' }
 					className = { styles["diagram"] }
 					/>	
 			</div>
@@ -74,7 +75,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { enemy.diagram! }
 					zooming = { true }
-					style = { 'normal' }
+					mode = { 'normal' }
 					className = { styles["diagram"] }
 					/>
 
@@ -98,18 +99,41 @@ const Page: FC<IProps> = observer(( {
 						( state === 'enemy' ? 'moving' : 'waiting') 
 					) }
 
-					leftCorner = {
-						<>
-							<DropSidedInfo
-								message = { t("info.shooting." + tabNumber + ".m") }
-								comment = { t("info.shooting." + tabNumber + ".c") }
-							/>
+					cornerElements = {<>
+						<DropSidedInfo
+							message = { t("info.shooting." + tabNumber + ".m") }
+							comment = { t("info.shooting." + tabNumber + ".c") }
+						/>
 
-							<div className = { (tabNumber === 3 ? "" : styles.closed) }>
-								<SelectedElementMobile number = { number } />
-							</div>
-						</>
-					}
+						<SelectedElementMobile 
+							number = { number }
+							className = { (tabNumber === 3 ? "" : styles.closed) }
+						/>
+					</>}
+					
+					// leftElements = {<>
+					// 	<MiniInfo
+					// 		provider = { "00:00" }
+					// 		glyph = "clock"
+					// 		hasShadow = { true }
+					// 	/>
+					// 	<MiniInfo
+					// 		provider = { "1" }
+					// 		glyph = "diagram"
+					// 		caption = { "ход" }
+					// 		// caption = { t("labels.shots") }
+					// 		hasShadow = { true }
+					// 	/>
+					// </>}
+
+					// rightElements = {<>
+					// 	<MiniInfo
+					// 		provider = { "? / 118" }
+					// 		glyph = "accuracy"
+					// 		caption = { "подходит" }
+					// 		hasShadow = { true }
+					// 	/>
+					// </>}
 				/>
 
 				<div className = {

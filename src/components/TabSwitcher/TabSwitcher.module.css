@@ -10,12 +10,14 @@
 	position: fixed;
 	top: 50%;
 	left: 1em;
+	z-index: 100;
 }
 
 .right {
 	position: fixed;
 	top: 50%;
 	right: 1em;
+	z-index: 100;
 }
 
 /* иконка вправо — это перевёрнутая иконка влево */
