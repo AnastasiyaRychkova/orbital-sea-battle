@@ -1,3 +1,4 @@
+import ability from './ability';
 import accuracy from './accuracy';
 import clock from './clock';
 import cross from "./cross";
@@ -6,8 +7,13 @@ import hit from './hit';
 import info from "./info";
 import play from './play';
 import shot from "./shot";
+import left from './left';
+import repeat from './repeat';
+import flag from './flag';
+import diagram from './diagram';
 
 const glyphs = {
+	ability,
 	accuracy,
 	clock,
 	cross,
@@ -16,6 +22,10 @@ const glyphs = {
 	info,
 	play,
 	shot,
+	left,
+	repeat,
+	flag,
+	diagram,
 }
 
 export default glyphs;

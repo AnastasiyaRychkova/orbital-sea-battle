@@ -1,9 +1,6 @@
 import React from 'react';
-import styles from '../GameInterface.module.css';
-import button from '../Buttons.module.css';
-import icons from '../../../style/icons.module.css';
-
-import img from '../../../img/components/ability.svg'
+import styles from '../Buttons.module.css';
+import Button from '../../Button/IconButton/Button';
 
 interface IProps {
 	/** Функция по нажатию */
@@ -12,23 +9,11 @@ interface IProps {
 
 export default function AbilityButton( props: IProps ) {
 	return (
-		<button
-			className = {
-				button["button-content-center"]
-				+ " " +
-				styles["interface-icon-button"]
-				+ " " +
-				styles["icon-message"]		
-			}
+		<Button
+			className = { styles.middle + " " + styles.ability }
+			glyph = { "ability" }
+			theme = { "backing" }
 			onClick = { props.onClick }
-		>
-			<img
-				src = { img }
-				width = "20"
-				height = "20"
-				alt = ""
-				className = { icons["icon-small"] }
-			/>
-		</button>
+		/>
 	);
 }

@@ -1,6 +1,6 @@
-import type { CellQN } from '../Services/Chemistry';
-import OB_IEnemy from './interfaces/OB_EnemyInterface';
-import OB_ILocalPlayer from './interfaces/OB_LocalPlayerInterface';
+import type { CellQN } from '../Chemistry/types';
+import type OB_IEnemy from './interfaces/OB_EnemyInterface';
+import type OB_ILocalPlayer from './interfaces/OB_LocalPlayerInterface';
 
 export type PlayersFabric = {
 	player: ( user: User ) => OB_ILocalPlayer,

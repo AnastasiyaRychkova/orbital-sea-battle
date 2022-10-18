@@ -8,7 +8,7 @@ interface IProps {
 
 const Body: FC<IProps> = observer(( props ) => {
 	return (
-		<div className={ styles.body2 } >
+		<div className={ styles.body } >
 			{ props.children }
 		</div>
 	);

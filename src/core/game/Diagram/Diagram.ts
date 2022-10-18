@@ -1,13 +1,19 @@
 import { makeObservable, observable, action, computed } from "mobx";
 
-import { stringSchemeToQuantumNumbers } from "../ChemicalElement/QuantumNumbers";
+import { QN } from "../Chemistry";
 import State from "./DObjectState";
-import EventProvider from "../../util/EventEmitter/EventProvider";
+import { EventProvider } from "../../util";
 
-import type { CellQN, BlockQN, QNStringScheme, ElemConfig } from '../Services/Chemistry';
-import type { default as IDiagram, DiagramEvent, DiagramEventData } from "./DiagramInterface";
-import type { IDiagramState, InteractionMode } from "./DObjectState.d";
-import type IFilter from "./Filter/FilterInterface";
+import type { ElemConfig } from '../Chemistry';
+import type { CellQN, BlockQN, QNStringScheme } from '../Chemistry/types';
+import type {
+	IDiagram,
+	DiagramEvent,
+	DiagramEventData,
+	IFilter,
+	IDiagramState,
+	InteractionMode,
+} from "./types";
 
 
 
@@ -135,7 +141,7 @@ class Diagram extends EventProvider<DiagramEvent, DiagramEventData> implements I
 	{
 		if( !this._highlight )
 			return;
-		this._highlight.setState( stringSchemeToQuantumNumbers( qnScheme ) );
+		this._highlight.setState( QN.strSchemeToQN( qnScheme ) );
 	}
 }
 

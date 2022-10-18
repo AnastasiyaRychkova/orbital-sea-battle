@@ -1,4 +1,4 @@
-import EventProvider from "../../util/EventEmitter/EventProvider";
+import { EventProvider } from "../../util";
 
 class PlayerMock extends EventProvider<string, any>
 {

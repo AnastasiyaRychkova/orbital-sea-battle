@@ -18,10 +18,15 @@ interface IProps {
 	/** Название иконки */
 	glyph: Glyph,
 
+	/** Расположение элементов внутри */
+	orientation?: "horizontal" | "vertical";
+
+	/** Имеет ли тень */
+	hasShadow?: boolean;
+
 	/** Стили, переданные родителем */
 	className?: string,
 }
-
 
 /** __Окно с краткой информацией__
  * 
@@ -32,21 +37,26 @@ const MiniInfo: FC<IProps> = observer(({
 	provider,
 	caption,
 	glyph,
+	orientation = "horizontal",
+	hasShadow = false,
 	className,
 }) => {
 	return (
-		<div className={cn( styles, ['miniInfo'], className )}>
-			<Icon type={glyph} className={styles.icon} />
-			<div className={styles.message}>
-				<span className={styles.valueText}>
-					{provider}
+		<div className = { cn( styles, ["box", orientation, (hasShadow ? "shadow" : "")], className ) }>
+			
+			<Icon type = {glyph} className = {styles.icon} />
+
+			<div className = {styles.value}>
+				<span className = "button-medium">
+					{ provider }
 				</span>
-				{ caption &&
-					<span className={styles.captionText}>
-						{caption}
-					</span>
-				}
 			</div>
+
+			{ caption &&
+				<div className = {styles.caption + " button-tiny"}>
+					{ caption }
+				</div>
+			}
 		</div>
 	);
 });

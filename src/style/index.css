@@ -11,17 +11,11 @@ body {
 	background: var(--checkPattern);
 	background-color: #1E2C26;
 	background-size: 3em 3em;
-	color: #96C2AF;
+	color: var(--secondary-100);
 }
 
-@media screen and (max-height: 375px) and (max-width:812px) {
-	body {
-		background: none;
-		background-color: var(--secondary-800);
-	}
-}
-
-@media screen and (max-height: 812px) and (max-width:375px) {
+@media (max-height: 375px) and (max-width: 812px),
+(max-height: 812px) and (max-width: 375px) {
 	body {
 		background: none;
 		background-color: var(--secondary-800);
@@ -32,17 +26,17 @@ body {
 /* Дизайн полос прокрутки в chrome и opera */
 
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+	width: 6px;
+	height: 6px;
 }
 
 ::-webkit-scrollbar-track {
 	background-color: var(--disable-500);
-	border-radius: 10px;
+	border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
+	border-radius: 8px;
 	background-color: var(--primary-200);
 }
 
@@ -56,15 +50,4 @@ body {
 
 ::-webkit-scrollbar-corner {
 	background: transparent;
-}
-
-@media screen and (max-width:1024px) {
-	::-webkit-scrollbar {
-		width: 5px;
-		height:5px;
-	}
-
-	::-webkit-scrollbar-track {
-		border-radius: 8px;
-	}
 }

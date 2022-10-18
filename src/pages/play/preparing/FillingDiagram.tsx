@@ -6,7 +6,7 @@ import Body from '../../../components/Body/Body';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
 import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import SelectedElement from '../../../components/GameInterface/SelectedElement/SelectedElement';
-
+import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
 import IconButton from '../../../components/Button/WithIcon/Button';
 import FillingPanel from '../../../components/FillingPanel/FillingPanel';
 import DiagramComponent from '../../../components/Diagram/Diagram';
@@ -54,7 +54,7 @@ const FillingDiagram: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { diagram }
 					zooming = { true }
-					style = { 'ships' }
+					mode = { 'ships' }
 					className = { styles["diagram"] }
 				/>
 			</div>
@@ -66,12 +66,17 @@ const FillingDiagram: FC<IProps> = observer(( {
 					enemy = { enemy.user }
 					enemyStatus = { t("status.filling") }
 					turn = { "none" }
-					leftCorner = {
+
+					cornerElements = {<>
+						<DropSidedInfo
+							message = { t("info.filling.m") }
+							comment = { t("info.filling.c") }
+						/>
 						<SelectedElement
 							element = { player.selectedElement! }
 							chosen = { diagram.observableState.cellCounter || 0 }
 						/>
-					}
+					</>}
 				/>
 		
 				<GameBottomInterface>

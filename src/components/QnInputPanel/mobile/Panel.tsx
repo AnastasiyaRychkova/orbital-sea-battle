@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react';
 import React, {FC, useEffect} from 'react';
 import cn from '../../className';
-import {CellQN, QN} from '../../../core/game/Services/Chemistry';
+import { QN } from '../../../core/game/Chemistry';
 import ConfirmButton from '../ConfirmButton';
 import InputValue from './InputValue';
 import styles from './Panel.module.css';
 import PanelController from './PanelController';
-import type { IDiagramState } from '../../../core/game/Diagram/DObjectState.d';
+import type { IDiagramState } from '../../../core/game/Diagram/types';
+import type { CellQN } from '../../../core/game/Chemistry/types';
 
 interface IProps {
 	className?: string,

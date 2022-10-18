@@ -1,4 +1,5 @@
-import Timer, {ITimer} from "../Timer/Timer";
+import Timer from "../Timer";
+import type { ITimer } from "../Timer/types";
 import {
 	ActionFunction,
 	DelayedTransition,
@@ -11,7 +12,7 @@ import {
 	Transition,
 	IMachineNodeTesting,
 	Context,
-} from "./StateMachineTypes";
+} from "./types";
 
 class StateNode<SState extends string, SEvent extends string> implements IStateNode<SState, SEvent>, IStateNodeTesting
 {

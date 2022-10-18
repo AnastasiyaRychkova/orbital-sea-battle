@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './ResultsHeader.module.css';
-import texts from '../../style/text.module.css';
 import { useTranslation } from 'react-i18next';
 
 import sprite from "../../img/sprite.svg";
@@ -16,18 +15,18 @@ export default function ResultsHeader( props: IProps ) {
 	const isWinner = props.areYouWinningSon;
 
 	return (
-		<div className = { styles["results-header"] } >
+		<div className = { styles.container } >
+
 			<svg className = {
-				styles["icon-results-decoration"] + " " +
-				( isWinner ? styles["local-winner"] : styles["loser"] )
+				styles.icon + " " +
+				( isWinner ? styles.win : styles.none)
 			} >
 				<use href = { sprite + "#ship" } />
 			</svg>
 
 			<h1 className = {
-				texts["headers-bold-h3"] + " " +
-				styles["text-style"] + " " +
-				styles["results-header"] + " " +
+				styles.container +
+				" header-3 bold " +
 				( isWinner ? styles.win : styles.lose )
 			} >
 				{ t(
@@ -38,8 +37,8 @@ export default function ResultsHeader( props: IProps ) {
 			</h1>
 
 			<svg className = {
-				styles["icon-results-decoration"] + " " +
-				( isWinner ? styles["loser"] : styles["enemy-winner"]  )
+				styles.icon + " " +
+				( isWinner ? styles.none : styles.lose)
 			} >
 				<use
 					className = { styles.mirror }

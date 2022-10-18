@@ -1,4 +1,4 @@
-import Chemistry from "../../Services/Chemistry";
+import Chemistry from "../../Chemistry";
 import entities from "../OB_EntitiesFabric";
 import GameState, { OB_IGameState } from "../entities/OB_GameState";
 import type { OB_IEnemy, OB_ILocalPlayer, ILocalPlayerController, IUser } from "../OB_Entities";

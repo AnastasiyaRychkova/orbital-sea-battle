@@ -11,7 +11,7 @@ interface IProps {
 	diagram: IDiagram,
 	zooming: boolean,
 	className: string,
-	style?: 'normal'|'ships',
+	mode?: 'normal' | 'ships',
 }
 
 class Diagram extends React.Component<IProps>
@@ -99,17 +99,17 @@ class Diagram extends React.Component<IProps>
 	render() {
 		return(
 			<svg className={(this.props as IProps).className}
-				viewBox={this.props.style === 'normal' ? "-50 -2 1520 602" : "-50 -2 1760 602"}
+				viewBox={this.props.mode === 'normal' ? "-50 -2 1520 602" : "-50 -2 1760 602"}
 				fill="none"
 				preserveAspectRatio="xMidYMid meet"
 				xmlns="http://www.w3.org/2000/svg"
 				data-mode={this.props.diagram.mode}
-				data-style={this.props.style || 'normal'}>
+				data-style={this.props.mode || 'normal'}>
 
 				<defs>
 					<CellSymbol />
 					{
-						this.props.style === 'ships'
+						this.props.mode === 'ships'
 						?
 							<>
 							<ShipFrontSymbol />
@@ -124,7 +124,7 @@ class Diagram extends React.Component<IProps>
 					
 					<DiagramField
 						diagram={this.props.diagram}
-						style={this.props.style || 'normal'} />
+						mode={this.props.mode || 'normal'} />
 				</g>
 
 			</svg>

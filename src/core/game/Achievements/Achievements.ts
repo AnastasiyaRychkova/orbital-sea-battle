@@ -1,7 +1,7 @@
-import { EventData } from "../../util/EventEmitter/EventProviderInterface";
 import IAchievement, { GameType } from "./AchievementInterface";
 import achievements, {AchievementDescription, EAchievementType} from './AchievementsDescription';
-import { periodicTable } from '../Services/Chemistry';
+import { periodicTable } from '../Chemistry';
+import type { EventData } from "../../util/types";
 
 type InitializeObject = {
 	level?: number,

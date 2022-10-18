@@ -1,47 +1,55 @@
-.button-icon{
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap:1rem;
+html .ability {
+	color: var(--corn);
 }
 
-.icon-scaling {
-	min-height: max(2.2rem,30px);
-	min-width: max(2.2rem,30px);
-	background-color: var(--secondary-700);
-	padding: 0;
-	height: min-content;
-	outline: none;
-}
-
-.button-content-center{
-	display:flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.button-secondary-bright-fill{
-	color: var(--primary-900);
-	background-color:var(--primary-400);
-}
-
-@media (hover: hover) {
-	.button-secondary-bright-fill:hover{
-		background-color:var(--primary-200);
-		box-shadow: var(--glow__button--primary--m);
+@media screen and (hover: hover) {
+	html .ability:hover {
+		color: var(--corn);
 	}
 }
 
-.button-secondary-bright-fill:active{
-	color:var(--primary-600);
-
-
+html .ability:active {
+	color: var(--corn);
 }
-.button-secondary-bright-fill:disabled{
-	background-color:var(--disable-800);
-	color:var(--disable-600);
-	outline-color:var(--disable-600);
-	box-shadow: none;
-	fill:var(--disable-600);
+
+html .small {
+	height: 2.25em;
+	width: 2.25em;
+	padding: 0.5em;
+	box-shadow: var(--shadow__input);
+}
+
+html .middle {
+	height: 3.5em;
+	width: 3.5em;
+	padding: 0.75em;
+	box-shadow: var(--shadow__input);
+}
+
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	html .middle {
+		height: 3em;
+		width: 3em;
+		padding: 0.625em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	html .middle {
+		height: 2.5em;
+		width: 2.5em;
+		padding: 0.5em;
+	}
+
+	html .small {
+		height: 1.875em;
+		width: 1.875em;
+		padding: 0.4em;
+	}
 }

@@ -1,4 +1,4 @@
-import type { CellQN } from "../../Services/Chemistry";
+import type { CellQN } from "../../Chemistry/types";
 import type { IDiagram, OB_IPlayer } from '../OB_Entities';
 import type { PlayerEvent, PlayerResults } from '../types';
 

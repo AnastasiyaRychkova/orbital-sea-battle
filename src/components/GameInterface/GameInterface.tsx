@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import styles from './GameInterface.module.css';
+import { observer } from 'mobx-react';
+import styles from './Interface.module.css';
 
-import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
-
-import TurnInfo, { Turn } from './TurnInfo';
+import TurnInfo, { Turn } from './TurnInfo/TurnInfo';
 import AbilityButton from './AbilityButton/AbilityButton';
 import FullScreenButton from './FullScreen/FullScreenButton';
-import { observer } from 'mobx-react';
+
+import IProfile from '../../core/game/GameplayEntities/ProfileInterface'
 
 interface IGameTopProps {
 	/** Локальный игрок */
@@ -24,8 +24,14 @@ interface IGameTopProps {
 	/** Чей сейчас ход: ничей 'none', игрока 'local' или противника 'enemy' */
 	turn: Turn;
 
-	/** Элементы в левом углу */
-	leftCorner?: React.ReactNode;
+	/** Элементы в левом верхнем углу */
+	cornerElements?: React.ReactNode;
+	
+	/** Информационный блок слева */
+	leftElements?: React.ReactNode;
+	
+	/** Информационный блок справа */
+	rightElements?: React.ReactNode;
 }
 
 /** Верхняя часть игрового интерфейса */
@@ -36,16 +42,25 @@ const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 			<div>
 				<AbilityButton onClick = { ()=>{} } />
 
-				<div className = {
-						styles["interface__function__info"]
-						+ " " +
-						styles["interface__function-big-gap"]
+				<div className = { styles.corner }>
+					{ props.cornerElements }
+
+					{ (props.leftElements !== undefined
+					|| props.rightElements !== undefined) &&
+
+						<div className = { styles["info-corner"] }>	
+							{ props.rightElements }
+							{ props.leftElements }
+						</div>
 					}
-				>
-					{ props.leftCorner }
 				</div>
-				
 			</div>
+
+			{ props.leftElements !== undefined &&
+				<div className = { styles.info }>
+					{ props.leftElements }
+				</div>
+			}
 
 			<TurnInfo
 				player = { props.player }
@@ -55,8 +70,13 @@ const GameTopInterface: FC<IGameTopProps> = observer(( props ) => {
 				turn = { props.turn }
 			/>
 
-			<FullScreenButton />
+			{ props.rightElements !== undefined &&
+				<div className = { styles.info }>
+					{ props.rightElements }
+				</div>
+			}
 
+			<FullScreenButton />
 		</div>
 	);
 });
@@ -66,14 +86,12 @@ interface IGameBottomProps {
 	children: React.ReactNode;
 }
 
-/** Нижняя часть интерфейса с кнопкой "Сдаться" */
+/** Нижняя часть интерфейса */
 const GameBottomInterface: FC<IGameBottomProps> = observer(( props ) => {
 	return (
-		<div className = { styles["bottom-control-panel"] } >
-			<div className = { styles["default-menu-left-center-right"] } >
-		
+		<div className = { styles.bottom }>
+			<div className = { styles.menu }>
 				{ props.children }
-			
 			</div>
 		</div>
 	);
@@ -84,9 +102,10 @@ interface IAllProps {
 	children: React.ReactNode;
 }
 
+/** Обёртка для всех частей игрового интерфейса */
 const All: FC<IAllProps> = observer(( props ) => {
 	return (
-		<div className={ styles["all-interface"] } >
+		<div className = { styles.all }>
 			{ props.children }
 		</div>
 	);

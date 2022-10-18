@@ -1,5 +1,5 @@
-import type { BlockQN, CellQN, ChemicalElement } from '../../Services/Chemistry';
-import type IEventProvider from "../../../util/EventEmitter/EventProvider";
+import type { BlockQN, CellQN, ChemicalElement } from '../../Chemistry/types';
+import type { IEventProvider } from "../../../util/types";
 import type { IDiagram, OB_IPlayer } from '../OB_Entities';
 import type { PlayerEvent, PlayerResults } from '../types';
 

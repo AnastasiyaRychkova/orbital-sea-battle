@@ -1,10 +1,10 @@
-import IEventProvider from "../../../util/EventEmitter/EventProviderInterface";
+import type { IEventProvider } from "../../../util/types";
 import type {
 	IQuantumNumber,
 	QuantumNumbers,
 	QNStrType,
-} from '../../Services/Chemistry';
-import INote from "./NoteInterface";
+} from '../../Chemistry/types';
+import type INote from "./NoteInterface";
 
 export type StoreKey = QNStrType;
 

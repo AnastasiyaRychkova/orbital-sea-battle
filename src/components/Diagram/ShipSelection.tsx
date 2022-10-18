@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
+import { OrbitalQN } from '../../core/game/Chemistry';
 import cn from 'classnames';
-import { OrbitalQN } from '../../core/game/ChemicalElement/QuantumNumbers';
 import styles from './diagram.module.css';
 
 import {

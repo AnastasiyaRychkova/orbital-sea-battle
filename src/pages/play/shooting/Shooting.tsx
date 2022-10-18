@@ -2,21 +2,21 @@ import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import styles from './Shooting.module.css';
-// import Body from '../../../components/Body/Body';
 import PeriodicTable from '../../../components/PeriodicTableUnit/PeriodicTableUnit';
 import useElement from '../../../components/PeriodicTableUnit/useElement';
 import SelectedElementMobile from '../../../components/PeriodicTableUnit/SelectedElementMobile';
 import DiagramComponent from '../../../components/Diagram/Diagram';
 import { GameTopInterface, GameBottomInterface, All } from '../../../components/GameInterface/GameInterface';
+import DropSidedInfo from '../../../components/DropSidedInfo/DropSidedInfo';
+import MiniInfo from '../../../components/MiniInfo/MiniInfo';
 import GiveUpButton from '../../../components/GameInterface/GiveUp/GiveUpButton';
 import TabSwitcher from '../../../components/TabSwitcher/TabSwitcher';
-
 import type { TabNumber } from '../../../components/TabSwitcher/TabSwitcher';
+import Filter from '../../../components/QnInputPanel/Filter';
+import UI from '../../../core/browser/UIStore';
 
 import type { IGameState } from '../../../core/game/OrbitalBattleship/OB_Entities';
 import { useAppPath } from '../../../components/Router/Router';
-import Filter from '../../../components/QnInputPanel/Filter';
-import UI from '../../../core/browser/UIStore';
 import { CellQN } from '../../../core/game/Services/Chemistry';
 
 
@@ -59,7 +59,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { player.diagram! }
 					zooming = { true }
-					style = { 'ships' }
+					mode = { 'ships' }
 					className = { styles["diagram"] }
 					/>	
 			</div>
@@ -75,7 +75,7 @@ const Page: FC<IProps> = observer(( {
 				<DiagramComponent
 					diagram = { enemy.diagram! }
 					zooming = { true }
-					style = { 'normal' }
+					mode = { 'normal' }
 					className = { styles["diagram"] }
 					/>
 
@@ -99,11 +99,41 @@ const Page: FC<IProps> = observer(( {
 						( state === 'enemy' ? 'moving' : 'waiting') 
 					) }
 
-					leftCorner = {
-						<div className = { (tabNumber === 3 ? "" : styles.closed) }>
-							<SelectedElementMobile number = { number } />
-						</div>
-					}
+					cornerElements = {<>
+						<DropSidedInfo
+							message = { t("info.shooting." + tabNumber + ".m") }
+							comment = { t("info.shooting." + tabNumber + ".c") }
+						/>
+
+						<SelectedElementMobile 
+							number = { number }
+							className = { (tabNumber === 3 ? "" : styles.closed) }
+						/>
+					</>}
+					
+					// leftElements = {<>
+					// 	<MiniInfo
+					// 		provider = { "00:00" }
+					// 		glyph = "clock"
+					// 		hasShadow = { true }
+					// 	/>
+					// 	<MiniInfo
+					// 		provider = { "1" }
+					// 		glyph = "diagram"
+					// 		caption = { "ход" }
+					// 		// caption = { t("labels.shots") }
+					// 		hasShadow = { true }
+					// 	/>
+					// </>}
+
+					// rightElements = {<>
+					// 	<MiniInfo
+					// 		provider = { "? / 118" }
+					// 		glyph = "accuracy"
+					// 		caption = { "подходит" }
+					// 		hasShadow = { true }
+					// 	/>
+					// </>}
 				/>
 
 				<div className = {

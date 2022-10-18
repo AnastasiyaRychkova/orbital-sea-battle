@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
-import { CellQN, QN } from "../../core/game/Services/Chemistry";
+import { QN } from "../../core/game/Chemistry";
+import cn from '../className';
 import InputValue from './InputValue';
 import ConfirmButton from './ConfirmButton';
 import styles from './style.module.css';
 import { ToggleTheme } from './types';
-import cn from '../className';
-import { IDiagramState } from '../../core/game/OrbitalBattleship/OB_Entities.d';
+import type { IDiagramState } from '../../core/game/Diagram/types';
+import type { CellQN } from "../../core/game/Chemistry/types";
 
 interface IProps {
 	className?: string,
@@ -18,7 +19,7 @@ const Panel: FC<IProps> = ({
 	fireFn,
 	className
 }) => {
-	return (
+	return diagram.filter ? (
 		<form className={cn(styles, ['panel'], className)}>
 			<div className={styles.inputsRow}>
 				<div className={styles.inputPair}>
@@ -81,7 +82,7 @@ const Panel: FC<IProps> = ({
 				diagram={diagram}
 			/>
 		</form>
-	);
+	) : null;
 }
 
 export default Panel;

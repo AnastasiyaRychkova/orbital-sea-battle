@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { periodicTable } from '../../core/game/Services/Chemistry';
 
 const MIN: number = 0;
-const MAX: number = periodicTable.MAX_ELEM_NUMBER;
+const MAX: number = periodicTable.MAX_NUMBER;
 
 function normalize( x: number ): number
 {

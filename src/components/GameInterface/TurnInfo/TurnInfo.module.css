@@ -1,0 +1,134 @@
+.players {
+	--gap: 0.5em;
+	display: grid;
+	grid-template-columns: repeat(3, min-content);
+	gap: var(--gap);
+}
+
+.player {
+	display: flex;
+	align-items: center;
+	height: min-content;
+	width: min-content;
+	padding: var(--gap);
+	box-shadow: var(--shadow__input);
+	background-color: var(--disable-800) ;	
+	gap: calc(2 * var(--gap));
+}
+
+.player-active {
+	background-color: var(--secondary-700);
+}
+
+.avatar {
+	opacity: 0.7;
+	width: 3em;
+	height: 3em;
+}
+
+.avatar-active {
+	opacity: 1;
+	outline: solid var(--primary-400) 1px;
+}
+
+.avatar-opponent {
+	opacity: 1;
+	outline: solid var(--error-500) 1px;
+}
+
+.info {
+	/* width: min-content; */
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+}
+
+.text-online {
+	color: var(--primary-200);
+}
+
+.text-offline {
+	color: var(--error-400);
+}
+
+.name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 15em;
+}
+
+.status {
+	font-family: var(--primary-font);
+	font-style: normal;
+	font-weight: 700;
+	font-size: 0.625em; /* 10px */
+	line-height: 120%;
+	letter-spacing: 0.08em;
+}
+
+.sputnik-img {
+	object-fit: cover;
+	height: 4em;
+}
+
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (max-height: tablet), (max-width: laptop) {
+	.players {
+		--gap: 0.375em;
+	}
+	.avatar {
+		width: 2.25em;
+		height: 2.25em;
+	}
+	.name {
+		width: 14em;
+	}
+	.sputnik-img {
+		width: 8em;
+		height: 3em;
+	}
+}
+
+@media (max-width: tablet) 
+{
+	.sputnik-img {
+		width: 4.125em;
+		height: 3em;
+	}
+}
+
+/* перелом, с которого карточки игроков располагаются друг под другом */
+@media (max-width: 660px) 
+{
+	.players {
+		grid-template-columns: repeat(2, min-content);
+		column-gap: 1em;
+	}
+	.name {
+		width: 12em;
+	}
+	.sputnik-img {
+		display: flex;
+		align-self: center;
+		grid-row: 1 / 3;
+		grid-column: 2 / 3;
+		width: 3em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+	
+	.players {
+		column-gap: 0.75em;
+	}
+	.name {
+		font-size: 0.6875em; /* 11px */
+		width: 10em;
+	}
+	.status {
+		font-size: 0.5625em; /* 9px */
+	}
+}

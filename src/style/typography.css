@@ -41,31 +41,6 @@ html {
 }
 
 
-/* --- Large Headers --- */
-
-.large-header {
-	text-transform: uppercase;
-	line-height: 120%;
-	font-family: var(--primary-font);
-	font-weight: normal;
-	font-style: normal;
-
-	--large: 3.75em;
-	--big: 3em;
-}
-
-.large-header-1 {
-	letter-spacing: 0.04em;
-	font-size: var(--large);
-}
-
-.large-header-2 {
-	letter-spacing: 0.05em;
-	font-size: var(--big);
-}
-
-
-
 /*----------  Text  ----------*/
 
 .text {
@@ -232,17 +207,12 @@ html {
 }
 
 
-@media (min-width: 540px) and (max-width: 1300px) {
+@media (min-width: 540px) and (max-width: 1200px) {
 	.header {
 		--large: 3em;
 		--big: 1.5em;
 		--medium: 1.12em;
 		--normal: 1.12em;
-	}
-
-	.large-header {
-		--large: 3em;
-		--big: 2em;
 	}
 
 	.text {
@@ -277,11 +247,6 @@ html {
 		--big: 1.12em;
 		--medium: 1.12em;
 		--normal: 1.12em;
-	}
-	
-	.large-header {
-		--large: 2em;
-		--big: 1.5em;
 	}
 	
 	.text {

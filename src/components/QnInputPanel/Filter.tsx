@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import { observer } from "mobx-react";
 import PanelMobile from './mobile/Panel';
 import PanelDesktop from './Panel';
-import { IDiagramState } from '../../core/game/OrbitalBattleship/OB_Entities';
-import { CellQN } from '../../core/game/ChemicalElement/QuantumNumbers';
+import { IDiagramState } from '../../core/game/Diagram/types';
+import type { CellQN } from '../../core/game/Chemistry/types';
 
 type UiStore = {
 	mobile: boolean,

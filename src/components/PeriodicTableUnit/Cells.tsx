@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './PeriodicTable.module.css';
-import texts from '../../style/text.module.css';
 import cn from '../className';
 
 /** Пустая ячейка */
@@ -23,7 +22,7 @@ export const PeriodCell: FC<IPeriodProps> = ( {
 } ) => {
 	return (
 		<div className={ cn( styles, ["cell", "period"] ) }>
-			<span className={ cn( texts, ["text-bold-T-Tiny"]) }>
+			<span className = "text-small bold" >
 				{ number }
 			</span>
 		</div>
@@ -46,7 +45,7 @@ export const GroupCell: FC<IGroupProps> = ( {
 } ) => {
 	return (
 		<div className={ cn( styles, ["cell", "group", (isTop ? "top" : undefined)] ) }>
-			<span className={ cn( texts, ["text-bold-T-Tiny"]) }>
+			<span className = "text-small bold" >
 				{ number }
 			</span>
 		</div>
@@ -67,8 +66,8 @@ export const SeriesCell: FC<ISeriesProps> = ( {
 	start, finish
 } ) => {
 	return (
-		<div className={ cn( styles, ["cell", "series"] ) }>
-			<span className={ styles.element__number + " " + cn( texts, ["text-bold-T-Small"] ) }>
+		<div className={ cn( styles, ["cell", "series", "border"] ) }>
+			<span className = { styles.element__number + " text-small bold" }>
 				{ start + "-" + finish }
 			</span>
 		</div>
@@ -108,11 +107,12 @@ export const Cell: FC<ICellProps> = ( {
 	const { t } = useTranslation();
 
 	return (
-		<div
+		<button
 			className = {
 				cn( styles, [
 					"cell",
 					"element",
+					"border",
 					(isDisabled ? "element--disabled" : undefined),
 					(isSelected ? "element--selected" : undefined),
 					( (exception && !isDisabled && !isSelected) ? "element--exception" : undefined)
@@ -121,13 +121,13 @@ export const Cell: FC<ICellProps> = ( {
 			onClick = { isDisabled ? () => {} : onClick }
 			title = { t( "periodic_table." + number ) }
 		>
-			<span className={ styles.element__number + " " + cn( texts, ["text-bold-T-Small"] ) }>
+			<span className = { styles.element__number + " text-small bold" }>
 				{ number }
 			</span>
 
-			<span className={ styles.element__name + " " + cn( texts, ["text-bold-T-Big"] ) }>
+			<span className = { styles.element__name + " text-big bold" }>
 				{ symbol }
 			</span>
-		</div>
+		</button>
 	);
 }

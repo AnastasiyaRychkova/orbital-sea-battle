@@ -1,6 +1,60 @@
 {
-
 	"title": "Orbital Battleship",
+	
+	"instructions": {
+		"selecting": "Let's choose the shipment plan",
+		"filling": "Now fill the ships",
+		"shooting": "Let's play!"
+	},
+
+	"info": {
+		"selecting": {
+			"m": "Select a cargo plan",
+			"c": "Plans are identified by chemical elements"
+		},
+
+		"filling": {
+			"m": "Fill the scheme",
+			"c": "Depending on the mode, you can mark single items or whole ships"
+		},
+
+		"shooting": {
+			"1": {
+				"m": "Track the situation",
+				"c": "The opponent uses a satellite for surveillance"
+			},
+			"2": {
+				"m": "Reveal the opponent's placement",
+				"c": "Use quantum numbers for a high-precision satellite image"
+			},
+			"3": {
+				"m": "Identify the opponent's code",
+				"c": "It is necessary to find out which cargo plan is used"
+			}
+		}
+	},
+
+	"status": {
+		"choosing" : "choosing",
+		"filling" : "filling",
+		"moving" : "moving",
+		"waiting" : "waiting"
+ 	},
+	
+	"labels": {
+		"time": "time",
+		"shots": "shots",
+		"certainty": "certainty"
+	},
+
+	"actions": {
+		"play" : "Play",
+		"main" : "Back to main",
+		"giveup" : "Give Up",
+		"start" : "Start mission",
+		"rematch" : "Rematch",
+		"exit" : "Leave"
+	},
 
 	"components": {
 
@@ -9,7 +63,7 @@
 		
 		"table": {
 			"code": "Shipment code",
-			"enemy": "Enemy code",
+			"enemy": "Opponent's code",
 			"ammo": "Amount",
 			"choose": "Select element",
 			"guess": "Make a guess"
@@ -27,31 +81,7 @@
 		}
 	},
 
-	"labels": {
-		"time": "time",
-		"shots": "shots",
-		"certainty": "certainty"
-	},
-
-	"actions": {
-		
-		"play" : "Play",
-		"main" : "Back to main",
-		"giveup" : "Give Up",
-		"start" : "Start mission",
-		"rematch" : "Rematch",
-		"exit" : "Leave"
-	},
-
-	"status": {
-		"choosing" : "choosing",
-		"filling" : "filling",
-		"moving" : "moving",
-		"waiting" : "waiting"
- 	},
-
 	"pages": {
-
 		"landing": {
 			"educational": "Educational Chemistry game"
 		},
@@ -61,15 +91,7 @@
 			"text": "Page not found",
 			"construction": "Under construction"
 		}
-
 	},
-
-	"instructions": {
-		"selecting": "Let's choose the shipment plan",
-		"filling": "Now fill the ships",
-		"shooting": "Let's play!"
-	},
-
 
 	"aliases": {
 		"_ai" : "Droid",
@@ -199,5 +221,4 @@
 		"Tennessine",
 		"Oganesson"
 	]
-	
 }

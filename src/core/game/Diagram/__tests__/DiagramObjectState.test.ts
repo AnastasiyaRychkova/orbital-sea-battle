@@ -1,4 +1,4 @@
-import Chemistry, { periodicTable } from "../../Services/Chemistry";
+import Chemistry, { periodicTable } from "../../Chemistry";
 import DiagramState from "../DObjectState";
 
 describe( 'Diagram state without filter or highlight layout', () => {

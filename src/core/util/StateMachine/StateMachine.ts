@@ -14,8 +14,9 @@ import {
 	SMEventData,
 	MachineActionType,
 	OnDoneFunction,
-} from "./StateMachineTypes";
-import EventProvider, { EventData as EventDataEmitter } from "../EventEmitter/EventProvider";
+} from "./types";
+import { EventProvider } from "../EventEmitter";
+import type { EventData as EventDataEmitter } from "../EventEmitter/types";
 
 type EventData<StateName> = EventDataEmitter<SMEventData<StateName>>;
 

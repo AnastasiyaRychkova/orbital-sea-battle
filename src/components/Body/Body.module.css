@@ -1,18 +1,29 @@
-.body2 {
-	margin:0;
+.body {
+	margin: 0;
 	font-family: 'Montserrat', sans-serif;
-	letter-spacing: 0.13rem;
-	color:var(--secondary-100);
+	color: var(--secondary-100);
 	min-width: 320px;
 	height: 100vh;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-between; 
 	box-sizing: border-box;
 	align-items: center;
-	padding: 1rem;
+	padding: 1em;
 }
 
-/* .body-padding{
-	padding: 1rem;
-} */
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+	.body {
+		padding: 0.75em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+	.body {
+		padding: 0.5em;
+	}
+}

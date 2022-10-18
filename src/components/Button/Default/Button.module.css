@@ -1,6 +1,3 @@
-@value sizes: '../../../style/display.css';
-@value mobile, laptop from sizes;
-
 .button {
 	box-sizing: border-box;
 	display: flex;
@@ -8,6 +5,7 @@
 	flex-direction: row;
 	justify-content: center;
 	padding: 0.625em 1em;
+	user-select: none;
 }
 
 .disabled {
@@ -18,11 +16,22 @@
 /*----------  Primary  ----------*/
 
 .primary {
-	composes: button;
 	border: none;
 	background-color: var(--primary-400);
 	border: 2px solid var(--primary-400);
 	color: var(--primary-900);
+}
+
+@media screen and (hover: hover) {
+	.primary:hover {
+		box-shadow: var(--glow__button--light--l);
+		background-color: var(--primary-200);
+		border-color: var(--primary-200);
+	}
+
+	.primary.disabled:hover {
+		box-shadow: none;
+	}
 }
 
 .primary:active {
@@ -40,10 +49,21 @@
 /*----------  Secondary  ----------*/
 
 .secondary {
-	composes: button;
 	border: 2px solid currentColor;
 	background-color: var(--secondary-800);
 	color: var(--primary-400);
+}
+
+@media screen and (hover: hover) {
+	.secondary:hover {
+		border-color: var(--primary-200);
+		box-shadow: var(--glow__button--primary--l);
+		background-color: var(--secondary-900);
+	}
+	
+	.secondary.disabled:hover {
+		box-shadow: none;
+	}
 }
 
 .secondary:active {
@@ -68,37 +88,18 @@
 }
 
 
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
 
-/*----------  Hover  ----------*/
-
-@media screen and (hover: hover) {
-	.primary:hover {
-		box-shadow: var(--glow__button--light--l);
-		background-color: var(--primary-200);
-		border-color: var(--primary-200);
-	}
-	
-	.primary.disabled:hover {
-		box-shadow: none;
-	}
-
-	.secondary:hover {
-		border-color: var(--primary-200);
-		box-shadow: var(--glow__button--primary--l);
-		background-color: var(--secondary-900);
-	}
-	
-	.secondary.disabled:hover {
-		box-shadow: none;
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+	.button {
+		padding: 0.5em 0.8em;
 	}
 }
 
-
-
-/*=============================================
-=                    Text                    =
-=============================================*/
-
-.text {
-	composes: text-button-B-Medium from '../../../style/text.module.css';
-}
+@media (max-width: mobile), (max-height: mobile) {
+	.button {
+		padding: 0.4em 0.625em;
+	}
+} 

@@ -1,6 +1,6 @@
-import EventProvider from "../../../util/EventEmitter/EventProvider";
+import { EventProvider } from "../../../util";
 import ShotsAnalyzer from "./OB_ShotsAnalyzer";
-import type { CellQN, ChemicalElement } from "../../Services/Chemistry";
+import type { CellQN, ChemicalElement } from "../../Chemistry/types";
 import type { IDiagram, IUser, IShotsAnalyzer, OB_IPlayer } from "../OB_Entities";
 import type { PlayerResults, PlayerEvent, PlayerEventData } from '../types';
 

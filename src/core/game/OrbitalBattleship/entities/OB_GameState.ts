@@ -1,10 +1,21 @@
-import { IStopwatch, randomBool, stopwatch } from '../../../util/util';
-import EventProvider, { IEventProvider, ListenerFunc } from "../../../util/EventEmitter/EventProvider";
-import StateMachine, { IStateMachine, MachineActionType } from "../../../util/StateMachine/StateMachine";
-import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
+import {
+	randomBool,
+	stopwatch,
+	EventProvider,
+	StateMachine,
+} from '../../../util';
+import OB_IGameState, { GSEvent, GSEventData, GSResults } from '../interfaces/OB_GameStateInterface';
 
-import type { ActionFunction, Context } from "../../../util/StateMachine/StateMachineTypes";
-import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, IUser } from "../OB_Entities";
+import type {
+	IStopwatch,
+	IStateMachine,
+	MachineActionType,
+	IEventProvider,
+	ListenerFunc,
+	ActionFunction,
+	Context,
+} from '../../../util/types';
+import type { OB_IEnemy, OB_ILocalPlayer, OB_IPlayer, IUser } from '../OB_Entities';
 import type {
 	EventContext,
 	NamingContext,
@@ -21,7 +32,20 @@ type SEvent = string;
 type Milliseconds = number;
 
 
-
+/**
+ * __Состояние игры__
+ * 
+ * !! Для изменения состояния используйте контроллеры !!
+ * 
+ * Содержит в себе конечный автомат, который позволяет выполнять только те операции,
+ * которые возможны в текущем состоянии.
+ * 
+ * Инициируемые события (`GSEvent`):
+ * * `change` — Изменение текущего состояния. Передает `GSStateChanging`.
+ * * `finish` — Окончание матча. Игра переходит в состояние `results`, становится доступен объект результатов матча. Во время матча он равен `undefined`. Передает `GSResults`.
+ * * `new` — Начало нового матча. Результаты предыдущего доступны в свойстве result буден недоступен. Возвращает пустой объект.
+ * * `end` — Инициируется во время полного завершения игры.
+ */
 class GameState extends EventProvider<GSEvent, GSEventData> implements OB_IGameState
 {
 	#machine: IStateMachine<SState, string>;

@@ -1,97 +1,108 @@
-button{
-	font-family: 'Montserrat', sans-serif;
-	letter-spacing: 0.13rem;
-	border:none;
-	cursor:pointer;
+.panel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.5em 1em;
+	background-color: var(--disable-800);
+	box-shadow: var(--shadow__input);
+	user-select: none;
 }
 
-.button-icon{
+.switch {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5em;
+}
+
+.toggle {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	gap:1rem;
-}
-
-.button-tertiary:disabled{
-	background-color:var(--disable-800);
-	color:var(--disable-600);
-	fill:var(--disable-600);
-}
-.button-tertiary{
-	background-color:var(--disable-800);
-	color:var(--primary-300);
-	fill:var(--primary-300);
-}
-@media (hover: hover) {
-	.button-tertiary:hover{
-		background-color:var(--disable-700);
-		color:var(--primary-200);
-		fill:var(--primary-200);
-	}
-}
-.button-tertiary:active{
-	color:var(--primary-600);
-	fill:var(--primary-600);
-}
-
-.collapse-vertical{
-	visibility: hidden;
-}
-.selected-element-medium{
-	background-color: transparent;
-	padding: 0;
-}
-.select-switch{
-	display: flex;
-	justify-content:center;
-	align-items: center;
-	flex-wrap:wrap;
-	gap:0.8rem;
-}
-@media screen and  (max-width:812px){
-	.collapse-vertical{
-		visibility:visible;
-	}
-}
-
-
-.select-switch__button{
-	min-width: 15.625rem;
-	min-height: 2.69rem;
+	min-width: 16em;
+	padding: 0.75em;
+	gap: 0.625em;
 	background-color: var(--secondary-800);
-	color:var(--primary-100);
-	text-transform: uppercase;
-	gap:0.4rem;
-	fill:currentColor;
+	color: var(--primary-100);
 }
 
-.select-switch__button.selected{
-	background-color: var(--primary-600);
-
-}
-
-.filling-mode-selection{
-	background-color: var(--disable-800);
-	padding:1rem 2rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap:0.5rem;
-	user-select: none;
-}
-
-@media screen and  (max-width:812px){
-	.filling-mode-selection{
-		padding:1rem;
+@media (hover: hover) {
+	.toggle:hover {
+		background-color: var(--secondary-900);
 	}
-	.filling-mode-selection>span{
+}
+
+.toggle:active {
+	color: var(--primary-200);
+}
+
+/* selected */
+.toggle:disabled {
+	background-color: var(--primary-600);
+	color: var(--primary-50);
+}
+
+.icon {
+	height: 1.125em;
+	width: 2.5em;
+}
+
+
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
+
+	.panel {
+		padding: 0.5em 0.75em;
+	}
+
+	.toggle {
+		min-width: 13em;
+	}
+
+	.icon {
+		height: 1em;
+		width: 2em;
+	}
+}
+
+@media (max-width: tablet) {
+
+	.toggle {
+		min-width: 11em;
+	}
+}
+
+@media (max-width: mobile), (max-height: mobile) {
+
+	.panel {
+		padding: 0.5em;
+	}
+	/* надпись на панели исчезает на маленьких экранах */
+	.panel > span {
 		display: none;
 	}
+
+	.toggle {
+		min-width: 10em;
+		padding: 0.5em;
+		gap: 0.5em;
+	}
+
+	.icon {
+		height: 0.875em;
+		width: 1.75em;
+	}
 }
 
-@media screen and  (max-width:600px){
-	.select-switch{
+/* перелом, с которого кнопки располагаются друг под другом */
+@media screen and (max-width: 500px) {
+	.switch {
 		flex-direction: column;
 	}
 }

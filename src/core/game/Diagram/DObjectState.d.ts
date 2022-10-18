@@ -1,11 +1,10 @@
-import {
+import type { MagneticQN, SpinQN } from "../Chemistry";
+import type {
 	BlockQN,
 	BoxQN,
 	CellQN,
-	MagneticQN,
-	SpinQN,
-} from "../Services/Chemistry";
-import IFilter from "./Filter/FilterInterface";
+} from "../Chemistry/types";
+import { IFilter } from "./types";
 
 
 export type DEnvironment = {

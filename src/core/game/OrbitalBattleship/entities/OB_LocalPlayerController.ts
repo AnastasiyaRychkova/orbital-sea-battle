@@ -1,4 +1,5 @@
-import Chemistry, { BlockQN, CellQN } from "../../Services/Chemistry";
+import Chemistry from "../../Chemistry";
+import type { BlockQN, CellQN } from "../../Chemistry/types";
 import type { IGameState, ILocalPlayerController } from '../OB_Entities';
 
 

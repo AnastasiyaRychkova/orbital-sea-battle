@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './TabSwitcher.module.css';
-import icons from '../../style/icons.module.css';
-
+import Button from '../Button/IconButton/Button';
 import sprite from "../../img/sprite.svg";
 
 export type TabNumber = 1 | 2 | 3;
@@ -16,19 +15,14 @@ interface IPagingButtonProps {
 function PagingButton( props: IPagingButtonProps ) {
 	return (
 		<button
-			className = { styles["button-icon"] + " " + styles["button-paging"] }
+			className = {
+				styles.paging + " " +
+				( props.isSelected ? styles.selected : "" )
+			}
+			onClick = { () => { if (!props.isSelected) props.onClick(); } }
 		>
-			<svg
-				className = {
-					icons["icon-tiny"]
-					+ " " +
-					icons["icon-secondary"]
-					+ " " +
-					( props.isSelected ? icons["icon-secondary--selected"] : "" )
-				}
-				onClick = { () => { if (!props.isSelected) props.onClick(); } }
-			>
-					<use href = { sprite + props.icon } />
+			<svg className = { styles.tiny }>
+				<use href = { sprite + props.icon } />
 			</svg>
 		</button>
 	);
@@ -43,28 +37,14 @@ interface IArrowProps {
 function Arrow( props: IArrowProps ) {
 	if ( props.visible )
 		return (
-			<button className = {
-					styles["button-icon"]
-					+ " " +
-					styles[ ( "paging-" + props.direction ) ]
-					+ " " +
-					styles["button-paging"]
+			<Button
+				className = {
+					styles.small + " " +
+					styles[ props.direction ]
 				}
-			>
-				<svg
-					role = "presentation" width = "20" height = "20"
-					className = {
-						( props.direction === "right" ? icons["icon-flip"] : "" )
-						+ " " +
-						icons["icon-small"]
-						+ " " +
-						icons["icon-stroke__color"]
-					}
-					onClick = { props.onClick }
-				>
-					<use href = { sprite + "#arrow-left" } />
-				</svg>
-			</button>
+				glyph = { "left" }
+				onClick = { props.onClick }
+			/>
 		);
 	return ( <></> );
 }
@@ -95,14 +75,14 @@ export default function TabSwitcher( props: IProps ) {
 				onClick = { prev }
 				direction = "left"
 			/>
-			
+
 			<Arrow
 				visible = { props.tabNumber !== 3 }
 				onClick = { next }
 				direction = "right"
 			/>
 
-			<nav className = { styles["nav-3"] }>
+			<nav className = { styles.nav }>
 				<PagingButton
 					onClick = { first }
 					icon = "#choose"

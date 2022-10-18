@@ -1,73 +1,83 @@
-@value sizes: '../../style/display.css';
-@value mobile, laptop from sizes;
 
-.miniInfo {
-	display: flex;
-	align-items: center;
-	column-gap: .75em;
-	
-	width: fit-content;
-	padding: 1em;
-	padding-left: .75em;
-
+.shadow {
 	box-shadow: var(--shadow__input);
+}
+
+.box {
+	display: grid;
+	--gap: 0.5em;
+	column-gap: var(--gap);
+	width: fit-content;
+	height: fit-content;
+	align-items: center;
+	padding: 0.5em 0.75em;
 	background-color: var(--secondary-900);
 	color: var(--secondary-100);
 }
 
+.horizontal {
+	grid-template:
+		"icon value" 1fr
+		"icon caption" min-content
+		/ auto auto;
+}
+
+.vertical {
+	grid-template:
+		"caption caption" auto
+		"icon value" auto
+		/ auto auto;
+}
+
 .icon {
-	width: 1.8em;
+	grid-area: icon;
+	width: 2.5em;
+	justify-self: end;
 }
 
-.message {
-	display: flex;
-	flex-direction: column;
-	row-gap: .125em;
+.value {
+	grid-area: value;
 }
 
-.captionText {
-	composes: button from '../../style/typography.css';
-	composes: button-tiny from '../../style/typography.css';
+.caption {
+	grid-area: caption;
 }
 
-.valueText {
-	composes: button from '../../style/typography.css';
-	composes: button-medium from '../../style/typography.css';
+.horizontal > .caption {
+	padding-top: 2px;
 }
 
+.vertical > .caption {
+	justify-self: center;
+	padding-bottom: var(--gap);
+}
 
-/*=============================================
-=               Media Requests               =
-=============================================*/
+@value sizes: '../../style/display.css';
+@value mobile, tablet, laptop from sizes;
 
 /* Tablet or Small Notebook */
-@media (min-width: mobile) and (max-width: laptop) {
+@media (min-height: mobile) and (max-height: tablet),
+(min-width: mobile) and (max-width: laptop) {
 
-	.miniInfo {
-		column-gap: .5em;
-		padding: .75em;
-		padding-right: 1em;
+	.box {
+		--gap: 0.425em;
+		padding: 0.425em 0.625em;
 	}
 	
 	.icon {
-		width: 1.5em;
+		width: 1.875em;
 	}
 }
-
 
 /* Smartphone */
 @media (max-width: mobile), (max-height: mobile) {
 
-	.miniInfo {
-		column-gap: .4em;
-		padding: .5em .75em;
+	.box {
+		--gap: 0.3125em;
+		padding: 0.3125em 0.5em;
 	}
 	
 	.icon {
-		width: 1.5em;
-	}
-	
-	.message {
-		row-gap: 0;
+		width: 1.375em;
 	}
 }

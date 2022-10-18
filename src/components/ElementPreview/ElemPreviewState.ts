@@ -1,5 +1,5 @@
 import { makeObservable, observable, computed, action } from "mobx"
-import periodicTable from "../../core/game/ChemicalElement/PeriodicTable";
+import periodicTable from "../../core/game/Chemistry/PeriodicTable";
 
 type ChemicalElement = {
 	name: string,
