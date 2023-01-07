@@ -1,0 +1,45 @@
+.col_2 {
+	display: grid;
+	gap: 30px;
+	grid-template-columns: 1fr 1fr;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+	line-height: 1.2;
+	color: #FFFFFF;
+
+	font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	gap: 10px;
+}
+
+.sample {
+	width: 42px;
+	height: 42px;
+	border-radius: 8px;
+	border-color: rgba(255, 255, 255, 0.1);
+	background-color: var(--secondary-800);
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.textStyle {
+	display: flex;
+	flex-direction: column;
+	white-space: pre-line;
+	color: var(--secondary-50);
+	gap: 10px;
+}
+
+.textStyle__name {
+	color: var(--custom-white);
+	font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}

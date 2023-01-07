@@ -17,7 +17,7 @@ interface IProps
 const SelectedElementMobile = observer(( props: IProps ) => {
 
 	if ( props.number === 0 )
-		return ( <></> );
+		return null;
 	const symbol = periodicTable.element( props.number ).symbol;
 	
 	return (

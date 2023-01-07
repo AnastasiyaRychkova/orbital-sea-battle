@@ -1,0 +1,55 @@
+import { Meta, Title, IconGallery, IconItem, ArgsTable } from '@storybook/addon-docs/';
+import style from './Icon.module.css';
+
+import Icon from './Icon';
+
+<Meta title="Iconography" />
+
+# Iconography
+
+<IconGallery>
+	<IconItem name="ability">
+		<Icon type="ability" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="accuracy">
+		<Icon type="accuracy" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="clock">
+		<Icon type="clock" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="cross">
+		<Icon type="cross" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="diagram">
+		<Icon type="diagram" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="flag">
+		<Icon type="flag" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="full_screen">
+		<Icon type="full_screen" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="hit">
+		<Icon type="hit" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="info">
+		<Icon type="info" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="left">
+		<Icon type="left" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="play">
+		<Icon type="play" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="repeat">
+		<Icon type="repeat" className={style.icon_em}/>
+	</IconItem>
+	<IconItem name="shot">
+		<Icon type="shot" className={style.icon_em}/>
+	</IconItem>
+</IconGallery>
+
+## Icon
+Для задания размера необходимо указать только свойство `width` через CSS.
+
+<ArgsTable of={Icon}/>

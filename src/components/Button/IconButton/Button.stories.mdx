@@ -1,0 +1,133 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/';
+
+import Button from './Button';
+const decorators = {
+	default: (Story) => (
+		<div style={{
+			padding: '.7em .8em',
+			border: '1px dashed var(--disable-300)',
+			borderRadius: 4,
+			width: 'fit-content',
+		}}>
+			<Story />
+		</div>
+	),
+	inversive: (Story) => (
+		<div style={{
+			padding: '.68em .8em',
+			borderRadius: 4,
+			backgroundColor: 'var(--secondary-100)',
+			width: 'fit-content',
+		}}>
+			<Story />
+		</div>
+	),
+	backing: (Story) => (
+		<div style={{
+			padding: '.3em',
+			border: '1px dashed var(--disable-300)',
+			borderRadius: 4,
+			width: 'fit-content',
+		}}>
+			<Story />
+		</div>
+	),
+};
+
+
+<Meta
+	title="UI/Button/IconButton"
+	argTypes={{
+		glyph: {
+			control: 'select',
+		},
+		className: {
+			control: false,
+		},
+	}}
+	component={Button}
+/>
+
+export const Template = ( args ) => {
+	return <Button {...args} />
+};
+
+# IconButton
+
+Кнопка иконки.
+
+По-умолчанию кнопка <u>не имеет</u> полей и равна высоте иконки (2em). Поля **backing** кнопки равны 0.5em.
+
+```js
+import IconButton from 'components/Button/IconButton/Button';
+```
+
+
+
+<Canvas columns={3}>
+	<Story
+		name="Default"
+		args={{
+			glyph: 'play',
+			theme: 'default',
+		}}
+		decorators={[decorators.default]}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Inversive"
+		args={{
+			glyph: 'clock',
+			theme: 'inversive',
+		}}
+		decorators={[decorators.inversive]}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Backing"
+		args={{
+			glyph: 'clock',
+			theme: 'backing',
+		}}
+		decorators={[decorators.backing]}
+	>
+		{Template.bind({})}
+	</Story>
+		<Story
+		name="Default - disabled"
+		args={{
+			glyph: 'play',
+			theme: 'default',
+			disabled: true,
+		}}
+		decorators={[decorators.default]}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Inversive - disabled"
+		args={{
+			glyph: 'clock',
+			theme: 'inversive',
+			disabled: true,
+		}}
+		decorators={[decorators.inversive]}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Backing - disabled"
+		args={{
+			glyph: 'clock',
+			theme: 'backing',
+			disabled: true,
+		}}
+		decorators={[decorators.backing]}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+<ArgsTable of={Button} />

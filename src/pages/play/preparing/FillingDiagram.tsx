@@ -91,7 +91,6 @@ const FillingDiagram: FC<IProps> = observer(( {
 						value = { t("actions.start") }
 						glyph = 'play'
 						priority = 'primary'
-						theme = 'muted'
 						onClick = { forward }
 						disabled = { state !== 'diagram' || diagram.observableState.cellCounter === 0 }
 						className = { styles.startBtn }

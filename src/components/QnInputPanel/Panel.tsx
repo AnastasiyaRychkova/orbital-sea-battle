@@ -3,10 +3,10 @@ import { QN } from "../../core/game/Chemistry";
 import cn from '../className';
 import InputValue from './InputValue';
 import ConfirmButton from './ConfirmButton';
-import styles from './style.module.css';
 import { ToggleTheme } from './types';
 import type { IDiagramState } from '../../core/game/Diagram/types';
 import type { CellQN } from "../../core/game/Chemistry/types";
+import styles from './style.module.css';
 
 interface IProps {
 	className?: string,

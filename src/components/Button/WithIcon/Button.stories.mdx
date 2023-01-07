@@ -1,0 +1,146 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/';
+
+import Button from './Button';
+
+<Meta
+	title="UI/Button/ButtonWithIcon"
+	argTypes={{
+		to: {
+			control: false,
+		},
+		replace: {
+			control: false,
+		},
+		className: {
+			control: false,
+		},
+	}}
+	component={Button}
+/>
+
+export const Template = ( args ) => {
+	return <Button {...args} />
+};
+
+# Button With Icon
+
+Кнопка с иконкой.
+
+```js
+import ButtonWithIcon from 'components/Button/WithIcon/Button';
+```
+
+
+<Canvas columns={3}>
+	<span className="button-small">Primary</span>
+	<span className="button-small">Secondary</span>
+	<span className="button-small">Tertiary</span>
+	<Story
+		name="Primary"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'primary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Secondary"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'secondary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Tertiary"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'tertiary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Primary - disabled"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'primary',
+			disabled: true,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Secondary - disabled"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'secondary',
+			disabled: true,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Tertiary - disabled"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'tertiary',
+			disabled: true,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
+
+<ArgsTable of={Button} />
+
+
+## With text wrap
+
+<Canvas>
+	<Story
+		name="With text wrap - primary"
+		args={{
+			value: 'Нажми\nна меня',
+			priority: 'primary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="With text wrap - secondary"
+		args={{
+			value: 'Нажми\nна меня',
+			priority: 'secondary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="With text wrap - tertiary"
+		args={{
+			value: 'Нажми\nна меня',
+			priority: 'tertiary',
+			disabled: false,
+			glyph: 'play',
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

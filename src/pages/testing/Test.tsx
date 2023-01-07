@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Button from '../../components/Button/Default/Button';
 import ButtonWithIcon from '../../components/Button/WithIcon/Button';
 import IconButton from '../../components/Button/IconButton/Button';
@@ -8,22 +9,26 @@ import MiniInfo from '../../components/MiniInfo/MiniInfo';
 
 import './components.css';
 import '../../style/root.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-// import achievements from '../../core/browser/AchievementSystem';
 
-// achievements.receive( 60 );
 
 const Test = () => {
 	return (
 		<Router>
-			<div className='test'>
+			<div className="test">
 				<section className="tasks">
 					<div className="row">
 						<div className="column tasks">
-							<DropSidedInfo message='Выберете 2 ряд диаграммы' comment='Используйте панель внизу экрана' />
+							<DropSidedInfo
+								message="Выберете 2 ряд диаграммы"
+								comment="Используйте панель внизу экрана"
+							/>
 						</div>
 						<div className="column mini-infos">
-							<MiniInfo provider='2/5' caption='выстрелов' glyph='shot' />
+							<MiniInfo
+								provider="2/5"
+								caption="выстрелов"
+								glyph="shot"
+							/>
 						</div>
 					</div>
 				</section>
@@ -43,19 +48,43 @@ const Test = () => {
 				<section className="buttons">
 					<div className="row">
 						<div className="column">
-							<Button value='Button' priority='primary' />
-							<Button value='Button' priority='secondary' />
+							<Button value="Button" priority="primary" />
+							<Button value="Button" priority="secondary" />
 						</div>
 						<div className="column">
-							<ButtonWithIcon value='Приоритетное действие' priority='primary' theme='muted' glyph='info' />
-							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='muted' glyph='info' />
-							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='bright' glyph='info' />
-							<ButtonWithIcon value='Альтернативное действие' priority='secondary' theme='dark' glyph='info' />
+							<ButtonWithIcon
+								value="Приоритетное действие"
+								priority="primary"
+								glyph="info"
+							/>
+							<ButtonWithIcon
+								value="Альтернативное действие"
+								priority="secondary"
+								glyph="info"
+							/>
+							<ButtonWithIcon
+								value="Альтернативное действие"
+								priority="secondary"
+								glyph="info"
+							/>
+							<ButtonWithIcon
+								value="Альтернативное действие"
+								priority="tertiary"
+								glyph="info"
+							/>
 						</div>
 						<div className="column">
-							<IconButton glyph='cross' className='icon-button' />
-							<IconButton glyph='cross' className='icon-button' theme='inversive' />
-							<IconButton glyph='cross' theme='backing' className='icon-button' />
+							<IconButton glyph="cross" className="icon-button" />
+							<IconButton
+								glyph="cross"
+								className="icon-button"
+								theme="inversive"
+							/>
+							<IconButton
+								glyph="cross"
+								theme="backing"
+								className="icon-button"
+							/>
 						</div>
 					</div>
 				</section>

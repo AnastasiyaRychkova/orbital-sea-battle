@@ -4,6 +4,10 @@
 	color: var(--primary-300);
 }
 
+.icon {
+	width: 2em;
+}
+
 @media screen and (hover: hover) {
 	.button:hover {
 		color: var(--primary-100);
@@ -27,7 +31,7 @@
 }
 
 .button:disabled {
-	color: var(--disable-700);
+	color: var(--disable-600);
 }
 
 
@@ -60,7 +64,7 @@
 }
 
 .inversive:disabled {
-	color: var(--disable-400);
+	color: var(--disable-600);
 }
 
 
@@ -90,6 +94,6 @@
 }
 
 .backing:disabled {
-	background-color: var(--disable-900);
-	color: var(--disable-700);
+	background-color: var(--disable-700);
+	color: var(--disable-900);
 }

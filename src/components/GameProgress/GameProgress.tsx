@@ -1,9 +1,17 @@
 import React, {FC} from 'react';
 import { observer } from 'mobx-react';
-import {achievements} from "../../core/core";
+// import {achievements} from 'core/core';
 import cn from '../className';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import styles from './GameProgress.module.css';
+
+// Заглушка
+const achievements = {
+	name: '',
+	level: 1,
+	score: 0,
+	goal: 1,
+};
 
 
 

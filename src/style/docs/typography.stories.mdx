@@ -1,0 +1,130 @@
+import { Meta, Canvas } from '@storybook/addon-docs/';
+import styles from './docs.module.css';
+const sampleText = 'The quick brown fox\njumps over the lazy dog.';
+
+<Meta
+	title="Typography"
+/>
+
+# Typography
+
+## Headers
+
+<Canvas>
+	<div className={styles.list}>
+		{[
+			'header-1',
+			'header-2',
+			'header-3',
+			'header-4',
+			'header-5',
+			'header-6',
+		].map( ( value ) => (
+			<div className={styles.textStyle}>
+				<span className={styles.textStyle__name}>
+					{value}
+				</span>
+				<span className={value}>
+					{sampleText}
+				</span>
+			</div>
+		) )}
+	</div>
+</Canvas>
+
+
+## Text
+### Normal
+<Canvas>
+	<div className={styles.list}>
+		{[
+			'text-xl',
+			'text-large',
+			'text-big',
+			'text-medium',
+			'text-normal',
+			'text-small',
+		].map( ( value ) => (
+			<div className={styles.textStyle}>
+				<span className={styles.textStyle__name}>
+					{value}
+				</span>
+				<span className={value}>
+					{sampleText}
+				</span>
+			</div>
+		) )}
+	</div>
+</Canvas>
+
+### Bold
+<Canvas>
+	<div className={styles.list}>
+		{[
+			'text-xl bold',
+			'text-large bold',
+			'text-big bold',
+			'text-medium bold',
+			'text-normal bold',
+			'text-small bold',
+		].map( ( value ) => (
+			<div className={styles.textStyle}>
+				<span className={styles.textStyle__name}>
+					{value}
+				</span>
+				<span className={value}>
+					{sampleText}
+				</span>
+			</div>
+		) )}
+	</div>
+</Canvas>
+
+
+## Long Text
+
+<Canvas>
+	<div className={styles.list}>
+		{[
+			'long-medium',
+			'long-normal',
+			'long-small',
+			'long-little',
+		].map( ( value ) => (
+			<div className={styles.textStyle}>
+				<span className={styles.textStyle__name}>
+					{value}
+				</span>
+				<span className={value}>
+					{sampleText}
+				</span>
+			</div>
+		) )}
+	</div>
+</Canvas>
+
+
+## Button
+
+<Canvas>
+	<div className={styles.list}>
+		{[
+			'button-large',
+			'button-big',
+			'button-medium',
+			'button-normal',
+			'button-small',
+			'button-little',
+			'button-tiny',
+		].map( ( value ) => (
+			<div className={styles.textStyle}>
+				<span className={styles.textStyle__name}>
+					{value}
+				</span>
+				<span className={value}>
+					{sampleText}
+				</span>
+			</div>
+		) )}
+	</div>
+</Canvas>

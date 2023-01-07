@@ -1,0 +1,128 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+
+<Meta title="Colors" />
+
+# Colors
+
+<ColorPalette>
+	<ColorItem
+		title="--primary-#"
+		subtitle="Primary"
+		colors={
+			Object.fromEntries( [
+				50,
+				100,
+				200,
+				300,
+				400,
+				500,
+				600,
+				700,
+				800,
+				900
+			].map( ( value ) => [
+				value.toString(),
+				window.getComputedStyle(document.body).getPropertyValue(
+					`--primary-${value}`
+				),
+			] ) )
+		}
+	/>
+	<ColorItem
+		title="--secondary-#"
+		subtitle="Secondary"
+		colors={
+			Object.fromEntries( [
+				50,
+				100,
+				200,
+				300,
+				400,
+				500,
+				600,
+				700,
+				800,
+				900
+			].map( ( value ) => [
+				value.toString(),
+				window.getComputedStyle(document.body).getPropertyValue(
+					`--secondary-${value}`
+				),
+			] ) )
+		}
+	/>
+	<ColorItem
+		title="--disable-#"
+		subtitle="Disable"
+		colors={
+			Object.fromEntries( [
+				50,
+				100,
+				200,
+				300,
+				400,
+				500,
+				600,
+				700,
+				800,
+				900
+			].map( ( value ) => [
+				value.toString(),
+				window.getComputedStyle(document.body).getPropertyValue(
+					`--disable-${value}`
+				),
+			] ) )
+		}
+	/>
+	<ColorItem
+		title="--error-#"
+		subtitle="Error"
+		colors={
+			Object.fromEntries( [
+				50,
+				100,
+				200,
+				300,
+				400,
+				500,
+				600,
+				700,
+				800,
+				900
+			].map( ( value ) => [
+				value.toString(),
+				window.getComputedStyle(document.body).getPropertyValue(
+					`--error-${value}`
+				),
+			] ) )
+		}
+	/>
+	<ColorItem
+		title="--outline-#"
+		subtitle="Outline"
+		colors={
+			Object.fromEntries( [
+				400,
+			].map( ( value ) => [
+				value.toString(),
+				window.getComputedStyle(document.body).getPropertyValue(
+					`--outline-${value}`
+				),
+			] ) )
+		}
+	/>
+	<ColorItem
+		title="Other"
+		colors={{
+			['--jewel']:
+				window.getComputedStyle(document.body)
+					.getPropertyValue( '--jewel' ),
+			['--corn']:
+				window.getComputedStyle(document.body)
+					.getPropertyValue( '--corn' ),
+			['--custom-white']:
+				window.getComputedStyle(document.body)
+					.getPropertyValue( '--custom-white' ),
+		}}
+	/>
+</ColorPalette>

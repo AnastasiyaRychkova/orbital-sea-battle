@@ -6,9 +6,9 @@ class Purse implements IPurse
 {
 	#balance: ICoin;
 
-	constructor()
+	constructor( initialBalance: number = 0 )
 	{
-		this.#balance = coins( 0 );
+		this.#balance = coins( initialBalance );
 	}
 
 	get balance(): number
@@ -16,10 +16,23 @@ class Purse implements IPurse
 		return this.#balance.value;
 	}
 
-	add( coins: ICoin ): IPurse
+	add( money: ICoin ): IPurse
 	{
-		
+		this.#balance = this.#balance.plus( money );
 		return this;
+	}
+
+	takeOut( money: number ): ICoin
+	{
+		const withdrawnCoins = coins( money );
+		this.#balance = this.#balance.minus( withdrawnCoins );
+		return withdrawnCoins;
+	}
+
+	has( money: number | ICoin ): boolean {
+		return typeof money === 'number'
+			? money <= this.#balance.value
+			: money.value <= this.#balance.value;
 	}
 }
 

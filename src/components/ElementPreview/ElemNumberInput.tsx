@@ -6,18 +6,17 @@ type NumberInputProps = {
 	className?: string,
 	changeFn: ( number: number ) => void,
 	blurFn: () => void,
-}
+};
 
-function ElemNumberInput(props: NumberInputProps)
-{
-	const {number: elemNumber, changeFn} = props;
+function ElemNumberInput( props: NumberInputProps ) {
+	const { number: elemNumber, changeFn } = props;
 	return (
 		<input
 			type="number"
 			inputMode="numeric"
-			className={style.input+(props.className ? ' '+props.className : '')}
+			className={style.input + ( props.className ? ' ' + props.className : '' )}
 			value={elemNumber}
-			onChange={(e: any)=> {changeFn(e.target.value)}}
+			onChange={( e: any ) => { changeFn( e.target.value ); }}
 			onBlur={props.blurFn}
 		/>
 	);

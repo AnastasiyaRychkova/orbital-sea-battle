@@ -1,3 +1,7 @@
+@value sizes: '../../../style/display.css';
+@value mobile, tablet, laptop from sizes;
+
+
 .button {
 	box-sizing: border-box;
 	display: flex;
@@ -5,6 +9,8 @@
 	flex-direction: row;
 	justify-content: center;
 	padding: 0.625em 1em;
+	white-space: pre-line;
+	transition: all .2s ease;
 	user-select: none;
 }
 
@@ -17,16 +23,16 @@
 
 .primary {
 	border: none;
-	background-color: var(--primary-400);
 	border: 2px solid var(--primary-400);
+	background-color: var(--primary-400);
 	color: var(--primary-900);
 }
 
 @media screen and (hover: hover) {
 	.primary:hover {
+		border-color: var(--primary-200);
 		box-shadow: var(--glow__button--light--l);
 		background-color: var(--primary-200);
-		border-color: var(--primary-200);
 	}
 
 	.primary.disabled:hover {
@@ -35,14 +41,14 @@
 }
 
 .primary:active {
-	background-color: var(--primary-600);
 	border-color: var(--primary-600);
+	background-color: var(--primary-600);
 }
 
 .primary.disabled {
-	background-color: var(--disable-800);
 	border-color: var(--disable-800);
-	color: var(--disable-400);
+	background-color: var(--disable-800);
+	color: var(--disable-600);
 }
 
 
@@ -74,9 +80,8 @@
 }
 
 .secondary.disabled {
-	border: none;
-	background-color: var(--primary-800);
-	color: var(--disable-400);
+	border-color: var(--disable-500);
+	color: var(--disable-500);
 }
 
 .secondary .text {
@@ -87,9 +92,6 @@
 	text-shadow: none;
 }
 
-
-@value sizes: '../../../style/display.css';
-@value mobile, tablet, laptop from sizes;
 
 @media (min-height: mobile) and (max-height: tablet),
 (min-width: mobile) and (max-width: laptop) {

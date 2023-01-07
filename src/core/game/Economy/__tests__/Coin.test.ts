@@ -20,40 +20,30 @@ describe( 'Economy: Coin', () => {
 		const INIT_VALUE = 5;
 		const testedValue = coins( INIT_VALUE );
 		expect( testedValue.plus( coins( 5 ) ).value ).toBe( 10 );
-		expect( testedValue.plus( 5 ).value ).toBe( 10 );
 		expect( testedValue.value ).toBe( INIT_VALUE );
 	} );
 
-	test( 'summation: positive int', () => {
+	test( 'summation', () => {
 		const X = 5;
 		const testedValue = coins( X );
 		expect( testedValue.plus( coins( 5 ) ).value ).toBe( 10 );
-		expect( testedValue.plus( 5 ).value ).toBe( 10 );
 		expect( testedValue.value ).toBe( X );
 	} );
 
-	test( 'summation: negative int', () => {
+	test( 'subtraction', () => {
 		const X = 5;
 		const testedValue = coins( X );
-		expect( testedValue.plus( coins( -5 ) ).value ).toBe( 5 );
-		expect( testedValue.plus( -5 ).value ).toBe( 0 );
+		expect( testedValue.minus( coins( 3 ) ).value ).toBe( 2 );
+		expect( testedValue.minus( coins( 10 ) ).value ).toBe( 0 );
 		expect( testedValue.value ).toBe( X );
 	} );
 
-	test( 'summation: positive float', () => {
+	test( 'multiplication', () => {
 		const X = 5;
 		const testedValue = coins( X );
-		expect( testedValue.plus( coins( 5.2 ) ).value ).toBe( 10 );
-		expect( testedValue.plus( 5.8 ).value ).toBe( 10 );
-		expect( testedValue.value ).toBe( X );
-	} );
-
-	test( 'summation: negative float', () => {
-		const X = 5;
-		const testedValue = coins( X );
-		expect( testedValue.plus( coins( -1.2 ) ).value ).toBe( 5 );
-		expect( testedValue.plus( -0.2 ).value ).toBe( 4 );
-		expect( testedValue.plus( -0.8 ).value ).toBe( 4 );
+		expect( testedValue.times( 3 ).value ).toBe( 15 );
+		expect( testedValue.times( 0.2 ).value ).toBe( 1 );
+		expect( testedValue.times( -0.2 ).value ).toBe( 0 );
 		expect( testedValue.value ).toBe( X );
 	} );
 } );

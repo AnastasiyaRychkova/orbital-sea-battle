@@ -4,19 +4,19 @@ import style from './ElemIcon.module.css';
 
 type ElemIconProps = {
 	element: {
-		number: number,
-		name: string,
-		symbol: string,
-	},
-	changeFn: ( number: number ) => void,
-	blurFn: () => void,
-}
+		number: number;
+		name: string;
+		symbol: string;
+	};
+	changeFn: ( number: number ) => void;
+	blurFn: () => void;
+};
 
-function ElemIcon( props: ElemIconProps )
-{
-	const {element} = props;
+
+function ElemIcon( props: ElemIconProps ) {
+	const { element } = props;
 	return (
-		<div className={style.icon} >
+		<div className={style.icon}>
 			<ElemNumberInput
 				className={style.number}
 				number={element.number}

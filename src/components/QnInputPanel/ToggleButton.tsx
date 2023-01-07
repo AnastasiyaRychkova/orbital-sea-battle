@@ -1,30 +1,31 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import cn from 'classnames';
+import { ToggleTheme } from './types';
 import styles from './ToggleButton.module.css';
-import { ToggleTheme } from "./types";
 
 interface IProps {
 	/** Надпись на кнопке */
-	value: string,
+	value: string;
 
 	/** Идентификатор для группы кнопок */
-	toggleName: string,
+	toggleName: string;
 
 	/** Действие по нажатию на кнопку */
-	onChange: ( e: React.ChangeEvent<HTMLInputElement> ) => void,
+	onChange: ( e: React.ChangeEvent<HTMLInputElement> ) => void;
 
 	/** Визуальный стиль кнопки */
-	theme: ToggleTheme,
+	theme: ToggleTheme;
 
 	/** Выбрана ли она */
-	checked?: boolean,
+	checked?: boolean;
 
 	/** Есть ли возможность на нее нажать */
-	disabled?: boolean,
+	disabled?: boolean;
 
-
-	invalid?: boolean,
+	invalid?: boolean;
 }
+
+
 
 const ToggleButton: FC<IProps> = ( {
 	value,
@@ -46,42 +47,36 @@ const ToggleButton: FC<IProps> = ( {
 				type="checkbox"
 				onChange={onChange}
 				checked={checked}
-				disabled={disabled} />
+				disabled={disabled}
+			/>
 			<label
 				className={cn(
 					styles.button,
-					{[styles.invalid]: invalid},
+					{ [styles.invalid]: invalid },
 					getThemeClass( theme )
 				)}
 				htmlFor={id}
-				role='button'>
-				
-				<span className={styles.text}>
-					{value}
-				</span>
-
+				role="button"
+			>
+				<span className={styles.text}>{value}</span>
 			</label>
 		</React.Fragment>
 	);
-}
+};
 
 
 
-function getThemeClass( theme: ToggleTheme ): string
-{
-	switch( theme ) {
+function getThemeClass( theme: ToggleTheme ): string {
+	switch ( theme ) {
 		case ToggleTheme.default:
 			return styles.thin;
 
 		case ToggleTheme.squareM:
-			return styles.square + ' '+ styles.squareM;
+			return styles.square + ' ' + styles.squareM;
 
 		default:
-			return styles.square + ' '+ styles.squareL;
+			return styles.square + ' ' + styles.squareL;
 	}
 }
-
-
-
 
 export default ToggleButton;

@@ -6,6 +6,7 @@
 	justify-content: center;
 	column-gap: .75em;
 	padding: .75em 1.125em;
+	white-space: pre-line;
 }
 
 .icon {
@@ -19,27 +20,27 @@
 
 /*----------  Muted  ----------*/
 
-.button.primary.muted {
+.button.primary {
 	background-color: var(--primary-300);
 	color: var(--primary-900);
 }
 
-.button.primary.muted:disabled {
+.button.primary:disabled {
 	background-color: var(--disable-800);
 	color: var(--disable-600);
 }
 
 @media screen and (hover: hover) {
-	.button.primary.muted:hover {
+	.button.primary:hover {
+		box-shadow: var(--glow__button--light--m);
 		background-color: var(--primary-100);
 		color: var(--primary-800);
-		box-shadow: var(--glow__button--light--m);
 	}
 }
 
-.button.primary.muted:active {
-	background-color: var(--primary-400);
+.button.primary:active {
 	box-shadow: none;
+	background-color: var(--primary-400);
 }
 
 
@@ -56,70 +57,56 @@
 
 @media screen and (hover: hover)  {
 
-	.button.secondary.muted:hover {
-		box-shadow: var(--glow__button--light--m);
-		color: var(--secondary-50);
-	}
-	
-	.button.secondary.bright:hover {
+	.button.secondary:hover {
 		box-shadow: var(--glow__button--primary--m);
 		color: var(--primary-200);
 	}
 
-	.button.secondary.dark:hover {
+	.button.tertiary:hover {
 		background-color: var(--disable-700);
 		color: var(--primary-200);
 	}
 
-	.button.primary.muted:disabled:hover,
-	.button.secondary.muted:disabled:hover,
-	.button.secondary.bright:disabled:hover,
-	.button.secondary.dark:disabled:hover {
+	.button.primary:disabled:hover,
+	.button.tertiary:disabled:hover {
 		box-shadow: none;
 		background-color: var(--disable-800);
+		color: var(--disable-600);
+	}
+
+	.button.primary:disabled:hover,
+	.button.secondary:disabled:hover,
+	.button.tertiary:disabled:hover {
+		border-color: var(--disable-600);
+		box-shadow: none;
 		color: var(--disable-600);
 	}
 }
 
 
-/*----------  Muted  ----------*/
+/*----------  Secondary  ----------*/
 
-.button.secondary.muted {
-	border-style: solid;
-	border-color: currentColor;
-	background-color: transparent;
-	color: var(--secondary-100);
-}
-
-.button.secondary.muted:active {
-	box-shadow: none;
-	color: var(--secondary-300);
-}
-
-
-/*----------  Bright  ----------*/
-
-.button.secondary.bright {
+.button.secondary {
 	border-style: solid;
 	border-color: currentColor;
 	background-color: transparent;
 	color: var(--primary-400);
 }
 
-.button.secondary.bright:active {
+.button.secondary:active {
 	box-shadow: none;
 	color: var(--primary-600);
 }
 
 
-/*----------  Dark  ----------*/
+/*----------  Tertiary  ----------*/
 
-.button.secondary.dark {
+.button.tertiary {
 	background-color: var(--disable-800);
 	color: var(--primary-400);
 }
 
-.button.secondary.dark:active {
+.button.tertiary:active {
 	background-color: var(--disable-800);
 	color: var(--primary-600);
 }
@@ -127,11 +114,12 @@
 
 /*--------  Disabled  --------*/
 
-.button.secondary.muted:disabled,
-.button.secondary.bright:disabled,
-.button.secondary.dark:disabled {
-	border: none;
-	background-color: var(--disable-800);
+.button.secondary:disabled  {
+	border-color: var(--disable-600);
+	color: var(--disable-600);
+}
+
+.button.tertiary:disabled {
 	color: var(--disable-600);
 }
 

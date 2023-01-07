@@ -1,80 +1,71 @@
-import React, {FC, MouseEventHandler} from 'react';
-import { Link } from "react-router-dom";
+import React, { FC, MouseEventHandler } from 'react';
+import { Link } from 'react-router-dom';
 import cn from '../../className';
-
 import Icon from '../../Icon/Icon';
-import styles from './Button.module.css';
 import type { Glyph } from '../../Icon/glyph/type';
+import styles from './Button.module.css';
 
-type Priority = 'primary' | 'secondary';
-type Theme = 'muted' | 'bright' | 'dark';
+type Priority = 'primary' | 'secondary' | 'tertiary';
 
 interface IProps {
 	/** Надпись на кнопке */
-	value: string,
+	value: string;
 
 	/** Название иконки */
-	glyph: Glyph,
+	glyph: Glyph;
 
-	/** Параметр стиля (главная или второстепенная)*/
-	priority: Priority,
+	/** Параметр стиля*/
+	priority: Priority;
 
-	/** Стиль кнопки */
-	theme: Theme,
-
-	disabled?: boolean,
+	/** Заблокирована ли кнопка */
+	disabled?: boolean;
 
 	/** Функция по нажатию */
-	onClick?: MouseEventHandler<HTMLElement>,
-	
+	onClick?: MouseEventHandler<HTMLElement>;
+
 	/** URL */
-	to?: string,
-	
+	to?: string;
+
 	/** Нужно ли переопределить путь */
-	replace?: boolean,
+	replace?: boolean;
 
 	/** Стили, переданные родителями */
-	className?: string,
+	className?: string;
 }
 
-const Button: FC<IProps> = ({
+
+
+const Button: FC<IProps> = ( {
 	value,
 	glyph,
 	priority,
-	theme,
 	disabled = false,
 	className,
 	onClick,
 	to = '#',
 	replace = false,
-}) => {
-	return to === '#'
-	? (
+} ) => {
+	return to === '#' ? (
 		<button
-			type='button'
-			disabled = {disabled}
+			type="button"
+			disabled={disabled}
 			onClick={onClick}
-			className={cn( styles, ['button', priority, theme], className )} >
-				<Icon type={glyph} className={styles.icon}/>
-				<span className={ styles.text + " button-medium" }>
-					{value}
-				</span>
+			className={cn( styles, ['button', priority], className )}
+		>
+			<Icon type={glyph} className={styles.icon} />
+			<span className={styles.text + ' button-medium'}>{value}</span>
 		</button>
-	)
-	
-	: (
+	) : (
 		<Link
 			to={to}
 			replace={replace}
 			onClick={onClick}
-			className={cn( styles, ['button', priority, theme], className )} >
-				<Icon type={glyph} className={styles.icon}/>
-				<span className={ styles.text + " button-medium" }>
-					{value}
-				</span>
+			className={cn( styles, ['button', priority], className )}
+		>
+			<Icon type={glyph} className={styles.icon} />
+			<span className={styles.text + ' button-medium'}>{value}</span>
 		</Link>
 	);
 };
-
 
 export default Button;

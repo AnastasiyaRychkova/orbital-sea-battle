@@ -7,7 +7,7 @@ import cn from '../../className';
 import type { Glyph } from '../../Icon/glyph/type';
 
 
-export type Theme = 'backing' | 'inversive';
+export type Theme = 'default' | 'backing' | 'inversive';
 
 interface IProps {
 	/** Название иконки */
@@ -15,6 +15,9 @@ interface IProps {
 
 	/** Стиль кнопки */
 	theme?: Theme,
+
+	/** Заблокирована лии она */
+	disabled?: boolean,
 
 	/** Функция по нажатию */
 	onClick?: MouseEventHandler<HTMLButtonElement>,
@@ -26,7 +29,8 @@ interface IProps {
 
 const Button: FC<IProps> = ({
 	glyph,
-	theme,
+	theme = 'default',
+	disabled,
 	onClick,
 	className,
 }) => {
@@ -34,8 +38,11 @@ const Button: FC<IProps> = ({
 		<button
 			type="button"
 			onClick={onClick}
+			disabled={disabled}
 			className={cn( styles, ['button', theme], className )} >
-				<Icon type={glyph} />
+				<Icon className={styles.icon}
+					type={glyph}
+				/>
 		</button>
 	);
 };

@@ -1,0 +1,59 @@
+import { Meta, Canvas } from '@storybook/addon-docs/';
+import style from './docs.module.css';
+
+
+<Meta
+	title="Shadow & Glow"
+/>
+
+# Shadow / Glow
+
+`box-shadow: var( --value )`
+
+## Shadow
+
+<Canvas>
+	<div className={style.col_2}>
+		{[
+			'--shadow__button-text',
+			'--shadow__input',
+			'--shadow__filter',
+		].map( ( value ) => (
+			<div className={style.item}>
+				<div className={style.sample}
+					style={{boxShadow: `var(${value})`}}
+				></div>
+				<span>{value}</span>
+			</div>
+		) )}
+	</div>
+</Canvas>
+
+
+## Glow
+
+<Canvas>
+	<div className={style.col_2}>
+		{[
+			'--glow__diagram-selection-1',
+			'--glow__diagram-selection-2',
+			'--glow__arrow-selection-1',
+			'--glow__arrow-selection-2',
+			'--glow__arrow-selection--error-1',
+			'--glow__arrow-selection--error-2',
+			'--glow__button--primary--l',
+			'--glow__button--primary--m',
+			'--glow__button--light--l',
+			'--glow__button--light--m',
+			'--glow__button--error--normal',
+			'--glow__button--error--light',
+		].map( ( value ) => (
+			<div className={style.item}>
+				<div className={style.sample}
+					style={{boxShadow: `var(${value})`}}
+				></div>
+				<span>{value}</span>
+			</div>
+		) )}
+	</div>
+</Canvas>

@@ -5,7 +5,7 @@ import styles from './Button.module.css';
 
 type Priority = 'primary' | 'secondary';
 
-interface IProps {
+interface IButtonProps {
 	/** Надпись на кнопке */
 	value: string,
 
@@ -28,7 +28,7 @@ interface IProps {
 	className?: string,
 }
 
-const Button: FC<IProps> = ({
+const Button: FC<IButtonProps> = ({
 	value,
 	priority,
 	className,
