@@ -1,0 +1,155 @@
+@import "../../style/display.scss";
+
+.header{
+	position:absolute;
+	left:0;
+	right:0;
+	z-index:5;
+
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	height:3.4rem;
+	padding: 0 20px;
+	margin:0 auto;
+
+	background-color: var(--disable-800);
+	color: var(--primary-200);
+
+	@include mobile {
+		height:min-content;
+		align-items: flex-start;
+		padding: 0 16px;
+	}
+}
+
+
+.header__nav__ul >li{
+	display: block;
+	height:100%;
+}
+
+.header__nav__ul{
+	display:flex;
+	flex-direction:row;
+	justify-content: stretch;
+	align-items: center;
+	list-style-type:none;
+	text-transform: uppercase;
+	padding:0;
+	height: 100%;
+	margin: 0.67em 0;
+
+
+	@include mobile {
+		flex-direction: column;
+
+		margin: 32px 0;
+		gap:24px;
+	}
+}
+
+.a-logo{	
+	display:block;
+	background:url(../../img/common/logo.png) no-repeat; 
+	height:2.34em;
+	width:2.34em;
+	background-size: 100%;
+
+	@include mobile {
+		height:23px;
+		width:23px;
+		margin: 6.5px 4px;
+		box-sizing: border-box;
+	}
+	
+}
+
+.header__nav__link{
+	margin-right:2em;
+	text-decoration:none;
+	height: 100%;
+	color:var(--primary-200);
+	letter-spacing: 0.13em;
+	transition: color .3s linear;
+
+	&:hover{
+		color:var(--primary-50);
+	}
+	&:active{
+		color:var(--primary-400);
+	}
+	&:disabled{
+		color:var(--disable-700);
+	}
+	&.selected{
+		border-bottom: solid var(--primary-200) 1px;
+	}
+
+	@include mobile {
+		margin-right:0;
+	}
+}
+
+.burger{
+	display:none;
+	width:36px;
+	height:36px;
+
+	@include mobile {
+		display:block;
+		margin-right:0;
+	}
+
+}
+
+.header__sign{
+	color: var(--primary-200);
+	fill: currentColor;
+	letter-spacing: 0.13em;
+	font-weight: 700;
+	outline: solid var(--primary-200) 1px;
+	text-shadow: 0px 4px 2px var(--main-bg-color);
+	background-color: transparent;
+	padding: 0.28em 0.5em;
+
+	&:hover{
+		color: var(--primary-50);
+		box-shadow: var(--glow-button-L-light);
+		outline-color:var(--primary-50);
+	}
+
+	&:active{
+		color:var(--primary-400);
+		outline-color:var(--primary-400);
+	}
+
+	&:disabled{
+		color:var(--disable-800);
+		outline-color:var(--disable-800);
+	}
+}
+.img-enter{
+	//background:url('../img/index/icons_light.png') 60% 67%;
+	height:1.33em;
+	width:1.33em;
+	background-size: 600% auto;
+}
+
+/*ДЛЯ большинства кнопок - используется повторно*/
+.button-img{
+	font-size: 1em;
+	text-transform: uppercase;
+	display:flex;
+	align-items: center;
+	cursor: pointer;
+	justify-content: center;
+	gap: 0.5em;
+	letter-spacing: 0.13em;
+}
+
+.header__sign:hover{
+	box-shadow: 0 0 0.5em var(--clickable-color);
+	text-shadow: 0 0 1em var(--main-bg-color);
+}

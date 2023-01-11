@@ -1,0 +1,90 @@
+@import "../../../style/display.scss";
+@import "../../../style/root.css";
+
+.wrap{
+	width:100%
+}
+.header{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.background-radar{
+	display:flex;
+	justify-content: center;
+	align-items: end;
+	box-sizing: border-box;
+
+	min-height: 516px;
+	max-width:1098px;
+	margin:1em auto 160px;
+	background: url("../../../img/mainPage/radar.jpg") no-repeat  center center;
+	background-size: cover;
+
+	@include laptop {
+		min-height: 431px;
+		max-width:919px;
+		margin-bottom: 130px;
+	}
+
+	@include tablet {
+		min-height:282px;
+		max-width:610px;
+		margin-bottom: 110px;
+	}
+
+	@include mobile {
+		min-height:168px;
+		max-width:100%;
+		margin: 20px 20px 270px;
+	}
+}
+
+.footer-info{
+	display:flex;
+	justify-content: space-between;
+	min-height: 68px;
+	width:100%;
+	padding:1em;
+	box-sizing: border-box;
+	@include laptop {
+		min-height: 68px;
+	}
+
+	@include tablet {
+		min-height: 64px;
+	}
+
+	@include mobile {
+		min-height: 68px;
+		flex-direction: column-reverse;
+		align-items: center;
+		gap:8px;
+	}
+
+	background-color: var(--secondary-900);
+
+}
+.links{
+	display:flex;
+	flex-direction: column;
+	align-items: flex-end;
+	
+	a {
+		color: var(--primary-600);
+		text-align: center;
+		
+		&:hover{
+			color: var(--primary-500);
+		}
+	}
+	@include mobile {
+		align-items:center;
+		gap:8px;
+	}
+}
+
+.button-location{
+	transform: translateY(40px);
+}

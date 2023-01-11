@@ -1,0 +1,58 @@
+@import "../../style/root.css";
+@import "../../style/display.scss";
+
+.selection{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 70px;
+  
+	@include tablet{
+	  gap: 50px;
+	}
+	@include mobile {
+	  gap: 30px;
+	}
+  
+	width: 100%;
+	height: 100%;
+	padding:30px;
+	box-sizing: border-box;
+  
+	color:white;
+  }
+  
+  .manual{
+	padding: 12px 38px;
+	background-color: var(--disable-800);
+  }
+  
+  .folders{
+	display: flex;
+	flex-wrap: wrap;
+	// justify-content: space-between;
+	column-gap: 110px;
+	row-gap:20px;
+	justify-content: center;
+  
+	@include laptop{
+	  column-gap: 90px;
+	}
+  
+	@include tablet {
+	  column-gap: 60px;
+	}
+  
+	margin-bottom: 70px;
+  
+	@include mobile {
+	  margin-bottom: 0px;
+	  overflow-y:auto;
+	}
+  
+  }
+  
+  
+  
+  

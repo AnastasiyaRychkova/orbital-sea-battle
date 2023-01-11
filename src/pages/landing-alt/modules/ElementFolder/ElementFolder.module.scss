@@ -1,0 +1,85 @@
+@import "../../style/display.scss";
+
+.folder{
+	position: relative;
+	width: 300px;
+	height: 358px;
+	background-color: transparent;
+
+	@include laptop {
+		width: 252px;
+		height: 300px;
+	}
+
+	@include tablet {
+		width: 158px;
+		height: 188px;
+	}
+
+	@include mobile {
+		width: 158px;
+		height: 188px;
+	}
+
+	cursor: pointer;
+
+	&:disabled{
+		filter: brightness(0.8);
+		pointer-events: none;
+	}
+
+	&.selected{
+		
+	}
+}
+
+
+
+
+.element{
+	position: relative;
+
+	display:flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+
+	width: 120px;
+	height: 120px;
+	margin-top: -185px;
+	margin-left:65px;
+	padding: 8px;
+	border: 1.4px solid var(--disable-900);
+
+
+	@include laptop {
+		width: 100px;
+		height: 100px;
+		margin-top: -140px;
+		margin-left:52px;
+	}
+
+	@include tablet {
+		width: 100px;
+		height: 100px;
+		margin-top: -118px;
+		margin-left:15px;
+	}
+
+	@include mobile{
+		width: 100px;
+		height: 100px;
+		margin-top: -118px;
+		margin-left:15px;
+	}
+	
+	color: var(--disable-900);
+	pointer-events: none;
+
+}
+
+.elementNumber{
+	align-self: flex-start;
+}
+

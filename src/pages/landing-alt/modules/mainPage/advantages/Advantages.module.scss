@@ -1,0 +1,84 @@
+@import "../../../style/display.scss";
+
+.advantages{
+	display:grid;
+	grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+	grid-row-gap:43px;
+	grid-column-gap:30px;
+	max-width:1200px;
+	box-sizing: border-box;
+	margin: 50px auto 228px;
+	padding: 0 16px;
+
+	@include laptop {
+		grid-row-gap: 24px;
+		grid-column-gap: 24px;
+		margin: 30px auto 173px;
+	}
+
+	@include tablet{
+		gap: 16px;
+		margin: 24px auto 142px;
+	}
+	
+	@include mobile{
+		gap: 24px;
+		width:100%;
+	}
+
+}
+.header{
+	text-align: center;
+}
+
+.block{
+	display:flex;
+	flex-basis:7.5em;
+	gap:18px;
+	background-color: rgb(150,194,175,0.2);
+	padding:24px;
+
+	@include laptop {
+		gap:16px;
+		padding:20px;
+	}
+
+	@include tablet{
+		gap:11.25px;
+		padding:15px;
+	}
+	
+	@include mobile{
+		gap:11.25px;
+		padding:15px;
+	}
+
+}
+
+
+.img{
+	width:95px;
+	height:95px;
+	flex-shrink: 0;
+		
+	@include laptop {
+		width:80px;
+		height: 80px;
+	}
+
+	@include tablet{
+		width:60px;
+		height:60px;
+	}
+
+	@include mobile{
+		width:60px;
+		height:60px;
+	}
+}
+
+.description{
+	font-size: 12px;
+	letter-spacing: 0.13em;
+	color:var(--text-color);
+}

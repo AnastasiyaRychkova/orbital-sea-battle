@@ -1,0 +1,118 @@
+/* Стилевые переменные и предустановки */
+
+:root {
+	--custom-white: #FFFFFF;
+
+	--primary-50:#EAF8E9;
+	--primary-100:#C4ECC3;
+	--primary-200:#9CDF9A;
+	--primary-300:#79CF76;
+	--primary-400:#61C35A;
+	--primary-500:#4EA448;
+	--primary-600:#40843C;
+	--primary-700:#286124;
+	--primary-800:#1C4519;
+	--primary-900:#163914;
+
+	--secondary-50:#B6E4D0;
+	--secondary-100:#96C2AF;
+	--secondary-200:#71AA91;
+	--secondary-300:#5A8C77;
+	--secondary-400:#517465;
+	--secondary-500:#456356;
+	--secondary-600:#354E43;
+	--secondary-700:#2C463A;
+	--secondary-800:#1E2C26;
+	--secondary-900:#15211C;
+
+	--disable-50:#EEF3EE;
+	--disable-100:#D0DFCF;
+	--disable-200:#B1CAB0;
+	--disable-300:#A0B09F;
+	--disable-400:#899988;
+	--disable-500:#627661;
+	--disable-600:#566B5B;
+	--disable-700:#3A4D40;
+	--disable-800:#2E3D36;
+	--disable-900:#1C221E;
+
+	--error-50: #FFECEB;
+	--error-100: #FFC0BC;
+	--error-200: #FFA19B;
+	--error-300:#FA7971;
+	--error-400:#EB564D;
+	--error-500:#9C2F28;
+	--error-600: #9C2F28;
+	--error-700: #7E281C;
+	--error-800: #61251D;
+	--error-900: #3F1A15; 
+
+	--outline-400:#EEFF25;
+	--jewel:#116F42;
+	--corn:#FFEC8A;
+
+
+	--checkPattern:
+		linear-gradient( rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0,
+		linear-gradient( 90deg, rgba(255,255,255, 0) 2.9em, rgba(64, 132, 60, 0.08) 3em) 0 0;
+
+	--shadow__button-text: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	--shadow__input: 2px 2px 3px rgba(5, 20, 13, 0.4);
+	--shadow__filter: 0px 0px 10px rgba(150, 194, 175, 0.2), 3px 6px 10px rgba(0, 0, 0, 0.4);
+
+	--glow__diagram-selection-1: 0px 0px 8px rgba(241, 255, 252, 1);
+	--glow__diagram-selection-2: 0px 0px 3px rgba(231, 255, 231, 1);
+	--glow__arrow-selection-1: 0px 0px 6px rgba(182, 243, 229, 1);
+	--glow__arrow-selection-2: 0px 0px 4px rgba(232, 255, 245, 1);
+	--glow__arrow-selection--error-1: 0px 0px 10px rgba(255, 89, 89, 1);
+	--glow__arrow-selection--error-2: 0px 0px 4px rgba(255, 185, 185, 0.5);
+
+	--glow__button--primary--l: 0px 0px 20px rgba(78, 164, 72, 0.4);
+	--glow__button--primary--m: 0px 0px 10px rgba(78, 164, 72, 0.5);
+	--glow__button--light--l: 0px 0px 25px rgba(191, 239, 189, 0.4);
+	--glow__button--light--m: 0px 0px 10px rgba(219, 243, 237, 0.4);
+	--glow__button--error--normal: 0px 0px 8px rgba(218, 78, 78, 0.7);
+	--glow__button--error--light: 0px 0px 10px rgba(255, 153, 153, 0.7);
+
+	--box-shadow-bright:0.5rem 0.5rem 0.5rem rgba(65, 137, 95, 0.5);
+	--box-shadow-input: 0.3rem 0.3rem 0.3rem rgb(28, 34, 30, 0.7);
+}
+
+* {
+	font-size: inherit;
+
+	-webkit-tap-highlight-color: transparent;
+}
+
+#root *:focus-visible {
+	outline: 2px solid white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 1em;
+	padding: 0;
+	margin: 0;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: default;
+}
+
+a {
+	text-decoration: none;
+}

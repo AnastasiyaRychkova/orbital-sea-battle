@@ -1,0 +1,282 @@
+.all-interface{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	min-height: 200px;
+	min-width:320px;
+	pointer-events: none;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+/*верхняя панель управления интерфейса*/
+.interface{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	box-sizing: border-box;
+	pointer-events: auto;
+}
+
+.interface__function__info{
+	position: absolute;
+	top:6rem;
+	display: flex;
+	flex-direction: column;
+	gap:1.5rem;
+	align-items: flex-start;
+}
+.interface__function-big-gap {
+	gap: 1.5rem;
+}
+/*все кнопки-иконки интерфейса*/
+.interface-icon-button{  /*icon-interface*/
+	min-height: max(3.5rem,40px);
+	min-width:max(3.5rem,40px);
+	padding: 1rem;
+	outline: none;
+	box-shadow: var(--box-shadow-input);
+}
+
+/*цвета конопок-иконок интерфейса*/
+.icon-message{
+	background-color: var(--secondary-700-light-backing) ;
+}
+
+.icon-info{
+	background-color: var(--secondary-900-dark-backing) ;
+}
+
+/*характереистики иконки элемента в левом меню*/
+.icon-element{
+	color: var(--secondary-100-text);
+	background-color:  var(--secondary-900-dark-backing) ;
+	outline:  solid var(--secondary-100-text) 1px;
+	font-size: 14px;
+	width:40px;
+	height: 40px;
+}
+
+/*скрытие выбранного элемента при больших экранах*/
+.interface__function__element{
+	display:none;
+}
+
+/*расположение характеристик время/точность слева для маленьких экранов*/
+.left-mini-info-list{
+	display: flex;
+	flex-direction: column;
+	gap:0.5rem;
+	align-items: flex-start;
+}
+
+/*блок характеристика*/
+.move-info-wrap{
+	padding:0.5rem 1rem ;
+	display:flex;
+	align-items: center;
+	gap: 0.8rem;
+	background-color: var(--secondary-900-dark-backing);
+	height:min-content;
+}
+.move-target {
+    margin: 0 4.5rem;
+}
+
+/*скрытие левого блока характеристик при больших экранах*/
+.move-info-vertical{
+	display: none;
+}
+
+.move-info{
+	display:flex;
+}
+
+/*отступы для центрирования игроков*/
+.move-number{
+	margin-right:1rem;
+}
+
+/* вид игроков */
+.players{
+	display:grid;
+	grid-template-columns: repeat(3, min-content);
+	gap:0.5rem;
+}
+
+.player{
+	background-color: var(--disable-800-light-backing) ;
+	padding:0.5rem;
+	width:19.93rem;
+	height: min-content;
+	display:flex;
+	align-items: center;	
+	gap:1rem;
+	box-shadow: var(--box-shadow-input);
+}
+
+
+/* фото игрока */
+.player__avatar{
+	opacity: 0.7;
+	height: 3rem;
+	width:3rem;
+}
+
+.player__info{
+	display: flex;
+	flex-direction: column;
+	gap:0.5rem;
+}
+
+.truncate-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width:13rem;
+}
+.player__info__status{
+	display:flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+.circle {
+	height: 0.5em;
+	width:0.5em;
+	border-radius: 50%;
+}
+
+.online{
+	background-color: var(--primary-200-clickable);
+}
+.text-online{
+	color:var(--primary-200-clickable);
+}
+.offline{
+	background-color: var(--error-400-error);
+}
+.text-offline{
+	color:var(--error-400-error);
+}
+
+.sputnik-img{
+	height: 4rem;
+}
+
+/* нижняя панель интерфейса */
+.bottom-control-panel{
+	width:100%;
+	position: sticky;
+	bottom:1rem;
+	box-sizing: border-box;
+	pointer-events: auto;
+}
+
+.default-menu{
+	display: flex;
+	justify-content: center;
+}
+.default-menu-left-center-right{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap:1rem;
+}
+.button-exit-position{
+	position:absolute;
+	left:0;
+	bottom:0;
+}
+
+.nav-3{
+	display:flex;
+	gap:3.75rem;
+}
+
+@media screen and  (max-width:1400px){ 
+	.interface__function__info{
+		gap:1rem;
+		top:6.5rem;
+	}
+
+}
+
+@media screen and  (max-width:1024px){
+	.player{
+		width: 16rem;
+	}
+
+	.truncate-text {
+		width:10rem;
+	}
+
+	/* переместить иконки хода */
+	.move-target, .move-info{
+		display: none;
+	}
+	.move-info-vertical{
+		display: flex;
+	}
+}
+
+@media screen and  (max-width:812px){
+	.sputnik-img{
+		width: 72px;
+		height:36px;
+		object-fit: cover;
+	}
+
+	.interface__function__element{
+		display:block;
+	}
+
+	.selected-element{
+		visibility: hidden;
+	}
+	.selected-element-wrapper{
+		display: none; 
+	}
+	.selected-element-medium{
+		background-color: var(--secondary-900-dark-backing);
+		padding: 0.8rem;
+	}
+}
+
+@media screen and (max-height: 375px) and (max-width:812px){
+
+	.interface-exit{
+		justify-content:space-between; 
+	}
+
+}
+
+@media screen and (max-width: 600px){
+	.interface-exit{
+		box-sizing: border-box;
+	}
+
+}
+@media screen and  (max-width:520px){
+	.sputnik-img{
+		grid-row: 1 / 3;
+		grid-column: 2/3;
+		display: flex;
+		align-self: center;
+		width: 36px;
+		height:36px;
+	}
+	.players{
+		grid-template-columns:  repeat(2, min-content);
+		column-gap: 2rem;
+	}
+	.icon-tiny{
+		height: 14px;
+		width: 14px;
+	}
+	.nav-3{
+		display:flex;
+	}
+}

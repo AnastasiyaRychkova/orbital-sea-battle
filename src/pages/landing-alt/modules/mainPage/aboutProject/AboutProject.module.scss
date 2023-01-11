@@ -1,0 +1,129 @@
+@import "../../../style/display.scss";
+@import "../../../style/root.css";
+
+.about{
+	margin-bottom: 168px;
+	@include laptop {
+		margin-bottom: 134px;
+	}
+
+	@include tablet {
+		margin-bottom: 238px;
+	}
+
+	@include mobile {
+		margin-bottom: 391px;
+	}
+}
+.header{
+	text-align: center;
+}
+
+.statistic{
+	margin-top: 40px;
+	margin-bottom: 120px;
+	gap: 0.5em;
+
+	@include laptop {
+		margin-top: 59px;
+		margin-bottom: 90px;
+	}
+
+	@include tablet {
+		margin-top: 30px;
+		margin-bottom: 90px;
+	}
+
+	@include mobile {
+		margin-top: 30px;
+		margin-bottom: 90px;
+	}
+}
+
+.multiple-container{   /*можно использовать повторно*/
+	display:grid;
+	grid-template-columns: repeat(4,1fr);
+	
+	@include mobile {
+		grid-template-columns: repeat(2,1fr);
+		gap:1vw;
+		:nth-child(2n){
+			justify-self: left;
+		}
+		:nth-child(2n+1){
+			justify-self: right;
+		}
+	}
+}
+
+.element{
+	justify-self: center;
+	text-align: center;
+	max-width: 178px;
+}
+
+.numbers__block__description{
+	font-size: 0.889em;
+	letter-spacing: 0.13em;
+	color:var(--text-color);
+}
+
+.bold_heading{
+	font-weight:800;
+	font-size:3.33em;
+}
+
+.thin_heading{
+	font-weight: 400;
+	font-size:1.33em;
+}
+
+/*перенос текста - в каждой строке новое слово*/
+.line-transfer{
+	display:block;
+	width:100%;
+	text-transform: uppercase;
+}
+
+.description{
+	font-size: 12px;
+	letter-spacing: 0.13em;
+	color:var(--secondary-500);
+}
+
+.partners{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	gap:50px;
+
+	@include laptop {
+		gap:40px;
+	}
+
+	@include tablet {
+		gap:34px;
+	}
+
+	@include mobile {
+		justify-content: space-between;
+	}
+}
+
+
+.partners img{
+	max-height: 84px;
+	@include laptop {
+		max-height: 65px;
+	}
+
+	@include tablet {
+		max-height: 57px;
+	}
+
+	@include mobile {
+		max-height: 57px;
+	}
+}
+
+

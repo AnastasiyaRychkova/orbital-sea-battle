@@ -1,0 +1,118 @@
+@import "../../../style/display.scss";
+@import "../../../style/root.css";
+
+.header{
+	text-align: center;
+}
+.multiple-container{   /*можно использовать повторно*/
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.team{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	gap:30px;
+
+	@include laptop {
+		margin-top: 59px;
+		margin-bottom: 30px;
+	}
+
+	@include tablet {
+		margin-top: 30px;
+		margin-bottom: 30px;
+		gap:16px;
+	}
+
+	@include mobile {
+		margin-top: 30px;
+		margin-bottom: 30px;
+		gap:16px;
+	}
+}
+
+.block{
+	display:flex;
+	flex-direction: column;
+	text-align: center;
+	gap:24px;
+	width: 338px;
+	// box-sizing: border-box;
+	padding:16px;
+
+	@include laptop {
+		width: 272px;
+		gap: 20px;
+		padding:12px;
+	}
+
+	@include tablet {
+		flex-direction: row;
+		text-align: start;
+		gap: 16px;
+		width: 380px;
+		padding:8px;
+	}
+
+	@include mobile {
+		flex-direction: row;
+		text-align: start;
+		gap: 16px;
+		width: 100%;
+		padding:8px;
+	}
+
+	background-color: var(--disable-800);
+	box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+.block img{
+	width:100%;
+	height:100%;
+	background-color: var(--secondary-500);
+
+	@include tablet {
+		width: 84px;
+		height: 84px;
+	}
+
+	@include mobile {
+		width: 84px;
+		height: 84px;
+	}
+}
+
+/*имя человека*/
+.person{
+	font-weight: 700;
+	width:min-content;
+	margin:0 auto;
+	text-transform: uppercase;
+	@include tablet {
+		margin: 0;
+	}
+
+	@include mobile {
+		margin: 0;
+	}
+}
+
+ .description{
+	margin-top:8px;
+}
+.member{
+	display:flex;
+	flex-direction:column;
+	align-self: center;
+	color:var(--text-color);
+	font-size:1.1em;
+	letter-spacing: 0.13em;
+	margin-top:0;
+}
+.heading__heading3{
+	margin-top:0;
+	font-size: 1.1em;
+	color:var(--text-color);
+}

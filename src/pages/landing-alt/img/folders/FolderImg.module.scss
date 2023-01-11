@@ -1,0 +1,6 @@
+g:hover {
+	 filter: url(#filter_choose);
+}
+g:disabled{
+	filter:brightness()
+}

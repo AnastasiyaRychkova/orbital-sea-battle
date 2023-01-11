@@ -1,0 +1,118 @@
+@import "../../../style/display.scss";
+
+.welcome-page{
+	display:flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 100vh;
+	width:100%;
+	box-sizing: border-box;
+}
+
+.header{
+	margin-top:3.4rem;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--primary-50);
+}
+.content{
+	width:100%;
+	position: relative;
+	//background-image: url(../../../img/mainPage/back-ships.png);
+	display:flex;
+	align-items: center;
+	flex-direction:column;
+}
+.video{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+
+	margin: 0 auto;
+	width: 770px;
+	height: 433px;
+
+	@include laptop {
+		width: 615px;
+		height: 346px;
+	}
+
+	@include tablet {
+		width: 378px;
+		height: 213px;
+	}
+
+	@include mobile {
+		max-width:345px;
+		height: 210px;
+	}
+
+	background-color: var(--secondary-900);
+}
+.play-video{
+	height: 73px;
+
+	@include laptop {
+		height: 57px;
+	}
+
+	@include tablet {
+		height: 36px;
+	}
+
+	@include mobile {
+		height: 33px;
+	}
+
+}
+.button-location{
+	margin-top: -1.5rem;
+	fill:currentColor;
+	z-index: 1;
+}
+
+.ship{
+	position: absolute;
+	height: 306px;
+	top:50px;
+
+	@include laptop {
+		top:20px;
+		height: 306px;
+	}
+
+	@include tablet {
+		top:10px;
+		height: 193px;
+	}
+
+	@include mobile {
+		display: none;
+	}
+}
+
+.left{
+	margin-right: 950px;
+
+	@include laptop {
+		margin-right: 780px;
+	}
+
+	@include tablet {
+		margin-right: 480px;
+	}
+}
+.right{
+	transform: scaleX(-1);
+	margin-left: 950px;
+	
+	@include laptop {
+		margin-left: 780px;
+	}
+
+	@include tablet {
+		margin-left: 480px;
+	}
+}

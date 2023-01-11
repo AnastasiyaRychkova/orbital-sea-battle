@@ -1,0 +1,101 @@
+@import "../../style/display.scss";
+
+/*иконки-заливки*/
+/*иконки-линии*/
+.icon__color, .icon-stroke__color {
+	fill:var(--primary-300);
+
+	&:hover{
+		fill:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
+	&:active{
+		fill:var(--primary-500);
+	}
+	&:disabled{
+		fill:var(--disable-700);
+	}
+}
+
+
+/*второстепенные иконки (например, навигация по станицам)*/
+.icon-secondary {
+	fill:var(--primary-300);
+
+	&:hover{
+		fill:var(--primary-400-main);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
+	&:active{
+		fill:var(--primary-700);
+	}
+	&:disabled{
+		fill:var(--disable-700);
+	}
+}
+
+
+.icon-secondary--selected {
+	fill:var(--primary-200);
+
+	&:hover{
+		fill:var(--primary-100);
+		filter:drop-shadow(0px 0px 10px rgba(219, 243, 237, 0.4));
+	}
+	&:active{
+		fill:var(--primary-300);
+	}
+	&:disabled{
+		fill:var(--disable-700);
+	}
+}
+
+/*размерыы иконок*/
+.icon-medium{
+	height: 36px;
+	width: 36px;
+
+	@include laptop{
+		height: 18.7px;
+		width: 18.7px;
+	}
+}
+
+.icon-small{
+	height: 30px;
+	width: 30px;
+
+	@include laptop{
+		height: 26px;
+		width: 26px;
+	}
+
+	@include mobile {
+		height: 20px;
+		width: 20px;
+	}
+}
+
+.icon-tiny{
+	height: 24px;
+	width: 24px;
+	
+	@include laptop{
+		height: 20px;
+		width: 20px;
+	}
+
+	@include mobile {
+		height: 14px;
+		width: 14px;
+	}
+}
+
+.icon-mini-tiny{
+	height:12px;
+	max-width:30px;
+}
+
+.icon-flip{
+	transform: rotate(180deg);
+}

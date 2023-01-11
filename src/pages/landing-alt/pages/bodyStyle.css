@@ -1,0 +1,14 @@
+.contentCenterLong{
+	display:flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.content-width{
+	max-width: 1200px;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
