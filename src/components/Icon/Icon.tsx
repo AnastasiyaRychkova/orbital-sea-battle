@@ -3,7 +3,7 @@ import { glyphs, GlyphType } from './glyph/index';
 import styles from './Icon.module.css';
 import cn from '../className';
 
-interface IProps {
+interface IProps extends React.SVGProps<SVGSVGElement> {
 	/** Название иконки */
 	type: GlyphType,
 
@@ -11,10 +11,14 @@ interface IProps {
 	className?: string,
 }
 
-const Icon: FC<IProps> = ( { type, className } ) => {
+const Icon: FC<IProps> = ( {
+	type,
+	className,
+	...args
+} ) => {
 	return (
 		<span className={cn( styles, ['icon'], className )}>
-			{glyphs[type]()}
+			{glyphs[type]( args )}
 		</span>
 	);
 };

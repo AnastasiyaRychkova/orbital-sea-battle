@@ -1,20 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 
-const clock = () => {
+function clock( props: React.SVGProps<SVGSVGElement> ) {
 	return (
-		<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 100 100">
-			<path fill="currentColor" d="M46 28a28 28 0 0122.653 44.458L46 56V28z"/>
-			<circle cx="46" cy="56" r="38" stroke="currentColor" strokeWidth="6"/>
-			<g>
-			<rect width="20" height="8" x="82.257" y="15" fill="currentColor" rx="2" transform="rotate(50 82.257 15)"/>
-			<rect width="10" height="12" x="82.406" y="21.401" fill="currentColor" transform="rotate(50 82.406 21.401)"/>
-			</g>
-			<g>
-			<rect width="20" height="8" x="36" y="2" fill="currentColor" rx="2"/>
-			<rect width="10" height="12" x="41" y="6" fill="currentColor"/>
-			</g>
+		<svg
+			width="1em"
+			height="1em"
+			viewBox="0 0 40 40"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<path
+				d="M15.49 1a.76.76 0 00-.76.76v1.52a.76.76 0 00.76.76h1.14v2.012C8.408 6.998 2 14 2 22.47 2 31.584 9.416 39 18.53 39c9.113 0 16.53-7.416 16.53-16.53a16.424 16.424 0 00-2.554-8.81l1.61-1.303.718.886a.76.76 0 001.07.113l1.181-.957a.76.76 0 00.112-1.068L33.37 6.605a.76.76 0 00-1.069-.113l-1.182.957a.76.76 0 00-.112 1.069l.718.886-1.603 1.297a16.488 16.488 0 00-9.693-4.648V4.04h1.14a.76.76 0 00.76-.76V1.76a.76.76 0 00-.76-.76h-6.08zm3.04 7.6A13.85 13.85 0 0132.4 22.47a13.85 13.85 0 01-13.87 13.87A13.85 13.85 0 014.66 22.47 13.85 13.85 0 0118.53 8.6zm0 2.828V22.47l8.829 6.63a11.041 11.041 0 00-8.828-17.671z"
+				fill="currentColor"
+			/>
 		</svg>
 	);
-};
+}
 
 export default clock;

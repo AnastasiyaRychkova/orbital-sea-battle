@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function chevron( props: React.SVGProps<SVGSVGElement> ) {
+function reduce( props: React.SVGProps<SVGSVGElement> ) {
 	return (
 		<svg
 			width="1em"
@@ -11,9 +11,9 @@ function chevron( props: React.SVGProps<SVGSVGElement> ) {
 			{...props}
 		>
 			<path
-				d="M12 36l16-16L12 4"
+				d="M5 34.917l8.333-8.25M34.917 5l-8.25 8.25M32.7 14.3h-7.5V6.8M6.8 25.6h7.5v7.5"
 				stroke="currentColor"
-				strokeWidth={3}
+				strokeWidth={3.6}
 				strokeLinecap="round"
 				strokeLinejoin="round"
 			/>
@@ -21,4 +21,4 @@ function chevron( props: React.SVGProps<SVGSVGElement> ) {
 	);
 }
 
-export default chevron;
+export default reduce;
