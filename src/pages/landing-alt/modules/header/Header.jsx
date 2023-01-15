@@ -10,7 +10,7 @@ import cx from 'classnames'
 const Header = () =>{
   return (
     <header className={style.header}>
-      <a href="#" className={style['a-logo']}></a>
+      <a href="#welcome" className={style['a-logo']}></a>
       <nav>
         <ul className={style['header__nav__ul']}>
           <li><a href="#" className={cx(style['header__nav__link'], style['selected'])} >об игре</a></li>

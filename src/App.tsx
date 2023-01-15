@@ -5,7 +5,8 @@ import {
 	Route,
 } from "react-router-dom";
 
-import Landing from './pages/landing/Landing';
+// import Landing from './pages/landing/Landing';
+import Landing from './pages/landing-alt/pages/mainPage/MainPage';
 import SimpleGame from './pages/play/SimpleGamePage';
 import Page404 from './pages/404/Page404';
 import Stub from './pages/404/Stub';

@@ -1,8 +1,8 @@
 import React, {FC, MouseEventHandler} from 'react';
-import styles from './Button.module.css';
-import Icon from '../../Icon/Icon';
-
 import cn from '../../className';
+import Icon from '../../Icon/Icon';
+import styles from './Button.module.css';
+
 
 import type { Glyph } from '../../Icon/glyph/type';
 
@@ -27,24 +27,26 @@ interface IProps {
 }
 
 
-const Button: FC<IProps> = ({
+const Button: FC<IProps> = ( {
 	glyph,
 	theme = 'default',
 	disabled,
 	onClick,
 	className,
-}) => {
+} ) => {
 	return (
 		<button
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className={cn( styles, ['button', theme], className )} >
-				<Icon className={styles.icon}
-					type={glyph}
-				/>
+			className={cn( styles, ['button', theme], className )}
+		>
+			<Icon className={styles.icon}
+				type={glyph}
+			/>
 		</button>
 	);
 };
 
 export default Button;
+export { Button as IconButton };

@@ -2,6 +2,7 @@ export type Glyph =
 	| 'ability'
 	| 'accuracy'
 	| 'clock'
+	| 'chevron'
 	| 'cross'
 	| 'diagram'
 	| 'flag'

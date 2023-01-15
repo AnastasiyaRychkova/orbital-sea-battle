@@ -11,7 +11,7 @@ import cx from 'classnames'
 
 const WelcomePage = () =>{
   return (
-    <div className={style['welcome-page']}>
+    <div className={style['welcome-page']} id="welcome">
       <div className={style.header}>
         <h1 className='header-1'>orbital battleship</h1>
         <span className='header-5 bold'>образовательная игра по&nbsp;химии</span>
