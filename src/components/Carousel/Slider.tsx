@@ -25,8 +25,6 @@ interface SliderProps {
 
 export const Slider: FC<SliderProps> = ( {
 	controller,
-	width = '100%',
-	height = '100%',
 	autoPlay = false,
 	autoPlayTime = 5000,
 	className
@@ -49,7 +47,6 @@ export const Slider: FC<SliderProps> = ( {
 	return (
 		<div
 			className={cn( styles.slider, className )}
-			style={{ width, height }}
 			onTouchStart={controller.handleTouchStart}
 			onTouchMove={controller.handleTouchMove}
 			onTouchEnd={controller.handleTouchEnd}

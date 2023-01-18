@@ -24,7 +24,10 @@
 	color: inherit;
 }
 
-.icon_em {
-	width: 1em;
-	height: 1em;
+.em {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	justify-content: center;
+	min-width: 10px;
 }

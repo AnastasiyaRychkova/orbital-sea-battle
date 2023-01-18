@@ -3,15 +3,15 @@ import cn from '../../className';
 import Icon from '../../Icon/Icon';
 import styles from './Button.module.css';
 
+import type { GlyphType } from 'components/Icon/glyph';
 
-import type { Glyph } from '../../Icon/glyph/type';
 
 
 export type Theme = 'default' | 'backing' | 'inversive';
 
 interface IProps {
 	/** Название иконки */
-	glyph: Glyph,
+	glyph: GlyphType,
 
 	/** Стиль кнопки */
 	theme?: Theme,

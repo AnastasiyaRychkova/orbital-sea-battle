@@ -1,5 +1,6 @@
 export type Index = number;
 export type URL = string;
+export type TranslationKey = string;
 
 /** Значение координаты X на координатной плоскости */
 export type Abscissa = number;

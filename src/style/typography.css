@@ -20,22 +20,22 @@ html {
 	--normal: 1.12em;
 }
 
-.header-1 {
+.header-1-d {
 	letter-spacing: 0.02em;
 	font-size: var(--large);
 }
 
-.header-2 {
+.header-2-d {
 	letter-spacing: 0.02em;
 	font-size: var(--big);
 }
 
-.header-3 {
+.header-3-d {
 	letter-spacing: 0.05em;
 	font-size: var(--medium);
 }
 
-.header-4 {
+.header-4-d {
 	letter-spacing: 0.05em;
 	font-size: var(--normal);
 }

@@ -83,7 +83,67 @@
 
 	"pages": {
 		"landing": {
-			"educational": "Educational Chemistry game"
+			"header": {
+				"game": "Game",
+				"rules": "Rules",
+				"project": "Project"
+			},
+			"play": "Play",
+			"educational": "Educational game in chemistry",
+			"game": {
+				"header": "It's not just a game",
+				"subheader": "",
+				"title-1": "Fixing the rules of Klechkovsky and Hund",
+				"text-1": "Knowing the rules of chemistry is the key to victory",
+				"title-2": "Demonstration of periodicity of elements",
+				"text-2": "Both the game and the interactive simulator",
+				"title-3": "Development of strategic skills",
+				"text-3": "Develop your strategy to overtake the enemy",
+				"title-4": "Increase motivation and concentration",
+				"text-4": "Play, earn points and become a pro"
+			},
+			"rules": {
+				"header": "How to play?",
+				"subheader": "The same sea battle only with chemical elements",
+				"action": "Create profile",
+				"1": {
+					"title": "Element selection",
+					"description": "Choose a chemical element"
+				},
+				"2": {
+					"title": "Diagram completion",
+					"description": "Fill in the atom of the selected element in the ground state on the energy level diagram"
+				},
+				"3": {
+					"title": "Shot at the opponent's diagram",
+					"description": "Shoot at your opponent's diagram to find out if his element has a particular electron. To do this, enter the quantum numbers of the target."
+				},
+				"4": {
+					"title": "Finish",
+					"description": "Get ahead of your opponent - guess his element first!"
+				}
+			},
+			"project": {
+				"header": "About the project",
+				"from": "from",
+				"year": "year",
+				"implementation": "the project was introduced into the educational process in chemistry",
+				"articles": "articles",
+				"publishing": "in the leading scientific publication Journal of Chemical Education",
+				"grants": "grants",
+				"grants-goal": "dedicated to teaching chemistry in a VR environment",
+				"version": "version",
+				"presented": "successfully developed and presented at exhibitions"
+			},
+			"command": {
+				"header": "Team",
+				"name-1": "Mikhail Kurichin",
+				"name-2": "Artem Smolin",
+				"name-3": "Anastasia Rychkova",
+				"name-4": "Asia Ermolaeva",
+				"name-5": "Ilya Koshcheev",
+				"name-6": "Angelina Malkiv"
+			}
 		},
 
 		"404": {

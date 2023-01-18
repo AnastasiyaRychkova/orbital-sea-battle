@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import cn from '../../className';
+import cn from 'classnames';
 import Icon from '../../Icon/Icon';
 import type { Glyph } from '../../Icon/glyph/type';
 import styles from './Button.module.css';
@@ -29,17 +29,19 @@ interface IProps {
 	/** Нужно ли переопределить путь */
 	replace?: boolean;
 
+	/** Маленькая ли кнопка */
+	small?: boolean;
+
 	/** Стили, переданные родителями */
 	className?: string;
 }
-
-
 
 const Button: FC<IProps> = ( {
 	value,
 	glyph,
 	priority,
 	disabled = false,
+	small = false,
 	className,
 	onClick,
 	to = '#',
@@ -50,22 +52,51 @@ const Button: FC<IProps> = ( {
 			type="button"
 			disabled={disabled}
 			onClick={onClick}
-			className={cn( styles, ['button', priority], className )}
+			className={cn(
+				styles.button,
+				styles[priority],
+				{ [styles.small]: small },
+				className
+			)}
 		>
-			<Icon type={glyph} className={styles.icon} />
-			<span className={styles.text + ' button-medium'}>{value}</span>
+			<Icon type={glyph}
+				className={styles.icon}
+			/>
+			<span
+				className={cn(
+					styles.text,
+					small ? 'button-normal' : 'button-medium'
+				)}
+			>
+				{value}
+			</span>
 		</button>
 	) : (
 		<Link
 			to={to}
 			replace={replace}
 			onClick={onClick}
-			className={cn( styles, ['button', priority], className )}
+			className={cn(
+				styles.button,
+				styles[priority],
+				{ [styles.small]: small },
+				className
+			)}
 		>
-			<Icon type={glyph} className={styles.icon} />
-			<span className={styles.text + ' button-medium'}>{value}</span>
+			<Icon type={glyph}
+				className={styles.icon}
+			/>
+			<span
+				className={cn(
+					styles.text,
+					small ? 'button-normal' : 'button-medium'
+				)}
+			>
+				{value}
+			</span>
 		</Link>
 	);
 };
 
 export default Button;
+export { Button as ButtonWithIcon };
