@@ -2,13 +2,13 @@
 @import "../../../style/root.css";
 
 .section {
-	scroll-margin: 20vh;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	min-height: 60vh;
 	margin: 150px 16px;
+	min-height: 60vh;
+	scroll-margin: 20vh;
 }
 
 .header {
@@ -22,7 +22,7 @@
 	justify-content: stretch;
 	margin-top: 30px;
 	max-width: 1200px;
-	height: 390px;
+	height: fit-content;
 	padding: 0 44px;
 	transition-duration: .2s;
 	transition-property: margin, padding;
@@ -30,7 +30,6 @@
 
 	@include tablet {
 		margin-top: 24px;
-		height: 320px;
 		padding: 0 23px;
 	}
 
@@ -38,7 +37,6 @@
 		display: flex;
 		flex-direction: column;
 		margin-top: 24px;
-		min-height: 400px;
 		padding: 0 16px;
 	}
 }
@@ -46,7 +44,27 @@
 .manual {
 	flex-grow: 1;
 	width: 100%;
-	aspect-ratio: 16 / 9;
+
+	&::before, &::after {
+		display: block;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+		width: 7%;
+		height: 100%;
+		background: var(--secondary-800);
+		content: '';
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(to right, #1F2C27, #1F2C2700);
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(to left, #1F2C27, #1F2C2700);
+	}
 }
 
 .slide-number {
@@ -69,9 +87,23 @@
 		position: absolute;
 		top: 1vw;
 		right: 13vw;
+		opacity: 0.4;
 		line-height: 100%;
-		color: var(--secondary-600);
-		font-size: 48px;
+		font-size: 40px;
+	}
+}
+
+.action {
+	position: absolute;
+	top: calc( 100% + 2em );
+	left: calc( 16px + 7% );
+
+	@include mobile {
+		top: calc( 100% + 8em );
+		right: 0;
+		left: 0;
+		margin: 0 auto;
+		width: fit-content;
 	}
 }
 
@@ -123,6 +155,7 @@
 	}
 
 	@include mobile {
+		top: calc( 100% + 1em );
 		margin-bottom: 15px;
 		width: 100%;
 		padding: 12px;

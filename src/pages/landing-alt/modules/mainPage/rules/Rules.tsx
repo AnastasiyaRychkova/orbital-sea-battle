@@ -8,6 +8,7 @@ import { Slider } from 'components/Carousel/Slider';
 import style from './Rules.module.scss';
 import styleIcons from '../../icons/Icons.module.scss';
 import styleButton from '../../buttons/Button.module.scss';
+import { ButtonWithIcon } from 'components/Button/WithIcon/Button';
 
 type SlideDescription = string;
 
@@ -61,6 +62,12 @@ const Rules = observer( () => {
 						{t( 'action' )}
 					</span>
 				</button>
+				<ButtonWithIcon
+					className={style.action}
+					value={t( 'action' )}
+					glyph="info"
+					priority="secondary"
+				/>
 				<div className={cn(
 					'long-medium',
 					style.description
