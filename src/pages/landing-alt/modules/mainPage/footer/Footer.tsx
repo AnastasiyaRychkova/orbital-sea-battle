@@ -11,7 +11,7 @@ const Footer = () => {
 		<div className={style.wrap}>
 			<div className={style.header}>
 				<span className="header-1">Orbital Battleship</span>
-				<span className="header-5">
+				<span className="header-5 bold">
 					{t( 'educational' )}
 				</span>
 			</div>

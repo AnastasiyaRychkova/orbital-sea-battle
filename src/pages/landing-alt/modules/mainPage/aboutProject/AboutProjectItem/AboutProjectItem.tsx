@@ -19,7 +19,7 @@ export const AboutProjectItem: FC<AboutProjectItemProps> = ( {
 	return (
 		<div className={styles.element}>
 			{prefix ? (
-				<span className="header-4 bold">{`${prefix} `}</span>
+				<span className="header-5 bold">{`${prefix} `}</span>
 			) : null}
 			<span className="header-1 bold">{header}</span>
 			<span className={cn( 'header-4 bold', styles['line-transfer'] )}>
