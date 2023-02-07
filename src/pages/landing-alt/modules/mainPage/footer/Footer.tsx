@@ -25,9 +25,14 @@ const Footer = () => {
 				/>
 			</div>
 			<footer className={style['footer-info']}>
-				<span>{`© 2022 – ${new Date().getFullYear()} ${t( 'footer.copyright' )}`}</span>
+				<span className="long-normal">
+					{`© 2022 – ${new Date().getFullYear()} ${t( 'footer.copyright' )}`}
+				</span>
 				<div className={style.links}>
-					<a href="https://itmo.ru/images/pages/79/Pravila_ispolzovanija_informacii.pdf">
+					<a
+						className="long-normal"
+						href="https://itmo.ru/images/pages/79/Pravila_ispolzovanija_informacii.pdf"
+					>
 						{t( 'footer.domain' )}
 					</a>
 				</div>

@@ -1,15 +1,18 @@
-import React from 'react';
-import cn from 'classnames';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+
 import { Logo } from 'components/Logo/Logo';
-import { ButtonWithIcon } from 'components/Button/WithIcon/Button';
+import { Menu } from './menu/Menu';
+
 import { IconButton } from 'components/Button/IconButton/Button';
 
 import style from './Header.module.scss';
 
 
 const Header = () => {
-	const { t } = useTranslation( 'translation', { keyPrefix: 'pages.landing' } );
+	
+	const [ isOpened, setIsOpened ] = useState( false );
+
+
 	return (
 		<header className={style.header}>
 			<a href="#welcome"
@@ -17,47 +20,11 @@ const Header = () => {
 			>
 				<Logo />
 			</a>
-			<nav>
-				<ul className={style.nav}>
-					<li>
-						<a
-							href="#about"
-							className={cn(
-								'button-normal',
-								style.navLink,
-							)}
-						>
-							{t( 'header.game' )}
-						</a>
-					</li>
-					<li>
-						<a href="#rules"
-							className={cn( 'button-normal', style.navLink )}
-						>
-							{t( 'header.rules' )}
-						</a>
-					</li>
-					<li>
-						<a href="#project"
-							className={cn( 'button-normal', style.navLink )}
-						>
-							{t( 'header.project' )}
-						</a>
-					</li>
-					<li>
-						<ButtonWithIcon
-							value={t( 'play' )}
-							glyph="play"
-							priority="secondary"
-							small
-							to="play"
-						/>
-					</li>
-				</ul>
-			</nav>
+			<Menu isOpened={isOpened} />
 			<IconButton
 				className={style.burger}
 				glyph="menu"
+				onClick={() => setIsOpened( ( state ) => !state )}
 			/>
 		</header>
 	);

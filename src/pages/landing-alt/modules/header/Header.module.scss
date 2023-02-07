@@ -1,13 +1,6 @@
 @import "../../style/display.scss";
 
 .header {
-
-	@include mobile {
-		align-items: flex-start;
-		height: min-content;
-		padding: 0 16px;
-	}
-
 	display:flex;
 	position:absolute;
 	right:0;
@@ -22,83 +15,36 @@
 
 	background-color: var(--disable-800);
 	color: var(--primary-200);
-}
 
-
-.header__nav__ul>li {
-	display: block;
-	height: 100%;
-}
-
-.nav {
 	@include mobile {
-		flex-direction: column;
-
-		margin: 32px 0;
-		gap: 24px;
+		align-items: flex-start;
+		height: min-content;
+		padding: 0 16px;
 	}
-	display:flex;
-	align-items: center;
-	flex-direction:row;
-	justify-content: stretch;
-	margin: 0.67em 0;
-	height: 100%;
-	padding:0;
-	list-style-type:none;
-	text-transform: uppercase;
 }
 
 .logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--primary-400);
+	font-size: 2.4em;
 	@include mobile {
 		box-sizing: border-box;
 		margin: 6.5px 4px;
 		width: 23px;
 		height: 23px;
 	}
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--primary-400);
-	font-size: 2.4em;
 
-}
-
-.navLink {
-	@include mobile {
-		margin-right: 0;
-	}
-
-	margin-right:2em;
-	height: 100%;
-	text-decoration: none;
-	letter-spacing: 0.13em;
-	color: var(--primary-200);
-	transition: color .3s linear;
-
-	&:hover {
-		color: var(--primary-50);
-	}
-
-	&:active {
-		color: var(--primary-400);
-	}
-
-	&:disabled {
-		color: var(--disable-700);
-	}
-
-	&.selected {
-		border-bottom: solid var(--primary-200) 1px;
-	}
 }
 
 .burger {
+
+	display: none;
+	padding: .34em;
+	font-size: .7em;
 	@include mobile {
 		display: block;
 		margin-right: 0;
 	}
-
-	display: none;
-	font-size: .7em;
-	padding: .34em;
 }
