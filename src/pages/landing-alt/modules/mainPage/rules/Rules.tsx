@@ -23,7 +23,9 @@ const Rules = observer( () => {
 	const current = slides[ carousel.currentIndex ];
 
 	return (
-		<section>
+		<section id="rules"
+			className={style.section}
+		>
 			<div className={style.header}>
 				<h1 className="header-2">
 					{t( 'header' )}

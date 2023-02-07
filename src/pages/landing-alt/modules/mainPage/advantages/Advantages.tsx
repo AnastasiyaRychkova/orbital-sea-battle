@@ -27,7 +27,9 @@ const Advantages = () => {
 
 
 	return (
-		<section>
+		<section className={styles.section}
+			id="about"
+		>
 			<div className={styles.header}>
 				<h2 className="header-2">
 					{t( 'header' )}

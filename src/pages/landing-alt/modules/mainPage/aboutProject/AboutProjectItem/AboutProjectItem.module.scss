@@ -1,0 +1,17 @@
+.element {
+	max-width: 178px;
+	text-align: center;
+	justify-self: center;
+}
+
+.thin_heading {
+	font-size: 1.33em;
+	font-weight: 400;
+}
+
+/*перенос текста - в каждой строке новое слово*/
+.line-transfer {
+	display: block;
+	width: 100%;
+	text-transform: uppercase;
+}

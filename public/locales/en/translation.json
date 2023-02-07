@@ -125,7 +125,7 @@
 			},
 			"project": {
 				"header": "About the project",
-				"from": "from",
+				"from": "since",
 				"year": "year",
 				"implementation": "the project was introduced into the educational process in chemistry",
 				"articles": "articles",
@@ -143,6 +143,10 @@
 				"name-4": "Asia Ermolaeva",
 				"name-5": "Ilya Koshcheev",
 				"name-6": "Angelina Malkiv"
+			},
+			"footer": {
+				"domain": "Rules for the use of information in the itmo.ru domain zone",
+				"copyright": "ITMO University"
 			}
 		},
 

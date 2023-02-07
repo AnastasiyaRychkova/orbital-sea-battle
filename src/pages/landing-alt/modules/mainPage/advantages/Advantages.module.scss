@@ -1,27 +1,37 @@
 @import "../../../style/display.scss";
 
+.section {
+	scroll-margin: 20vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
+	margin: 100px 16px;
+}
+
 .advantages {
 	box-sizing: border-box;
 	display: grid;
-	margin: 50px auto 228px;
+	margin-top: 50px;
 	max-width: 1200px;
-	padding: 0 16px;
 	grid-column-gap: 30px;
 	grid-row-gap: 43px;
-	grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+	grid-template-columns: 1fr 1fr;
 
 	@include laptop {
-		margin: 30px auto 173px;
+		margin-top: 30px;
 		grid-column-gap: 24px;
 		grid-row-gap: 24px;
 	}
 
 	@include tablet {
-		margin: 24px auto 142px;
+		margin-top: 24px;
 		gap: 16px;
 	}
 
 	@include mobile {
+		grid-template-columns: 1fr;
 		width: 100%;
 		gap: 24px;
 	}
