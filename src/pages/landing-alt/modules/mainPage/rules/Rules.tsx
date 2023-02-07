@@ -67,6 +67,8 @@ const Rules = observer( () => {
 					value={t( 'action' )}
 					glyph="info"
 					priority="secondary"
+					to="/rules"
+					inNewTab
 				/>
 				<div className={cn(
 					'long-medium',

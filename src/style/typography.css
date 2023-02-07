@@ -155,32 +155,32 @@ html {
 	--tiny: 0.62em;
 }
 
-.button-large {
+.button-large-d {
 	letter-spacing: 0.05em;
 	font-size: var(--large);
 }
 
-.button-big {
+.button-big-d {
 	letter-spacing: 0.05em;
 	font-size: var(--big);
 }
 
-.button-medium {
+.button-medium-d {
 	letter-spacing: 0.05em;
 	font-size: var(--medium);
 }
 
-.button-normal {
+.button-normal-d {
 	letter-spacing: 0.08em;
 	font-size: var(--normal);
 }
 
-.button-small {
+.button-small-d {
 	letter-spacing: 0.08em;
 	font-size: var(--small);
 }
 
-.button-tiny {
+.button-tiny-d {
 	letter-spacing: 0.08em;
 	font-size: var(--tiny);
 }

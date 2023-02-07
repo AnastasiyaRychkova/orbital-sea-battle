@@ -32,6 +32,9 @@ interface IProps {
 	/** Маленькая ли кнопка */
 	small?: boolean;
 
+	/** Открыть в новой вкладке */
+	inNewTab?: boolean;
+
 	/** Стили, переданные родителями */
 	className?: string;
 }
@@ -46,6 +49,7 @@ const Button: FC<IProps> = ( {
 	onClick,
 	to = '#',
 	replace = false,
+	inNewTab = false,
 } ) => {
 	return to === '#' ? (
 		<button
@@ -82,6 +86,8 @@ const Button: FC<IProps> = ( {
 				{ [styles.small]: small },
 				className
 			)}
+			target={inNewTab ? '_blank' : undefined}
+			rel={inNewTab ? 'noopener noreferrer' : undefined}
 		>
 			<Icon type={glyph}
 				className={styles.icon}

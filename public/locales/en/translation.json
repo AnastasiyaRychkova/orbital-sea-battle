@@ -105,7 +105,7 @@
 			"rules": {
 				"header": "How to play?",
 				"subheader": "The same sea battle only with chemical elements",
-				"action": "Read more...",
+				"action": "Read more",
 				"1": {
 					"title": "Element selection",
 					"description": "Choose a chemical element"
