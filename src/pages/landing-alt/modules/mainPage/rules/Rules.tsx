@@ -15,7 +15,7 @@ type SlideDescription = string;
 
 const Rules = observer( () => {
 	const { t } = useTranslation( 'translation', { keyPrefix: 'pages.landing.rules' } );
-	const slides = Array.from( {length: 4} ).map( ( _, index ) => ( {
+	const slides = Array.from( {length: 5} ).map( ( _, index ) => ( {
 		title: `${index + 1}.title`,
 		src: '/img/landing/pic.jpg',
 		meta: `${index + 1}.description`,
@@ -45,23 +45,6 @@ const Rules = observer( () => {
 				<span className={style['slide-number']}>
 					{carousel.currentIndex + 1}
 				</span>
-				<button
-					className={cn(
-						styleButton['button-secondary-bright'],
-						styleButton['button-icon'],
-						styleButton['button-create-profile'],
-						style['button-location']
-					)}
-				>
-					<img
-						src={current.src}
-						className={styleIcons['icon-small']}
-						alt=""
-					/>
-					<span className="button-medium bold">
-						{t( 'action' )}
-					</span>
-				</button>
 				<ButtonWithIcon
 					className={style.action}
 					value={t( 'action' )}

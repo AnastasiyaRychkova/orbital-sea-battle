@@ -108,19 +108,23 @@
 				"action": "Read more",
 				"1": {
 					"title": "Element selection",
-					"description": "Choose a chemical element"
+					"description": "Choose a loading plan - one of 118 chemical elements."
 				},
 				"2": {
 					"title": "Diagram completion",
-					"description": "Fill in the atom of the selected element in the ground state on the energy level diagram"
+					"description": "Arrange the weights (electrons) according to the plan - the electronic configuration of the element."
 				},
 				"3": {
 					"title": "Shot at the opponent's diagram",
-					"description": "Shoot at your opponent's diagram to find out if his element has a particular electron. To do this, enter the quantum numbers of the target."
+					"description": "Battle: on the opponent's field, choose the electrons you want to \"shoot\" at by checking if there is an electron on that spot. Use the coordinates of the weights:\nn - the level of the electron cloud: 1, 2 and up to 7\nl - a specific ship in our game\nmL - a cell in the electron cloud, a place for cargo in the ship\nmS - electron spin or cargo position in the cell"
 				},
 				"4": {
 					"title": "Finish",
-					"description": "Get ahead of your opponent - guess his element first!"
+					"description": "Take turns shooting at each other's electrons: if you shot at an electron that is present in your opponent's atom, it will glow red; if your electron is hit, it will glow white. During the turn it is allowed to either shoot your opponent's electron once, or to name your opponent's chemical element."
+				},
+				"5": {
+					"title": "The goal",
+					"description": "The goal of the game is to guess the opponent's chemical element.\nHave a good orbital battleship!"
 				}
 			},
 			"project": {

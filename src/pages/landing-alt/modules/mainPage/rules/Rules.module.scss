@@ -135,12 +135,13 @@
 	top: calc( 100% - 2em );
 	right: 0;
 	z-index: 2;
-	width: 670px;
+	width: 630px;
 	height: fit-content;
 	padding: 30px;
 	background-color: var(--secondary-900);
 	color: var(--secondary-100);
 	transition: top .2s ease;
+	white-space: pre-line;
 
 
 	@include laptop {
@@ -150,7 +151,7 @@
 
 	@include tablet {
 		top: calc( 100% - 3em );
-		width: 367px;
+		width: min( 567px, 100% );
 		padding: 12px;
 	}
 
