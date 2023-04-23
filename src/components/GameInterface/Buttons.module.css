@@ -13,15 +13,18 @@ html .ability:active {
 }
 
 html .small {
-	height: 2.25em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 2.25em;
-	padding: 0.5em;
+	height: 2.25em;
+	padding: 0em;
 	box-shadow: var(--shadow__input);
 }
 
 html .middle {
-	height: 3.5em;
 	width: 3.5em;
+	height: 3.5em;
 	padding: 0.75em;
 	box-shadow: var(--shadow__input);
 }
@@ -33,8 +36,8 @@ html .middle {
 (min-width: mobile) and (max-width: laptop) {
 
 	html .middle {
-		height: 3em;
 		width: 3em;
+		height: 3em;
 		padding: 0.625em;
 	}
 }
@@ -42,14 +45,14 @@ html .middle {
 @media (max-width: mobile), (max-height: mobile) {
 
 	html .middle {
-		height: 2.5em;
 		width: 2.5em;
+		height: 2.5em;
 		padding: 0.5em;
 	}
 
 	html .small {
-		height: 1.875em;
 		width: 1.875em;
+		height: 1.875em;
 		padding: 0.4em;
 	}
 }

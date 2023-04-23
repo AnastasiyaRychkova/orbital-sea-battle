@@ -59,14 +59,14 @@ export default function ResultsPage( props: IProps ) {
 							className={styles.player}
 						/>
 
-						<div className={styles.stats + ' ' + styles.left}>
+						{/* <div className={styles.stats + ' ' + styles.left}>
 							<MiniInfo
 								provider={results.player.steps}
 								glyph="accuracy"
 								caption={t( 'labels.shots' )}
 								orientation="vertical"
 							/>
-						</div>
+						</div> */}
 
 						<div className={styles.score}>
 							<span className={'header-1 bold ' + styles.glow}>
@@ -90,7 +90,7 @@ export default function ResultsPage( props: IProps ) {
 							className={styles.enemy}
 						/>
 
-						<div className={styles.stats + ' ' + styles.right}>
+						{/* <div className={styles.stats + ' ' + styles.right}>
 							<MiniInfo
 								provider={results.enemy.steps}
 								glyph="accuracy"
@@ -98,13 +98,13 @@ export default function ResultsPage( props: IProps ) {
 								orientation="vertical"
 							/>
 
-							{/* <MiniInfo
+							<MiniInfo
 							provider = { results.enemy.certainty.toFixed(4) }
 							glyph = "hit"
 							caption = { t("labels.certainty") }
 							orientation = "vertical"
-						/> */}
-						</div>
+						/>
+						</div> */}
 					</div>
 
 					<div className={styles.actions}>
