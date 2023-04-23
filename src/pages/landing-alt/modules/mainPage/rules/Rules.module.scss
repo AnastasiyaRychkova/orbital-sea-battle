@@ -17,33 +17,43 @@
 
 .content {
 	box-sizing: border-box;
-	display: flex;
+	display: grid;
 	position: relative;
 	justify-content: stretch;
-	margin-top: 30px;
+	margin-top: 40px;
 	max-width: 1200px;
 	height: fit-content;
 	padding: 0 44px;
 	transition-duration: .2s;
 	transition-property: margin, padding;
 	transition-timing-function: ease;
+	grid-template-columns: auto 1fr;
+	row-gap: 30px;
 
 	@include tablet {
-		margin-top: 24px;
+		margin-top: 30px;
 		padding: 0 23px;
+		row-gap: 24px;
 	}
 
 	@include mobile {
-		display: flex;
-		flex-direction: column;
 		margin-top: 24px;
-		padding: 0 16px;
+		padding: 0px;
+		grid-template-columns: auto;
+		row-gap: 24px;
 	}
 }
 
 .manual {
-	flex-grow: 1;
 	width: 100%;
+	grid-column: 1;
+	grid-row: 1;
+
+	@include mobile {
+		margin-left: -16px;
+		width: calc( 100% + 32px );
+		grid-row: 2;
+	}
 
 	&::before, &::after {
 		display: block;
@@ -74,6 +84,8 @@
 	line-height: 140%;
 	font-size: 240px;
 	font-weight: 700;
+	grid-column: 2;
+	grid-row: 1;
 
 	@include laptop {
 		font-size: 192px;
@@ -90,20 +102,20 @@
 		opacity: 0.4;
 		line-height: 100%;
 		font-size: 40px;
+		grid-column: 1;
+		grid-row: 2;
 	}
 }
 
 .action {
-	position: absolute;
-	top: calc( 100% + 2em );
-	left: calc( 16px + 7% );
+	height: fit-content;
+	grid-column: 2;
+	grid-row: 2;
 
 	@include mobile {
-		top: calc( 100% + 8em );
-		right: 0;
-		left: 0;
-		margin: 0 auto;
-		width: fit-content;
+		width: 100%;
+		grid-column: 1;
+		grid-row: 1;
 	}
 }
 
@@ -131,35 +143,33 @@
 
 .description {
 	box-sizing: border-box;
-	position: absolute;
-	top: calc( 100% - 2em );
-	right: 0;
-	z-index: 2;
-	width: 630px;
+	margin: 0 calc( 7% + 4px );
+	width: calc( 86% - 8px );
 	height: fit-content;
 	padding: 30px;
 	background-color: var(--secondary-900);
+	white-space: pre-line;
 	color: var(--secondary-100);
 	transition: top .2s ease;
-	white-space: pre-line;
+	grid-column: 1;
+	grid-row: 2;
 
 
 	@include laptop {
-		width: 535px;
 		padding: 24px;
 	}
 
 	@include tablet {
-		top: calc( 100% - 3em );
-		width: min( 567px, 100% );
 		padding: 12px;
 	}
 
 	@include mobile {
-		top: calc( 100% + 1em );
+		margin: 0;
 		margin-bottom: 15px;
 		width: 100%;
 		padding: 12px;
 		transform: none;
+		grid-column: 1;
+		grid-row: 3;
 	}
 }

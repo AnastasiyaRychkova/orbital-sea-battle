@@ -10,6 +10,7 @@
 	transition-duration: .2s;
 	transition-property: color, border, background-color;
 	transition-timing-function: ease-in-out;
+	user-select: none;
 }
 
 .button.small {
@@ -61,7 +62,7 @@
 =============================================*/
 
 .button.secondary {
-	border-width: 2.5px;
+	border-width: 2px;
 }
 
 .button.secondary.small {
@@ -170,7 +171,7 @@
 	}
 
 	.button.secondary {
-		border-width: 2px;
+		border-width: 1.5px;
 	}
 }
 
@@ -185,6 +186,6 @@
 	}
 
 	.button.secondary {
-		border-width: 1.5px;
+		border-width: 1px;
 	}
 }

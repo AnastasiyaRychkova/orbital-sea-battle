@@ -1,14 +1,12 @@
 import React, { useRef } from 'react';
+import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import cn from 'classnames';
 import { Carousel, CarouselImage } from 'components/Carousel/Carousel';
 
 import { Slider } from 'components/Carousel/Slider';
-import style from './Rules.module.scss';
-import styleIcons from '../../icons/Icons.module.scss';
-import styleButton from '../../buttons/Button.module.scss';
 import { ButtonWithIcon } from 'components/Button/WithIcon/Button';
+import style from './Rules.module.scss';
 
 type SlideDescription = string;
 
@@ -49,7 +47,7 @@ const Rules = observer( () => {
 					className={style.action}
 					value={t( 'action' )}
 					glyph="info"
-					priority="secondary"
+					priority="tertiary"
 					to="/rules"
 					inNewTab
 				/>

@@ -59,6 +59,10 @@
 		cursor: pointer;
 	}
 
+	@media (max-width: 812px) {
+		font-size: 0.8rem;
+	}
+
 	&_left {
 		transform: rotate(180deg);
 	}

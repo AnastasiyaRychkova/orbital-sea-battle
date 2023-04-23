@@ -11,10 +11,10 @@
 	padding: 0.625em 1em;
 	white-space: pre-line;
 	transition: all .2s ease;
-	user-select: none;
-	transition-property: color, border, background-color;
 	transition-duration: .2s;
+	transition-property: color, border, background-color;
 	transition-timing-function: ease-in-out;
+	user-select: none;
 }
 
 .disabled {
