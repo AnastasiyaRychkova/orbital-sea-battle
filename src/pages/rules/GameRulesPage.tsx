@@ -19,7 +19,7 @@ export const GameRulesPage = () => {
 						</p>
 						<RulesImage
 							className={styles.image}
-							src={img1}
+							src="/img/landing/2.png"
 							alt={imgCaption( t, 0 )}
 						/>
 					</div>
@@ -84,7 +84,7 @@ export const GameRulesPage = () => {
 					</p>
 					<RulesImage
 						className={styles.image}
-						src={img2}
+						src="/img/landing/5.png"
 						alt={imgCaption( t, 1 )}
 					/>
 					<div className={styles.part}>

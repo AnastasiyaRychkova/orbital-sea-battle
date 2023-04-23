@@ -1,25 +1,17 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Carousel, CarouselImage } from 'components/Carousel/Carousel';
 
+import { useCarousel } from './hooks/use-carousel';
 import { Slider } from 'components/Carousel/Slider';
 import { ButtonWithIcon } from 'components/Button/WithIcon/Button';
 import style from './Rules.module.scss';
 
-type SlideDescription = string;
-
 
 const Rules = observer( () => {
 	const { t } = useTranslation( 'translation', { keyPrefix: 'pages.landing.rules' } );
-	const slides = Array.from( {length: 5} ).map( ( _, index ) => ( {
-		title: `${index + 1}.title`,
-		src: '/img/landing/pic.jpg',
-		meta: `${index + 1}.description`,
-	} as CarouselImage<SlideDescription> ) );
-	const { current: carousel } = useRef( new Carousel( slides ) );
-	const current = slides[ carousel.currentIndex ];
+	const { carousel, current } = useCarousel();
 
 	return (
 		<section id="rules"
