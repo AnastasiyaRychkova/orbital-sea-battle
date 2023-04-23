@@ -1,14 +1,14 @@
 .page {
 	width: 100%;
 	min-height: 100vh;
-	background: var(--disable-900);
 	padding: 8vh 0;
+	background: var(--disable-900);
 }
 
 .article {
 	margin: 0 auto;
+	max-width: 800px;
 	padding: 0 max( 7vw, 16px );
-	max-width: 736px;
 }
 
 .content {
@@ -17,8 +17,59 @@
 	p {
 		margin: .5em 0;
 	}
+
+
+	.mono {
+		margin-bottom: 1.2em;
+		padding: 0.5em 1em;
+		border: 1px solid var(--disable-700);
+		border-radius: 8px;
+		background-color: var(--disable-800);
+	}
 }
 
 .part {
 	margin: 3em 0;
+}
+
+.bold {
+	background-color: var(--disable-800);
+}
+
+
+.list {
+	.bold {
+		padding: 2px 4px;
+		background-color: var(--secondary-600);
+	}
+}
+
+.dl {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+
+	dt {
+		display: inline-block;
+		margin-right: 0.4em;
+		padding: 0.2em 0.5em;
+		border: 1px solid var(--disable-700);
+		border-radius: 4px;
+		background-color: var(--disable-800);
+		font-size: 1.4em;
+
+		sub {
+			font-size: 0.8em;
+		}
+	}
+
+	dd {
+		display: inline;
+		margin: 0;
+	}
+}
+
+.image {
+	margin-top: 1.4em;
+	margin-bottom: 3em;
 }

@@ -1,0 +1,14 @@
+.root {
+	margin-left: min( calc((80vw - 100%) / -2), 0px );
+	width: max(100%, 80vw);
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+
+	figcaption {
+		text-align: center;
+		color: var(--primary-100);
+	}
+}
