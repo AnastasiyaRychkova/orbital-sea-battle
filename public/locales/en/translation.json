@@ -162,26 +162,26 @@
 
 		"rules": {
 			"paragraphs": [
-				"Ваш помощник – капитан корабля – укажет, что в начале игры Вы должны **выбрать план погрузки** – это один из 118 химических элементов. Затем Вам необходимо **расположить грузы** (которые символизируют собой электроны) в соответствии с планом, то есть изобразить электронную конфигурацию выбранного **в основном состоянии** на электронной диаграмме, которую Вы увидите перед собой. Эта диаграмма станет Вашим «полем»",
-				"Число грузов, то есть электронов – это порядковый номер элемента. Заполнение корабля грузами, то есть орбиталей электронами, происходит согласно химическим законам. Для того, чтобы заполнить диаграмму для своего элемента, а также чтобы впоследствии угадать элемент соперника, нужно руководствоваться несколькими принципами:",
-				"**Правило Клечковского (Маделунга)**: он определяет порядок заполнения электронами атомных орбиталей, и, согласно ему, электроны заполняют энергетические уровни в порядке увеличения их энергии:",
-				"**Правило Хунда**: согласно этому правилу, каждое электронное облако (то есть, корабль в игре) заполняется сначала электронами с положительным спином (стрелочки, направленные вверх), а уже затем добавляются с отрицательным (стрелочки вниз). Это связано с наибольшей суммарной энергией, которая образуется на конкретном электронном облаке – корабле в нашей игре.",
-				"Кликая на стрелки, Вы можете изменять их состояние – если стрелка загорается, то Вы добавили груз на этот корабль. Помните, что количество грузов соответствует номеру элемента в таблице Менделеева. Внизу экрана Вы можете выбрать режим заполнения – грузы по одному или корабли полностью, переключая их Вы можете заполнять орбитали, как Вам удобно. Если Вы правильно заполнили электронную диаграмму элемента, то капитан скажет Вам, что игра началась. Ваш соперник – программа с ником Droid, попробуйте её победить!",
-				"Далее происходит сам «бой»: Вы увидите орбитальную диаграмму Вашего соперника (заглянуть на свою Вы можете, нажав стрелку посередине экрана слева, или переключив вид в поле внизу экрана). Также внизу Вы видите Вашу панель управления выстрелами: чтобы попасть в конкретный груз нужно точно указать его координаты. В морском бое это буквы и цифры, а здесь – это значения четырёх квантовых чисел:",
-				"**По очереди Вы ходите, стреляя по электронам друг друга**: если Вы выстрелили в электрон, который присутствует в атоме соперника, он загорится красным, если в Ваш электрон попали, то он загорится белым цветом. Во время хода допустимо либо **выстрелить в электрон противника один раз, либо назвать химический элемент противника**, использовав третий вид игры, нажав стрелку посередине экрана справа, или переключив вид в поле внизу экрана – Вам откроется таблица Менделеева, где можно будет указать элемент соперника и Вы также можете свериться с ней. Если Вы не можете угадать элемент и хотите выйти из игры, то нажмите кнопку «Сдаться» – в этом случае Вам автоматически засчитается проигрыш, и Вы вернётесь к выбору соперника.",
-				"**Целью игры является первым угадать химический элемент противника**. Если Вы угадали правильно, Вы побеждаете, если же Вы не успели в свой ход назвать элемент противника, или же назвали его неверно – Вы проигрываете бой и видите на экране надпись «Миссия провалена». Затем Вы можете играть снова в первом случае и взять реванш во втором, чтобы играть дальше."
+				"Your assistant - the captain of the ship - will point out that at the beginning of the game you have to choose a loading plan - it is one of 118 chemical elements. Then you have to place the weights (which represent the electrons) according to the plan, i. e. to represent the electronic configuration of the chosen in the ground state on the electronic diagram which you will see in front of you. This diagram will become your \"battlefield\".",
+				"The number of weights, i. e. electrons, is the ordinal number of the element. Filling the ship with weights, i. e. orbitals with electrons, happens according to chemical laws. In order to fill the diagram for player's chosen element, as well as to subsequently guess the element of the opponent, the player should be guided by several principles:",
+				"**Kleczkowski’s (Madelung’s) rule**: this rule determines the order in which electrons fill atomic orbitals, and, according to it, electrons fill energy levels in order of increasing energy:",
+				"**Hund’s rule**: according to this rule, each electron cloud (i. e., the ship in the game) is filled first with electrons with positive spin (arrows pointing up), and then are added with negative spin (arrows pointing down). This is due to the greatest total energy that is formed on a particular electron cloud - the ship in our game.",
+				"By clicking on the arrows on the diagram you can change their state - if the arrow is white, then you have added weight to this ship. Remember that the number of cargoes corresponds to the number of the element in the Mendeleev table. At the bottom of the screen, you can choose the mode of filling - weights one by one or whole ships, by switching them you can fill the orbitals the way you want. If you fill in the electronic element chart correctly, the captain will inform you that the game has started. Your opponent is a program with the nickname \"Droid\", try to win the game!",
+				"Next comes the \"battle\" stage: you will see your opponent's orbital chart (you can look at yours by clicking on the arrow in the middle of the screen on the left, or by switching the view in the box at the bottom of the screen). Also, at the bottom you see your shot control panel: to hit a particular weight you need to pinpoint its coordinates. In classical battleship game, these are letters and numbers, but here they are the values of four quantum numbers:",
+				"**Players take turns shooting at each other's electrons**: if you shot at an electron that is present in your opponent's atom, it will glow red; if your electron is hit, it will glow white. You can either shoot your opponent's electron once during the move, or you can name your opponent's chemical element using the third view of the game by pressing the arrow in the middle of the screen on the right, or by switching the view in the box at the bottom of the screen - you will get the Mendeleev table where you can name your opponent's element and you can also check with it. If you can't guess an element and want to quit the game, press the \"Quit\" button - in this case you will automatically lose and return to the selection of your opponent.",
+				"**The goal of the game is to be the first to guess the opponent's chemical element**. If you guessed correctly, you win, but if you did not have time to name the enemy element in your turn, or if you named it incorrectly, you lose the battle and see the message \"Mission Failed\" on the screen. Then you can play again in the first case and take revenge in the second to play again."
 			],
 			"definitions": {
-				"n": "главное, определяет уровень электронного облака: 1, 2 и до 7",
-				"l": "орбитальное, определяет форму орбитали, или конкретный корабль в нашей игре",
-				"m": "магнитное, определяет ячейку в электронном облаке, место для груза корабле",
-				"s": "спиновое, определяет спин электрона или положение груза в ячейке"
+				"n": "principal, determines the level of the electron cloud: 1, 2 and up to 7",
+				"l": "azimuthal, defines the shape of the orbital, or a specific ship in our game",
+				"m": "magnetic, defines a cell in the electron cloud, a place for weight in the ship",
+				"s": "spin, determines the spin of the electron or the position of the cargo in the cell."
 			},
 			"caption": [
-				"Орбитальная диаграмма с примером заполнения для неона (порядковый номер 10)",
-				"Вид игры в фазу «боя»."
+				"Orbital diagram with example filling for neon (order number 10).",
+				"View of the game in the \"battle\" phase"
 			],
-			"end": "Удачного орбитального морского боя!"
+			"end": "Have a great orbital battleship game!"
 		}
 	},
 
