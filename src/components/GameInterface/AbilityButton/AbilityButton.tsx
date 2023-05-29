@@ -14,6 +14,7 @@ export default function AbilityButton( props: IProps ) {
 			glyph = { "ability" }
 			theme = { "backing" }
 			onClick = { props.onClick }
+			disabled
 		/>
 	);
 }

@@ -1,51 +1,91 @@
 @import "../../../style/display.scss";
 @import "../../../style/root.css";
 
-.header{
+.section {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	margin: 150px 16px;
+	min-height: 60vh;
+	scroll-margin: 20vh;
+}
+
+.header {
 	text-align: center;
 }
 
-.content{
-	position: relative;
-	display:grid;
-	grid-template-columns:4fr 4fr 3fr;
-	margin-top:40px;
-	margin-bottom: 206px;
-	max-width:1200px;
+.content {
 	box-sizing: border-box;
+	display: grid;
+	position: relative;
+	justify-content: stretch;
+	margin-top: 40px;
+	max-width: 1200px;
+	height: fit-content;
 	padding: 0 44px;
-
-	@include laptop {
-		margin-top:30px;
-		margin-bottom: 150px;
-		padding: 0 44px;
-	}
+	transition-duration: .2s;
+	transition-property: margin, padding;
+	transition-timing-function: ease;
+	grid-template-columns: auto 1fr;
+	row-gap: 30px;
 
 	@include tablet {
-		margin-top:24px;
-		margin-bottom: 142px;
+		margin-top: 30px;
 		padding: 0 23px;
+		row-gap: 24px;
 	}
 
 	@include mobile {
-		display:flex;
-		flex-direction: column;
-		margin-top:24px;
-		margin-bottom: 186px;
-		padding: 0 16px;
+		margin-top: 24px;
+		padding: 0px;
+		grid-template-columns: auto;
+		row-gap: 24px;
 	}
 }
 
-.manual{
-	grid-column: 1/3;
+.manual {
+	width: 100%;
+	grid-column: 1;
+	grid-row: 1;
+
+	@include mobile {
+		margin-left: -16px;
+		width: calc( 100% + 32px );
+		grid-row: 2;
+	}
+
+	&::before, &::after {
+		display: block;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+		width: 7%;
+		height: 100%;
+		background: var(--secondary-800);
+		content: '';
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(to right, #1F2C27, #1F2C2700);
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(to left, #1F2C27, #1F2C2700);
+	}
 }
 
-.slide-number{
-	font-weight: 700;
-	font-size: 240px;
-	line-height: 140%;
+.slide-number {
 	align-self: center;
-	justify-self: end;
+	width: 1.2em;
+	text-align: right;
+	line-height: 140%;
+	font-size: 240px;
+	font-weight: 700;
+	grid-column: 2;
+	grid-row: 1;
 
 	@include laptop {
 		font-size: 192px;
@@ -56,21 +96,37 @@
 	}
 
 	@include mobile {
-		font-size: 48px;
-		color:var(--secondary-600);
 		position: absolute;
-		line-height:100%;
 		top: 1vw;
 		right: 13vw;
+		opacity: 0.4;
+		line-height: 100%;
+		font-size: 40px;
+		grid-column: 1;
+		grid-row: 2;
 	}
 }
 
-.button-location{
-	grid-area: 2 / 1 / 3 / 2;
-	display:flex;
-	align-self: center;
-	justify-self: center;
+.action {
+	height: fit-content;
+	grid-column: 2;
+	grid-row: 2;
+
+	@include mobile {
+		width: 100%;
+		grid-column: 1;
+		grid-row: 1;
+	}
+}
+
+.button-location {
+	display: none;
+	align-self: flex-start;
 	padding: 12px 18px;
+	grid-column: 1;
+	grid-row: 2;
+	justify-self: center;
+
 	@include laptop {
 		padding: 10px 15px;
 	}
@@ -80,37 +136,40 @@
 	}
 
 	@include mobile {
+		order: 2;
 		padding: 8px 14px;
-		order:2;
 	}
 }
 
-.description{
-	grid-column: 2/4;
-	justify-self: flex-end;
+.description {
 	box-sizing: border-box;
-	width:670px;
-	padding:30px;
-	transform: translateY(-50px);
+	margin: 0 calc( 7% + 4px );
+	width: calc( 86% - 8px );
+	height: fit-content;
+	padding: 30px;
+	background-color: var(--secondary-900);
+	white-space: pre-line;
+	color: var(--secondary-100);
+	transition: top .2s ease;
+	grid-column: 1;
+	grid-row: 2;
+
 
 	@include laptop {
-		width:535px;
-		padding:24px;
+		padding: 24px;
 	}
 
 	@include tablet {
-		width:367px;
 		padding: 12px;
 	}
 
 	@include mobile {
-		width:100%;
+		margin: 0;
+		margin-bottom: 15px;
+		width: 100%;
 		padding: 12px;
 		transform: none;
-		margin-bottom:15px;
+		grid-column: 1;
+		grid-row: 3;
 	}
-
-	background-color: var(--secondary-900);
-	color: var(--secondary-100)
 }
-

@@ -1,21 +1,33 @@
 import React, {FC} from 'react';
-import { Glyph } from './glyph/type';
-import glyphs from './glyph/index';
+import cn from 'classnames';
+import { glyphs, GlyphType } from './glyph/index';
 import styles from './Icon.module.css';
-import cn from '../className';
 
-interface IProps {
+interface IProps extends React.SVGProps<SVGSVGElement> {
 	/** Название иконки */
-	type: Glyph,
+	type: GlyphType,
+
+	/** Размер в em? */
+	emSize?: boolean,
 
 	/** Стили, переданные родителями */
 	className?: string,
 }
 
-const Icon: FC<IProps> = ({ type, className }) => {
+const Icon: FC<IProps> = ( {
+	type,
+	emSize,
+	className,
+	...args
+} ) => {
 	return (
-		<span className={cn( styles, ['icon'], className )}>
-			{glyphs[type]()}
+		<span className={cn(
+			styles.icon,
+			{[styles.em]: emSize},
+			className
+		)}
+		>
+			{glyphs[type]( args )}
 		</span>
 	);
 };

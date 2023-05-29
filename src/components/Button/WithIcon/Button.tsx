@@ -1,8 +1,8 @@
 import React, { FC, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import cn from '../../className';
+import cn from 'classnames';
 import Icon from '../../Icon/Icon';
-import type { Glyph } from '../../Icon/glyph/type';
+import type { GlyphType } from 'components/Icon/glyph';
 import styles from './Button.module.css';
 
 type Priority = 'primary' | 'secondary' | 'tertiary';
@@ -12,7 +12,7 @@ interface IProps {
 	value: string;
 
 	/** Название иконки */
-	glyph: Glyph;
+	glyph: GlyphType;
 
 	/** Параметр стиля*/
 	priority: Priority;
@@ -29,43 +29,80 @@ interface IProps {
 	/** Нужно ли переопределить путь */
 	replace?: boolean;
 
+	/** Маленькая ли кнопка */
+	small?: boolean;
+
+	/** Открыть в новой вкладке */
+	inNewTab?: boolean;
+
 	/** Стили, переданные родителями */
 	className?: string;
 }
-
-
 
 const Button: FC<IProps> = ( {
 	value,
 	glyph,
 	priority,
 	disabled = false,
+	small = false,
 	className,
 	onClick,
 	to = '#',
 	replace = false,
+	inNewTab = false,
 } ) => {
 	return to === '#' ? (
 		<button
 			type="button"
 			disabled={disabled}
 			onClick={onClick}
-			className={cn( styles, ['button', priority], className )}
+			className={cn(
+				styles.button,
+				styles[priority],
+				{ [styles.small]: small },
+				className
+			)}
 		>
-			<Icon type={glyph} className={styles.icon} />
-			<span className={styles.text + ' button-medium'}>{value}</span>
+			<Icon type={glyph}
+				className={styles.icon}
+			/>
+			<span
+				className={cn(
+					styles.text,
+					small ? 'button-normal' : 'button-medium'
+				)}
+			>
+				{value}
+			</span>
 		</button>
 	) : (
 		<Link
 			to={to}
 			replace={replace}
 			onClick={onClick}
-			className={cn( styles, ['button', priority], className )}
+			className={cn(
+				styles.button,
+				styles[priority],
+				{ [styles.small]: small },
+				className
+			)}
+			target={inNewTab ? '_blank' : undefined}
+			rel={inNewTab ? 'noopener noreferrer' : undefined}
 		>
-			<Icon type={glyph} className={styles.icon} />
-			<span className={styles.text + ' button-medium'}>{value}</span>
+			<Icon type={glyph}
+				className={styles.icon}
+			/>
+			<span
+				className={cn(
+					styles.text,
+					small ? 'button-normal' : 'button-medium'
+				)}
+			>
+				{value}
+			</span>
 		</Link>
 	);
 };
 
 export default Button;
+export { Button as ButtonWithIcon };

@@ -1,6 +1,6 @@
 import EventProvider from "../../../util/EventEmitter/EventProvider";
 import OB_IGameState, { GSEvent, GSEventData, GSResults } from "../interfaces/OB_GameStateInterface";
-import { OB_IPlayer, OB_IEnemy, OB_ILocalPlayer, User } from "../OB_Entities";
+import { OB_IPlayer, OB_IEnemy, OB_ILocalPlayer, IUser } from "../OB_Entities";
 import { EventContext, GameScore, NamingContext, PlayersFabric, ShootingContext, SState } from "../types";
 
 class GameStateMock extends EventProvider<GSEvent, GSEventData> implements OB_IGameState
@@ -11,7 +11,7 @@ class GameStateMock extends EventProvider<GSEvent, GSEventData> implements OB_IG
 	state: SState;
 	statesChain: SState[];
 	
-	constructor( player: User, enemy: User, fabric: PlayersFabric )
+	constructor( player: IUser, enemy: IUser, fabric: PlayersFabric )
 	{
 		super();
 		this.#player = fabric.player( player );

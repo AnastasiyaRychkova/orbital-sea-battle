@@ -1,0 +1,58 @@
+@import '../../../style/display.scss';
+
+.menu {
+	@include tablet-and-more {
+		display: block !important;
+	}
+
+	&_closed {
+		display: none;
+	}
+}
+
+.nav {
+	@include mobile {
+		flex-direction: column;
+
+		margin: 32px 0;
+		gap: 24px;
+	}
+	display:flex;
+	align-items: center;
+	flex-direction:row;
+	justify-content: stretch;
+	margin: 0.67em 0;
+	height: 100%;
+	padding:0;
+	list-style-type:none;
+	text-transform: uppercase;
+}
+
+.navLink {
+	@include mobile {
+		margin-right: 0;
+	}
+
+	margin-right:2em;
+	height: 100%;
+	text-decoration: none;
+	letter-spacing: 0.13em;
+	color: var(--primary-200);
+	transition: color .3s linear;
+
+	&:hover {
+		color: var(--primary-50);
+	}
+
+	&:active {
+		color: var(--primary-400);
+	}
+
+	&:disabled {
+		color: var(--disable-700);
+	}
+
+	&.selected {
+		border-bottom: solid var(--primary-200) 1px;
+	}
+}

@@ -106,6 +106,47 @@ import ButtonWithIcon from 'components/Button/WithIcon/Button';
 
 <ArgsTable of={Button} />
 
+## Small
+
+<Canvas>
+	<Story
+		name="Primary small"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'primary',
+			disabled: false,
+			glyph: 'play',
+			small: true,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Secondary small"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'secondary',
+			disabled: false,
+			glyph: 'play',
+			small: true,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+	<Story
+		name="Tertiary small"
+		args={{
+			value: 'Нажми на меня',
+			priority: 'tertiary',
+			disabled: false,
+			glyph: 'play',
+			small: true,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>
+
 
 ## With text wrap
 

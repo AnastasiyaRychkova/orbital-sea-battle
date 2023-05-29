@@ -20,5 +20,5 @@ ReactDOM.render(
 			</I18nextProvider>
 		</Suspense>
 	</React.StrictMode>,
-	document.getElementById('root')
+	document.getElementById( 'root' )
 );

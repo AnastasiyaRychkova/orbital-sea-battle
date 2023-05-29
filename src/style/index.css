@@ -5,6 +5,7 @@ html, body {
 	padding: 0;
 	height: 100%;
 	overflow-x: hidden;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -50,4 +51,9 @@ body {
 
 ::-webkit-scrollbar-corner {
 	background: transparent;
+}
+
+::selection {
+	color: var(--disable-900);
+	background-color: var(--primary-200);
 }

@@ -103,6 +103,10 @@ const Page: FC<IProps> = observer(( {
 						<DropSidedInfo
 							message = { t("info.shooting." + tabNumber + ".m") }
 							comment = { t("info.shooting." + tabNumber + ".c") }
+							link={{
+								text: t( 'pages.landing.rules.action' ),
+								to: "/rules"
+							}}
 						/>
 
 						<SelectedElementMobile 

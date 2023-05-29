@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from '../Buttons.module.css';
-import Button from '../../Button/IconButton/Button';
+import IconButton from '../../Button/IconButton/Button';
 
-import Browser from "../../../core/browser/Browser";
+import Browser from '../../../core/browser/Browser';
 
-function Click()
-{
-	Browser.fullScreen.toggle();
-}
 
 export default function FullScreenButton() {
+	const [isFullScreen, setIsFullScreen] = useState( false );
+	const toggle = useCallback( () => {
+		setIsFullScreen( ( state ) => {
+			state
+				? Browser.fullScreen.off()
+				: Browser.fullScreen.on();
+			return !state;
+		} );
+	}, [] );
+
 	return (
-		<Button
-			className = { styles.small }
-			glyph = { "full_screen" }
-			theme = { "backing" }
-			onClick = { Click }
+		<IconButton
+			className={styles.small}
+			glyph={isFullScreen ? 'reduce' : 'full_screen'}
+			theme={'backing'}
+			onClick={toggle}
 		/>
 	);
 }

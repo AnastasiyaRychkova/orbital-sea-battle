@@ -1,0 +1,63 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/';
+import { useRef } from 'react';
+import { Carousel } from './Carousel';
+import cover from './carousel-story-cover.png';
+
+import { Slider } from './Slider';
+
+<Meta
+	title="Components/Slider"
+	argTypes={{
+		controller: {
+			control: false
+		},
+		className: {
+			control: false
+		},
+	}}
+	component={Slider}
+/>
+
+export const Template = ( {
+	sliders,
+	...args
+} ) => {
+	const controller = useRef( new Carousel( sliders ) );
+	return (
+		<Slider
+			controller={controller.current}
+			{...args}
+		/>
+	)
+};
+
+# Slider
+
+<ArgsTable of={Slider} />
+
+<Canvas>
+	<Story
+		name="Default"
+		args={{
+			sliders: [
+				{
+					src: cover,
+					title: 'Title 1',
+				},
+				{
+					src: cover,
+					title: 'Title 2',
+				},
+				{
+					src: cover,
+					title: 'Title 3',
+				},
+			],
+			autoPlay: true,
+			width: 800,
+			autoPlayTime: 5000,
+		}}
+	>
+		{Template.bind({})}
+	</Story>
+</Canvas>

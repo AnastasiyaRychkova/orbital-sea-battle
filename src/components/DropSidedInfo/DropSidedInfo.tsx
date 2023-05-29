@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import cn from '../className';
 import Icon from '../Icon/Icon';
 import styles from './DropSidedInfo.module.css';
+import { ButtonWithIcon } from 'components/Button/WithIcon/Button';
 
 interface IProps {
 	/** Основное сообщение */
@@ -9,6 +10,11 @@ interface IProps {
 
 	/** Пояснение */
 	comment: string;
+
+	link?: {
+		text: string;
+		to: string;
+	};
 
 	/** Раскрыт ли по умолчанию */
 	isOpen?: boolean;
@@ -23,6 +29,7 @@ interface IProps {
 const DropSidedInfo: FC<IProps> = ({
 	message,
 	comment,
+	link,
 	isOpen = false,
 	className,
 }) => {
@@ -49,6 +56,16 @@ const DropSidedInfo: FC<IProps> = ({
 				<div className={styles.description}>
 					<span className="button-medium">{message}</span>
 					<span className="long-normal">{comment}</span>
+					{link ?
+					<ButtonWithIcon
+						className={styles.btn}
+						priority="tertiary"
+						value={link.text}
+						to={link.to}
+						inNewTab
+						glyph="info"
+						small
+					/> : null}
 				</div>
 				<label
 					htmlFor={id}

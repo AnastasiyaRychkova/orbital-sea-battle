@@ -15,6 +15,12 @@ $desktop: 1440px;
     }
 }
 
+@mixin tablet-and-more {
+    @media screen and (min-width: $tablet) {
+        @content;
+    }
+}
+
 @mixin laptop {
     @media screen and (min-width: $laptop) and (max-width: $desktop) {
         @content;
