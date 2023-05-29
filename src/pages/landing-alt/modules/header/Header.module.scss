@@ -20,6 +20,21 @@
 		align-items: flex-start;
 		height: min-content;
 		padding: 0 16px;
+
+		.lang {
+			padding: .2em .3em;
+		}
+	}
+
+	.burger {
+		display: none;
+		padding: .46em 0.34em;
+		font-size: .7em;
+	
+		@include mobile {
+			display: block;
+			margin-right: 0;
+		}
 	}
 }
 
@@ -29,6 +44,7 @@
 	justify-content: center;
 	color: var(--primary-400);
 	font-size: 2.4em;
+
 	@include mobile {
 		box-sizing: border-box;
 		margin: 6.5px 4px;
@@ -36,15 +52,9 @@
 		height: 23px;
 	}
 
-}
-
-.burger {
-
-	display: none;
-	padding: .34em;
-	font-size: .7em;
-	@include mobile {
-		display: block;
-		margin-right: 0;
+	&Section {
+		display: flex;
+		align-items: center;
+		column-gap: 1em;
 	}
 }

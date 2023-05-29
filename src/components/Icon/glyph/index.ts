@@ -22,6 +22,7 @@ import settings from './settings';
 import shot from './shot';
 import typing from './typing';
 import user from './user';
+import world from './world';
 
 
 export const glyphs = {
@@ -49,6 +50,7 @@ export const glyphs = {
 	shot,
 	typing,
 	user,
+	world,
 };
 
 export type GlyphType = keyof typeof glyphs;

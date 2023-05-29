@@ -43,19 +43,29 @@
 /* раскрытие блока с информацией */
 .checkbox:checked ~ .content {
 	opacity: 1;
+	column-gap: 0.75em;
 	font-size: inherit;
 	transition:
 		opacity 250ms ease 250ms,
 		font-size 250ms ease;
 }
 
+.checkbox:not(:checked) ~ .content .btn {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	font-size: 0em;
+}
+
 /* закрытие блока с информацией */
 .checkbox:not(:checked) ~ .content {
 	opacity: 0;
+	column-gap: 0em;
 	font-size: 0;
 	transition:
 		opacity 250ms ease,
-		font-size 250ms ease 250ms;	
+		gap 250ms ease,
+		font-size 250ms ease 250ms;
 }
 
 

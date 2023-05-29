@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Logo } from 'components/Logo/Logo';
 import { Menu } from './menu/Menu';
 
+import { LangSwitcher } from './lang-switcher/LangSwitcher';
 import { IconButton } from 'components/Button/IconButton/Button';
 
 import style from './Header.module.scss';
@@ -15,11 +16,14 @@ const Header = () => {
 
 	return (
 		<header className={style.header}>
-			<a href="#welcome"
-				className={style.logo}
-			>
-				<Logo />
-			</a>
+			<div className={style.logoSection}>
+				<a href="#welcome"
+					className={style.logo}
+				>
+					<Logo />
+				</a>
+				<LangSwitcher />
+			</div>
 			<Menu isOpened={isOpened} />
 			<IconButton
 				className={style.burger}

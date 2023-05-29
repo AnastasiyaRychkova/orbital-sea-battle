@@ -2,7 +2,7 @@ import React, { FC, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import Icon from '../../Icon/Icon';
-import type { Glyph } from '../../Icon/glyph/type';
+import type { GlyphType } from 'components/Icon/glyph';
 import styles from './Button.module.css';
 
 type Priority = 'primary' | 'secondary' | 'tertiary';
@@ -12,7 +12,7 @@ interface IProps {
 	value: string;
 
 	/** Название иконки */
-	glyph: Glyph;
+	glyph: GlyphType;
 
 	/** Параметр стиля*/
 	priority: Priority;

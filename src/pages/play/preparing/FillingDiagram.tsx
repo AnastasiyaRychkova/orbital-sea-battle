@@ -71,6 +71,10 @@ const FillingDiagram: FC<IProps> = observer(( {
 						<DropSidedInfo
 							message = { t("info.filling.m") }
 							comment = { t("info.filling.c") }
+							link={{
+								text: t( 'pages.landing.rules.action' ),
+								to: "/rules"
+							}}
 						/>
 						<SelectedElement
 							element = { player.selectedElement! }

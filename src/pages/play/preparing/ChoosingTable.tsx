@@ -43,6 +43,10 @@ export default function ChoosingTable( props: IProps ) {
 						<DropSidedInfo
 							message = { t("info.selecting.m") }
 							comment = { t("info.selecting.c") }
+							link={{
+								text: t( 'pages.landing.rules.action' ),
+								to: "/rules"
+							}}
 						/>
 
 						<SelectedElementMobile number = { number } />

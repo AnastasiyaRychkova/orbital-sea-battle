@@ -32,6 +32,8 @@ const Footer = () => {
 					<a
 						className="long-normal"
 						href="https://itmo.ru/images/pages/79/Pravila_ispolzovanija_informacii.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						{t( 'footer.domain' )}
 					</a>
