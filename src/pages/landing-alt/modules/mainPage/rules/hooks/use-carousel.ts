@@ -1,19 +1,28 @@
 import { Carousel, CarouselImage } from 'components/Carousel/Carousel';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type SlideDescription = string;
 
 export function useCarousel() {
-	const slides = Array.from( {length: 5} ).map( ( _, index ) => ( {
-		title: `${index + 1}.title`,
-		src: `/img/landing/${index + 1}.png`,
-		meta: `${index + 1}.description`,
-	} as CarouselImage<SlideDescription> ) );
-	const { current: carousel } = useRef( new Carousel( slides ) );
-	const current = slides[ carousel.currentIndex ];
+	const { i18n } = useTranslation();
+
+	const { carousel, slides } = useMemo( () => {
+		const imgSuffix = i18n.language !== 'ru' ? '_en' : '';
+		const slides = Array.from( {length: 5} ).map( ( _, index ) => ( {
+			title: `${index + 1}.title`,
+			src: `/img/landing/${index + 1}${imgSuffix}.png`,
+			meta: `${index + 1}.description`,
+		} as CarouselImage<SlideDescription> ) );
+
+		return {
+			carousel: new Carousel( slides ),
+			slides,
+		};
+	}, [ i18n.language ] );
 
 	return {
 		carousel,
-		current,
+		current: slides[ carousel.currentIndex ],
 	}
 };
