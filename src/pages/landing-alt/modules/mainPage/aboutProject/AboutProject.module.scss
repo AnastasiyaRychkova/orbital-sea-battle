@@ -19,8 +19,8 @@
 .statistic {
 	margin-top: 40px;
 	margin-bottom: 120px;
-	gap: 0.5em;
 	width: 100%;
+	gap: 0.5em;
 
 	@include laptop {
 		margin-top: 59px;
@@ -73,11 +73,19 @@
 
 	@include tablet {
 		gap: 34px;
+
+		img.itmoLogo {
+			transform: translateY(-0.2em) scale(0.7);
+		}
 	}
 
 	@include mobile {
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	.itmoLogo {
+		transform: translateY(-0.3em) scale(0.7);
 	}
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 
 import imgSCAMT from '../../../img/common/SCAMT_Logo.svg';
-import imgITMO from '../../../img/common/ITMO_Logo.svg';
+import imgITMO from '../../../img/common/ITMO_Logo.png';
 
 import style from './AboutProject.module.scss';
 import { AboutProjectItem } from './AboutProjectItem/AboutProjectItem';
@@ -43,6 +43,7 @@ const AboutProject = () => {
 			<div className={style.partners}>
 				<img src={imgITMO}
 					alt="ITMO"
+					className={style.itmoLogo}
 				/>
 				<img src={imgSCAMT}
 					alt="SCAMT ITMO"
